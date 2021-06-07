@@ -267,6 +267,9 @@ class Game extends ConsumerWidget {
                                   return FigureButton(
                                     child: Text('OK'),
                                     onPressed: () {
+                                      if (gameState.answer.isEmpty) {
+                                        return;
+                                      }
                                       gameNotifier.checkAnswer(quiz);
                                       gameNotifier.clearAnswer();
                                       final lastIndex = quizLength - 1;
