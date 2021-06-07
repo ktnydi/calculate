@@ -76,22 +76,24 @@ class Setting extends ConsumerWidget {
             child: Text('問題数'),
           ),
           const Divider(height: 1),
-          ListTile(
-            leading: Radio(
-              value: 50,
-              groupValue: 100,
-              onChanged: (value) {},
-            ),
+          RadioListTile<int>(
+            value: 50,
+            groupValue: settingState.quizLength,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateQuizLength(value);
+            },
             title: Text('50問'),
             tileColor: Colors.white,
           ),
           const Divider(height: 1),
-          ListTile(
-            leading: Radio(
-              value: 100,
-              groupValue: 100,
-              onChanged: (value) {},
-            ),
+          RadioListTile<int>(
+            value: 100,
+            groupValue: settingState.quizLength,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateQuizLength(value);
+            },
             title: Text('100問'),
             tileColor: Colors.white,
           ),

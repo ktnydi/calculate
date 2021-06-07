@@ -16,6 +16,7 @@ class Game extends ConsumerWidget {
     final gameState = watch(gameProvider);
     final prefs = watch(sharedPreferencesProvider);
     final limit = prefs.getInt('limit') ?? 180;
+    final quizLength = prefs.getInt('quizLength') ?? 100;
 
     return Stack(
       children: [
@@ -24,7 +25,7 @@ class Game extends ConsumerWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Text(
-              '${gameState.index + 1}／100問',
+              '${gameState.index + 1}／${quizLength}問',
               style: TextStyle(
                 fontSize: 18,
                 color: Theme.of(context).textTheme.caption!.color,
@@ -268,7 +269,8 @@ class Game extends ConsumerWidget {
                                     onPressed: () {
                                       gameNotifier.checkAnswer(quiz);
                                       gameNotifier.clearAnswer();
-                                      if (gameState.index == 99) {
+                                      final lastIndex = quizLength - 1;
+                                      if (gameState.index == lastIndex) {
                                         gameNotifier.endCountDown();
                                         return gameNotifier.finishQuiz();
                                       }
@@ -317,7 +319,7 @@ class Game extends ConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        '${gameState.correctList.where((e) => e == true).length}／100点',
+                        '${gameState.correctList.where((e) => e == true).length}／${quizLength}点',
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(

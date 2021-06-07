@@ -14,9 +14,11 @@ class SettingNotifier extends StateNotifier<SettingState> {
     final prefs = _read(sharedPreferencesProvider);
     final isRandom = prefs.getBool('isRandom') ?? false;
     final limit = prefs.getInt('limit') ?? 180;
+    final quizLength = prefs.getInt('quizLength') ?? 100;
     state = state.copyWith(
       isRandom: isRandom,
       limit: limit,
+      quizLength: quizLength,
     );
   }
 
@@ -35,6 +37,14 @@ class SettingNotifier extends StateNotifier<SettingState> {
     await prefs.setInt('limit', limit);
     state = state.copyWith(
       limit: limit,
+    );
+  }
+
+  Future<void> updateQuizLength(int quizLength) async {
+    final prefs = _read(sharedPreferencesProvider);
+    await prefs.setInt('quizLength', quizLength);
+    state = state.copyWith(
+      quizLength: quizLength,
     );
   }
 }
