@@ -3,6 +3,7 @@ import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -17,7 +18,10 @@ void main() async {
       overrides: [
         sharedPreferencesProvider.overrideWithValue(
           await SharedPreferences.getInstance(),
-        )
+        ),
+        packageInfoProvider.overrideWithValue(
+          await PackageInfo.fromPlatform(),
+        ),
       ],
       child: MyApp(),
     ),

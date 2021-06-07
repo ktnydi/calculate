@@ -1,4 +1,5 @@
 import 'package:calculate/pages/game/game_page.dart';
+import 'package:calculate/pages/help/help_page.dart';
 import 'package:calculate/pages/setting/setting_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,12 @@ class Home extends ConsumerWidget {
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   onPressed: () {
-                    // TODO: ヘルプ画面
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Help(),
+                      ),
+                    );
                   },
                 ),
               ],
