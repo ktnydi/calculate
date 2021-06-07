@@ -1,4 +1,5 @@
 import 'package:calculate/pages/contact/contact_page.dart';
+import 'package:calculate/pages/load_map/load_map_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,7 +48,12 @@ class Help extends StatelessWidget {
             trailing: Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
-              // TODO: ロードマップページへ
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoadMap(),
+                ),
+              );
             },
           ),
           const Divider(height: 1),
