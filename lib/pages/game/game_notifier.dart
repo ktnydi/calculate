@@ -44,8 +44,14 @@ class GameNotifier extends StateNotifier<GameState> {
   void fillInAnswer(int num) {
     if (state.answer.length >= 10) return;
 
+    final isOnlyZero =
+        num == 0 && state.answer.contains(0) && state.answer.length == 1;
+    if (isOnlyZero) return;
+
+    final includeZero = state.answer.contains(0) && state.answer.length == 1;
+
     state = state.copyWith(
-      answer: [...state.answer, num],
+      answer: [if (!includeZero) ...state.answer, num],
     );
   }
 

@@ -282,7 +282,8 @@ class Game extends ConsumerWidget {
                                   );
                                 }
 
-                                index = index == 10 ? -1 : index;
+                                final isZeroBtn = index == 10;
+                                index = isZeroBtn ? -1 : index;
 
                                 return FigureButton(
                                   child: Text('${index + 1}'),
