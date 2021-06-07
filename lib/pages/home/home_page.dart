@@ -43,6 +43,31 @@ class Home extends StatelessWidget {
                 },
               ),
             ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.settings,
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  ),
+                  onPressed: () {
+                    // TODO: 設定画面
+                  },
+                ),
+                const SizedBox(width: 16),
+                IconButton(
+                  icon: Icon(
+                    Icons.help_outline,
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  ),
+                  onPressed: () {
+                    // TODO: ヘルプ画面
+                  },
+                ),
+              ],
+            )
           ],
         ),
       ),
