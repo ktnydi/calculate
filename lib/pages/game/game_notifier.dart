@@ -1,22 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:calculate/pages/game/game_state.dart';
+import 'package:calculate/providers.dart';
 import 'package:calculate/quiz/quiz.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
   (_) => GameNotifier(),
-);
-
-final quizProvider = FutureProvider<List<Quiz>>(
-  (_) async {
-    final jsonString = await rootBundle.loadString('assets/quiz.json');
-    final List json = await jsonDecode(jsonString);
-    final quizList = json.map((json) => Quiz.fromJson(json)).toList();
-    return quizList;
-  },
 );
 
 class GameNotifier extends StateNotifier<GameState> {

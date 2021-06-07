@@ -1,9 +1,12 @@
 import 'package:calculate/pages/game/game_page.dart';
+import 'package:calculate/pages/setting/setting_page.dart';
+import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Home extends StatelessWidget {
+class Home extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
@@ -33,6 +36,7 @@ class Home extends StatelessWidget {
                   onPrimary: Theme.of(context).colorScheme.primaryVariant,
                 ),
                 onPressed: () {
+                  context.refresh(quizProvider);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -53,7 +57,12 @@ class Home extends StatelessWidget {
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   onPressed: () {
-                    // TODO: 設定画面
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Setting(),
+                      ),
+                    );
                   },
                 ),
                 const SizedBox(width: 16),
