@@ -6,18 +6,25 @@ import 'package:calculate/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
-  (_) => GameNotifier(),
+  (ref) => GameNotifier(ref.read),
 );
 
 class GameNotifier extends StateNotifier<GameState> {
-  GameNotifier() : super(GameState()) {
+  GameNotifier(this._read) : super(GameState()) {
+    final prefs = _read(sharedPreferencesProvider);
+    final leftTime = prefs.getInt('limit') ?? 180;
+    state = state.copyWith(
+      leftTime: leftTime,
+    );
     beginCountDown();
   }
 
+  final Reader _read;
   Timer? timer;
 
   void beginCountDown() {
-    int leftTime = 180;
+    final prefs = _read(sharedPreferencesProvider);
+    int leftTime = prefs.getInt('limit') ?? 180;
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       leftTime -= 1;
       if (leftTime == 0) {
@@ -25,7 +32,7 @@ class GameNotifier extends StateNotifier<GameState> {
       }
 
       state = state.copyWith(
-        leftTime: state.leftTime - 1,
+        leftTime: leftTime,
       );
     });
   }

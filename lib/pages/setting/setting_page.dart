@@ -37,32 +37,35 @@ class Setting extends ConsumerWidget {
             child: Text('制限時間'),
           ),
           const Divider(height: 1),
-          ListTile(
-            leading: Radio(
-              value: 1,
-              groupValue: 1,
-              onChanged: (value) {},
-            ),
+          RadioListTile<int>(
+            value: 180,
+            groupValue: settingState.limit,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateLimit(value);
+            },
             title: Text('180秒（3分）'),
             tileColor: Colors.white,
           ),
           const Divider(height: 1),
-          ListTile(
-            leading: Radio(
-              value: 2,
-              groupValue: 1,
-              onChanged: (value) {},
-            ),
+          RadioListTile<int>(
+            value: 240,
+            groupValue: settingState.limit,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateLimit(value);
+            },
             title: Text('240秒（4分）'),
             tileColor: Colors.white,
           ),
           const Divider(height: 1),
-          ListTile(
-            leading: Radio(
-              value: 3,
-              groupValue: 1,
-              onChanged: (value) {},
-            ),
+          RadioListTile<int>(
+            value: 300,
+            groupValue: settingState.limit,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateLimit(value);
+            },
             title: Text('300秒（5分）'),
             tileColor: Colors.white,
           ),

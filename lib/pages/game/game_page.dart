@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:calculate/pages/game/game_notifier.dart';
 import 'package:calculate/pages/home/home_page.dart';
+import 'package:calculate/providers.dart';
 import 'package:calculate/widgets/figure_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class Game extends ConsumerWidget {
     final quizList = watch(quizProvider);
     final gameNotifier = watch(gameProvider.notifier);
     final gameState = watch(gameProvider);
+    final prefs = watch(sharedPreferencesProvider);
+    final limit = prefs.getInt('limit') ?? 180;
 
     return Stack(
       children: [
@@ -157,7 +160,7 @@ class Game extends ConsumerWidget {
                     const Divider(height: 1),
                     Container(
                       width: MediaQuery.of(context).size.width *
-                          (gameState.leftTime / 180),
+                          (gameState.leftTime / limit),
                       height: 10,
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,

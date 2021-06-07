@@ -19,7 +19,7 @@ class Home extends ConsumerWidget {
             ),
             const SizedBox(height: 32),
             Text(
-              '全て解けるかな？\nあなたの計算力をチェック！！\n（制限時間１８０秒）',
+              '全て解けるかな？\nあなたの計算力をチェック！！',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline6,
             ),
