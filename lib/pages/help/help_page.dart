@@ -1,3 +1,4 @@
+import 'package:calculate/pages/contact/contact_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,7 +19,12 @@ class Help extends StatelessWidget {
             trailing: Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
-              // TODO: お問い合わせページへ
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Contact(),
+                ),
+              );
             },
           ),
           const Divider(height: 1),
@@ -27,7 +33,12 @@ class Help extends StatelessWidget {
             trailing: Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
-              // TODO: ご要望ページへ
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Contact(),
+                ),
+              );
             },
           ),
           const Divider(height: 1),
