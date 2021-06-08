@@ -1,3 +1,4 @@
+import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/pages/setting/setting_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Setting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final flavor = Flavor.values.firstWhere(
+      (value) {
+        const flavor = String.fromEnvironment('FLAVOR');
+        return value.name == flavor;
+      },
+    );
     final settingState = watch(settingProvider);
     final settingNotifier = watch(settingProvider.notifier);
 
@@ -36,6 +43,18 @@ class Setting extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             child: Text('制限時間'),
           ),
+          if (flavor == Flavor.development) const Divider(height: 1),
+          if (flavor == Flavor.development)
+            RadioListTile<int>(
+              value: 10,
+              groupValue: settingState.limit,
+              onChanged: (value) async {
+                if (value == null) return;
+                await settingNotifier.updateLimit(value);
+              },
+              title: Text('10秒（開発環境）'),
+              tileColor: Colors.white,
+            ),
           const Divider(height: 1),
           RadioListTile<int>(
             value: 180,
@@ -75,6 +94,18 @@ class Setting extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             child: Text('問題数'),
           ),
+          if (flavor == Flavor.development) const Divider(height: 1),
+          if (flavor == Flavor.development)
+            RadioListTile<int>(
+              value: 2,
+              groupValue: settingState.quizLength,
+              onChanged: (value) async {
+                if (value == null) return;
+                await settingNotifier.updateQuizLength(value);
+              },
+              title: Text('2問（開発環境）'),
+              tileColor: Colors.white,
+            ),
           const Divider(height: 1),
           RadioListTile<int>(
             value: 50,
