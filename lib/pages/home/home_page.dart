@@ -30,10 +30,10 @@ class Home extends ConsumerWidget {
                 child: Text('はじめる'),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(22),
+                    borderRadius: BorderRadius.circular(24),
                   ),
-                  minimumSize: Size(200, 44),
-                  primary: Theme.of(context).scaffoldBackgroundColor,
+                  minimumSize: Size(200, 48),
+                  primary: Colors.white,
                   onPrimary: Theme.of(context).colorScheme.primaryVariant,
                 ),
                 onPressed: () {
@@ -55,7 +55,7 @@ class Home extends ConsumerWidget {
                 IconButton(
                   icon: Icon(
                     Icons.settings,
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -70,7 +70,7 @@ class Home extends ConsumerWidget {
                 IconButton(
                   icon: Icon(
                     Icons.help_outline,
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     Navigator.push(
