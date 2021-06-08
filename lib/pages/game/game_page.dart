@@ -318,7 +318,9 @@ class Game extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        gameState.index != 99 ? 'タイムアップ' : '終了',
+                        gameState.correctList.length != quizLength
+                            ? 'タイムアップ'
+                            : '終了',
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       const SizedBox(height: 16),
