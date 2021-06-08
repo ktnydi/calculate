@@ -11,5 +11,6 @@ class GameState with _$GameState {
     @Default([]) List<int> answer,
     @Default([]) List<bool> correctList,
     @Default(180) int leftTime,
+    @Default(false) bool isFinished,
   }) = _GameState;
 }

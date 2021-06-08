@@ -97,7 +97,7 @@ class GameNotifier extends StateNotifier<GameState> {
   }
 
   void finishQuiz() {
-    state = state.copyWith(leftTime: 0);
+    state = state.copyWith(isFinished: true);
   }
 
   @override

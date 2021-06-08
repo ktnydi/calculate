@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:calculate/pages/game/game_notifier.dart';
+import 'package:calculate/pages/game_result/game_result_page.dart';
 import 'package:calculate/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:calculate/widgets/figure_button.dart';
@@ -303,7 +304,7 @@ class Game extends ConsumerWidget {
             },
           ),
         ),
-        if (gameState.leftTime == 0)
+        if (gameState.leftTime == 0 || gameState.isFinished)
           Container(
             color: Colors.black26,
             child: Center(
@@ -329,7 +330,7 @@ class Game extends ConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
-                        child: Text('ホームに戻る'),
+                        child: Text('結果を見る'),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(22),
@@ -337,14 +338,13 @@ class Game extends ConsumerWidget {
                           minimumSize: Size(120, 44),
                         ),
                         onPressed: () {
-                          Navigator.popUntil(
-                            context,
-                            (route) => route.isFirst,
-                          );
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Home(),
+                              builder: (context) => GameResult(
+                                gameState.leftTime,
+                                gameState.correctList,
+                              ),
                             ),
                           );
                         },

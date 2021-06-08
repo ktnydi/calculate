@@ -21,13 +21,15 @@ class _$GameStateTearOff {
       int index = 0,
       List<int> answer = const [],
       List<bool> correctList = const [],
-      int leftTime = 180}) {
+      int leftTime = 180,
+      bool isFinished = false}) {
     return _GameState(
       figuresList: figuresList,
       index: index,
       answer: answer,
       correctList: correctList,
       leftTime: leftTime,
+      isFinished: isFinished,
     );
   }
 }
@@ -42,6 +44,7 @@ mixin _$GameState {
   List<int> get answer => throw _privateConstructorUsedError;
   List<bool> get correctList => throw _privateConstructorUsedError;
   int get leftTime => throw _privateConstructorUsedError;
+  bool get isFinished => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GameStateCopyWith<GameState> get copyWith =>
@@ -57,7 +60,8 @@ abstract class $GameStateCopyWith<$Res> {
       int index,
       List<int> answer,
       List<bool> correctList,
-      int leftTime});
+      int leftTime,
+      bool isFinished});
 }
 
 /// @nodoc
@@ -75,6 +79,7 @@ class _$GameStateCopyWithImpl<$Res> implements $GameStateCopyWith<$Res> {
     Object? answer = freezed,
     Object? correctList = freezed,
     Object? leftTime = freezed,
+    Object? isFinished = freezed,
   }) {
     return _then(_value.copyWith(
       figuresList: figuresList == freezed
@@ -97,6 +102,10 @@ class _$GameStateCopyWithImpl<$Res> implements $GameStateCopyWith<$Res> {
           ? _value.leftTime
           : leftTime // ignore: cast_nullable_to_non_nullable
               as int,
+      isFinished: isFinished == freezed
+          ? _value.isFinished
+          : isFinished // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -112,7 +121,8 @@ abstract class _$GameStateCopyWith<$Res> implements $GameStateCopyWith<$Res> {
       int index,
       List<int> answer,
       List<bool> correctList,
-      int leftTime});
+      int leftTime,
+      bool isFinished});
 }
 
 /// @nodoc
@@ -131,6 +141,7 @@ class __$GameStateCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res>
     Object? answer = freezed,
     Object? correctList = freezed,
     Object? leftTime = freezed,
+    Object? isFinished = freezed,
   }) {
     return _then(_GameState(
       figuresList: figuresList == freezed
@@ -153,6 +164,10 @@ class __$GameStateCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res>
           ? _value.leftTime
           : leftTime // ignore: cast_nullable_to_non_nullable
               as int,
+      isFinished: isFinished == freezed
+          ? _value.isFinished
+          : isFinished // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -165,7 +180,8 @@ class _$_GameState implements _GameState {
       this.index = 0,
       this.answer = const [],
       this.correctList = const [],
-      this.leftTime = 180});
+      this.leftTime = 180,
+      this.isFinished = false});
 
   @JsonKey(defaultValue: const [])
   @override
@@ -182,10 +198,13 @@ class _$_GameState implements _GameState {
   @JsonKey(defaultValue: 180)
   @override
   final int leftTime;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isFinished;
 
   @override
   String toString() {
-    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, correctList: $correctList, leftTime: $leftTime)';
+    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, correctList: $correctList, leftTime: $leftTime, isFinished: $isFinished)';
   }
 
   @override
@@ -204,7 +223,10 @@ class _$_GameState implements _GameState {
                     .equals(other.correctList, correctList)) &&
             (identical(other.leftTime, leftTime) ||
                 const DeepCollectionEquality()
-                    .equals(other.leftTime, leftTime)));
+                    .equals(other.leftTime, leftTime)) &&
+            (identical(other.isFinished, isFinished) ||
+                const DeepCollectionEquality()
+                    .equals(other.isFinished, isFinished)));
   }
 
   @override
@@ -214,7 +236,8 @@ class _$_GameState implements _GameState {
       const DeepCollectionEquality().hash(index) ^
       const DeepCollectionEquality().hash(answer) ^
       const DeepCollectionEquality().hash(correctList) ^
-      const DeepCollectionEquality().hash(leftTime);
+      const DeepCollectionEquality().hash(leftTime) ^
+      const DeepCollectionEquality().hash(isFinished);
 
   @JsonKey(ignore: true)
   @override
@@ -228,7 +251,8 @@ abstract class _GameState implements GameState {
       int index,
       List<int> answer,
       List<bool> correctList,
-      int leftTime}) = _$_GameState;
+      int leftTime,
+      bool isFinished}) = _$_GameState;
 
   @override
   List<Quiz> get figuresList => throw _privateConstructorUsedError;
@@ -240,6 +264,8 @@ abstract class _GameState implements GameState {
   List<bool> get correctList => throw _privateConstructorUsedError;
   @override
   int get leftTime => throw _privateConstructorUsedError;
+  @override
+  bool get isFinished => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GameStateCopyWith<_GameState> get copyWith =>
