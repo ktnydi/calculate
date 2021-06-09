@@ -1,3 +1,4 @@
+import 'package:calculate/analytics.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/help/help_page.dart';
 import 'package:calculate/pages/setting/setting_page.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final analytics = watch(analyticsProvider);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
@@ -37,6 +40,7 @@ class Home extends ConsumerWidget {
                   onPrimary: Theme.of(context).colorScheme.primaryVariant,
                 ),
                 onPressed: () {
+                  analytics.logStartGame();
                   context.refresh(quizProvider);
                   Navigator.pushReplacement(
                     context,

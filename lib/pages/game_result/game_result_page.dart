@@ -1,3 +1,4 @@
+import 'package:calculate/analytics.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
@@ -12,6 +13,7 @@ class GameResult extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final analytics = watch(analyticsProvider);
     final prefs = watch(sharedPreferencesProvider);
     final isRandom = prefs.getBool('isRandom') ?? false;
     final limit = prefs.getInt('limit') ?? 180;
@@ -116,6 +118,7 @@ class GameResult extends ConsumerWidget {
                               primary: Colors.grey.shade200,
                             ),
                             onPressed: () {
+                              analytics.logRestartGame();
                               context.refresh(quizProvider);
                               Navigator.pushReplacement(
                                 context,

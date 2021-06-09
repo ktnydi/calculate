@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:calculate/analytics.dart';
 import 'package:calculate/pages/game/game_notifier.dart';
 import 'package:calculate/pages/game_result/game_result_page.dart';
 import 'package:calculate/pages/home/home_page.dart';
@@ -15,6 +16,7 @@ class Game extends ConsumerWidget {
     final quizList = watch(quizProvider);
     final gameNotifier = watch(gameProvider.notifier);
     final gameState = watch(gameProvider);
+    final analytics = watch(analyticsProvider);
     final prefs = watch(sharedPreferencesProvider);
     final limit = prefs.getInt('limit') ?? 180;
     final quizLength = prefs.getInt('quizLength') ?? 100;
@@ -113,6 +115,7 @@ class Game extends ConsumerWidget {
                                           minimumSize: Size(120, 44),
                                         ),
                                         onPressed: () {
+                                          analytics.logStopGame();
                                           Navigator.popUntil(
                                             context,
                                             (route) => route.isFirst,

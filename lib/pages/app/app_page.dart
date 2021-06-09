@@ -1,9 +1,13 @@
+import 'package:calculate/analytics.dart';
 import 'package:calculate/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final analytics = watch(analyticsProvider);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.from(
@@ -33,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: Home(),
+      navigatorObservers: [
+        analytics.observer,
+      ],
     );
   }
 }
