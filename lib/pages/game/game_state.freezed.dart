@@ -21,6 +21,7 @@ class _$GameStateTearOff {
       int index = 0,
       List<int> answer = const [],
       List<bool> correctList = const [],
+      List<Answer> answerList = const [],
       int leftTime = 180,
       bool isFinished = false}) {
     return _GameState(
@@ -28,6 +29,7 @@ class _$GameStateTearOff {
       index: index,
       answer: answer,
       correctList: correctList,
+      answerList: answerList,
       leftTime: leftTime,
       isFinished: isFinished,
     );
@@ -43,6 +45,7 @@ mixin _$GameState {
   int get index => throw _privateConstructorUsedError;
   List<int> get answer => throw _privateConstructorUsedError;
   List<bool> get correctList => throw _privateConstructorUsedError;
+  List<Answer> get answerList => throw _privateConstructorUsedError;
   int get leftTime => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
 
@@ -60,6 +63,7 @@ abstract class $GameStateCopyWith<$Res> {
       int index,
       List<int> answer,
       List<bool> correctList,
+      List<Answer> answerList,
       int leftTime,
       bool isFinished});
 }
@@ -78,6 +82,7 @@ class _$GameStateCopyWithImpl<$Res> implements $GameStateCopyWith<$Res> {
     Object? index = freezed,
     Object? answer = freezed,
     Object? correctList = freezed,
+    Object? answerList = freezed,
     Object? leftTime = freezed,
     Object? isFinished = freezed,
   }) {
@@ -98,6 +103,10 @@ class _$GameStateCopyWithImpl<$Res> implements $GameStateCopyWith<$Res> {
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
               as List<bool>,
+      answerList: answerList == freezed
+          ? _value.answerList
+          : answerList // ignore: cast_nullable_to_non_nullable
+              as List<Answer>,
       leftTime: leftTime == freezed
           ? _value.leftTime
           : leftTime // ignore: cast_nullable_to_non_nullable
@@ -121,6 +130,7 @@ abstract class _$GameStateCopyWith<$Res> implements $GameStateCopyWith<$Res> {
       int index,
       List<int> answer,
       List<bool> correctList,
+      List<Answer> answerList,
       int leftTime,
       bool isFinished});
 }
@@ -140,6 +150,7 @@ class __$GameStateCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res>
     Object? index = freezed,
     Object? answer = freezed,
     Object? correctList = freezed,
+    Object? answerList = freezed,
     Object? leftTime = freezed,
     Object? isFinished = freezed,
   }) {
@@ -160,6 +171,10 @@ class __$GameStateCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res>
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
               as List<bool>,
+      answerList: answerList == freezed
+          ? _value.answerList
+          : answerList // ignore: cast_nullable_to_non_nullable
+              as List<Answer>,
       leftTime: leftTime == freezed
           ? _value.leftTime
           : leftTime // ignore: cast_nullable_to_non_nullable
@@ -180,6 +195,7 @@ class _$_GameState implements _GameState {
       this.index = 0,
       this.answer = const [],
       this.correctList = const [],
+      this.answerList = const [],
       this.leftTime = 180,
       this.isFinished = false});
 
@@ -195,6 +211,9 @@ class _$_GameState implements _GameState {
   @JsonKey(defaultValue: const [])
   @override
   final List<bool> correctList;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<Answer> answerList;
   @JsonKey(defaultValue: 180)
   @override
   final int leftTime;
@@ -204,7 +223,7 @@ class _$_GameState implements _GameState {
 
   @override
   String toString() {
-    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, correctList: $correctList, leftTime: $leftTime, isFinished: $isFinished)';
+    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, correctList: $correctList, answerList: $answerList, leftTime: $leftTime, isFinished: $isFinished)';
   }
 
   @override
@@ -221,6 +240,9 @@ class _$_GameState implements _GameState {
             (identical(other.correctList, correctList) ||
                 const DeepCollectionEquality()
                     .equals(other.correctList, correctList)) &&
+            (identical(other.answerList, answerList) ||
+                const DeepCollectionEquality()
+                    .equals(other.answerList, answerList)) &&
             (identical(other.leftTime, leftTime) ||
                 const DeepCollectionEquality()
                     .equals(other.leftTime, leftTime)) &&
@@ -236,6 +258,7 @@ class _$_GameState implements _GameState {
       const DeepCollectionEquality().hash(index) ^
       const DeepCollectionEquality().hash(answer) ^
       const DeepCollectionEquality().hash(correctList) ^
+      const DeepCollectionEquality().hash(answerList) ^
       const DeepCollectionEquality().hash(leftTime) ^
       const DeepCollectionEquality().hash(isFinished);
 
@@ -251,6 +274,7 @@ abstract class _GameState implements GameState {
       int index,
       List<int> answer,
       List<bool> correctList,
+      List<Answer> answerList,
       int leftTime,
       bool isFinished}) = _$_GameState;
 
@@ -262,6 +286,8 @@ abstract class _GameState implements GameState {
   List<int> get answer => throw _privateConstructorUsedError;
   @override
   List<bool> get correctList => throw _privateConstructorUsedError;
+  @override
+  List<Answer> get answerList => throw _privateConstructorUsedError;
   @override
   int get leftTime => throw _privateConstructorUsedError;
   @override

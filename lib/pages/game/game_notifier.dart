@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:calculate/domains/answer/answer.dart';
 import 'package:calculate/pages/game/game_state.dart';
 import 'package:calculate/providers.dart';
-import 'package:calculate/quiz/quiz.dart';
+import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
@@ -67,26 +68,50 @@ class GameNotifier extends StateNotifier<GameState> {
     switch (quiz.type) {
       case 1:
         final answer = quiz.figures.first + quiz.figures.last;
+        final userAnswer = Answer(
+          quiz: quiz,
+          answer: inComing,
+          isCorrect: inComing == '$answer',
+        );
         state = state.copyWith(
           correctList: [...state.correctList, inComing == '$answer'],
+          answerList: [...state.answerList, userAnswer],
         );
         break;
       case 2:
         final answer = quiz.figures.first - quiz.figures.last;
+        final userAnswer = Answer(
+          quiz: quiz,
+          answer: inComing,
+          isCorrect: inComing == '$answer',
+        );
         state = state.copyWith(
           correctList: [...state.correctList, inComing == '$answer'],
+          answerList: [...state.answerList, userAnswer],
         );
         break;
       case 3:
         final answer = quiz.figures.first * quiz.figures.last;
+        final userAnswer = Answer(
+          quiz: quiz,
+          answer: inComing,
+          isCorrect: inComing == '$answer',
+        );
         state = state.copyWith(
           correctList: [...state.correctList, inComing == '$answer'],
+          answerList: [...state.answerList, userAnswer],
         );
         break;
       case 4:
         final answer = quiz.figures.first ~/ quiz.figures.last;
+        final userAnswer = Answer(
+          quiz: quiz,
+          answer: inComing,
+          isCorrect: inComing == '$answer',
+        );
         state = state.copyWith(
           correctList: [...state.correctList, inComing == '$answer'],
+          answerList: [...state.answerList, userAnswer],
         );
         break;
     }

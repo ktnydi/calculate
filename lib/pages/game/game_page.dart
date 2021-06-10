@@ -361,7 +361,7 @@ class Game extends ConsumerWidget {
                             MaterialPageRoute(
                               builder: (context) => GameResult(
                                 gameState.leftTime,
-                                gameState.correctList,
+                                gameState.answerList,
                               ),
                             ),
                           );
