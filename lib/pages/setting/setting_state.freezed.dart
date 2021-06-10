@@ -17,11 +17,15 @@ class _$SettingStateTearOff {
   const _$SettingStateTearOff();
 
   _SettingState call(
-      {bool isRandom = false, int limit = 180, int quizLength = 100}) {
+      {bool isRandom = false,
+      int limit = 180,
+      int quizLength = 100,
+      int keyboardLocation = 0}) {
     return _SettingState(
       isRandom: isRandom,
       limit: limit,
       quizLength: quizLength,
+      keyboardLocation: keyboardLocation,
     );
   }
 }
@@ -34,6 +38,7 @@ mixin _$SettingState {
   bool get isRandom => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
   int get quizLength => throw _privateConstructorUsedError;
+  int get keyboardLocation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingStateCopyWith<SettingState> get copyWith =>
@@ -45,7 +50,7 @@ abstract class $SettingStateCopyWith<$Res> {
   factory $SettingStateCopyWith(
           SettingState value, $Res Function(SettingState) then) =
       _$SettingStateCopyWithImpl<$Res>;
-  $Res call({bool isRandom, int limit, int quizLength});
+  $Res call({bool isRandom, int limit, int quizLength, int keyboardLocation});
 }
 
 /// @nodoc
@@ -61,6 +66,7 @@ class _$SettingStateCopyWithImpl<$Res> implements $SettingStateCopyWith<$Res> {
     Object? isRandom = freezed,
     Object? limit = freezed,
     Object? quizLength = freezed,
+    Object? keyboardLocation = freezed,
   }) {
     return _then(_value.copyWith(
       isRandom: isRandom == freezed
@@ -75,6 +81,10 @@ class _$SettingStateCopyWithImpl<$Res> implements $SettingStateCopyWith<$Res> {
           ? _value.quizLength
           : quizLength // ignore: cast_nullable_to_non_nullable
               as int,
+      keyboardLocation: keyboardLocation == freezed
+          ? _value.keyboardLocation
+          : keyboardLocation // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -86,7 +96,7 @@ abstract class _$SettingStateCopyWith<$Res>
           _SettingState value, $Res Function(_SettingState) then) =
       __$SettingStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isRandom, int limit, int quizLength});
+  $Res call({bool isRandom, int limit, int quizLength, int keyboardLocation});
 }
 
 /// @nodoc
@@ -104,6 +114,7 @@ class __$SettingStateCopyWithImpl<$Res> extends _$SettingStateCopyWithImpl<$Res>
     Object? isRandom = freezed,
     Object? limit = freezed,
     Object? quizLength = freezed,
+    Object? keyboardLocation = freezed,
   }) {
     return _then(_SettingState(
       isRandom: isRandom == freezed
@@ -118,6 +129,10 @@ class __$SettingStateCopyWithImpl<$Res> extends _$SettingStateCopyWithImpl<$Res>
           ? _value.quizLength
           : quizLength // ignore: cast_nullable_to_non_nullable
               as int,
+      keyboardLocation: keyboardLocation == freezed
+          ? _value.keyboardLocation
+          : keyboardLocation // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -126,7 +141,10 @@ class __$SettingStateCopyWithImpl<$Res> extends _$SettingStateCopyWithImpl<$Res>
 
 class _$_SettingState implements _SettingState {
   const _$_SettingState(
-      {this.isRandom = false, this.limit = 180, this.quizLength = 100});
+      {this.isRandom = false,
+      this.limit = 180,
+      this.quizLength = 100,
+      this.keyboardLocation = 0});
 
   @JsonKey(defaultValue: false)
   @override
@@ -137,10 +155,13 @@ class _$_SettingState implements _SettingState {
   @JsonKey(defaultValue: 100)
   @override
   final int quizLength;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int keyboardLocation;
 
   @override
   String toString() {
-    return 'SettingState(isRandom: $isRandom, limit: $limit, quizLength: $quizLength)';
+    return 'SettingState(isRandom: $isRandom, limit: $limit, quizLength: $quizLength, keyboardLocation: $keyboardLocation)';
   }
 
   @override
@@ -154,7 +175,10 @@ class _$_SettingState implements _SettingState {
                 const DeepCollectionEquality().equals(other.limit, limit)) &&
             (identical(other.quizLength, quizLength) ||
                 const DeepCollectionEquality()
-                    .equals(other.quizLength, quizLength)));
+                    .equals(other.quizLength, quizLength)) &&
+            (identical(other.keyboardLocation, keyboardLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.keyboardLocation, keyboardLocation)));
   }
 
   @override
@@ -162,7 +186,8 @@ class _$_SettingState implements _SettingState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isRandom) ^
       const DeepCollectionEquality().hash(limit) ^
-      const DeepCollectionEquality().hash(quizLength);
+      const DeepCollectionEquality().hash(quizLength) ^
+      const DeepCollectionEquality().hash(keyboardLocation);
 
   @JsonKey(ignore: true)
   @override
@@ -171,8 +196,11 @@ class _$_SettingState implements _SettingState {
 }
 
 abstract class _SettingState implements SettingState {
-  const factory _SettingState({bool isRandom, int limit, int quizLength}) =
-      _$_SettingState;
+  const factory _SettingState(
+      {bool isRandom,
+      int limit,
+      int quizLength,
+      int keyboardLocation}) = _$_SettingState;
 
   @override
   bool get isRandom => throw _privateConstructorUsedError;
@@ -180,6 +208,8 @@ abstract class _SettingState implements SettingState {
   int get limit => throw _privateConstructorUsedError;
   @override
   int get quizLength => throw _privateConstructorUsedError;
+  @override
+  int get keyboardLocation => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SettingStateCopyWith<_SettingState> get copyWith =>

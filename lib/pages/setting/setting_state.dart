@@ -8,5 +8,6 @@ class SettingState with _$SettingState {
     @Default(false) bool isRandom,
     @Default(180) int limit,
     @Default(100) int quizLength,
+    @Default(0) int keyboardLocation,
   }) = _SettingState;
 }

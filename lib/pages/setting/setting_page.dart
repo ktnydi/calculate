@@ -129,6 +129,44 @@ class Setting extends ConsumerWidget {
             tileColor: Colors.white,
           ),
           const Divider(height: 1),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text('キーボードの位置'),
+          ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 0,
+            groupValue: settingState.keyboardLocation,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateKeyboardLocation(value);
+            },
+            title: Text('標準（デフォルト）'),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 1,
+            groupValue: settingState.keyboardLocation,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateKeyboardLocation(value);
+            },
+            title: Text('左'),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 2,
+            groupValue: settingState.keyboardLocation,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateKeyboardLocation(value);
+            },
+            title: Text('右'),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
         ],
       ),
     );

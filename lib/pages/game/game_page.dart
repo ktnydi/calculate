@@ -20,6 +20,7 @@ class Game extends ConsumerWidget {
     final prefs = watch(sharedPreferencesProvider);
     final limit = prefs.getInt('limit') ?? 180;
     final quizLength = prefs.getInt('quizLength') ?? 100;
+    final keyboardLocation = prefs.getInt('keyboardLocation') ?? 0;
 
     return Stack(
       children: [
@@ -240,64 +241,79 @@ class Game extends ConsumerWidget {
                   Container(
                     color: Colors.white,
                     child: SafeArea(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 1),
-                        color: Theme.of(context).dividerColor,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GridView.count(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              crossAxisCount: 3,
-                              childAspectRatio: 5 / 3,
-                              mainAxisSpacing: 1,
-                              crossAxisSpacing: 1,
-                              children: List.generate(
-                                12,
-                                (index) {
-                                  if (index == 9) {
-                                    return FigureButton(
-                                      child: Text('C'),
-                                      onPressed: () {
-                                        gameNotifier.clearAnswer();
-                                      },
-                                    );
-                                  }
-
-                                  if (index == 11) {
-                                    return FigureButton(
-                                      child: Text('OK'),
-                                      onPressed: () {
-                                        if (gameState.answer.isEmpty) {
-                                          return;
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Divider(height: 1, thickness: 1),
+                          Row(
+                            children: [
+                              if (keyboardLocation == 2)
+                                const SizedBox(width: 80),
+                              Flexible(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 1),
+                                  color: Theme.of(context).dividerColor,
+                                  child: GridView.count(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    crossAxisCount: 3,
+                                    childAspectRatio: 5 / 3,
+                                    mainAxisSpacing: 1,
+                                    crossAxisSpacing: 1,
+                                    children: List.generate(
+                                      12,
+                                      (index) {
+                                        if (index == 9) {
+                                          return FigureButton(
+                                            child: Text('C'),
+                                            onPressed: () {
+                                              gameNotifier.clearAnswer();
+                                            },
+                                          );
                                         }
-                                        gameNotifier.checkAnswer(quiz);
-                                        final lastIndex = quizLength - 1;
-                                        if (gameState.index == lastIndex) {
-                                          gameNotifier.endCountDown();
-                                          return gameNotifier.finishQuiz();
+
+                                        if (index == 11) {
+                                          return FigureButton(
+                                            child: Text('OK'),
+                                            onPressed: () {
+                                              if (gameState.answer.isEmpty) {
+                                                return;
+                                              }
+                                              gameNotifier.checkAnswer(quiz);
+                                              final lastIndex = quizLength - 1;
+                                              if (gameState.index ==
+                                                  lastIndex) {
+                                                gameNotifier.endCountDown();
+                                                return gameNotifier
+                                                    .finishQuiz();
+                                              }
+                                              gameNotifier.clearAnswer();
+                                              gameNotifier.nextQuiz();
+                                            },
+                                          );
                                         }
-                                        gameNotifier.clearAnswer();
-                                        gameNotifier.nextQuiz();
+
+                                        final isZeroBtn = index == 10;
+                                        index = isZeroBtn ? -1 : index;
+
+                                        return FigureButton(
+                                          child: Text('${index + 1}'),
+                                          onPressed: () {
+                                            gameNotifier
+                                                .fillInAnswer(index + 1);
+                                          },
+                                        );
                                       },
-                                    );
-                                  }
-
-                                  final isZeroBtn = index == 10;
-                                  index = isZeroBtn ? -1 : index;
-
-                                  return FigureButton(
-                                    child: Text('${index + 1}'),
-                                    onPressed: () {
-                                      gameNotifier.fillInAnswer(index + 1);
-                                    },
-                                  );
-                                },
+                                    ),
+                                  ),
+                                ),
                               ),
-                            )
-                          ],
-                        ),
+                              if (keyboardLocation == 1)
+                                const SizedBox(width: 80),
+                            ],
+                          ),
+                          const Divider(height: 1, thickness: 1),
+                        ],
                       ),
                     ),
                   ),
