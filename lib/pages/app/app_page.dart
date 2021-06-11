@@ -35,8 +35,15 @@ class MyApp extends ConsumerWidget {
             ),
           ),
         ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Color(0xFF849D83),
+          ),
+        ),
       ),
-      home: Home(),
+      home: Scaffold(
+        body: Home(),
+      ),
       navigatorObservers: [
         analytics.observer,
       ],

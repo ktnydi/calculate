@@ -6,6 +6,9 @@ PODS:
     - FirebaseAnalytics (~> 8.0.0)
   - Firebase/CoreOnly (8.0.0):
     - FirebaseCore (= 8.0.0)
+  - Firebase/RemoteConfig (8.0.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 8.0.0)
   - firebase_analytics (8.1.1):
     - Firebase/Analytics (= 8.0.0)
     - firebase_core
@@ -13,6 +16,12 @@ PODS:
   - firebase_core (1.2.1):
     - Firebase/CoreOnly (= 8.0.0)
     - Flutter
+  - firebase_remote_config (0.10.0-1):
+    - Firebase/RemoteConfig (= 8.0.0)
+    - firebase_core
+    - Flutter
+  - FirebaseABTesting (8.1.0):
+    - FirebaseCore (~> 8.0)
   - FirebaseAnalytics (8.0.0):
     - FirebaseAnalytics/AdIdSupport (= 8.0.0)
     - FirebaseCore (~> 8.0)
@@ -54,6 +63,12 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
     - PromisesObjC (~> 1.2)
+  - FirebaseRemoteConfig (8.0.0):
+    - FirebaseABTesting (~> 8.0)
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - "GoogleUtilities/NSData+zlib (~> 7.4)"
   - Flutter (1.0.0)
   - GoogleAppMeasurement (8.0.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.0.0)
@@ -109,6 +124,7 @@ PODS:
 DEPENDENCIES:
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -118,10 +134,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
+    - FirebaseRemoteConfig
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -133,6 +151,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_remote_config:
+    :path: ".symlinks/plugins/firebase_remote_config/ios"
   Flutter:
     :path: Flutter
   package_info:
@@ -148,10 +168,13 @@ SPEC CHECKSUMS:
   Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
   firebase_analytics: 63c9b821662e558ae4b9920d0dab237a27f434cc
   firebase_core: a9b69f8583dc992f1b15f376b4918537c1804bb4
+  firebase_remote_config: c874f977d79250846e26c1896dbb6dea025493f0
+  FirebaseABTesting: 5b22abfa9a55d5b9cd3d1e500a3ca29f6b1264cb
   FirebaseAnalytics: dcb92c7c9ef4fa7ffac276e8f87bd4fc8c97f1b8
   FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
   FirebaseInstallations: 7f31798a8198c354eadcb87176d2090b62edc187
+  FirebaseRemoteConfig: 055f6b5ba1751547596ded5032c4d5c6054ca501
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   GoogleAppMeasurement: c6bbc9753d046b5456dd4f940057fbad2c28419e
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
