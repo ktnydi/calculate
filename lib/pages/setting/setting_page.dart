@@ -21,7 +21,6 @@ class Setting extends ConsumerWidget {
       ),
       body: ListView(
         children: [
-          // TODO: 出題順の設定
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text('出題順'),
@@ -38,7 +37,6 @@ class Setting extends ConsumerWidget {
             tileColor: Colors.white,
           ),
           const Divider(height: 1),
-          // TODO: 制限時間の設定
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text('制限時間'),
@@ -89,7 +87,6 @@ class Setting extends ConsumerWidget {
             tileColor: Colors.white,
           ),
           const Divider(height: 1),
-          // TODO: 問題数の設定
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text('問題数'),
