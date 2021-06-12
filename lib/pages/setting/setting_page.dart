@@ -40,6 +40,28 @@ class Setting extends ConsumerWidget {
               if (value == null) return;
               await settingNotifier.updateLimit(value);
             },
+            title: Text('60秒（1分）'),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 120,
+            groupValue: settingState.limit,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateLimit(value);
+            },
+            title: Text('120秒（2分）'),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 180,
+            groupValue: settingState.limit,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateLimit(value);
+            },
             title: Text('180秒（3分）'),
             tileColor: Colors.white,
           ),
@@ -82,6 +104,28 @@ class Setting extends ConsumerWidget {
               title: Text('2問（開発環境）'),
               tileColor: Colors.white,
             ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 10,
+            groupValue: settingState.quizLength,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateQuizLength(value);
+            },
+            title: Text('10問'),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
+          RadioListTile<int>(
+            value: 20,
+            groupValue: settingState.quizLength,
+            onChanged: (value) async {
+              if (value == null) return;
+              await settingNotifier.updateQuizLength(value);
+            },
+            title: Text('20問'),
+            tileColor: Colors.white,
+          ),
           const Divider(height: 1),
           RadioListTile<int>(
             value: 50,
