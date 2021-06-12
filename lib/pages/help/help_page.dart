@@ -2,6 +2,7 @@ import 'package:app_review/app_review.dart';
 import 'package:calculate/pages/contact/contact_page.dart';
 import 'package:calculate/pages/load_map/load_map_page.dart';
 import 'package:calculate/providers.dart';
+import 'package:calculate/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -83,6 +84,38 @@ class Help extends StatelessWidget {
                     applicationVersion: packageInfo.version,
                   );
                 },
+              );
+            },
+          ),
+          const Divider(height: 1),
+          ListTile(
+            title: Text('利用規約'),
+            trailing: Icon(Icons.navigate_next),
+            tileColor: Colors.white,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WebViewPage(
+                    'https://www.notion.so/dc7d95253ab1441c9ec099c1b79e2c67',
+                  ),
+                ),
+              );
+            },
+          ),
+          const Divider(height: 1),
+          ListTile(
+            title: Text('プライバシーポリシー'),
+            trailing: Icon(Icons.navigate_next),
+            tileColor: Colors.white,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WebViewPage(
+                    'https://www.notion.so/d9bdcb0258c846eb987f08e583dd7ff2',
+                  ),
+                ),
               );
             },
           ),
