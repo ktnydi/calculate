@@ -18,22 +18,6 @@ class Setting extends ConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Text('出題順'),
-          ),
-          const Divider(height: 1),
-          ListTile(
-            title: Text('ランダムに出題する'),
-            trailing: Switch(
-              value: settingState.isRandom,
-              onChanged: (value) async {
-                await settingNotifier.updateRandom(value);
-              },
-            ),
-            tileColor: Colors.white,
-          ),
-          const Divider(height: 1),
-          Padding(
-            padding: const EdgeInsets.all(16),
             child: Text('制限時間'),
           ),
           if (flavor == Flavor.development) const Divider(height: 1),

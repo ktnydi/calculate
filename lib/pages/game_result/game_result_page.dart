@@ -226,7 +226,7 @@ class GameResult extends ConsumerWidget {
               ),
               onPressed: () {
                 analytics.logRestartGame();
-                context.refresh(quizProvider);
+                context.refresh(randomQuizProvider);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

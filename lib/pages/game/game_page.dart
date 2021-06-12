@@ -13,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Game extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final quizList = watch(quizProvider);
+    final randomQuizList = watch(randomQuizProvider);
     final gameNotifier = watch(gameProvider.notifier);
     final gameState = watch(gameProvider);
     final analytics = watch(analyticsProvider);
@@ -135,7 +135,7 @@ class Game extends ConsumerWidget {
               ),
             ),
           ),
-          body: quizList.when(
+          body: randomQuizList.when(
             loading: () {
               return const Center(
                 child: CupertinoActivityIndicator(),

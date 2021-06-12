@@ -12,12 +12,10 @@ final settingProvider =
 class SettingNotifier extends StateNotifier<SettingState> {
   SettingNotifier(this._read) : super(SettingState()) {
     final prefs = _read(sharedPreferencesProvider);
-    final isRandom = prefs.getBool('isRandom') ?? false;
     final limit = prefs.getInt('limit') ?? 180;
     final quizLength = prefs.getInt('quizLength') ?? 100;
     final keyboardLocation = prefs.getInt('keyboardLocation') ?? 0;
     state = state.copyWith(
-      isRandom: isRandom,
       limit: limit,
       quizLength: quizLength,
       keyboardLocation: keyboardLocation,
@@ -25,14 +23,6 @@ class SettingNotifier extends StateNotifier<SettingState> {
   }
 
   final Reader _read;
-
-  Future<void> updateRandom(bool isRandom) async {
-    final prefs = _read(sharedPreferencesProvider);
-    await prefs.setBool('isRandom', isRandom);
-    state = state.copyWith(
-      isRandom: isRandom,
-    );
-  }
 
   Future<void> updateLimit(int limit) async {
     final prefs = _read(sharedPreferencesProvider);

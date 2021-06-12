@@ -1,11 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:calculate/domains/update_info/update_info.dart';
 import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,15 +19,29 @@ final packageInfoProvider = Provider<PackageInfo>(
   (_) => throw UnimplementedError(),
 );
 
-final quizProvider = FutureProvider<List<Quiz>>(
+final randomQuizProvider = FutureProvider<List<Quiz>>(
   (ref) async {
     final prefs = ref.read(sharedPreferencesProvider);
-    final isRandom = prefs.getBool('isRandom') ?? false;
-    final jsonString = await rootBundle.loadString('assets/quiz.json');
-    final List json = await jsonDecode(jsonString);
-    final quizList = json.map((json) => Quiz.fromJson(json)).toList();
-    if (isRandom) {
-      quizList..shuffle();
+    final quizLength = prefs.getInt('limit') ?? 100;
+    final quizList = <Quiz>[];
+    final random = Random();
+    const minNum = 10;
+    const maxNum = 100;
+    final createNum = (int min, int max) => min + random.nextInt(max - min);
+
+    for (int i = 0; i < quizLength; i++) {
+      final isAddition = random.nextBool();
+      final num1 = createNum(minNum, maxNum);
+      final num2 = createNum(minNum, maxNum);
+      final id = i + 1;
+      final figures = [num1, num2];
+      if (!isAddition) {
+        /// 引き算なら降順にする。
+        figures.sort((i, j) => j - i);
+      }
+      final type = isAddition ? 1 : 2;
+      final quiz = Quiz(id: id, figures: figures, type: type);
+      quizList.add(quiz);
     }
     return quizList;
   },
