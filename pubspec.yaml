@@ -20,6 +20,7 @@ dependencies:
   firebase_analytics: ^8.1.1
   firebase_remote_config: ^0.10.0+1
   version: ^2.0.0
+  app_review: ^2.1.1+1
 
 dev_dependencies:
   flutter_test:

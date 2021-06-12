@@ -1,3 +1,4 @@
+import 'package:app_review/app_review.dart';
 import 'package:calculate/pages/contact/contact_page.dart';
 import 'package:calculate/pages/load_map/load_map_page.dart';
 import 'package:calculate/providers.dart';
@@ -61,8 +62,10 @@ class Help extends StatelessWidget {
             title: Text('アプリを評価'),
             trailing: Icon(Icons.navigate_next),
             tileColor: Colors.white,
-            onTap: () {
-              // TODO: アプリストアへ
+            onTap: () async {
+              if (await AppReview.isRequestReviewAvailable) {
+                await AppReview.requestReview;
+              }
             },
           ),
           const Divider(height: 1),

@@ -1,3 +1,4 @@
+import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/pages/game/game_page.dart';
@@ -81,8 +82,8 @@ class Home extends ConsumerWidget {
                                         UpdateRequestType.cancelable)
                                       const SizedBox(width: 16),
                                     ElevatedButton(
-                                      onPressed: () {
-                                        // TODO: App Store or Google Play を表示
+                                      onPressed: () async {
+                                        await AppReview.storeListing;
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
