@@ -6,12 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Setting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final flavor = Flavor.values.firstWhere(
-      (value) {
-        const flavor = String.fromEnvironment('FLAVOR');
-        return value.name == flavor;
-      },
-    );
+    final flavor = watch(flavorProvider);
     final settingState = watch(settingProvider);
     final settingNotifier = watch(settingProvider.notifier);
 
