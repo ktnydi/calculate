@@ -14,7 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Game extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final randomQuizList = watch(randomQuizProvider);
+    final quiz = watch(quizProvider);
     final gameNotifier = watch(gameProvider.notifier);
     final gameState = watch(gameProvider);
     final analytics = watch(analyticsProvider);
@@ -131,7 +131,9 @@ class Game extends ConsumerWidget {
               },
             ),
             title: Text(
-              '${gameState.index + 1}／${quizLength}問',
+              quizType == QuizType.numQuizzes
+                  ? '${gameState.index + 1}／${quizLength}問'
+                  : '第${gameState.index + 1}問',
               style: TextStyle(
                 fontSize: 18,
                 fontFeatures: [
@@ -140,7 +142,7 @@ class Game extends ConsumerWidget {
               ),
             ),
           ),
-          body: randomQuizList.when(
+          body: quiz.when(
             loading: () {
               return const Center(
                 child: CupertinoActivityIndicator(),
@@ -153,9 +155,7 @@ class Game extends ConsumerWidget {
                 ),
               );
             },
-            data: (quizList) {
-              final quiz = quizList[gameState.index];
-
+            data: (quiz) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -291,12 +291,14 @@ class Game extends ConsumerWidget {
                                               }
                                               gameNotifier.checkAnswer(quiz);
                                               final lastIndex = quizLength - 1;
-                                              if (gameState.index ==
-                                                  lastIndex) {
-                                                gameNotifier.endCountDown();
+                                              if (quizType ==
+                                                      QuizType.numQuizzes &&
+                                                  gameState.index ==
+                                                      lastIndex) {
                                                 return gameNotifier
                                                     .finishQuiz();
                                               }
+                                              context.refresh(quizProvider);
                                               gameNotifier.clearAnswer();
                                               gameNotifier.nextQuiz();
                                             },
