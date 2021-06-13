@@ -7,7 +7,6 @@ part 'quiz.g.dart';
 class Quiz with _$Quiz {
   const Quiz._();
   const factory Quiz({
-    required int id,
     required List<int> figures,
     required int type,
   }) = _Quiz;

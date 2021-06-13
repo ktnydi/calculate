@@ -19,6 +19,25 @@ final packageInfoProvider = Provider<PackageInfo>(
   (_) => throw UnimplementedError(),
 );
 
+final quizProvider = FutureProvider<Quiz>(
+  (ref) async {
+    final random = Random();
+    const minNum = 10;
+    const maxNum = 100;
+    final createNum = (int min, int max) => min + random.nextInt(max - min);
+    final isAddition = random.nextBool();
+    final num1 = createNum(minNum, maxNum);
+    final num2 = createNum(minNum, maxNum);
+    final figures = [num1, num2];
+    if (!isAddition) {
+      /// 引き算なら降順にする。
+      figures.sort((i, j) => j - i);
+    }
+    final type = isAddition ? 1 : 2;
+    return Quiz(figures: figures, type: type);
+  },
+);
+
 final randomQuizProvider = FutureProvider<List<Quiz>>(
   (ref) async {
     final prefs = ref.read(sharedPreferencesProvider);
@@ -33,14 +52,13 @@ final randomQuizProvider = FutureProvider<List<Quiz>>(
       final isAddition = random.nextBool();
       final num1 = createNum(minNum, maxNum);
       final num2 = createNum(minNum, maxNum);
-      final id = i + 1;
       final figures = [num1, num2];
       if (!isAddition) {
         /// 引き算なら降順にする。
         figures.sort((i, j) => j - i);
       }
       final type = isAddition ? 1 : 2;
-      final quiz = Quiz(id: id, figures: figures, type: type);
+      final quiz = Quiz(figures: figures, type: type);
       quizList.add(quiz);
     }
     return quizList;
