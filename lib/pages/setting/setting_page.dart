@@ -67,7 +67,7 @@ class Setting extends ConsumerWidget {
                   ),
                 const Divider(height: 1),
                 RadioListTile<int>(
-                  value: 180,
+                  value: 60,
                   groupValue: settingState.limit,
                   onChanged: (value) async {
                     if (value == null) return;
