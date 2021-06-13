@@ -355,10 +355,6 @@ class Game extends ConsumerWidget {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        '${gameState.correctList.where((e) => e == true).length}／${quizLength}点',
-                      ),
-                      const SizedBox(height: 16),
                       ElevatedButton(
                         child: Text('結果を見る'),
                         style: ElevatedButton.styleFrom(

@@ -1,5 +1,6 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/domains/answer/answer.dart';
+import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
@@ -16,9 +17,12 @@ class GameResult extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final analytics = watch(analyticsProvider);
     final prefs = watch(sharedPreferencesProvider);
-    final isRandom = prefs.getBool('isRandom') ?? false;
     final limit = prefs.getInt('limit') ?? 180;
     final timePerQuiz = (limit - leftTime) / answerList.length;
+    final quizType = QuizType.values.firstWhere(
+      (value) => value.id == prefs.getInt('quizType'),
+      orElse: () => QuizType.numQuizzes,
+    );
     final quizLength = prefs.getInt('quizLength') ?? 100;
     final numCorrects = answerList.where((ans) => ans.isCorrect).length;
     final viewPadding = MediaQuery.of(context).viewPadding;
@@ -53,12 +57,43 @@ class GameResult extends ConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${isRandom ? 'ランダム・' : ''}$limit秒・$quizLength問',
+                  quizType == QuizType.numQuizzes
+                      ? '問題数・全${quizLength}問'
+                      : '時間制限・$limit秒',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ],
             ),
           ),
+          if (quizType == QuizType.timeLimit) const SizedBox(height: 16),
+          if (quizType == QuizType.timeLimit)
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 32,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Theme.of(context).dividerColor,
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '時間／問',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${timePerQuiz.toStringAsFixed(2)}秒',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ],
+              ),
+            ),
           const SizedBox(height: 16),
           Container(
             padding: EdgeInsets.symmetric(
@@ -75,59 +110,13 @@ class GameResult extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '時間',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    Text(
-                      '１問：${timePerQuiz.toStringAsFixed(2)}秒',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
                 Text(
-                  '${limit - leftTime}秒',
+                  '正答率',
                   style: Theme.of(context).textTheme.headline6,
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 32,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: Theme.of(context).dividerColor,
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      '正答率',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    Text(
-                      '未回答：${quizLength - answerList.length}',
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 4),
                 Text(
-                  '${(numCorrects * 100 ~/ quizLength).round()}%',
+                  '${(numCorrects * 100 / answerList.length).toStringAsPrecision(3)}%',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ],
