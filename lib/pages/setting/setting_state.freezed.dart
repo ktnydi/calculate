@@ -17,8 +17,12 @@ class _$SettingStateTearOff {
   const _$SettingStateTearOff();
 
   _SettingState call(
-      {int limit = 180, int quizLength = 100, int keyboardLocation = 0}) {
+      {QuizType quizType = QuizType.numQuizzes,
+      int limit = 180,
+      int quizLength = 100,
+      int keyboardLocation = 0}) {
     return _SettingState(
+      quizType: quizType,
       limit: limit,
       quizLength: quizLength,
       keyboardLocation: keyboardLocation,
@@ -31,6 +35,7 @@ const $SettingState = _$SettingStateTearOff();
 
 /// @nodoc
 mixin _$SettingState {
+  QuizType get quizType => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
   int get quizLength => throw _privateConstructorUsedError;
   int get keyboardLocation => throw _privateConstructorUsedError;
@@ -45,7 +50,8 @@ abstract class $SettingStateCopyWith<$Res> {
   factory $SettingStateCopyWith(
           SettingState value, $Res Function(SettingState) then) =
       _$SettingStateCopyWithImpl<$Res>;
-  $Res call({int limit, int quizLength, int keyboardLocation});
+  $Res call(
+      {QuizType quizType, int limit, int quizLength, int keyboardLocation});
 }
 
 /// @nodoc
@@ -58,11 +64,16 @@ class _$SettingStateCopyWithImpl<$Res> implements $SettingStateCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? quizType = freezed,
     Object? limit = freezed,
     Object? quizLength = freezed,
     Object? keyboardLocation = freezed,
   }) {
     return _then(_value.copyWith(
+      quizType: quizType == freezed
+          ? _value.quizType
+          : quizType // ignore: cast_nullable_to_non_nullable
+              as QuizType,
       limit: limit == freezed
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -86,7 +97,8 @@ abstract class _$SettingStateCopyWith<$Res>
           _SettingState value, $Res Function(_SettingState) then) =
       __$SettingStateCopyWithImpl<$Res>;
   @override
-  $Res call({int limit, int quizLength, int keyboardLocation});
+  $Res call(
+      {QuizType quizType, int limit, int quizLength, int keyboardLocation});
 }
 
 /// @nodoc
@@ -101,11 +113,16 @@ class __$SettingStateCopyWithImpl<$Res> extends _$SettingStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? quizType = freezed,
     Object? limit = freezed,
     Object? quizLength = freezed,
     Object? keyboardLocation = freezed,
   }) {
     return _then(_SettingState(
+      quizType: quizType == freezed
+          ? _value.quizType
+          : quizType // ignore: cast_nullable_to_non_nullable
+              as QuizType,
       limit: limit == freezed
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -126,8 +143,14 @@ class __$SettingStateCopyWithImpl<$Res> extends _$SettingStateCopyWithImpl<$Res>
 
 class _$_SettingState implements _SettingState {
   const _$_SettingState(
-      {this.limit = 180, this.quizLength = 100, this.keyboardLocation = 0});
+      {this.quizType = QuizType.numQuizzes,
+      this.limit = 180,
+      this.quizLength = 100,
+      this.keyboardLocation = 0});
 
+  @JsonKey(defaultValue: QuizType.numQuizzes)
+  @override
+  final QuizType quizType;
   @JsonKey(defaultValue: 180)
   @override
   final int limit;
@@ -140,13 +163,16 @@ class _$_SettingState implements _SettingState {
 
   @override
   String toString() {
-    return 'SettingState(limit: $limit, quizLength: $quizLength, keyboardLocation: $keyboardLocation)';
+    return 'SettingState(quizType: $quizType, limit: $limit, quizLength: $quizLength, keyboardLocation: $keyboardLocation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _SettingState &&
+            (identical(other.quizType, quizType) ||
+                const DeepCollectionEquality()
+                    .equals(other.quizType, quizType)) &&
             (identical(other.limit, limit) ||
                 const DeepCollectionEquality().equals(other.limit, limit)) &&
             (identical(other.quizLength, quizLength) ||
@@ -160,6 +186,7 @@ class _$_SettingState implements _SettingState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(quizType) ^
       const DeepCollectionEquality().hash(limit) ^
       const DeepCollectionEquality().hash(quizLength) ^
       const DeepCollectionEquality().hash(keyboardLocation);
@@ -172,8 +199,13 @@ class _$_SettingState implements _SettingState {
 
 abstract class _SettingState implements SettingState {
   const factory _SettingState(
-      {int limit, int quizLength, int keyboardLocation}) = _$_SettingState;
+      {QuizType quizType,
+      int limit,
+      int quizLength,
+      int keyboardLocation}) = _$_SettingState;
 
+  @override
+  QuizType get quizType => throw _privateConstructorUsedError;
   @override
   int get limit => throw _privateConstructorUsedError;
   @override

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:calculate/analytics.dart';
+import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/game/game_notifier.dart';
 import 'package:calculate/pages/game_result/game_result_page.dart';
 import 'package:calculate/pages/home/home_page.dart';
@@ -18,6 +19,10 @@ class Game extends ConsumerWidget {
     final gameState = watch(gameProvider);
     final analytics = watch(analyticsProvider);
     final prefs = watch(sharedPreferencesProvider);
+    final quizType = QuizType.values.firstWhere(
+      (value) => value.id == prefs.getInt('quizType'),
+      orElse: () => QuizType.numQuizzes,
+    );
     final limit = prefs.getInt('limit') ?? 180;
     final quizLength = prefs.getInt('quizLength') ?? 100;
     final keyboardLocation = prefs.getInt('keyboardLocation') ?? 0;
@@ -206,8 +211,11 @@ class Game extends ConsumerWidget {
                       alignment: Alignment.centerLeft,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width *
-                              (gameState.leftTime / limit),
+                          width: quizType == QuizType.numQuizzes
+                              ? MediaQuery.of(context).size.width *
+                                  (gameState.answerList.length / quizLength)
+                              : MediaQuery.of(context).size.width *
+                                  (gameState.leftTime / limit),
                           height: 30,
                           decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
@@ -217,7 +225,9 @@ class Game extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '残り：${gameState.leftTime}秒',
+                              quizType == QuizType.numQuizzes
+                                  ? '残り：${quizLength - gameState.answerList.length}問'
+                                  : '残り：${gameState.leftTime}秒',
                               style: TextStyle(
                                 fontFeatures: [
                                   FontFeature.tabularFigures(),

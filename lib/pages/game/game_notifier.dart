@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:calculate/domains/answer/answer.dart';
+import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/game/game_state.dart';
 import 'package:calculate/providers.dart';
 import 'package:calculate/domains/quiz/quiz.dart';
@@ -13,6 +14,15 @@ final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
 class GameNotifier extends StateNotifier<GameState> {
   GameNotifier(this._read) : super(GameState()) {
     final prefs = _read(sharedPreferencesProvider);
+
+    /// 問題形式を取得
+    final quizType = QuizType.values.firstWhere(
+      (value) => value.id == prefs.getInt('quizType'),
+      orElse: () => QuizType.numQuizzes,
+    );
+    if (quizType == QuizType.numQuizzes) return;
+
+    /// 問題形式が時間制限ならカウントを始める。
     final leftTime = prefs.getInt('limit') ?? 180;
     state = state.copyWith(
       leftTime: leftTime,
