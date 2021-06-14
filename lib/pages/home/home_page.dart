@@ -1,5 +1,6 @@
 import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
+import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/help/help_page.dart';
@@ -13,6 +14,13 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final analytics = watch(analyticsProvider);
     final updateRequest = watch(updateRequestProvider);
+    final prefs = watch(sharedPreferencesProvider);
+    final quizType = QuizType.values.firstWhere(
+      (value) => value.id == prefs.getInt('quizType'),
+      orElse: () => QuizType.numQuizzes,
+    );
+    final limit = prefs.getInt('limit') ?? 180;
+    final quizLength = prefs.getInt('quizLength') ?? 100;
 
     return updateRequest.when(
       loading: () {
@@ -115,25 +123,39 @@ class Home extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/math.png',
-                  width: 200,
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(width: 2),
+                      bottom: BorderSide(width: 2),
+                    ),
+                  ),
+                  child: Text(
+                    'Keisan Doriru',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  '全て解けるかな？\nあなたの計算力をチェック！！',
-                  textAlign: TextAlign.center,
+                  '＼ Let\'s challenge! ／',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 const SizedBox(height: 32),
                 Center(
                   child: ElevatedButton(
-                    child: Text('はじめる'),
+                    child: Text(
+                      'スタート\n（${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                      textAlign: TextAlign.center,
+                    ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      minimumSize: Size(200, 48),
+                      minimumSize: Size(232, 80),
                       primary: Colors.white,
                       onPrimary: Theme.of(context).colorScheme.primaryVariant,
                     ),
@@ -151,29 +173,40 @@ class Home extends ConsumerWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
+                    ElevatedButton(
+                      child: Text('設定'),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        minimumSize: Size(112, 56),
+                        primary: Colors.white,
+                        onPrimary: Theme.of(context).colorScheme.primaryVariant,
                       ),
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => Setting(),
                           ),
                         );
+                        context.refresh(sharedPreferencesProvider);
                       },
                     ),
-                    const SizedBox(width: 16),
-                    IconButton(
-                      icon: Icon(
-                        Icons.help_outline,
-                        color: Colors.white,
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      child: Text('ヘルプ'),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        minimumSize: Size(112, 56),
+                        primary: Colors.white,
+                        onPrimary: Theme.of(context).colorScheme.primaryVariant,
                       ),
                       onPressed: () {
                         Navigator.push(

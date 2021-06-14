@@ -15,4 +15,13 @@ extension QuizTypeEx on QuizType {
         return 1;
     }
   }
+
+  String get name {
+    switch (this) {
+      case QuizType.timeLimit:
+        return '時間制限';
+      case QuizType.numQuizzes:
+        return '問題数';
+    }
+  }
 }
