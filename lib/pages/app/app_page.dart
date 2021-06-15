@@ -12,7 +12,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: flavor == Flavor.development,
-      title: 'Flutter Demo',
+      title: '計算ドリル',
       theme: ThemeData.from(
         colorScheme: ColorScheme.light(
           primary: Color(0xFFB4CEB3),
