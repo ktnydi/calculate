@@ -1,4 +1,5 @@
 import 'package:calculate/analytics.dart';
+import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,8 +8,10 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final analytics = watch(analyticsProvider);
+    final flavor = watch(flavorProvider);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: flavor == Flavor.development,
       title: 'Flutter Demo',
       theme: ThemeData.from(
         colorScheme: ColorScheme.light(
