@@ -1,12 +1,16 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
+import 'package:calculate/config.dart';
 import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:calculate/domains/update_info/update_info.dart';
 import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:version/version.dart';
@@ -106,5 +110,27 @@ final updateRequestProvider = FutureProvider<UpdateRequestType>(
     return updateInfo.canCancel
         ? UpdateRequestType.cancelable
         : UpdateRequestType.forcibly;
+  },
+);
+
+final bannerAdProvider = FutureProvider.family<BannerAd, BuildContext>(
+  (ref, context) async {
+    final flavor = ref.read(flavorProvider);
+    final isProduction = flavor == Flavor.production;
+    // ユニットIdはlib/config.dartに記述済み。（Github管理対象外）
+    final unitId = Platform.isAndroid ? androidUnitId : iosUnitId;
+    final unitDemoId = Platform.isAndroid ? androidDemoUnitId : iosDemoUnitId;
+    final BannerAd myBanner = BannerAd(
+      adUnitId: isProduction ? unitId : unitDemoId,
+      size: await AdSize.getAnchoredAdaptiveBannerAdSize(
+            Orientation.portrait,
+            MediaQuery.of(context).size.width.toInt(),
+          ) ??
+          AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(),
+    );
+    myBanner.load();
+    return myBanner;
   },
 );

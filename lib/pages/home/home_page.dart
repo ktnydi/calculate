@@ -8,6 +8,7 @@ import 'package:calculate/pages/setting/setting_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Home extends ConsumerWidget {
   @override
@@ -15,6 +16,7 @@ class Home extends ConsumerWidget {
     final analytics = watch(analyticsProvider);
     final updateRequest = watch(updateRequestProvider);
     final prefs = watch(sharedPreferencesProvider);
+    final bannerAd = watch(bannerAdProvider(context)).data?.value;
     final quizType = QuizType.values.firstWhere(
       (value) => value.id == prefs.getInt('quizType'),
       orElse: () => QuizType.numQuizzes,
@@ -222,6 +224,14 @@ class Home extends ConsumerWidget {
               ],
             ),
           ),
+          bottomNavigationBar: bannerAd != null
+              ? SafeArea(
+                  child: Container(
+                    height: bannerAd.size.height.toDouble(),
+                    child: AdWidget(ad: bannerAd),
+                  ),
+                )
+              : null,
         );
       },
     );
