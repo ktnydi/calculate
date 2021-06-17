@@ -1,3 +1,4 @@
+import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/setting/setting_state.dart';
 import 'package:calculate/providers.dart';
@@ -14,12 +15,15 @@ class SettingNotifier extends StateNotifier<SettingState> {
   SettingNotifier(this._read) : super(SettingState()) {
     final prefs = _read(sharedPreferencesProvider);
     final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt('quizType'),
-      orElse: () => QuizType.numQuizzes,
+      (value) => value.id == prefs.getInt(Preferences.quizType.key),
+      orElse: () => Preferences.quizType.defaultValue,
     );
-    final limit = prefs.getInt('limit') ?? 180;
-    final quizLength = prefs.getInt('quizLength') ?? 100;
-    final keyboardLocation = prefs.getInt('keyboardLocation') ?? 0;
+    final limit = prefs.getInt(Preferences.timeLimit.key) ??
+        Preferences.timeLimit.defaultValue;
+    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
+        Preferences.numQuizzes.defaultValue;
+    final keyboardLocation = prefs.getInt(Preferences.keyboardLocation.key) ??
+        Preferences.keyboardLocation.defaultValue;
     state = state.copyWith(
       quizType: quizType,
       limit: limit,
@@ -32,7 +36,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
 
   Future<void> updateQuizType(QuizType quizType) async {
     final prefs = _read(sharedPreferencesProvider);
-    await prefs.setInt('quizType', quizType.id);
+    await prefs.setInt(Preferences.quizType.key, quizType.id);
     state = state.copyWith(
       quizType: quizType,
     );
@@ -40,7 +44,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
 
   Future<void> updateLimit(int limit) async {
     final prefs = _read(sharedPreferencesProvider);
-    await prefs.setInt('limit', limit);
+    await prefs.setInt(Preferences.timeLimit.key, limit);
     state = state.copyWith(
       limit: limit,
     );
@@ -48,7 +52,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
 
   Future<void> updateQuizLength(int quizLength) async {
     final prefs = _read(sharedPreferencesProvider);
-    await prefs.setInt('quizLength', quizLength);
+    await prefs.setInt(Preferences.numQuizzes.key, quizLength);
     state = state.copyWith(
       quizLength: quizLength,
     );
@@ -56,7 +60,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
 
   Future<void> updateKeyboardLocation(int keyboardLocation) async {
     final prefs = _read(sharedPreferencesProvider);
-    await prefs.setInt('keyboardLocation', keyboardLocation);
+    await prefs.setInt(Preferences.keyboardLocation.key, keyboardLocation);
     state = state.copyWith(
       keyboardLocation: keyboardLocation,
     );

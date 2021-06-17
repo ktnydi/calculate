@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:calculate/analytics.dart';
+import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/game/game_notifier.dart';
 import 'package:calculate/pages/game_result/game_result_page.dart';
@@ -20,12 +21,15 @@ class Game extends ConsumerWidget {
     final analytics = watch(analyticsProvider);
     final prefs = watch(sharedPreferencesProvider);
     final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt('quizType'),
-      orElse: () => QuizType.numQuizzes,
+      (value) => value.id == prefs.getInt(Preferences.quizType.key),
+      orElse: () => Preferences.quizType.defaultValue,
     );
-    final limit = prefs.getInt('limit') ?? 180;
-    final quizLength = prefs.getInt('quizLength') ?? 100;
-    final keyboardLocation = prefs.getInt('keyboardLocation') ?? 0;
+    final limit = prefs.getInt(Preferences.timeLimit.key) ??
+        Preferences.timeLimit.defaultValue;
+    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
+        Preferences.numQuizzes.defaultValue;
+    final keyboardLocation = prefs.getInt(Preferences.keyboardLocation.key) ??
+        Preferences.keyboardLocation.defaultValue;
 
     return Stack(
       children: [

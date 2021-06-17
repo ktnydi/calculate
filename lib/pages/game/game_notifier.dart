@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:calculate/domains/answer/answer.dart';
+import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/game/game_state.dart';
 import 'package:calculate/providers.dart';
@@ -17,13 +18,14 @@ class GameNotifier extends StateNotifier<GameState> {
 
     /// 問題形式を取得
     final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt('quizType'),
-      orElse: () => QuizType.numQuizzes,
+      (value) => value.id == prefs.getInt(Preferences.quizType.key),
+      orElse: () => Preferences.quizType.defaultValue,
     );
     if (quizType == QuizType.numQuizzes) return;
 
     /// 問題形式が時間制限ならカウントを始める。
-    final leftTime = prefs.getInt('limit') ?? 180;
+    final leftTime = prefs.getInt(Preferences.timeLimit.key) ??
+        Preferences.timeLimit.defaultValue;
     state = state.copyWith(
       leftTime: leftTime,
     );
@@ -35,7 +37,8 @@ class GameNotifier extends StateNotifier<GameState> {
 
   void beginCountDown() {
     final prefs = _read(sharedPreferencesProvider);
-    int leftTime = prefs.getInt('limit') ?? 180;
+    int leftTime = prefs.getInt(Preferences.timeLimit.key) ??
+        Preferences.timeLimit.defaultValue;
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       leftTime -= 1;
       if (leftTime == 0) {

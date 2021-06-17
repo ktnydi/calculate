@@ -1,5 +1,6 @@
 import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
+import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/pages/game/game_page.dart';
@@ -18,11 +19,13 @@ class Home extends ConsumerWidget {
     final prefs = watch(sharedPreferencesProvider);
     final bannerAd = watch(bannerAdProvider(context)).data?.value;
     final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt('quizType'),
-      orElse: () => QuizType.numQuizzes,
+      (value) => value.id == prefs.getInt(Preferences.quizType.key),
+      orElse: () => Preferences.quizType.defaultValue,
     );
-    final limit = prefs.getInt('limit') ?? 180;
-    final quizLength = prefs.getInt('quizLength') ?? 100;
+    final limit = prefs.getInt(Preferences.timeLimit.key) ??
+        Preferences.timeLimit.defaultValue;
+    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
+        Preferences.numQuizzes.defaultValue;
 
     return updateRequest.when(
       loading: () {

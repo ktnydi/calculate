@@ -1,5 +1,6 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/domains/answer/answer.dart';
+import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/home/home_page.dart';
@@ -17,13 +18,15 @@ class GameResult extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final analytics = watch(analyticsProvider);
     final prefs = watch(sharedPreferencesProvider);
-    final limit = prefs.getInt('limit') ?? 180;
+    final limit = prefs.getInt(Preferences.timeLimit.key) ??
+        Preferences.timeLimit.defaultValue;
     final timePerQuiz = (limit - leftTime) / answerList.length;
     final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt('quizType'),
-      orElse: () => QuizType.numQuizzes,
+      (value) => value.id == prefs.getInt(Preferences.quizType.key),
+      orElse: () => Preferences.quizType.defaultValue,
     );
-    final quizLength = prefs.getInt('quizLength') ?? 100;
+    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
+        Preferences.numQuizzes.defaultValue;
     final numCorrects = answerList.where((ans) => ans.isCorrect).length;
     final viewPadding = MediaQuery.of(context).viewPadding;
 
