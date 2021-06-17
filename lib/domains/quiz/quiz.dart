@@ -1,3 +1,4 @@
+import 'package:calculate/enums/quiz_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'quiz.freezed.dart';
@@ -8,22 +9,21 @@ class Quiz with _$Quiz {
   const Quiz._();
   const factory Quiz({
     required List<int> figures,
-    required int type,
+    required QuizCategory type,
   }) = _Quiz;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
 
   String get title {
     switch (this.type) {
-      case 1:
+      case QuizCategory.additional:
         return '${this.figures.first} + ${this.figures.last}';
-      case 2:
+      case QuizCategory.subtraction:
         return '${this.figures.first} - ${this.figures.last}';
-      case 3:
+      case QuizCategory.multiplication:
         return '${this.figures.first} × ${this.figures.last}';
-      case 4:
+      case QuizCategory.division:
         return '${this.figures.first} ÷ ${this.figures.last}';
     }
-    return '';
   }
 }

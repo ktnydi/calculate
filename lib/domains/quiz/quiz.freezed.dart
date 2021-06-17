@@ -20,7 +20,7 @@ Quiz _$QuizFromJson(Map<String, dynamic> json) {
 class _$QuizTearOff {
   const _$QuizTearOff();
 
-  _Quiz call({required List<int> figures, required int type}) {
+  _Quiz call({required List<int> figures, required QuizCategory type}) {
     return _Quiz(
       figures: figures,
       type: type,
@@ -38,7 +38,7 @@ const $Quiz = _$QuizTearOff();
 /// @nodoc
 mixin _$Quiz {
   List<int> get figures => throw _privateConstructorUsedError;
-  int get type => throw _privateConstructorUsedError;
+  QuizCategory get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +49,7 @@ mixin _$Quiz {
 abstract class $QuizCopyWith<$Res> {
   factory $QuizCopyWith(Quiz value, $Res Function(Quiz) then) =
       _$QuizCopyWithImpl<$Res>;
-  $Res call({List<int> figures, int type});
+  $Res call({List<int> figures, QuizCategory type});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$QuizCopyWithImpl<$Res> implements $QuizCopyWith<$Res> {
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as int,
+              as QuizCategory,
     ));
   }
 }
@@ -83,7 +83,7 @@ abstract class _$QuizCopyWith<$Res> implements $QuizCopyWith<$Res> {
   factory _$QuizCopyWith(_Quiz value, $Res Function(_Quiz) then) =
       __$QuizCopyWithImpl<$Res>;
   @override
-  $Res call({List<int> figures, int type});
+  $Res call({List<int> figures, QuizCategory type});
 }
 
 /// @nodoc
@@ -108,7 +108,7 @@ class __$QuizCopyWithImpl<$Res> extends _$QuizCopyWithImpl<$Res>
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as int,
+              as QuizCategory,
     ));
   }
 }
@@ -124,7 +124,7 @@ class _$_Quiz extends _Quiz {
   @override
   final List<int> figures;
   @override
-  final int type;
+  final QuizCategory type;
 
   @override
   String toString() {
@@ -160,8 +160,8 @@ class _$_Quiz extends _Quiz {
 }
 
 abstract class _Quiz extends Quiz {
-  const factory _Quiz({required List<int> figures, required int type}) =
-      _$_Quiz;
+  const factory _Quiz(
+      {required List<int> figures, required QuizCategory type}) = _$_Quiz;
   const _Quiz._() : super._();
 
   factory _Quiz.fromJson(Map<String, dynamic> json) = _$_Quiz.fromJson;
@@ -169,7 +169,7 @@ abstract class _Quiz extends Quiz {
   @override
   List<int> get figures => throw _privateConstructorUsedError;
   @override
-  int get type => throw _privateConstructorUsedError;
+  QuizCategory get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$QuizCopyWith<_Quiz> get copyWith => throw _privateConstructorUsedError;

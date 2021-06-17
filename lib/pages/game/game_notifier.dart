@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:calculate/domains/answer/answer.dart';
 import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
+import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/pages/game/game_state.dart';
 import 'package:calculate/providers.dart';
 import 'package:calculate/domains/quiz/quiz.dart';
@@ -79,7 +80,7 @@ class GameNotifier extends StateNotifier<GameState> {
     final inComing = state.answer.join();
 
     switch (quiz.type) {
-      case 1:
+      case QuizCategory.additional:
         final answer = quiz.figures.first + quiz.figures.last;
         final userAnswer = Answer(
           quiz: quiz,
@@ -91,7 +92,7 @@ class GameNotifier extends StateNotifier<GameState> {
           answerList: [...state.answerList, userAnswer],
         );
         break;
-      case 2:
+      case QuizCategory.subtraction:
         final answer = quiz.figures.first - quiz.figures.last;
         final userAnswer = Answer(
           quiz: quiz,
@@ -103,7 +104,7 @@ class GameNotifier extends StateNotifier<GameState> {
           answerList: [...state.answerList, userAnswer],
         );
         break;
-      case 3:
+      case QuizCategory.multiplication:
         final answer = quiz.figures.first * quiz.figures.last;
         final userAnswer = Answer(
           quiz: quiz,
@@ -115,7 +116,7 @@ class GameNotifier extends StateNotifier<GameState> {
           answerList: [...state.answerList, userAnswer],
         );
         break;
-      case 4:
+      case QuizCategory.division:
         final answer = quiz.figures.first ~/ quiz.figures.last;
         final userAnswer = Answer(
           quiz: quiz,

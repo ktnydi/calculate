@@ -6,7 +6,9 @@ import 'package:calculate/config.dart';
 import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:calculate/domains/update_info/update_info.dart';
 import 'package:calculate/enums/flavor.dart';
+import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/update_request_type.dart';
+import 'package:calculate/repositories/quiz_repository.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,19 +28,20 @@ final packageInfoProvider = Provider<PackageInfo>(
 final quizProvider = FutureProvider<Quiz>(
   (ref) async {
     final random = Random();
-    const minNum = 10;
-    const maxNum = 100;
-    final createNum = (int min, int max) => min + random.nextInt(max - min);
-    final isAddition = random.nextBool();
-    final num1 = createNum(minNum, maxNum);
-    final num2 = createNum(minNum, maxNum);
-    final figures = [num1, num2];
-    if (!isAddition) {
-      /// 引き算なら降順にする。
-      figures.sort((i, j) => j - i);
+    final quizCategory = QuizCategory.values.firstWhere(
+      (value) => value.index == random.nextInt(5),
+      orElse: () => QuizCategory.additional,
+    );
+    switch (quizCategory) {
+      case QuizCategory.additional:
+        return ref.read(quizRepositoryProvider).getAdditional();
+      case QuizCategory.subtraction:
+        return ref.read(quizRepositoryProvider).getSubtraction();
+      case QuizCategory.division:
+        return ref.read(quizRepositoryProvider).getDivision();
+      case QuizCategory.multiplication:
+        return ref.read(quizRepositoryProvider).getMultiplication();
     }
-    final type = isAddition ? 1 : 2;
-    return Quiz(figures: figures, type: type);
   },
 );
 
@@ -61,7 +64,8 @@ final randomQuizProvider = FutureProvider<List<Quiz>>(
         /// 引き算なら降順にする。
         figures.sort((i, j) => j - i);
       }
-      final type = isAddition ? 1 : 2;
+      final type =
+          isAddition ? QuizCategory.additional : QuizCategory.subtraction;
       final quiz = Quiz(figures: figures, type: type);
       quizList.add(quiz);
     }
