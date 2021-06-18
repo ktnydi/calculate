@@ -1,10 +1,8 @@
 import 'dart:math';
 
-import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quizType.dart';
-import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/help/help_page.dart';
 import 'package:calculate/pages/setting/setting_page.dart';
@@ -17,7 +15,6 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final analytics = watch(analyticsProvider);
-    final updateRequest = watch(updateRequestProvider);
     final prefs = watch(sharedPreferencesProvider);
     final bannerAd = watch(bannerAdProvider(context)).data?.value;
     final quizType = QuizType.values.firstWhere(
@@ -29,230 +26,131 @@ class Home extends ConsumerWidget {
     final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
         Preferences.numQuizzes.defaultValue;
 
-    return updateRequest.when(
-      loading: () {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-      error: (error, _) {
-        return Center(
-          child: Text('$error'),
-        );
-      },
-      data: (requestType) {
-        WidgetsBinding.instance!.addPostFrameCallback(
-          (_) {
-            if (requestType != UpdateRequestType.not) {
-              showDialog<void>(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) {
-                  return WillPopScope(
-                    // AndroidのBackボタンで閉じられないようにする
-                    onWillPop: () async => false,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: 320,
-                          ),
-                          child: Container(
-                            width: double.infinity,
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  '最新の更新があります。\nアップデートをお願いします。',
-                                  style: Theme.of(context).textTheme.subtitle2,
-                                  textAlign: TextAlign.center,
-                                ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    if (requestType ==
-                                        UpdateRequestType.cancelable)
-                                      ElevatedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(22),
-                                          ),
-                                          minimumSize: Size(120, 44),
-                                          primary: Colors.grey.shade200,
-                                        ),
-                                        child: const Text('キャンセル'),
-                                      ),
-                                    if (requestType ==
-                                        UpdateRequestType.cancelable)
-                                      const SizedBox(width: 16),
-                                    ElevatedButton(
-                                      onPressed: () async {
-                                        await AppReview.storeListing;
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(22),
-                                        ),
-                                        minimumSize: Size(120, 44),
-                                      ),
-                                      child: const Text('アップデート'),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }
-          },
-        );
-
-        return Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          body: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height -
-                    (bannerAd?.size.height.toDouble() ?? 0),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height -
+                (bannerAd?.size.height.toDouble() ?? 0),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.center,
                 children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/blobs.png',
-                        width: min(MediaQuery.of(context).size.width, 320),
-                        color: Theme.of(context).colorScheme.primaryVariant,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Keisan Doriru',
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 32),
-                          Text(
-                            'Let\'s challenge!',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ],
-                      ),
-                    ],
+                  Image.asset(
+                    'assets/blobs.png',
+                    width: min(MediaQuery.of(context).size.width, 320),
+                    color: Theme.of(context).colorScheme.primaryVariant,
                   ),
-                  const SizedBox(height: 32),
-                  Center(
-                    child: ElevatedButton(
-                      child: Text(
-                        'スタート\n（${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
-                        textAlign: TextAlign.center,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        minimumSize: Size(232, 80),
-                        primary: Colors.white,
-                        onPrimary: Theme.of(context).colorScheme.primaryVariant,
-                      ),
-                      onPressed: () {
-                        analytics.logStartGame();
-                        context.refresh(randomQuizProvider);
-                        context.refresh(quizProvider);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            fullscreenDialog: true,
-                            builder: (context) => Game(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
+                  Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ElevatedButton(
-                        child: Text('設定'),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          minimumSize: Size(112, 56),
-                          primary: Colors.white,
-                          onPrimary:
-                              Theme.of(context).colorScheme.primaryVariant,
+                      Text(
+                        'Keisan Doriru',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
                         ),
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Setting(),
-                            ),
-                          );
-                          context.refresh(sharedPreferencesProvider);
-                        },
                       ),
-                      const SizedBox(width: 8),
-                      ElevatedButton(
-                        child: Text('ヘルプ'),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          minimumSize: Size(112, 56),
-                          primary: Colors.white,
-                          onPrimary:
-                              Theme.of(context).colorScheme.primaryVariant,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Help(),
-                            ),
-                          );
-                        },
+                      const SizedBox(height: 32),
+                      Text(
+                        'Let\'s challenge!',
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            ),
-          ),
-          bottomNavigationBar: bannerAd != null
-              ? SafeArea(
-                  child: Container(
-                    height: bannerAd.size.height.toDouble(),
-                    child: AdWidget(ad: bannerAd),
+              const SizedBox(height: 32),
+              Center(
+                child: ElevatedButton(
+                  child: Text(
+                    'スタート\n（${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                    textAlign: TextAlign.center,
                   ),
-                )
-              : null,
-        );
-      },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    minimumSize: Size(232, 80),
+                    primary: Colors.white,
+                    onPrimary: Theme.of(context).colorScheme.primaryVariant,
+                  ),
+                  onPressed: () {
+                    analytics.logStartGame();
+                    context.refresh(randomQuizProvider);
+                    context.refresh(quizProvider);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) => Game(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                    child: Text('設定'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      minimumSize: Size(112, 56),
+                      primary: Colors.white,
+                      onPrimary: Theme.of(context).colorScheme.primaryVariant,
+                    ),
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Setting(),
+                        ),
+                      );
+                      context.refresh(sharedPreferencesProvider);
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    child: Text('ヘルプ'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      minimumSize: Size(112, 56),
+                      primary: Colors.white,
+                      onPrimary: Theme.of(context).colorScheme.primaryVariant,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Help(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: bannerAd != null
+          ? SafeArea(
+              child: Container(
+                height: bannerAd.size.height.toDouble(),
+                child: AdWidget(ad: bannerAd),
+              ),
+            )
+          : null,
     );
   }
 }
