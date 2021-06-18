@@ -81,7 +81,6 @@ class Home extends ConsumerWidget {
                   ),
                   onPressed: () {
                     analytics.logStartGame();
-                    context.refresh(randomQuizProvider);
                     context.refresh(quizProvider);
                     Navigator.pushReplacement(
                       context,

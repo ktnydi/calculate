@@ -47,34 +47,6 @@ final quizProvider = FutureProvider<Quiz>(
   },
 );
 
-final randomQuizProvider = FutureProvider<List<Quiz>>(
-  (ref) async {
-    final prefs = ref.read(sharedPreferencesProvider);
-    final quizLength = prefs.getInt('limit') ?? 100;
-    final quizList = <Quiz>[];
-    final random = Random();
-    const minNum = 10;
-    const maxNum = 100;
-    final createNum = (int min, int max) => min + random.nextInt(max - min);
-
-    for (int i = 0; i < quizLength; i++) {
-      final isAddition = random.nextBool();
-      final num1 = createNum(minNum, maxNum);
-      final num2 = createNum(minNum, maxNum);
-      final figures = [num1, num2];
-      if (!isAddition) {
-        /// 引き算なら降順にする。
-        figures.sort((i, j) => j - i);
-      }
-      final type =
-          isAddition ? QuizCategory.additional : QuizCategory.subtraction;
-      final quiz = Quiz(figures: figures, type: type);
-      quizList.add(quiz);
-    }
-    return quizList;
-  },
-);
-
 final remoteConfigProvider = Provider<RemoteConfig>(
   (ref) {
     final rc = RemoteConfig.instance;
