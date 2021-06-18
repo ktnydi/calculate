@@ -1,3 +1,4 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,5 +19,15 @@ class Analytics {
 
   Future<void> logStopGame() async {
     await _instance.logEvent(name: 'stop_game');
+  }
+
+  Future<void> logTracking(TrackingStatus status) async {
+    if (status == TrackingStatus.authorized) {
+      await _instance.logEvent(name: 'authorized_tracking');
+    }
+
+    if (status == TrackingStatus.denied) {
+      await _instance.logEvent(name: 'denied_tracking');
+    }
   }
 }

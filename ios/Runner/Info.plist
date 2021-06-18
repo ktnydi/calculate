@@ -61,5 +61,7 @@
           <string>cstr6suwn9.skadnetwork</string>
         </dict>
       </array>
+     <key>NSUserTrackingUsageDescription</key>
+     <string>あなたの興味・関心に合わせた広告がより表示されるようになります。</string>
 </dict>
 </plist>

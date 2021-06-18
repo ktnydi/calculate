@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
 import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:calculate/domains/update_info/update_info.dart';
@@ -121,6 +123,15 @@ final bannerAdProvider = FutureProvider.family<BannerAd, BuildContext>(
   (ref, context) async {
     final flavor = ref.read(flavorProvider);
     final isProduction = flavor == Flavor.production;
+
+    var status = await AppTrackingTransparency.trackingAuthorizationStatus;
+
+    if (status == TrackingStatus.notDetermined) {
+      status = await AppTrackingTransparency.requestTrackingAuthorization();
+
+      if (isProduction) ref.read(analyticsProvider).logTracking(status);
+    }
+
     // ユニットIdはlib/config.dartに記述済み。（Github管理対象外）
     final unitId = Platform.isAndroid ? androidUnitId : iosUnitId;
     final unitDemoId = Platform.isAndroid ? androidDemoUnitId : iosDemoUnitId;

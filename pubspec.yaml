@@ -22,6 +22,7 @@ dependencies:
   version: ^2.0.0
   app_review: ^2.1.1+1
   google_mobile_ads: ^0.13.0
+  app_tracking_transparency: ^2.0.1
 
 dev_dependencies:
   flutter_test:
