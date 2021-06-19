@@ -32,6 +32,71 @@ class Setting extends ConsumerWidget {
             title: Text('問題数'),
             tileColor: Colors.white,
           ),
+          if (settingState.quizType == QuizType.numQuizzes)
+            const Divider(height: 1),
+          if (settingState.quizType == QuizType.numQuizzes)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (flavor == Flavor.development)
+                  RadioListTile<int>(
+                    value: 2,
+                    groupValue: settingState.quizLength,
+                    onChanged: (value) async {
+                      if (value == null) return;
+                      await settingNotifier.updateQuizLength(value);
+                    },
+                    title: Text('2問（開発環境）'),
+                    tileColor: Colors.white,
+                    contentPadding: EdgeInsets.only(left: 48),
+                  ),
+                RadioListTile<int>(
+                  value: 10,
+                  groupValue: settingState.quizLength,
+                  onChanged: (value) async {
+                    if (value == null) return;
+                    await settingNotifier.updateQuizLength(value);
+                  },
+                  title: Text('10問'),
+                  tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
+                ),
+                RadioListTile<int>(
+                  value: 20,
+                  groupValue: settingState.quizLength,
+                  onChanged: (value) async {
+                    if (value == null) return;
+                    await settingNotifier.updateQuizLength(value);
+                  },
+                  title: Text('20問'),
+                  tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
+                ),
+                RadioListTile<int>(
+                  value: 50,
+                  groupValue: settingState.quizLength,
+                  onChanged: (value) async {
+                    if (value == null) return;
+                    await settingNotifier.updateQuizLength(value);
+                  },
+                  title: Text('50問'),
+                  tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
+                ),
+                RadioListTile<int>(
+                  value: 100,
+                  groupValue: settingState.quizLength,
+                  onChanged: (value) async {
+                    if (value == null) return;
+                    await settingNotifier.updateQuizLength(value);
+                  },
+                  title: Text('100問'),
+                  tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
+                ),
+              ],
+            ),
           const Divider(height: 1),
           RadioListTile<QuizType>(
             value: QuizType.timeLimit,
@@ -43,17 +108,13 @@ class Setting extends ConsumerWidget {
             title: Text('制限時間'),
             tileColor: Colors.white,
           ),
-          const Divider(height: 1),
+          if (settingState.quizType == QuizType.timeLimit)
+            const Divider(height: 1),
           if (settingState.quizType == QuizType.timeLimit)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text('制限時間'),
-                ),
-                if (flavor == Flavor.development) const Divider(height: 1),
                 if (flavor == Flavor.development)
                   RadioListTile<int>(
                     value: 10,
@@ -64,8 +125,8 @@ class Setting extends ConsumerWidget {
                     },
                     title: Text('10秒（開発環境）'),
                     tileColor: Colors.white,
+                    contentPadding: EdgeInsets.only(left: 48),
                   ),
-                const Divider(height: 1),
                 RadioListTile<int>(
                   value: 60,
                   groupValue: settingState.limit,
@@ -73,10 +134,10 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     await settingNotifier.updateLimit(value);
                   },
-                  title: Text('60秒（1分）'),
+                  title: Text('60秒'),
                   tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
                 ),
-                const Divider(height: 1),
                 RadioListTile<int>(
                   value: 120,
                   groupValue: settingState.limit,
@@ -84,10 +145,10 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     await settingNotifier.updateLimit(value);
                   },
-                  title: Text('120秒（2分）'),
+                  title: Text('120秒'),
                   tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
                 ),
-                const Divider(height: 1),
                 RadioListTile<int>(
                   value: 180,
                   groupValue: settingState.limit,
@@ -95,10 +156,10 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     await settingNotifier.updateLimit(value);
                   },
-                  title: Text('180秒（3分）'),
+                  title: Text('180秒'),
                   tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
                 ),
-                const Divider(height: 1),
                 RadioListTile<int>(
                   value: 240,
                   groupValue: settingState.limit,
@@ -106,10 +167,10 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     await settingNotifier.updateLimit(value);
                   },
-                  title: Text('240秒（4分）'),
+                  title: Text('240秒'),
                   tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
                 ),
-                const Divider(height: 1),
                 RadioListTile<int>(
                   value: 300,
                   groupValue: settingState.limit,
@@ -117,80 +178,13 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     await settingNotifier.updateLimit(value);
                   },
-                  title: Text('300秒（5分）'),
+                  title: Text('300秒'),
                   tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
                 ),
-                const Divider(height: 1),
               ],
             ),
-          if (settingState.quizType == QuizType.numQuizzes)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text('問題数'),
-                ),
-                if (flavor == Flavor.development) const Divider(height: 1),
-                if (flavor == Flavor.development)
-                  RadioListTile<int>(
-                    value: 2,
-                    groupValue: settingState.quizLength,
-                    onChanged: (value) async {
-                      if (value == null) return;
-                      await settingNotifier.updateQuizLength(value);
-                    },
-                    title: Text('2問（開発環境）'),
-                    tileColor: Colors.white,
-                  ),
-                const Divider(height: 1),
-                RadioListTile<int>(
-                  value: 10,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
-                  },
-                  title: Text('10問'),
-                  tileColor: Colors.white,
-                ),
-                const Divider(height: 1),
-                RadioListTile<int>(
-                  value: 20,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
-                  },
-                  title: Text('20問'),
-                  tileColor: Colors.white,
-                ),
-                const Divider(height: 1),
-                RadioListTile<int>(
-                  value: 50,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
-                  },
-                  title: Text('50問'),
-                  tileColor: Colors.white,
-                ),
-                const Divider(height: 1),
-                RadioListTile<int>(
-                  value: 100,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
-                  },
-                  title: Text('100問'),
-                  tileColor: Colors.white,
-                ),
-                const Divider(height: 1),
-              ],
-            ),
+          const Divider(height: 1),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text('キーボードの位置'),
