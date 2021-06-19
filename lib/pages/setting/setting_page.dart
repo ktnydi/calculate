@@ -74,24 +74,24 @@ class Setting extends ConsumerWidget {
                   contentPadding: EdgeInsets.only(left: 48),
                 ),
                 RadioListTile<int>(
-                  value: 50,
+                  value: 30,
                   groupValue: settingState.quizLength,
                   onChanged: (value) async {
                     if (value == null) return;
                     await settingNotifier.updateQuizLength(value);
                   },
-                  title: Text('50問'),
+                  title: Text('30問'),
                   tileColor: Colors.white,
                   contentPadding: EdgeInsets.only(left: 48),
                 ),
                 RadioListTile<int>(
-                  value: 100,
+                  value: 40,
                   groupValue: settingState.quizLength,
                   onChanged: (value) async {
                     if (value == null) return;
                     await settingNotifier.updateQuizLength(value);
                   },
-                  title: Text('100問'),
+                  title: Text('40問'),
                   tileColor: Colors.white,
                   contentPadding: EdgeInsets.only(left: 48),
                 ),
@@ -128,6 +128,17 @@ class Setting extends ConsumerWidget {
                     contentPadding: EdgeInsets.only(left: 48),
                   ),
                 RadioListTile<int>(
+                  value: 30,
+                  groupValue: settingState.limit,
+                  onChanged: (value) async {
+                    if (value == null) return;
+                    await settingNotifier.updateLimit(value);
+                  },
+                  title: Text('30秒'),
+                  tileColor: Colors.white,
+                  contentPadding: EdgeInsets.only(left: 48),
+                ),
+                RadioListTile<int>(
                   value: 60,
                   groupValue: settingState.limit,
                   onChanged: (value) async {
@@ -157,28 +168,6 @@ class Setting extends ConsumerWidget {
                     await settingNotifier.updateLimit(value);
                   },
                   title: Text('180秒'),
-                  tileColor: Colors.white,
-                  contentPadding: EdgeInsets.only(left: 48),
-                ),
-                RadioListTile<int>(
-                  value: 240,
-                  groupValue: settingState.limit,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await settingNotifier.updateLimit(value);
-                  },
-                  title: Text('240秒'),
-                  tileColor: Colors.white,
-                  contentPadding: EdgeInsets.only(left: 48),
-                ),
-                RadioListTile<int>(
-                  value: 300,
-                  groupValue: settingState.limit,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    await settingNotifier.updateLimit(value);
-                  },
-                  title: Text('300秒'),
                   tileColor: Colors.white,
                   contentPadding: EdgeInsets.only(left: 48),
                 ),
