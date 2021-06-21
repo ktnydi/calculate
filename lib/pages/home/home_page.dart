@@ -13,10 +13,10 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Home extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final analytics = watch(analyticsProvider);
-    final prefs = watch(sharedPreferencesProvider);
-    final bannerAd = watch(bannerAdProvider(context)).data?.value;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final analytics = ref.watch(analyticsProvider);
+    final prefs = ref.watch(sharedPreferencesProvider);
+    final bannerAd = ref.watch(bannerAdProvider(context)).data?.value;
     final quizType = QuizType.values.firstWhere(
       (value) => value.id == prefs.getInt(Preferences.quizType.key),
       orElse: () => Preferences.quizType.defaultValue,
@@ -81,7 +81,7 @@ class Home extends ConsumerWidget {
                   ),
                   onPressed: () {
                     analytics.logStartGame();
-                    context.refresh(quizProvider);
+                    ref.refresh(quizProvider);
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -113,7 +113,7 @@ class Home extends ConsumerWidget {
                           builder: (context) => Setting(),
                         ),
                       );
-                      context.refresh(sharedPreferencesProvider);
+                      ref.refresh(sharedPreferencesProvider);
                     },
                   ),
                   const SizedBox(width: 8),

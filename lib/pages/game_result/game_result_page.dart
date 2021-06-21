@@ -15,9 +15,9 @@ class GameResult extends ConsumerWidget {
   GameResult(this.leftTime, this.answerList);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final analytics = watch(analyticsProvider);
-    final prefs = watch(sharedPreferencesProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final analytics = ref.watch(analyticsProvider);
+    final prefs = ref.watch(sharedPreferencesProvider);
     final limit = prefs.getInt(Preferences.timeLimit.key) ??
         Preferences.timeLimit.defaultValue;
     final timePerQuiz = (limit - leftTime) / answerList.length;
@@ -218,7 +218,7 @@ class GameResult extends ConsumerWidget {
               ),
               onPressed: () {
                 analytics.logRestartGame();
-                context.refresh(quizProvider);
+                ref.refresh(quizProvider);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

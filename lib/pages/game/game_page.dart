@@ -14,12 +14,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Game extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final quiz = watch(quizProvider);
-    final gameNotifier = watch(gameProvider.notifier);
-    final gameState = watch(gameProvider);
-    final analytics = watch(analyticsProvider);
-    final prefs = watch(sharedPreferencesProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final quiz = ref.watch(quizProvider);
+    final gameNotifier = ref.watch(gameProvider.notifier);
+    final gameState = ref.watch(gameProvider);
+    final analytics = ref.watch(analyticsProvider);
+    final prefs = ref.watch(sharedPreferencesProvider);
     final quizType = QuizType.values.firstWhere(
       (value) => value.id == prefs.getInt(Preferences.quizType.key),
       orElse: () => Preferences.quizType.defaultValue,
@@ -302,7 +302,7 @@ class Game extends ConsumerWidget {
                                                 return gameNotifier
                                                     .finishQuiz();
                                               }
-                                              context.refresh(quizProvider);
+                                              ref.refresh(quizProvider);
                                               gameNotifier.clearAnswer();
                                               gameNotifier.nextQuiz();
                                             },

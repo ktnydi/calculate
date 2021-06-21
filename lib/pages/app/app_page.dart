@@ -6,9 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final analytics = watch(analyticsProvider);
-    final flavor = watch(flavorProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final analytics = ref.watch(analyticsProvider);
+    final flavor = ref.watch(flavorProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: flavor == Flavor.development,

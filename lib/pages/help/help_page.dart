@@ -71,8 +71,8 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           Consumer(
-            builder: (context, watch, child) {
-              final packageInfo = watch(packageInfoProvider);
+            builder: (context, ref, child) {
+              final packageInfo = ref.watch(packageInfoProvider);
               return ListTile(
                 title: Text('ライセンス'),
                 trailing: Icon(Icons.navigate_next),
@@ -121,8 +121,8 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           Consumer(
-            builder: (context, watch, child) {
-              final packageInfo = watch(packageInfoProvider);
+            builder: (context, ref, child) {
+              final packageInfo = ref.watch(packageInfoProvider);
               return ListTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

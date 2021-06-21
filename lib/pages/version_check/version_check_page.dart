@@ -84,8 +84,8 @@ class VersionCheck extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final updateRequest = watch(updateRequestProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final updateRequest = ref.watch(updateRequestProvider);
     return Scaffold(
       body: updateRequest.when(
         loading: () {

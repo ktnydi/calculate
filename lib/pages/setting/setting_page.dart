@@ -6,10 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Setting extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final flavor = watch(flavorProvider);
-    final settingState = watch(settingProvider);
-    final settingNotifier = watch(settingProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final flavor = ref.watch(flavorProvider);
+    final settingState = ref.watch(settingProvider);
+    final settingNotifier = ref.watch(settingProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
