@@ -1,3 +1,19 @@
+import 'package:calculate/enums/preference.dart';
+import 'package:calculate/providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final quizTypeProvider = StateProvider<QuizType>(
+  (ref) {
+    final prefs = ref.read(sharedPreferencesProvider);
+    return QuizType.values.firstWhere(
+      (value) {
+        return value.id == prefs.getInt(Preferences.quizType.key);
+      },
+      orElse: () => QuizType.numQuizzes,
+    );
+  },
+);
+
 enum QuizType {
   /// 時間制限
   timeLimit,
