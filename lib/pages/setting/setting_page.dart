@@ -1,5 +1,6 @@
 import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/enums/quizType.dart';
+import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/pages/setting/setting_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ class Setting extends ConsumerWidget {
     final flavor = ref.watch(flavorProvider);
     final settingState = ref.watch(settingProvider);
     final settingNotifier = ref.watch(settingProvider.notifier);
+    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -17,6 +19,27 @@ class Setting extends ConsumerWidget {
       ),
       body: ListView(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text('出題モード'),
+          ),
+          const Divider(height: 1),
+          ...QuizCategoryMode.values.map(
+            (value) {
+              return RadioListTile<QuizCategoryMode>(
+                value: value,
+                groupValue: quizCategoryMode.state,
+                onChanged: (value) async {
+                  if (value == null) return;
+                  settingNotifier.updateQuizCategoryMode(value);
+                  quizCategoryMode.state = value;
+                },
+                title: Text('${value.name}'),
+                tileColor: Colors.white,
+              );
+            },
+          ),
+          const Divider(height: 1),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text('問題形式'),

@@ -2,16 +2,38 @@ import 'dart:math';
 
 import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
+import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/repositories/quiz_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final quizProvider = FutureProvider<Quiz>(
   (ref) async {
-    final random = Random();
-    final quizCategory = QuizCategory.values.firstWhere(
-      (value) => value.index == random.nextInt(5),
-      orElse: () => QuizCategory.additional,
-    );
+    final quizCategoryMode = ref.watch(quizCategoryModeProvider).state;
+
+    QuizCategory quizCategory;
+
+    switch (quizCategoryMode) {
+      case QuizCategoryMode.random:
+        final random = Random();
+        quizCategory = QuizCategory.values.firstWhere(
+          (value) => value.index == random.nextInt(5),
+          orElse: () => QuizCategory.additional,
+        );
+        break;
+      case QuizCategoryMode.add:
+        quizCategory = QuizCategory.additional;
+        break;
+      case QuizCategoryMode.subtraction:
+        quizCategory = QuizCategory.subtraction;
+        break;
+      case QuizCategoryMode.division:
+        quizCategory = QuizCategory.division;
+        break;
+      case QuizCategoryMode.multiplication:
+        quizCategory = QuizCategory.multiplication;
+        break;
+    }
+
     switch (quizCategory) {
       case QuizCategory.additional:
         return ref.read(quizRepositoryProvider).getAdditional();
