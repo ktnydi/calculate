@@ -1,4 +1,4 @@
-import 'package:calculate/enums/quizType.dart';
+import 'package:calculate/enums/quiz_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'setting_state.freezed.dart';

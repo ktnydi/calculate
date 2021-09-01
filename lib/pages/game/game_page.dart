@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/preference.dart';
-import 'package:calculate/enums/quizType.dart';
+import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/pages/game/game_notifier.dart';
 import 'package:calculate/pages/game_result/game_result_page.dart';
 import 'package:calculate/pages/home/home_page.dart';

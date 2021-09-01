@@ -1,4 +1,4 @@
-import 'package:calculate/enums/quizType.dart';
+import 'package:calculate/enums/quiz_type.dart';
 
 enum Preferences {
   quizType,
