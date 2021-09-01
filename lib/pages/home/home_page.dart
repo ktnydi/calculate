@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/preference.dart';
+import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/pages/game/game_page.dart';
 import 'package:calculate/pages/help/help_page.dart';
@@ -25,6 +26,7 @@ class Home extends ConsumerWidget {
         Preferences.timeLimit.defaultValue;
     final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
         Preferences.numQuizzes.defaultValue;
+    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -68,7 +70,7 @@ class Home extends ConsumerWidget {
               Center(
                 child: ElevatedButton(
                   child: Text(
-                    'スタート\n（${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                    'スタート\n（${quizCategoryMode.state.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
                     textAlign: TextAlign.center,
                   ),
                   style: ElevatedButton.styleFrom(
