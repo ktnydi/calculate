@@ -1,3 +1,4 @@
+import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/domains/answer/answer.dart';
 import 'package:calculate/enums/preference.dart';
@@ -216,7 +217,10 @@ class GameResult extends ConsumerWidget {
                 minimumSize: Size(140, 48),
                 primary: Colors.grey.shade200,
               ),
-              onPressed: () {
+              onPressed: () async {
+                final numPlays = prefs.getInt('numPlays') ?? 0;
+                await prefs.setInt('numPlays', numPlays + 1);
+
                 analytics.logRestartGame();
                 ref.refresh(quizProvider);
                 Navigator.pushReplacement(
@@ -237,7 +241,14 @@ class GameResult extends ConsumerWidget {
                 ),
                 minimumSize: Size(140, 48),
               ),
-              onPressed: () {
+              onPressed: () async {
+                final numPlays = prefs.getInt('numPlays') ?? 0;
+                if (numPlays >= 3 && await AppReview.isRequestReviewAvailable) {
+                  await AppReview.requestReview;
+                } else {
+                  await prefs.setInt('numPlays', numPlays + 1);
+                }
+
                 Navigator.popUntil(
                   context,
                   (route) => route.isFirst,
