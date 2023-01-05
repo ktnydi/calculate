@@ -222,7 +222,7 @@ class GameResult extends ConsumerWidget {
                 await prefs.setInt('numPlays', numPlays + 1);
 
                 analytics.logRestartGame();
-                ref.refresh(quizProvider);
+                ref.invalidate(quizProvider);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

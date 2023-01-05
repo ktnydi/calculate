@@ -15,7 +15,10 @@ class Setting extends ConsumerWidget {
     final settingNotifier = ref.watch(settingProvider.notifier);
     final quizCategoryMode = ref.watch(quizCategoryModeProvider);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
+    final keyboardLocationNotifier =
+        ref.watch(keyboardLocationProvider.notifier);
     final quizType = ref.watch(quizTypeProvider);
+    final quizTypeNotifier = ref.watch(quizTypeProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +34,7 @@ class Setting extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('出題モード'),
-                Text('${quizCategoryMode.state.name}'),
+                Text('${quizCategoryMode.name}'),
               ],
             ),
             trailing: Icon(Icons.navigate_next),
@@ -49,7 +52,7 @@ class Setting extends ConsumerWidget {
             tileColor: Colors.white,
             title: Text('問題形式'),
             trailing: CupertinoSlidingSegmentedControl<QuizType>(
-              groupValue: quizType.state,
+              groupValue: quizType,
               children: {
                 QuizType.numQuizzes: Text(QuizType.numQuizzes.name),
                 QuizType.timeLimit: Text(QuizType.timeLimit.name),
@@ -57,7 +60,7 @@ class Setting extends ConsumerWidget {
               onValueChanged: (value) async {
                 if (value == null) return;
                 await settingNotifier.updateQuizType(value);
-                quizType.state = value;
+                quizTypeNotifier.state = value;
               },
             ),
           ),
@@ -184,7 +187,7 @@ class Setting extends ConsumerWidget {
           ListTile(
             title: Text('キーボードの位置'),
             trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
-              groupValue: keyboardLocation.state,
+              groupValue: keyboardLocation,
               children: {
                 KeyboardLocation.left: Text(KeyboardLocation.left.name),
                 KeyboardLocation.center: Text(KeyboardLocation.center.name),
@@ -193,7 +196,7 @@ class Setting extends ConsumerWidget {
               onValueChanged: (value) async {
                 if (value == null) return;
                 await settingNotifier.updateKeyboardLocation(value.id);
-                keyboardLocation.state = value;
+                keyboardLocationNotifier.state = value;
               },
             ),
             tileColor: Colors.white,
@@ -210,6 +213,8 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settingNotifier = ref.watch(settingProvider.notifier);
     final quizCategoryMode = ref.watch(quizCategoryModeProvider);
+    final quizCategoryModeNotifier =
+        ref.watch(quizCategoryModeProvider.notifier);
 
     return SafeArea(
       child: Padding(
@@ -220,11 +225,11 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
             (value) {
               return RadioListTile<QuizCategoryMode>(
                 value: value,
-                groupValue: quizCategoryMode.state,
+                groupValue: quizCategoryMode,
                 onChanged: (value) async {
                   if (value == null) return;
                   settingNotifier.updateQuizCategoryMode(value);
-                  quizCategoryMode.state = value;
+                  quizCategoryModeNotifier.state = value;
                 },
                 title: Text('${value.name}'),
                 tileColor: Colors.white,

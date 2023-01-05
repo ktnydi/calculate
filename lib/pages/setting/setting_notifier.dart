@@ -8,13 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final settingProvider =
     StateNotifierProvider.autoDispose<SettingNotifier, SettingState>(
   (ref) {
-    return SettingNotifier(ref.read);
+    return SettingNotifier(ref);
   },
 );
 
 class SettingNotifier extends StateNotifier<SettingState> {
-  SettingNotifier(this._read) : super(SettingState()) {
-    final prefs = _read(sharedPreferencesProvider);
+  SettingNotifier(this._ref) : super(SettingState()) {
+    final prefs = _ref.read(sharedPreferencesProvider);
     final quizType = QuizType.values.firstWhere(
       (value) => value.id == prefs.getInt(Preferences.quizType.key),
       orElse: () => Preferences.quizType.defaultValue,
@@ -33,15 +33,15 @@ class SettingNotifier extends StateNotifier<SettingState> {
     );
   }
 
-  final Reader _read;
+  final Ref _ref;
 
   Future<void> updateQuizCategoryMode(QuizCategoryMode mode) async {
-    final prefs = _read(sharedPreferencesProvider);
+    final prefs = _ref.read(sharedPreferencesProvider);
     await prefs.setInt('quizCategoryMode', mode.id);
   }
 
   Future<void> updateQuizType(QuizType quizType) async {
-    final prefs = _read(sharedPreferencesProvider);
+    final prefs = _ref.read(sharedPreferencesProvider);
     await prefs.setInt(Preferences.quizType.key, quizType.id);
     state = state.copyWith(
       quizType: quizType,
@@ -49,7 +49,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
   }
 
   Future<void> updateLimit(int limit) async {
-    final prefs = _read(sharedPreferencesProvider);
+    final prefs = _ref.read(sharedPreferencesProvider);
     await prefs.setInt(Preferences.timeLimit.key, limit);
     state = state.copyWith(
       limit: limit,
@@ -57,7 +57,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
   }
 
   Future<void> updateQuizLength(int quizLength) async {
-    final prefs = _read(sharedPreferencesProvider);
+    final prefs = _ref.read(sharedPreferencesProvider);
     await prefs.setInt(Preferences.numQuizzes.key, quizLength);
     state = state.copyWith(
       quizLength: quizLength,
@@ -65,7 +65,7 @@ class SettingNotifier extends StateNotifier<SettingState> {
   }
 
   Future<void> updateKeyboardLocation(int keyboardLocation) async {
-    final prefs = _read(sharedPreferencesProvider);
+    final prefs = _ref.read(sharedPreferencesProvider);
     await prefs.setInt(Preferences.keyboardLocation.key, keyboardLocation);
     state = state.copyWith(
       keyboardLocation: keyboardLocation,

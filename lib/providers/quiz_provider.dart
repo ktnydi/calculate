@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final quizProvider = FutureProvider<Quiz>(
   (ref) async {
-    final quizCategoryMode = ref.watch(quizCategoryModeProvider).state;
+    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
 
     QuizCategory quizCategory;
 

@@ -302,7 +302,7 @@ class Game extends ConsumerWidget {
                                                 return gameNotifier
                                                     .finishQuiz();
                                               }
-                                              ref.refresh(quizProvider);
+                                              ref.invalidate(quizProvider);
                                               gameNotifier.clearAnswer();
                                               gameNotifier.nextQuiz();
                                             },

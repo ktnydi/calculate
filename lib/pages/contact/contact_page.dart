@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,25 +14,24 @@ class _ContactState extends State<Contact> {
   bool isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
         children: [
-          WebView(
-            initialUrl: _url,
-            javascriptMode: JavascriptMode.unrestricted,
-            onProgress: (progress) {
-              setState(() {
-                isLoading = progress != 100;
-              });
-            },
+          WebViewWidget(
+            controller: WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..setNavigationDelegate(
+                NavigationDelegate(
+                  onProgress: (progress) {
+                    setState(() {
+                      isLoading = progress != 100;
+                    });
+                  },
+                ),
+              )
+              ..loadRequest(Uri.parse(_url)),
           ),
           if (isLoading)
             Center(
@@ -45,9 +42,9 @@ class _ContactState extends State<Contact> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.launch),
         onPressed: () async {
-          final isValid = await canLaunch(_url);
+          final isValid = await canLaunchUrl(Uri.parse(_url));
           if (!isValid) return;
-          await launch(_url);
+          await launchUrl(Uri.parse(_url));
         },
       ),
     );

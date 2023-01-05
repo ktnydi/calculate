@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,25 +16,24 @@ class _WebViewPageState extends State<WebViewPage> {
   bool isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
         children: [
-          WebView(
-            initialUrl: widget.url,
-            javascriptMode: JavascriptMode.unrestricted,
-            onProgress: (progress) {
-              setState(() {
-                isLoading = progress != 100;
-              });
-            },
+          WebViewWidget(
+            controller: WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..setNavigationDelegate(
+                NavigationDelegate(
+                  onProgress: (progress) {
+                    setState(() {
+                      isLoading = progress != 100;
+                    });
+                  },
+                ),
+              )
+              ..loadRequest(Uri.parse(widget.url)),
           ),
           if (isLoading)
             Center(
@@ -47,9 +44,9 @@ class _WebViewPageState extends State<WebViewPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.launch),
         onPressed: () async {
-          final isValid = await canLaunch(widget.url);
+          final isValid = await canLaunchUrl(Uri.parse(widget.url));
           if (!isValid) return;
-          await launch(widget.url);
+          await launchUrl(Uri.parse(widget.url));
         },
       ),
     );

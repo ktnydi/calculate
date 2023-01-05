@@ -10,12 +10,12 @@ import 'package:calculate/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
-  (ref) => GameNotifier(ref.read),
+  (ref) => GameNotifier(ref),
 );
 
 class GameNotifier extends StateNotifier<GameState> {
-  GameNotifier(this._read) : super(GameState()) {
-    final prefs = _read(sharedPreferencesProvider);
+  GameNotifier(this._ref) : super(GameState()) {
+    final prefs = _ref.read(sharedPreferencesProvider);
 
     /// 問題形式を取得
     final quizType = QuizType.values.firstWhere(
@@ -33,11 +33,11 @@ class GameNotifier extends StateNotifier<GameState> {
     beginCountDown();
   }
 
-  final Reader _read;
+  final Ref _ref;
   Timer? timer;
 
   void beginCountDown() {
-    final prefs = _read(sharedPreferencesProvider);
+    final prefs = _ref.read(sharedPreferencesProvider);
     int leftTime = prefs.getInt(Preferences.timeLimit.key) ??
         Preferences.timeLimit.defaultValue;
     timer = Timer.periodic(Duration(seconds: 1), (timer) {

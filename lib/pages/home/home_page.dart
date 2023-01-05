@@ -17,7 +17,7 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final prefs = ref.watch(sharedPreferencesProvider);
-    final bannerAd = ref.watch(bannerAdProvider(context)).data?.value;
+    final bannerAd = ref.watch(bannerAdProvider(context)).value;
     final quizType = QuizType.values.firstWhere(
       (value) => value.id == prefs.getInt(Preferences.quizType.key),
       orElse: () => Preferences.quizType.defaultValue,
@@ -70,7 +70,7 @@ class Home extends ConsumerWidget {
               Center(
                 child: ElevatedButton(
                   child: Text(
-                    'スタート\n（${quizCategoryMode.state.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                    'スタート\n（${quizCategoryMode.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
                     textAlign: TextAlign.center,
                   ),
                   style: ElevatedButton.styleFrom(
@@ -84,7 +84,7 @@ class Home extends ConsumerWidget {
                   ),
                   onPressed: () {
                     analytics.logStartGame();
-                    ref.refresh(quizProvider);
+                    ref.invalidate(quizProvider);
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -117,7 +117,7 @@ class Home extends ConsumerWidget {
                           builder: (context) => Setting(),
                         ),
                       );
-                      ref.refresh(sharedPreferencesProvider);
+                      ref.invalidate(sharedPreferencesProvider);
                     },
                   ),
                   const SizedBox(width: 8),

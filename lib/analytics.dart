@@ -1,12 +1,11 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final analyticsProvider = Provider((_) => Analytics());
 
 class Analytics {
-  final _instance = FirebaseAnalytics();
+  final _instance = FirebaseAnalytics.instance;
   late final observer = FirebaseAnalyticsObserver(analytics: _instance);
 
   Future<void> logStartGame() async {
