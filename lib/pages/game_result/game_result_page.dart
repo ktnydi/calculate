@@ -214,8 +214,8 @@ class GameResult extends ConsumerWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28),
                 ),
+                backgroundColor: Colors.grey.shade200,
                 minimumSize: Size(140, 48),
-                primary: Colors.grey.shade200,
               ),
               onPressed: () async {
                 final numPlays = prefs.getInt('numPlays') ?? 0;

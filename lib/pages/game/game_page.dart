@@ -91,8 +91,8 @@ class Game extends ConsumerWidget {
                                           borderRadius:
                                               BorderRadius.circular(22),
                                         ),
+                                        backgroundColor: Colors.grey.shade200,
                                         minimumSize: Size(120, 44),
-                                        primary: Colors.grey.shade200,
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);

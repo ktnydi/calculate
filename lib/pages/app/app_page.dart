@@ -16,7 +16,6 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData.from(
         colorScheme: ColorScheme.light(
           primary: Color(0xFFB4CEB3),
-          primaryVariant: Color(0xFF849D83),
           onPrimary: Color(0xFF000000),
           secondary: Color(0xFFB4CEB3),
           onSecondary: Color(0xFF000000),
@@ -40,7 +39,7 @@ class MyApp extends ConsumerWidget {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: Color(0xFF849D83),
+            foregroundColor: Color(0xFF849D83),
           ),
         ),
       ),

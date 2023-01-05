@@ -51,8 +51,8 @@ class VersionCheck extends ConsumerWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(22),
                                 ),
+                                backgroundColor: Colors.grey.shade200,
                                 minimumSize: Size(120, 44),
-                                primary: Colors.grey.shade200,
                               ),
                               child: const Text('キャンセル'),
                             ),
@@ -99,7 +99,7 @@ class VersionCheck extends ConsumerWidget {
           );
         },
         data: (requestType) {
-          WidgetsBinding.instance!.addPostFrameCallback(
+          WidgetsBinding.instance.addPostFrameCallback(
             (_) {
               if (requestType != UpdateRequestType.not) {
                 _showUpdateDialog(context, requestType);

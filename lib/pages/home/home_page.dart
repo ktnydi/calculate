@@ -45,7 +45,7 @@ class Home extends ConsumerWidget {
                   Image.asset(
                     'assets/blobs.png',
                     width: min(MediaQuery.of(context).size.width, 320),
-                    color: Theme.of(context).colorScheme.primaryVariant,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -74,12 +74,13 @@ class Home extends ConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   style: ElevatedButton.styleFrom(
+                    foregroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
                     minimumSize: Size(232, 80),
-                    primary: Colors.white,
-                    onPrimary: Theme.of(context).colorScheme.primaryVariant,
                   ),
                   onPressed: () {
                     analytics.logStartGame();
@@ -101,12 +102,13 @@ class Home extends ConsumerWidget {
                   ElevatedButton(
                     child: Text('設定'),
                     style: ElevatedButton.styleFrom(
+                      foregroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       minimumSize: Size(112, 56),
-                      primary: Colors.white,
-                      onPrimary: Theme.of(context).colorScheme.primaryVariant,
                     ),
                     onPressed: () async {
                       await Navigator.push(
@@ -122,12 +124,13 @@ class Home extends ConsumerWidget {
                   ElevatedButton(
                     child: Text('ヘルプ'),
                     style: ElevatedButton.styleFrom(
+                      foregroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       minimumSize: Size(112, 56),
-                      primary: Colors.white,
-                      onPrimary: Theme.of(context).colorScheme.primaryVariant,
                     ),
                     onPressed: () {
                       Navigator.push(

@@ -11,11 +11,11 @@ class FigureButton extends StatelessWidget {
     return TextButton(
       child: child,
       style: TextButton.styleFrom(
+        foregroundColor: Theme.of(context).textTheme.bodyText2!.color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
         ),
         backgroundColor: Colors.white,
-        primary: Theme.of(context).textTheme.bodyText2!.color,
         textStyle: Theme.of(context).textTheme.headline5,
       ),
       onPressed: onPressed,
