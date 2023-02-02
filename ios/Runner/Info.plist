@@ -63,5 +63,7 @@
       </array>
      <key>NSUserTrackingUsageDescription</key>
      <string>あなたの興味・関心に合わせた広告がより表示されるようになります。</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>
