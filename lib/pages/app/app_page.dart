@@ -44,7 +44,7 @@ class MyApp extends ConsumerWidget {
         ),
       ),
       home: Scaffold(
-        body: VersionCheck(),
+        body: VersionCheckPage(),
       ),
       navigatorObservers: [
         analytics.observer,
