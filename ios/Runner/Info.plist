@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>計算ドリル</string>
+	<string>$(DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -53,16 +53,16 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-9706832803709318~1768182869</string>
-    <key>SKAdNetworkItems</key>
-      <array>
-        <dict>
-          <key>SKAdNetworkIdentifier</key>
-          <string>cstr6suwn9.skadnetwork</string>
-        </dict>
-      </array>
-     <key>NSUserTrackingUsageDescription</key>
-     <string>あなたの興味・関心に合わせた広告がより表示されるようになります。</string>
+	<string>ca-app-pub-9706832803709318~1768182869</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>あなたの興味・関心に合わせた広告がより表示されるようになります。</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 </dict>
