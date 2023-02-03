@@ -11,7 +11,7 @@
             "args": [
                 "--dart-define=FLAVOR",
                 "development",
-                "flavor",
+                "--flavor",
                 "development"
             ]
         },
@@ -22,6 +22,8 @@
             "flutterMode": "release",
             "args": [
                 "--dart-define=FLAVOR",
+                "production",
+                "--flavor",
                 "production"
             ]
         }
