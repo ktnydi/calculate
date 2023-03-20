@@ -45,17 +45,21 @@ class Home extends ConsumerWidget {
                   Image.asset(
                     'assets/blobs.png',
                     width: min(MediaQuery.of(context).size.width, 320),
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: Colors.black12,
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'Keisan Doriru',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium!.color,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 32),
                       Text(
@@ -74,8 +78,6 @@ class Home extends ConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   style: ElevatedButton.styleFrom(
-                    foregroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
@@ -102,8 +104,6 @@ class Home extends ConsumerWidget {
                   ElevatedButton(
                     child: Text('設定'),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor:
-                          Theme.of(context).colorScheme.primaryContainer,
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -124,8 +124,6 @@ class Home extends ConsumerWidget {
                   ElevatedButton(
                     child: Text('ヘルプ'),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor:
-                          Theme.of(context).colorScheme.primaryContainer,
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
