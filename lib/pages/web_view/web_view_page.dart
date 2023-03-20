@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -13,7 +12,27 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-  bool isLoading = false;
+  int _progress = 0;
+  final controller = WebViewController();
+
+  @override
+  void initState() {
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (progress) {
+            if (_progress == 100) return;
+            setState(() {
+              _progress = progress;
+            });
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.url));
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +41,11 @@ class _WebViewPageState extends State<WebViewPage> {
       body: Stack(
         children: [
           WebViewWidget(
-            controller: WebViewController()
-              ..setJavaScriptMode(JavaScriptMode.unrestricted)
-              ..setNavigationDelegate(
-                NavigationDelegate(
-                  onProgress: (progress) {
-                    setState(() {
-                      isLoading = progress != 100;
-                    });
-                  },
-                ),
-              )
-              ..loadRequest(Uri.parse(widget.url)),
+            controller: controller,
           ),
-          if (isLoading)
-            Center(
-              child: CupertinoActivityIndicator(),
+          if (_progress != 100)
+            LinearProgressIndicator(
+              value: _progress / 100,
             ),
         ],
       ),
