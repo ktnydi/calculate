@@ -25,6 +25,7 @@ class MyApp extends ConsumerWidget {
         scaffoldBackgroundColor: Color(0xFFF4F5F7),
         appBarTheme: AppBarTheme(
           elevation: 1,
+          centerTitle: true,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
