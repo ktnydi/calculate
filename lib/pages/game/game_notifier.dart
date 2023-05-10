@@ -55,17 +55,17 @@ class GameNotifier extends StateNotifier<GameState> {
     timer?.cancel();
   }
 
-  void fillInAnswer(int num) {
+  void fillInAnswer(int figure) {
     if (state.answer.length >= 10) return;
 
     final isOnlyZero =
-        num == 0 && state.answer.contains(0) && state.answer.length == 1;
+        figure == 0 && state.answer.contains(0) && state.answer.length == 1;
     if (isOnlyZero) return;
 
     final includeZero = state.answer.contains(0) && state.answer.length == 1;
 
     state = state.copyWith(
-      answer: [if (!includeZero) ...state.answer, num],
+      answer: [if (!includeZero) ...state.answer, figure],
     );
   }
 
