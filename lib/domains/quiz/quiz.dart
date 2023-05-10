@@ -26,4 +26,17 @@ class Quiz with _$Quiz {
         return '${this.figures.first} ÷ ${this.figures.last}';
     }
   }
+
+  int get correctAnswer {
+    switch (type) {
+      case QuizCategory.additional:
+        return figures.first + figures.last;
+      case QuizCategory.subtraction:
+        return figures.first - figures.last;
+      case QuizCategory.division:
+        return figures.first ~/ figures.last;
+      case QuizCategory.multiplication:
+        return figures.first * figures.last;
+    }
+  }
 }

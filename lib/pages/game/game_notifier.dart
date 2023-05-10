@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:calculate/domains/answer/answer.dart';
 import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_type.dart';
-import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/pages/game/game_state.dart';
 import 'package:calculate/providers.dart';
 import 'package:calculate/domains/quiz/quiz.dart';
@@ -77,58 +76,18 @@ class GameNotifier extends StateNotifier<GameState> {
   }
 
   void checkAnswer(Quiz quiz) {
-    final inComing = state.answer.join();
-
-    switch (quiz.type) {
-      case QuizCategory.additional:
-        final answer = quiz.figures.first + quiz.figures.last;
-        final userAnswer = Answer(
-          quiz: quiz,
-          answer: inComing,
-          isCorrect: inComing == '$answer',
-        );
-        state = state.copyWith(
-          correctList: [...state.correctList, inComing == '$answer'],
-          answerList: [...state.answerList, userAnswer],
-        );
-        break;
-      case QuizCategory.subtraction:
-        final answer = quiz.figures.first - quiz.figures.last;
-        final userAnswer = Answer(
-          quiz: quiz,
-          answer: inComing,
-          isCorrect: inComing == '$answer',
-        );
-        state = state.copyWith(
-          correctList: [...state.correctList, inComing == '$answer'],
-          answerList: [...state.answerList, userAnswer],
-        );
-        break;
-      case QuizCategory.multiplication:
-        final answer = quiz.figures.first * quiz.figures.last;
-        final userAnswer = Answer(
-          quiz: quiz,
-          answer: inComing,
-          isCorrect: inComing == '$answer',
-        );
-        state = state.copyWith(
-          correctList: [...state.correctList, inComing == '$answer'],
-          answerList: [...state.answerList, userAnswer],
-        );
-        break;
-      case QuizCategory.division:
-        final answer = quiz.figures.first ~/ quiz.figures.last;
-        final userAnswer = Answer(
-          quiz: quiz,
-          answer: inComing,
-          isCorrect: inComing == '$answer',
-        );
-        state = state.copyWith(
-          correctList: [...state.correctList, inComing == '$answer'],
-          answerList: [...state.answerList, userAnswer],
-        );
-        break;
-    }
+    final userAnswer = state.answer.join();
+    final correctAnswer = quiz.correctAnswer;
+    final isCorrect = userAnswer == '$correctAnswer';
+    final answer = Answer(
+      quiz: quiz,
+      answer: userAnswer,
+      isCorrect: isCorrect,
+    );
+    state = state.copyWith(
+      correctList: [...state.correctList, isCorrect],
+      answerList: [...state.answerList, answer],
+    );
   }
 
   void nextQuiz() {
