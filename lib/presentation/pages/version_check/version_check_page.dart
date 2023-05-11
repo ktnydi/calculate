@@ -1,7 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:app_review/app_review.dart';
 import 'package:calculate/enums/update_request_type.dart';
-import 'package:calculate/pages/home/home_page.dart';
+import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

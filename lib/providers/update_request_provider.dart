@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:calculate/domains/update_info/update_info.dart';
+import 'package:calculate/model/domains/update_info/update_info.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

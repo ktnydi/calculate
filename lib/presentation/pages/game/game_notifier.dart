@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:calculate/domains/answer/answer.dart';
+import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_type.dart';
-import 'package:calculate/pages/game/game_state.dart';
+import 'package:calculate/presentation/pages/game/game_state.dart';
 import 'package:calculate/providers.dart';
-import 'package:calculate/domains/quiz/quiz.dart';
+import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(

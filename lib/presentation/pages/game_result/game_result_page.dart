@@ -1,10 +1,10 @@
 import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
-import 'package:calculate/domains/answer/answer.dart';
+import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_type.dart';
-import 'package:calculate/pages/game/game_page.dart';
-import 'package:calculate/pages/home/home_page.dart';
+import 'package:calculate/presentation/pages/game/game_page.dart';
+import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:calculate/domains/quiz/quiz.dart';
+import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

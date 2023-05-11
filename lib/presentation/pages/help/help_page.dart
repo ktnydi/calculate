@@ -1,6 +1,6 @@
 import 'package:app_review/app_review.dart';
 import 'package:calculate/providers.dart';
-import 'package:calculate/pages/web_view/web_view_page.dart';
+import 'package:calculate/presentation/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,6 +1,6 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/flavor.dart';
-import 'package:calculate/pages/version_check/version_check_page.dart';
+import 'package:calculate/presentation/pages/version_check/version_check_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

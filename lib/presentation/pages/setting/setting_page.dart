@@ -2,7 +2,7 @@ import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
-import 'package:calculate/pages/setting/setting_notifier.dart';
+import 'package:calculate/presentation/pages/setting/setting_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

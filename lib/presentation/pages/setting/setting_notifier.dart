@@ -1,7 +1,7 @@
 import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
-import 'package:calculate/pages/setting/setting_state.dart';
+import 'package:calculate/presentation/pages/setting/setting_state.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

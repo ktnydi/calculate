@@ -1,5 +1,5 @@
-import 'package:calculate/domains/answer/answer.dart';
-import 'package:calculate/domains/quiz/quiz.dart';
+import 'package:calculate/model/domains/answer/answer.dart';
+import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'game_state.freezed.dart';

@@ -1,4 +1,4 @@
-import 'package:calculate/domains/quiz/quiz.dart';
+import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'answer.freezed.dart';

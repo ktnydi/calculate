@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:calculate/domains/quiz/quiz.dart';
+import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
-import 'package:calculate/repositories/quiz_repository.dart';
+import 'package:calculate/model/repositories/quiz_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final quizProvider = FutureProvider<Quiz>(
