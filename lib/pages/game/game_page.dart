@@ -20,10 +20,7 @@ class Game extends ConsumerWidget {
     final gameState = ref.watch(gameProvider);
     final analytics = ref.watch(analyticsProvider);
     final prefs = ref.watch(sharedPreferencesProvider);
-    final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt(Preferences.quizType.key),
-      orElse: () => Preferences.quizType.defaultValue,
-    );
+    final quizType = ref.watch(quizTypeProvider);
     final limit = prefs.getInt(Preferences.timeLimit.key) ??
         Preferences.timeLimit.defaultValue;
     final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
