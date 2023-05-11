@@ -85,7 +85,6 @@ class GameNotifier extends StateNotifier<GameState> {
       isCorrect: isCorrect,
     );
     state = state.copyWith(
-      correctList: [...state.correctList, isCorrect],
       answerList: [...state.answerList, answer],
     );
   }

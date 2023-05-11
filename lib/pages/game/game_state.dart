@@ -6,13 +6,18 @@ part 'game_state.freezed.dart';
 
 @freezed
 class GameState with _$GameState {
+  const GameState._();
+
   const factory GameState({
     @Default([]) List<Quiz> figuresList,
     @Default(0) int index,
     @Default([]) List<int> answer,
-    @Default([]) List<bool> correctList,
     @Default([]) List<Answer> answerList,
     @Default(180) int leftTime,
     @Default(false) bool isFinished,
   }) = _GameState;
+
+  int get numCorrects {
+    return answerList.where((element) => element.isCorrect).length;
+  }
 }

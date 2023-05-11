@@ -19,7 +19,6 @@ mixin _$GameState {
   List<Quiz> get figuresList => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
   List<int> get answer => throw _privateConstructorUsedError;
-  List<bool> get correctList => throw _privateConstructorUsedError;
   List<Answer> get answerList => throw _privateConstructorUsedError;
   int get leftTime => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
@@ -38,7 +37,6 @@ abstract class $GameStateCopyWith<$Res> {
       {List<Quiz> figuresList,
       int index,
       List<int> answer,
-      List<bool> correctList,
       List<Answer> answerList,
       int leftTime,
       bool isFinished});
@@ -60,7 +58,6 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
     Object? figuresList = null,
     Object? index = null,
     Object? answer = null,
-    Object? correctList = null,
     Object? answerList = null,
     Object? leftTime = null,
     Object? isFinished = null,
@@ -78,10 +75,6 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      correctList: null == correctList
-          ? _value.correctList
-          : correctList // ignore: cast_nullable_to_non_nullable
-              as List<bool>,
       answerList: null == answerList
           ? _value.answerList
           : answerList // ignore: cast_nullable_to_non_nullable
@@ -109,7 +102,6 @@ abstract class _$$_GameStateCopyWith<$Res> implements $GameStateCopyWith<$Res> {
       {List<Quiz> figuresList,
       int index,
       List<int> answer,
-      List<bool> correctList,
       List<Answer> answerList,
       int leftTime,
       bool isFinished});
@@ -129,7 +121,6 @@ class __$$_GameStateCopyWithImpl<$Res>
     Object? figuresList = null,
     Object? index = null,
     Object? answer = null,
-    Object? correctList = null,
     Object? answerList = null,
     Object? leftTime = null,
     Object? isFinished = null,
@@ -147,10 +138,6 @@ class __$$_GameStateCopyWithImpl<$Res>
           ? _value._answer
           : answer // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      correctList: null == correctList
-          ? _value._correctList
-          : correctList // ignore: cast_nullable_to_non_nullable
-              as List<bool>,
       answerList: null == answerList
           ? _value._answerList
           : answerList // ignore: cast_nullable_to_non_nullable
@@ -169,19 +156,18 @@ class __$$_GameStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GameState implements _GameState {
+class _$_GameState extends _GameState {
   const _$_GameState(
       {final List<Quiz> figuresList = const [],
       this.index = 0,
       final List<int> answer = const [],
-      final List<bool> correctList = const [],
       final List<Answer> answerList = const [],
       this.leftTime = 180,
       this.isFinished = false})
       : _figuresList = figuresList,
         _answer = answer,
-        _correctList = correctList,
-        _answerList = answerList;
+        _answerList = answerList,
+        super._();
 
   final List<Quiz> _figuresList;
   @override
@@ -204,15 +190,6 @@ class _$_GameState implements _GameState {
     return EqualUnmodifiableListView(_answer);
   }
 
-  final List<bool> _correctList;
-  @override
-  @JsonKey()
-  List<bool> get correctList {
-    if (_correctList is EqualUnmodifiableListView) return _correctList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_correctList);
-  }
-
   final List<Answer> _answerList;
   @override
   @JsonKey()
@@ -231,7 +208,7 @@ class _$_GameState implements _GameState {
 
   @override
   String toString() {
-    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, correctList: $correctList, answerList: $answerList, leftTime: $leftTime, isFinished: $isFinished)';
+    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, answerList: $answerList, leftTime: $leftTime, isFinished: $isFinished)';
   }
 
   @override
@@ -243,8 +220,6 @@ class _$_GameState implements _GameState {
                 .equals(other._figuresList, _figuresList) &&
             (identical(other.index, index) || other.index == index) &&
             const DeepCollectionEquality().equals(other._answer, _answer) &&
-            const DeepCollectionEquality()
-                .equals(other._correctList, _correctList) &&
             const DeepCollectionEquality()
                 .equals(other._answerList, _answerList) &&
             (identical(other.leftTime, leftTime) ||
@@ -259,7 +234,6 @@ class _$_GameState implements _GameState {
       const DeepCollectionEquality().hash(_figuresList),
       index,
       const DeepCollectionEquality().hash(_answer),
-      const DeepCollectionEquality().hash(_correctList),
       const DeepCollectionEquality().hash(_answerList),
       leftTime,
       isFinished);
@@ -271,15 +245,15 @@ class _$_GameState implements _GameState {
       __$$_GameStateCopyWithImpl<_$_GameState>(this, _$identity);
 }
 
-abstract class _GameState implements GameState {
+abstract class _GameState extends GameState {
   const factory _GameState(
       {final List<Quiz> figuresList,
       final int index,
       final List<int> answer,
-      final List<bool> correctList,
       final List<Answer> answerList,
       final int leftTime,
       final bool isFinished}) = _$_GameState;
+  const _GameState._() : super._();
 
   @override
   List<Quiz> get figuresList;
@@ -287,8 +261,6 @@ abstract class _GameState implements GameState {
   int get index;
   @override
   List<int> get answer;
-  @override
-  List<bool> get correctList;
   @override
   List<Answer> get answerList;
   @override

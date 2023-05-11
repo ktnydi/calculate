@@ -240,7 +240,7 @@ class Game extends ConsumerWidget {
                             ),
                             const Text('／'),
                             Text(
-                              '正答数：${gameState.correctList.where((e) => e == true).length}',
+                              '正答数：${gameState.numCorrects}',
                               style: TextStyle(
                                 fontFeatures: [
                                   FontFeature.tabularFigures(),
@@ -353,7 +353,7 @@ class Game extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        gameState.correctList.length != quizLength
+                        gameState.answerList.length != quizLength
                             ? 'タイムアップ'
                             : '終了',
                         style: Theme.of(context).textTheme.headline6,
