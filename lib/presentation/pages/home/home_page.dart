@@ -112,7 +112,6 @@ class Home extends ConsumerWidget {
                           builder: (context) => Setting(),
                         ),
                       );
-                      ref.invalidate(sharedPreferencesProvider);
                     },
                   ),
                   const SizedBox(width: 8),
