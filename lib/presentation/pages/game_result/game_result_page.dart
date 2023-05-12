@@ -1,4 +1,3 @@
-import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/quiz_type.dart';
@@ -19,7 +18,6 @@ class GameResult extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
-    final prefs = ref.watch(sharedPreferencesProvider);
     final limit = ref.watch(quizTimeNotifierProvider);
     final timePerQuiz = (limit - leftTime) / answerList.length;
     final quizType = ref.watch(quizTypeNotifierProvider);
@@ -214,9 +212,6 @@ class GameResult extends ConsumerWidget {
                 minimumSize: Size(140, 48),
               ),
               onPressed: () async {
-                final numPlays = prefs.getInt('numPlays') ?? 0;
-                await prefs.setInt('numPlays', numPlays + 1);
-
                 analytics.logRestartGame();
                 ref.invalidate(quizProvider);
                 Navigator.pushReplacement(
@@ -238,13 +233,6 @@ class GameResult extends ConsumerWidget {
                 minimumSize: Size(140, 48),
               ),
               onPressed: () async {
-                final numPlays = prefs.getInt('numPlays') ?? 0;
-                if (numPlays >= 3 && await AppReview.isRequestReviewAvailable) {
-                  await AppReview.requestReview;
-                } else {
-                  await prefs.setInt('numPlays', numPlays + 1);
-                }
-
                 Navigator.popUntil(
                   context,
                   (route) => route.isFirst,
