@@ -6,8 +6,8 @@ import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/model/repositories/quiz_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final quizProvider = FutureProvider<Quiz>(
-  (ref) async {
+final quizProvider = Provider<Quiz>(
+  (ref) {
     final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
 
     QuizCategory quizCategory;
