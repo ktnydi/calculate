@@ -8,11 +8,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final quizProvider = FutureProvider<Quiz>(
   (ref) async {
-    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
+    final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
 
     QuizCategory quizCategory;
 
-    switch (quizCategoryMode) {
+    switch (quizCategoryModeState) {
       case QuizCategoryMode.random:
         final random = Random();
         quizCategory = QuizCategory.values.firstWhere(

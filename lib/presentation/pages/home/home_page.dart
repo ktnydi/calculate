@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:calculate/analytics.dart';
-import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/pages/help/help_page.dart';
 import 'package:calculate/presentation/pages/setting/setting_page.dart';
@@ -16,17 +17,11 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
-    final prefs = ref.watch(sharedPreferencesProvider);
     final bannerAd = ref.watch(bannerAdProvider(context)).value;
-    final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt(Preferences.quizType.key),
-      orElse: () => Preferences.quizType.defaultValue,
-    );
-    final limit = prefs.getInt(Preferences.timeLimit.key) ??
-        Preferences.timeLimit.defaultValue;
-    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
-        Preferences.numQuizzes.defaultValue;
-    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
+    final quizType = ref.watch(quizTypeNotifierProvider);
+    final limit = ref.watch(quizTimeNotifierProvider);
+    final quizLength = ref.watch(quizSizeNotifierProvider);
+    final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -74,7 +69,7 @@ class Home extends ConsumerWidget {
               Center(
                 child: ElevatedButton(
                   child: Text(
-                    'スタート\n（${quizCategoryMode.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                    'スタート\n（${quizCategoryModeState.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
                     textAlign: TextAlign.center,
                   ),
                   style: ElevatedButton.styleFrom(

@@ -1,17 +1,33 @@
 import 'package:calculate/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final quizCategoryModeProvider = StateProvider<QuizCategoryMode>(
+final quizCategoryModeNotifierProvider =
+    StateNotifierProvider<QuizCategoryModeNotifier, QuizCategoryMode>(
   (ref) {
-    final prefs = ref.read(sharedPreferencesProvider);
-    return QuizCategoryMode.values.firstWhere(
-      (value) {
-        return value.id == prefs.getInt('quizCategoryMode');
-      },
-      orElse: () => QuizCategoryMode.random,
-    );
+    return QuizCategoryModeNotifier(ref);
   },
 );
+
+class QuizCategoryModeNotifier extends StateNotifier<QuizCategoryMode> {
+  QuizCategoryModeNotifier(this.ref) : super(QuizCategoryMode.random) {
+    final id = prefs.getInt(key);
+    if (id == null) return;
+    state = QuizCategoryMode.values.firstWhere(
+      (element) => element.id == id,
+      orElse: () => QuizCategoryMode.random,
+    );
+  }
+
+  final Ref ref;
+  SharedPreferences get prefs => ref.read(sharedPreferencesProvider);
+  final key = 'quizCategoryMode';
+
+  void change(QuizCategoryMode mode) {
+    state = mode;
+    prefs.setInt(key, mode.id);
+  }
+}
 
 enum QuizCategoryMode {
   random,

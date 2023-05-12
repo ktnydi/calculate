@@ -1,18 +1,33 @@
-import 'package:calculate/enums/preference.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final keyboardLocationProvider = StateProvider<KeyboardLocation>(
+final keyboardLocationProvider =
+    StateNotifierProvider<KeyboardLocationNotifier, KeyboardLocation>(
   (ref) {
-    final prefs = ref.read(sharedPreferencesProvider);
-    return KeyboardLocation.values.firstWhere(
-      (value) {
-        return value.id == prefs.getInt(Preferences.keyboardLocation.key);
-      },
-      orElse: () => KeyboardLocation.center,
-    );
+    return KeyboardLocationNotifier(ref);
   },
 );
+
+class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
+  KeyboardLocationNotifier(this.ref) : super(KeyboardLocation.center) {
+    final id = prefs.getInt(key);
+    if (id == null) return;
+    state = KeyboardLocation.values.firstWhere(
+      (element) => element.id == id,
+      orElse: () => KeyboardLocation.center,
+    );
+  }
+
+  final key = 'keyboardLocation';
+  final Ref ref;
+  SharedPreferences get prefs => ref.read(sharedPreferencesProvider);
+
+  void change(KeyboardLocation location) {
+    state = location;
+    prefs.setInt(key, location.id);
+  }
+}
 
 enum KeyboardLocation {
   center,

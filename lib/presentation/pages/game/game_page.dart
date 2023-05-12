@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:calculate/analytics.dart';
-import 'package:calculate/enums/preference.dart';
+import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/pages/game_result/game_result_page.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
@@ -19,14 +21,10 @@ class Game extends ConsumerWidget {
     final gameNotifier = ref.watch(gameProvider.notifier);
     final gameState = ref.watch(gameProvider);
     final analytics = ref.watch(analyticsProvider);
-    final prefs = ref.watch(sharedPreferencesProvider);
-    final quizType = ref.watch(quizTypeProvider);
-    final limit = prefs.getInt(Preferences.timeLimit.key) ??
-        Preferences.timeLimit.defaultValue;
-    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
-        Preferences.numQuizzes.defaultValue;
-    final keyboardLocation = prefs.getInt(Preferences.keyboardLocation.key) ??
-        Preferences.keyboardLocation.defaultValue;
+    final quizTypeState = ref.watch(quizTypeNotifierProvider);
+    final quizTimeState = ref.watch(quizTimeNotifierProvider);
+    final quizSizeState = ref.watch(quizSizeNotifierProvider);
+    final keyboardLocation = ref.watch(keyboardLocationProvider);
 
     return Stack(
       children: [
@@ -132,8 +130,8 @@ class Game extends ConsumerWidget {
               },
             ),
             title: Text(
-              quizType == QuizType.numQuizzes
-                  ? '${gameState.index + 1}／${quizLength}問'
+              quizTypeState == QuizType.numQuizzes
+                  ? '${gameState.index + 1}／${quizSizeState}問'
                   : '第${gameState.index + 1}問',
               style: TextStyle(
                 fontSize: 18,
@@ -212,11 +210,11 @@ class Game extends ConsumerWidget {
                       alignment: Alignment.centerLeft,
                       children: [
                         Container(
-                          width: quizType == QuizType.numQuizzes
+                          width: quizTypeState == QuizType.numQuizzes
                               ? MediaQuery.of(context).size.width *
-                                  (gameState.answerList.length / quizLength)
+                                  (gameState.answerList.length / quizSizeState)
                               : MediaQuery.of(context).size.width *
-                                  (gameState.leftTime / limit),
+                                  (gameState.leftTime / quizTimeState),
                           height: 30,
                           decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
@@ -226,8 +224,8 @@ class Game extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              quizType == QuizType.numQuizzes
-                                  ? '残り：${quizLength - gameState.answerList.length}問'
+                              quizTypeState == QuizType.numQuizzes
+                                  ? '残り：${quizSizeState - gameState.answerList.length}問'
                                   : '残り：${gameState.leftTime}秒',
                               style: TextStyle(
                                 fontFeatures: [
@@ -291,8 +289,9 @@ class Game extends ConsumerWidget {
                                                 return;
                                               }
                                               gameNotifier.checkAnswer(quiz);
-                                              final lastIndex = quizLength - 1;
-                                              if (quizType ==
+                                              final lastIndex =
+                                                  quizSizeState - 1;
+                                              if (quizTypeState ==
                                                       QuizType.numQuizzes &&
                                                   gameState.index ==
                                                       lastIndex) {
@@ -350,7 +349,7 @@ class Game extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        gameState.answerList.length != quizLength
+                        gameState.answerList.length != quizSizeState
                             ? 'タイムアップ'
                             : '終了',
                         style: Theme.of(context).textTheme.headline6,

@@ -1,8 +1,9 @@
 import 'package:app_review/app_review.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
-import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
@@ -19,15 +20,10 @@ class GameResult extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final prefs = ref.watch(sharedPreferencesProvider);
-    final limit = prefs.getInt(Preferences.timeLimit.key) ??
-        Preferences.timeLimit.defaultValue;
+    final limit = ref.watch(quizTimeNotifierProvider);
     final timePerQuiz = (limit - leftTime) / answerList.length;
-    final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt(Preferences.quizType.key),
-      orElse: () => Preferences.quizType.defaultValue,
-    );
-    final quizLength = prefs.getInt(Preferences.numQuizzes.key) ??
-        Preferences.numQuizzes.defaultValue;
+    final quizType = ref.watch(quizTypeNotifierProvider);
+    final quizLength = ref.watch(quizSizeNotifierProvider);
     final numCorrects = answerList.where((ans) => ans.isCorrect).length;
     final viewPadding = MediaQuery.of(context).viewPadding;
 

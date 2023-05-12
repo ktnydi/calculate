@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:calculate/model/domains/answer/answer.dart';
-import 'package:calculate/enums/preference.dart';
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_state.dart';
-import 'package:calculate/providers.dart';
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,18 +13,12 @@ final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
 
 class GameNotifier extends StateNotifier<GameState> {
   GameNotifier(this._ref) : super(GameState()) {
-    final prefs = _ref.read(sharedPreferencesProvider);
-
     /// 問題形式を取得
-    final quizType = QuizType.values.firstWhere(
-      (value) => value.id == prefs.getInt(Preferences.quizType.key),
-      orElse: () => Preferences.quizType.defaultValue,
-    );
+    final quizType = _ref.read(quizTypeNotifierProvider);
     if (quizType == QuizType.numQuizzes) return;
 
     /// 問題形式が時間制限ならカウントを始める。
-    final leftTime = prefs.getInt(Preferences.timeLimit.key) ??
-        Preferences.timeLimit.defaultValue;
+    final leftTime = _ref.read(quizTimeNotifierProvider);
     state = state.copyWith(
       leftTime: leftTime,
     );
@@ -36,9 +29,7 @@ class GameNotifier extends StateNotifier<GameState> {
   Timer? timer;
 
   void beginCountDown() {
-    final prefs = _ref.read(sharedPreferencesProvider);
-    int leftTime = prefs.getInt(Preferences.timeLimit.key) ??
-        Preferences.timeLimit.defaultValue;
+    int leftTime = _ref.read(quizTimeNotifierProvider);
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       leftTime -= 1;
       if (leftTime == 0) {

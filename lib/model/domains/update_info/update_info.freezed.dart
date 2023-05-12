@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'update_info.dart';
 
@@ -10,34 +12,11 @@ part of 'update_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 UpdateInfo _$UpdateInfoFromJson(Map<String, dynamic> json) {
   return _UpdateInfo.fromJson(json);
 }
-
-/// @nodoc
-class _$UpdateInfoTearOff {
-  const _$UpdateInfoTearOff();
-
-  _UpdateInfo call(
-      {required String requiredVersion,
-      bool canCancel = false,
-      required DateTime enabledAt}) {
-    return _UpdateInfo(
-      requiredVersion: requiredVersion,
-      canCancel: canCancel,
-      enabledAt: enabledAt,
-    );
-  }
-
-  UpdateInfo fromJson(Map<String, Object> json) {
-    return UpdateInfo.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $UpdateInfo = _$UpdateInfoTearOff();
 
 /// @nodoc
 mixin _$UpdateInfo {
@@ -55,76 +34,81 @@ mixin _$UpdateInfo {
 abstract class $UpdateInfoCopyWith<$Res> {
   factory $UpdateInfoCopyWith(
           UpdateInfo value, $Res Function(UpdateInfo) then) =
-      _$UpdateInfoCopyWithImpl<$Res>;
+      _$UpdateInfoCopyWithImpl<$Res, UpdateInfo>;
+  @useResult
   $Res call({String requiredVersion, bool canCancel, DateTime enabledAt});
 }
 
 /// @nodoc
-class _$UpdateInfoCopyWithImpl<$Res> implements $UpdateInfoCopyWith<$Res> {
+class _$UpdateInfoCopyWithImpl<$Res, $Val extends UpdateInfo>
+    implements $UpdateInfoCopyWith<$Res> {
   _$UpdateInfoCopyWithImpl(this._value, this._then);
 
-  final UpdateInfo _value;
   // ignore: unused_field
-  final $Res Function(UpdateInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requiredVersion = freezed,
-    Object? canCancel = freezed,
-    Object? enabledAt = freezed,
+    Object? requiredVersion = null,
+    Object? canCancel = null,
+    Object? enabledAt = null,
   }) {
     return _then(_value.copyWith(
-      requiredVersion: requiredVersion == freezed
+      requiredVersion: null == requiredVersion
           ? _value.requiredVersion
           : requiredVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      canCancel: canCancel == freezed
+      canCancel: null == canCancel
           ? _value.canCancel
           : canCancel // ignore: cast_nullable_to_non_nullable
               as bool,
-      enabledAt: enabledAt == freezed
+      enabledAt: null == enabledAt
           ? _value.enabledAt
           : enabledAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$UpdateInfoCopyWith<$Res> implements $UpdateInfoCopyWith<$Res> {
-  factory _$UpdateInfoCopyWith(
-          _UpdateInfo value, $Res Function(_UpdateInfo) then) =
-      __$UpdateInfoCopyWithImpl<$Res>;
+abstract class _$$_UpdateInfoCopyWith<$Res>
+    implements $UpdateInfoCopyWith<$Res> {
+  factory _$$_UpdateInfoCopyWith(
+          _$_UpdateInfo value, $Res Function(_$_UpdateInfo) then) =
+      __$$_UpdateInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String requiredVersion, bool canCancel, DateTime enabledAt});
 }
 
 /// @nodoc
-class __$UpdateInfoCopyWithImpl<$Res> extends _$UpdateInfoCopyWithImpl<$Res>
-    implements _$UpdateInfoCopyWith<$Res> {
-  __$UpdateInfoCopyWithImpl(
-      _UpdateInfo _value, $Res Function(_UpdateInfo) _then)
-      : super(_value, (v) => _then(v as _UpdateInfo));
+class __$$_UpdateInfoCopyWithImpl<$Res>
+    extends _$UpdateInfoCopyWithImpl<$Res, _$_UpdateInfo>
+    implements _$$_UpdateInfoCopyWith<$Res> {
+  __$$_UpdateInfoCopyWithImpl(
+      _$_UpdateInfo _value, $Res Function(_$_UpdateInfo) _then)
+      : super(_value, _then);
 
-  @override
-  _UpdateInfo get _value => super._value as _UpdateInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requiredVersion = freezed,
-    Object? canCancel = freezed,
-    Object? enabledAt = freezed,
+    Object? requiredVersion = null,
+    Object? canCancel = null,
+    Object? enabledAt = null,
   }) {
-    return _then(_UpdateInfo(
-      requiredVersion: requiredVersion == freezed
+    return _then(_$_UpdateInfo(
+      requiredVersion: null == requiredVersion
           ? _value.requiredVersion
           : requiredVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      canCancel: canCancel == freezed
+      canCancel: null == canCancel
           ? _value.canCancel
           : canCancel // ignore: cast_nullable_to_non_nullable
               as bool,
-      enabledAt: enabledAt == freezed
+      enabledAt: null == enabledAt
           ? _value.enabledAt
           : enabledAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -141,12 +125,12 @@ class _$_UpdateInfo implements _UpdateInfo {
       required this.enabledAt});
 
   factory _$_UpdateInfo.fromJson(Map<String, dynamic> json) =>
-      _$_$_UpdateInfoFromJson(json);
+      _$$_UpdateInfoFromJson(json);
 
   @override
   final String requiredVersion;
-  @JsonKey(defaultValue: false)
   @override
+  @JsonKey()
   final bool canCancel;
   @override
   final DateTime enabledAt;
@@ -159,53 +143,52 @@ class _$_UpdateInfo implements _UpdateInfo {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UpdateInfo &&
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateInfo &&
             (identical(other.requiredVersion, requiredVersion) ||
-                const DeepCollectionEquality()
-                    .equals(other.requiredVersion, requiredVersion)) &&
+                other.requiredVersion == requiredVersion) &&
             (identical(other.canCancel, canCancel) ||
-                const DeepCollectionEquality()
-                    .equals(other.canCancel, canCancel)) &&
+                other.canCancel == canCancel) &&
             (identical(other.enabledAt, enabledAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.enabledAt, enabledAt)));
+                other.enabledAt == enabledAt));
   }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(requiredVersion) ^
-      const DeepCollectionEquality().hash(canCancel) ^
-      const DeepCollectionEquality().hash(enabledAt);
 
   @JsonKey(ignore: true)
   @override
-  _$UpdateInfoCopyWith<_UpdateInfo> get copyWith =>
-      __$UpdateInfoCopyWithImpl<_UpdateInfo>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, requiredVersion, canCancel, enabledAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateInfoCopyWith<_$_UpdateInfo> get copyWith =>
+      __$$_UpdateInfoCopyWithImpl<_$_UpdateInfo>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_UpdateInfoToJson(this);
+    return _$$_UpdateInfoToJson(
+      this,
+    );
   }
 }
 
 abstract class _UpdateInfo implements UpdateInfo {
   const factory _UpdateInfo(
-      {required String requiredVersion,
-      bool canCancel,
-      required DateTime enabledAt}) = _$_UpdateInfo;
+      {required final String requiredVersion,
+      final bool canCancel,
+      required final DateTime enabledAt}) = _$_UpdateInfo;
 
   factory _UpdateInfo.fromJson(Map<String, dynamic> json) =
       _$_UpdateInfo.fromJson;
 
   @override
-  String get requiredVersion => throw _privateConstructorUsedError;
+  String get requiredVersion;
   @override
-  bool get canCancel => throw _privateConstructorUsedError;
+  bool get canCancel;
   @override
-  DateTime get enabledAt => throw _privateConstructorUsedError;
+  DateTime get enabledAt;
   @override
   @JsonKey(ignore: true)
-  _$UpdateInfoCopyWith<_UpdateInfo> get copyWith =>
+  _$$_UpdateInfoCopyWith<_$_UpdateInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }

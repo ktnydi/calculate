@@ -2,7 +2,8 @@ import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
-import 'package:calculate/presentation/pages/setting/setting_notifier.dart';
+import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,14 +12,16 @@ class Setting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final flavor = ref.watch(flavorProvider);
-    final settingState = ref.watch(settingProvider);
-    final settingNotifier = ref.watch(settingProvider.notifier);
-    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
+    final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
     final keyboardLocationNotifier =
         ref.watch(keyboardLocationProvider.notifier);
-    final quizType = ref.watch(quizTypeProvider);
-    final quizTypeNotifier = ref.watch(quizTypeProvider.notifier);
+    final quizTypeState = ref.watch(quizTypeNotifierProvider);
+    final quizTypeNotifier = ref.watch(quizTypeNotifierProvider.notifier);
+    final quizTimeState = ref.watch(quizTimeNotifierProvider);
+    final quizTimeNotifier = ref.watch(quizTimeNotifierProvider.notifier);
+    final quizSizeState = ref.watch(quizSizeNotifierProvider);
+    final quizSizeNotifier = ref.watch(quizSizeNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -52,20 +55,19 @@ class Setting extends ConsumerWidget {
             tileColor: Colors.white,
             title: Text('問題形式'),
             trailing: CupertinoSlidingSegmentedControl<QuizType>(
-              groupValue: quizType,
+              groupValue: quizTypeState,
               children: {
                 QuizType.numQuizzes: Text(QuizType.numQuizzes.name),
                 QuizType.timeLimit: Text(QuizType.timeLimit.name),
               },
               onValueChanged: (value) async {
                 if (value == null) return;
-                await settingNotifier.updateQuizType(value);
-                quizTypeNotifier.state = value;
+                quizTypeNotifier.change(value);
               },
             ),
           ),
           const Divider(height: 1),
-          if (settingState.quizType == QuizType.numQuizzes)
+          if (quizTypeState == QuizType.numQuizzes)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -73,57 +75,57 @@ class Setting extends ConsumerWidget {
                 if (flavor == Flavor.development)
                   RadioListTile<int>(
                     value: 2,
-                    groupValue: settingState.quizLength,
-                    onChanged: (value) async {
+                    groupValue: quizSizeState,
+                    onChanged: (value) {
                       if (value == null) return;
-                      await settingNotifier.updateQuizLength(value);
+                      quizSizeNotifier.change(value);
                     },
                     title: Text('2問（開発環境）'),
                     tileColor: Colors.white,
                   ),
                 RadioListTile<int>(
                   value: 10,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
+                  groupValue: quizSizeState,
+                  onChanged: (value) {
                     if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
+                    quizSizeNotifier.change(value);
                   },
                   title: Text('10問'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
                   value: 20,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
+                  groupValue: quizSizeState,
+                  onChanged: (value) {
                     if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
+                    quizSizeNotifier.change(value);
                   },
                   title: Text('20問'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
                   value: 30,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
+                  groupValue: quizSizeState,
+                  onChanged: (value) {
                     if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
+                    quizSizeNotifier.change(value);
                   },
                   title: Text('30問'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
                   value: 40,
-                  groupValue: settingState.quizLength,
-                  onChanged: (value) async {
+                  groupValue: quizSizeState,
+                  onChanged: (value) {
                     if (value == null) return;
-                    await settingNotifier.updateQuizLength(value);
+                    quizSizeNotifier.change(value);
                   },
                   title: Text('40問'),
                   tileColor: Colors.white,
                 ),
               ],
             ),
-          if (settingState.quizType == QuizType.timeLimit)
+          if (quizTypeState == QuizType.timeLimit)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -131,50 +133,50 @@ class Setting extends ConsumerWidget {
                 if (flavor == Flavor.development)
                   RadioListTile<int>(
                     value: 10,
-                    groupValue: settingState.limit,
+                    groupValue: quizTimeState,
                     onChanged: (value) async {
                       if (value == null) return;
-                      await settingNotifier.updateLimit(value);
+                      quizTimeNotifier.change(time: value);
                     },
                     title: Text('10秒（開発環境）'),
                     tileColor: Colors.white,
                   ),
                 RadioListTile<int>(
                   value: 30,
-                  groupValue: settingState.limit,
+                  groupValue: quizTimeState,
                   onChanged: (value) async {
                     if (value == null) return;
-                    await settingNotifier.updateLimit(value);
+                    quizTimeNotifier.change(time: value);
                   },
                   title: Text('30秒'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
                   value: 60,
-                  groupValue: settingState.limit,
+                  groupValue: quizTimeState,
                   onChanged: (value) async {
                     if (value == null) return;
-                    await settingNotifier.updateLimit(value);
+                    quizTimeNotifier.change(time: value);
                   },
                   title: Text('60秒'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
                   value: 120,
-                  groupValue: settingState.limit,
+                  groupValue: quizTimeState,
                   onChanged: (value) async {
                     if (value == null) return;
-                    await settingNotifier.updateLimit(value);
+                    quizTimeNotifier.change(time: value);
                   },
                   title: Text('120秒'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
                   value: 180,
-                  groupValue: settingState.limit,
+                  groupValue: quizTimeState,
                   onChanged: (value) async {
                     if (value == null) return;
-                    await settingNotifier.updateLimit(value);
+                    quizTimeNotifier.change(time: value);
                   },
                   title: Text('180秒'),
                   tileColor: Colors.white,
@@ -195,8 +197,7 @@ class Setting extends ConsumerWidget {
               },
               onValueChanged: (value) async {
                 if (value == null) return;
-                await settingNotifier.updateKeyboardLocation(value.id);
-                keyboardLocationNotifier.state = value;
+                keyboardLocationNotifier.change(value);
               },
             ),
             tileColor: Colors.white,
@@ -211,10 +212,9 @@ class Setting extends ConsumerWidget {
 class _QuizCategoryModeSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settingNotifier = ref.watch(settingProvider.notifier);
-    final quizCategoryMode = ref.watch(quizCategoryModeProvider);
+    final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
     final quizCategoryModeNotifier =
-        ref.watch(quizCategoryModeProvider.notifier);
+        ref.watch(quizCategoryModeNotifierProvider.notifier);
 
     return SafeArea(
       child: Padding(
@@ -225,11 +225,10 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
             (value) {
               return RadioListTile<QuizCategoryMode>(
                 value: value,
-                groupValue: quizCategoryMode,
+                groupValue: quizCategoryModeState,
                 onChanged: (value) async {
                   if (value == null) return;
-                  settingNotifier.updateQuizCategoryMode(value);
-                  quizCategoryModeNotifier.state = value;
+                  quizCategoryModeNotifier.change(value);
                 },
                 title: Text('${value.name}'),
                 tileColor: Colors.white,
