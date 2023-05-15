@@ -177,7 +177,7 @@ class Game extends ConsumerWidget {
                           ),
                           child: Center(
                             child: Text(
-                              '${gameState.answer.join()}',
+                              gameState.answer,
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.headline6,
                             ),

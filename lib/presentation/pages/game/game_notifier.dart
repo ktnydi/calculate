@@ -49,25 +49,19 @@ class GameNotifier extends StateNotifier<GameState> {
   void fillInAnswer(int figure) {
     if (state.answer.length >= 10) return;
 
-    final isOnlyZero =
-        figure == 0 && state.answer.contains(0) && state.answer.length == 1;
-    if (isOnlyZero) return;
+    if (state.answer == '0') {
+      return;
+    }
 
-    final includeZero = state.answer.contains(0) && state.answer.length == 1;
-
-    state = state.copyWith(
-      answer: [if (!includeZero) ...state.answer, figure],
-    );
+    state = state.copyWith(answer: state.answer + '$figure');
   }
 
   void clearAnswer() {
-    state = state.copyWith(
-      answer: [],
-    );
+    state = state.copyWith(answer: '');
   }
 
   void checkAnswer(Quiz quiz) {
-    final userAnswer = state.answer.join();
+    final userAnswer = state.answer;
     final correctAnswer = quiz.correctAnswer;
     final isCorrect = userAnswer == '$correctAnswer';
     final answer = Answer(

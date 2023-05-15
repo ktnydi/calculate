@@ -11,7 +11,7 @@ class GameState with _$GameState {
   const factory GameState({
     @Default([]) List<Quiz> figuresList,
     @Default(0) int index,
-    @Default([]) List<int> answer,
+    @Default('') String answer,
     @Default([]) List<Answer> answerList,
     @Default(180) int leftTime,
     @Default(false) bool isFinished,

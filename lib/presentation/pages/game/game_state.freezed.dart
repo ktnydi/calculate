@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$GameState {
   List<Quiz> get figuresList => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
-  List<int> get answer => throw _privateConstructorUsedError;
+  String get answer => throw _privateConstructorUsedError;
   List<Answer> get answerList => throw _privateConstructorUsedError;
   int get leftTime => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $GameStateCopyWith<$Res> {
   $Res call(
       {List<Quiz> figuresList,
       int index,
-      List<int> answer,
+      String answer,
       List<Answer> answerList,
       int leftTime,
       bool isFinished});
@@ -74,7 +74,7 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
       answer: null == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as String,
       answerList: null == answerList
           ? _value.answerList
           : answerList // ignore: cast_nullable_to_non_nullable
@@ -101,7 +101,7 @@ abstract class _$$_GameStateCopyWith<$Res> implements $GameStateCopyWith<$Res> {
   $Res call(
       {List<Quiz> figuresList,
       int index,
-      List<int> answer,
+      String answer,
       List<Answer> answerList,
       int leftTime,
       bool isFinished});
@@ -135,9 +135,9 @@ class __$$_GameStateCopyWithImpl<$Res>
           : index // ignore: cast_nullable_to_non_nullable
               as int,
       answer: null == answer
-          ? _value._answer
+          ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as String,
       answerList: null == answerList
           ? _value._answerList
           : answerList // ignore: cast_nullable_to_non_nullable
@@ -160,12 +160,11 @@ class _$_GameState extends _GameState {
   const _$_GameState(
       {final List<Quiz> figuresList = const [],
       this.index = 0,
-      final List<int> answer = const [],
+      this.answer = '',
       final List<Answer> answerList = const [],
       this.leftTime = 180,
       this.isFinished = false})
       : _figuresList = figuresList,
-        _answer = answer,
         _answerList = answerList,
         super._();
 
@@ -181,15 +180,9 @@ class _$_GameState extends _GameState {
   @override
   @JsonKey()
   final int index;
-  final List<int> _answer;
   @override
   @JsonKey()
-  List<int> get answer {
-    if (_answer is EqualUnmodifiableListView) return _answer;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_answer);
-  }
-
+  final String answer;
   final List<Answer> _answerList;
   @override
   @JsonKey()
@@ -219,7 +212,7 @@ class _$_GameState extends _GameState {
             const DeepCollectionEquality()
                 .equals(other._figuresList, _figuresList) &&
             (identical(other.index, index) || other.index == index) &&
-            const DeepCollectionEquality().equals(other._answer, _answer) &&
+            (identical(other.answer, answer) || other.answer == answer) &&
             const DeepCollectionEquality()
                 .equals(other._answerList, _answerList) &&
             (identical(other.leftTime, leftTime) ||
@@ -233,7 +226,7 @@ class _$_GameState extends _GameState {
       runtimeType,
       const DeepCollectionEquality().hash(_figuresList),
       index,
-      const DeepCollectionEquality().hash(_answer),
+      answer,
       const DeepCollectionEquality().hash(_answerList),
       leftTime,
       isFinished);
@@ -249,7 +242,7 @@ abstract class _GameState extends GameState {
   const factory _GameState(
       {final List<Quiz> figuresList,
       final int index,
-      final List<int> answer,
+      final String answer,
       final List<Answer> answerList,
       final int leftTime,
       final bool isFinished}) = _$_GameState;
@@ -260,7 +253,7 @@ abstract class _GameState extends GameState {
   @override
   int get index;
   @override
-  List<int> get answer;
+  String get answer;
   @override
   List<Answer> get answerList;
   @override
