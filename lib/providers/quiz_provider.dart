@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
@@ -11,14 +9,9 @@ final quizProvider = Provider<Quiz>(
     final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
 
     QuizCategory quizCategory;
-
     switch (quizCategoryModeState) {
       case QuizCategoryMode.random:
-        final random = Random();
-        quizCategory = QuizCategory.values.firstWhere(
-          (value) => value.index == random.nextInt(5),
-          orElse: () => QuizCategory.additional,
-        );
+        quizCategory = ([...QuizCategory.values]..shuffle()).first;
         break;
       case QuizCategoryMode.add:
         quizCategory = QuizCategory.additional;
