@@ -25,6 +25,26 @@ class Game extends ConsumerWidget {
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
 
+    ref.listen(
+      gameProvider.select((value) => int.tryParse(value.answer)),
+      (previous, next) {
+        if (next == null) return;
+        if (next != quiz.correctAnswer) return;
+
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          gameNotifier.checkAnswer(quiz);
+          final lastIndex = quizSizeState - 1;
+          if (quizTypeState == QuizType.numQuizzes &&
+              gameState.index == lastIndex) {
+            return gameNotifier.finishQuiz();
+          }
+          ref.invalidate(quizProvider);
+          gameNotifier.clearAnswer();
+          gameNotifier.nextQuiz();
+        });
+      },
+    );
+
     return Stack(
       children: [
         Scaffold(
