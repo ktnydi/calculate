@@ -361,21 +361,12 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
 
                                     if (index == 11) {
                                       return FigureButton(
-                                        child: Text('OK'),
+                                        child: Text('BS'),
                                         onPressed: () {
                                           if (gameState.answer.isEmpty) {
                                             return;
                                           }
-                                          gameNotifier.checkAnswer(quiz);
-                                          final lastIndex = quizSizeState - 1;
-                                          if (quizTypeState ==
-                                                  QuizType.numQuizzes &&
-                                              gameState.index == lastIndex) {
-                                            return gameNotifier.finishQuiz();
-                                          }
-                                          ref.invalidate(quizProvider);
-                                          gameNotifier.clearAnswer();
-                                          gameNotifier.nextQuiz();
+                                          gameNotifier.backSpace();
                                         },
                                       );
                                     }

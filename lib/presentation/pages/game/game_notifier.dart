@@ -60,6 +60,12 @@ class GameNotifier extends StateNotifier<GameState> {
     state = state.copyWith(answer: '');
   }
 
+  void backSpace() {
+    state = state.copyWith(
+      answer: state.answer.substring(0, state.answer.length - 1),
+    );
+  }
+
   void checkAnswer(Quiz quiz) {
     final userAnswer = state.answer;
     final correctAnswer = quiz.correctAnswer;
