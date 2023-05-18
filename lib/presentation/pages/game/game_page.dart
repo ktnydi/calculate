@@ -13,9 +13,33 @@ import 'package:calculate/presentation/widgets/figure_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Game extends ConsumerWidget {
+class Game extends ConsumerStatefulWidget {
+  const Game({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _GameState();
+}
+
+class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
+  late final AnimationController quizAnimation;
+
+  @override
+  void initState() {
+    quizAnimation = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+    quizAnimation.addListener(() {
+      if (quizAnimation.isCompleted) {
+        quizAnimation.reverse();
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final quiz = ref.watch(quizProvider);
     final gameNotifier = ref.watch(gameProvider.notifier);
     final gameState = ref.watch(gameProvider);
@@ -24,6 +48,16 @@ class Game extends ConsumerWidget {
     final quizTimeState = ref.watch(quizTimeNotifierProvider);
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
+
+    ref.listen(
+      gameProvider.select((value) => int.tryParse(value.answer)),
+      (previous, next) {
+        if (next == null) return;
+        if (next != quiz.correctAnswer) return;
+        if (gameState.index == quizSizeState - 1) return;
+        quizAnimation.forward();
+      },
+    );
 
     ref.listen(
       gameProvider.select((value) => int.tryParse(value.answer)),
@@ -164,48 +198,56 @@ class Game extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      quiz.title,
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300,
-                        fontFeatures: [
-                          FontFeature.tabularFigures(),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                child: Center(
+                  child: SlideTransition(
+                    position: Tween(
+                      begin: Offset.zero,
+                      end: Offset(0, 0.05),
+                    ).animate(quizAnimation),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '=',
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 180,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Theme.of(context).dividerColor,
-                            ),
+                          quiz.title,
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w300,
+                            fontFeatures: [
+                              FontFeature.tabularFigures(),
+                            ],
                           ),
-                          child: Center(
-                            child: Text(
-                              gameState.answer,
-                              textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '=',
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                          ),
+                            const SizedBox(width: 8),
+                            Container(
+                              width: 180,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: Theme.of(context).dividerColor,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  gameState.answer,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline6,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
               const Divider(height: 1, thickness: 1),
