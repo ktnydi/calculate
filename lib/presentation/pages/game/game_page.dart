@@ -39,6 +39,12 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    quizAnimation.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final quiz = ref.watch(quizProvider);
     final gameNotifier = ref.watch(gameProvider.notifier);
@@ -76,6 +82,32 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
           gameNotifier.clearAnswer();
           gameNotifier.nextQuiz();
         });
+      },
+    );
+
+    ref.listen(
+      gameProvider,
+      (previous, next) {
+        if (next.leftTime != 0 && !next.isFinished) return;
+
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 500),
+            pageBuilder: (context, animation, _) {
+              return GameResult(
+                gameState.leftTime,
+                gameState.answerList,
+              );
+            },
+            transitionsBuilder: (context, animation, _, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ),
+        );
       },
     );
 
@@ -373,53 +405,6 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
             ],
           ),
         ),
-        if (gameState.leftTime == 0 || gameState.isFinished)
-          Container(
-            color: Colors.black26,
-            child: Center(
-              child: Material(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Container(
-                  width: 300,
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        gameState.answerList.length != quizSizeState
-                            ? 'タイムアップ'
-                            : '終了',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        child: Text('結果を見る'),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(22),
-                          ),
-                          minimumSize: Size(120, 44),
-                        ),
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => GameResult(
-                                gameState.leftTime,
-                                gameState.answerList,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
       ],
     );
   }
