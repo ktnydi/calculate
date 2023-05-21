@@ -16,6 +16,18 @@
             ]
         },
         {
+            "name": "ReleaseDevelopment",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--dart-define=FLAVOR",
+                "development",
+                "--flavor",
+                "development"
+            ]
+        },
+        {
             "name": "ReleaseProduction",
             "request": "launch",
             "type": "dart",
