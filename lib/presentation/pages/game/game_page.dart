@@ -96,8 +96,8 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
             transitionDuration: const Duration(milliseconds: 500),
             pageBuilder: (context, animation, _) {
               return GameResult(
-                gameState.leftTime,
-                gameState.answerList,
+                next.leftTime,
+                next.answerList,
               );
             },
             transitionsBuilder: (context, animation, _, child) {
