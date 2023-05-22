@@ -35,43 +35,12 @@ class GameResult extends ConsumerWidget {
           Expanded(
             child: Stack(
               children: [
-                ListView(
-                  padding: const EdgeInsets.all(16).copyWith(
-                    bottom: 84 + viewPadding.bottom,
-                  ),
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 32,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Theme.of(context).dividerColor,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '設定',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            quizType == QuizType.numQuizzes
-                                ? '問題数・全${quizLength}問'
-                                : '時間制限・$limit秒',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ],
-                      ),
+                if (answerList.isNotEmpty)
+                  ListView(
+                    padding: const EdgeInsets.all(16).copyWith(
+                      bottom: 84 + viewPadding.bottom,
                     ),
-                    if (quizType == QuizType.timeLimit)
-                      const SizedBox(height: 16),
-                    if (quizType == QuizType.timeLimit)
+                    children: [
                       Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 16,
@@ -88,121 +57,160 @@ class GameResult extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '時間／問',
+                              '設定',
                               style: Theme.of(context).textTheme.headline6,
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              '${timePerQuiz.toStringAsFixed(2)}秒',
+                              quizType == QuizType.numQuizzes
+                                  ? '問題数・全${quizLength}問'
+                                  : '時間制限・$limit秒',
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ],
                         ),
                       ),
-                    const SizedBox(height: 16),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 32,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Theme.of(context).dividerColor,
+                      if (quizType == QuizType.timeLimit)
+                        const SizedBox(height: 16),
+                      if (quizType == QuizType.timeLimit)
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 32,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: Theme.of(context).dividerColor,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '時間／問',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '${timePerQuiz.toStringAsFixed(2)}秒',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                            ],
+                          ),
+                        ),
+                      const SizedBox(height: 16),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 32,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Theme.of(context).dividerColor,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '正答率',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${(numCorrects * 100 / answerList.length).toStringAsPrecision(3)}%',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
-                      child: Row(
+                      const SizedBox(height: 32),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '正答率',
+                            'あなたの回答',
                             style: Theme.of(context).textTheme.headline6,
                           ),
-                          const SizedBox(height: 4),
                           Text(
-                            '${(numCorrects * 100 / answerList.length).toStringAsPrecision(3)}%',
-                            style: Theme.of(context).textTheme.headline6,
+                            '（回答数：${answerList.length}）',
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 32),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'あなたの回答',
-                          style: Theme.of(context).textTheme.headline6,
+                      const SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Theme.of(context).dividerColor,
+                          ),
                         ),
-                        Text(
-                          '（回答数：${answerList.length}）',
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Theme.of(context).dividerColor,
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: DataTable(
-                        columns: <DataColumn>[
-                          DataColumn(
-                            label: Text('No.'),
-                          ),
-                          DataColumn(
-                            label: Text('問題'),
-                          ),
-                          DataColumn(
-                            label: Text('回答'),
-                          ),
-                          DataColumn(
-                            label: Text('判定'),
-                          ),
-                        ],
-                        rows: <DataRow>[
-                          ...List.generate(
-                            answerList.length,
-                            (index) {
-                              final answer = answerList.elementAt(index);
-                              final quiz = answer.quiz;
-                              return DataRow(
-                                cells: <DataCell>[
-                                  DataCell(
-                                    Text('${index + 1}'),
-                                  ),
-                                  DataCell(
-                                    Text('${quiz.title}'),
-                                  ),
-                                  DataCell(
-                                    Text('${answer.answer}'),
-                                  ),
-                                  DataCell(
-                                    Icon(
-                                      answer.isCorrect
-                                          ? Icons.circle_outlined
-                                          : Icons.close,
+                        clipBehavior: Clip.antiAlias,
+                        child: DataTable(
+                          columns: <DataColumn>[
+                            DataColumn(
+                              label: Text('No.'),
+                            ),
+                            DataColumn(
+                              label: Text('問題'),
+                            ),
+                            DataColumn(
+                              label: Text('回答'),
+                            ),
+                            DataColumn(
+                              label: Text('判定'),
+                            ),
+                          ],
+                          rows: <DataRow>[
+                            ...List.generate(
+                              answerList.length,
+                              (index) {
+                                final answer = answerList.elementAt(index);
+                                final quiz = answer.quiz;
+                                return DataRow(
+                                  cells: <DataCell>[
+                                    DataCell(
+                                      Text('${index + 1}'),
                                     ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ],
+                                    DataCell(
+                                      Text('${quiz.title}'),
+                                    ),
+                                    DataCell(
+                                      Text('${answer.answer}'),
+                                    ),
+                                    DataCell(
+                                      Icon(
+                                        answer.isCorrect
+                                            ? Icons.circle_outlined
+                                            : Icons.close,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '※未回答の回答は表示されません。',
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    ],
+                  )
+                else
+                  Center(
+                    child: Text(
+                      '回答しないと結果は表示されません。',
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '※未回答の回答は表示されません。',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  ],
-                ),
+                  ),
                 Positioned(
                   bottom: 16,
                   right: 0,
