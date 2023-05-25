@@ -288,12 +288,13 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
                 child: Stack(
                   alignment: Alignment.centerLeft,
                   children: [
-                    Container(
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
                       width: quizTypeState == QuizType.numQuizzes
                           ? MediaQuery.of(context).size.width *
                               (gameState.answerList.length / quizSizeState)
                           : MediaQuery.of(context).size.width *
-                              (gameState.leftTime / quizTimeState),
+                              (1 - gameState.leftTime / quizTimeState),
                       height: 30,
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
