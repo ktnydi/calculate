@@ -24,6 +24,7 @@ dependencies:
   google_mobile_ads: ^2.3.0
   app_tracking_transparency: ^2.0.1
   adaptive_dialog: ^1.8.2
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

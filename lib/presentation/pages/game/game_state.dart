@@ -13,7 +13,7 @@ class GameState with _$GameState {
     @Default(0) int index,
     @Default('') String answer,
     @Default([]) List<Answer> answerList,
-    @Default(180) int leftTime,
+    @Default(0) int time,
     @Default(false) bool isFinished,
   }) = _GameState;
 

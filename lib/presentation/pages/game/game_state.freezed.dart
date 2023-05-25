@@ -20,7 +20,7 @@ mixin _$GameState {
   int get index => throw _privateConstructorUsedError;
   String get answer => throw _privateConstructorUsedError;
   List<Answer> get answerList => throw _privateConstructorUsedError;
-  int get leftTime => throw _privateConstructorUsedError;
+  int get time => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $GameStateCopyWith<$Res> {
       int index,
       String answer,
       List<Answer> answerList,
-      int leftTime,
+      int time,
       bool isFinished});
 }
 
@@ -59,7 +59,7 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
     Object? index = null,
     Object? answer = null,
     Object? answerList = null,
-    Object? leftTime = null,
+    Object? time = null,
     Object? isFinished = null,
   }) {
     return _then(_value.copyWith(
@@ -79,9 +79,9 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
           ? _value.answerList
           : answerList // ignore: cast_nullable_to_non_nullable
               as List<Answer>,
-      leftTime: null == leftTime
-          ? _value.leftTime
-          : leftTime // ignore: cast_nullable_to_non_nullable
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
               as int,
       isFinished: null == isFinished
           ? _value.isFinished
@@ -103,7 +103,7 @@ abstract class _$$_GameStateCopyWith<$Res> implements $GameStateCopyWith<$Res> {
       int index,
       String answer,
       List<Answer> answerList,
-      int leftTime,
+      int time,
       bool isFinished});
 }
 
@@ -122,7 +122,7 @@ class __$$_GameStateCopyWithImpl<$Res>
     Object? index = null,
     Object? answer = null,
     Object? answerList = null,
-    Object? leftTime = null,
+    Object? time = null,
     Object? isFinished = null,
   }) {
     return _then(_$_GameState(
@@ -142,9 +142,9 @@ class __$$_GameStateCopyWithImpl<$Res>
           ? _value._answerList
           : answerList // ignore: cast_nullable_to_non_nullable
               as List<Answer>,
-      leftTime: null == leftTime
-          ? _value.leftTime
-          : leftTime // ignore: cast_nullable_to_non_nullable
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
               as int,
       isFinished: null == isFinished
           ? _value.isFinished
@@ -162,7 +162,7 @@ class _$_GameState extends _GameState {
       this.index = 0,
       this.answer = '',
       final List<Answer> answerList = const [],
-      this.leftTime = 180,
+      this.time = 0,
       this.isFinished = false})
       : _figuresList = figuresList,
         _answerList = answerList,
@@ -194,14 +194,14 @@ class _$_GameState extends _GameState {
 
   @override
   @JsonKey()
-  final int leftTime;
+  final int time;
   @override
   @JsonKey()
   final bool isFinished;
 
   @override
   String toString() {
-    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, answerList: $answerList, leftTime: $leftTime, isFinished: $isFinished)';
+    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, answerList: $answerList, time: $time, isFinished: $isFinished)';
   }
 
   @override
@@ -215,8 +215,7 @@ class _$_GameState extends _GameState {
             (identical(other.answer, answer) || other.answer == answer) &&
             const DeepCollectionEquality()
                 .equals(other._answerList, _answerList) &&
-            (identical(other.leftTime, leftTime) ||
-                other.leftTime == leftTime) &&
+            (identical(other.time, time) || other.time == time) &&
             (identical(other.isFinished, isFinished) ||
                 other.isFinished == isFinished));
   }
@@ -228,7 +227,7 @@ class _$_GameState extends _GameState {
       index,
       answer,
       const DeepCollectionEquality().hash(_answerList),
-      leftTime,
+      time,
       isFinished);
 
   @JsonKey(ignore: true)
@@ -244,7 +243,7 @@ abstract class _GameState extends GameState {
       final int index,
       final String answer,
       final List<Answer> answerList,
-      final int leftTime,
+      final int time,
       final bool isFinished}) = _$_GameState;
   const _GameState._() : super._();
 
@@ -257,7 +256,7 @@ abstract class _GameState extends GameState {
   @override
   List<Answer> get answerList;
   @override
-  int get leftTime;
+  int get time;
   @override
   bool get isFinished;
   @override

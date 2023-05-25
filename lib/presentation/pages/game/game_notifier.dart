@@ -18,10 +18,6 @@ class GameNotifier extends StateNotifier<GameState> {
     if (quizType == QuizType.numQuizzes) return;
 
     /// 問題形式が時間制限ならカウントを始める。
-    final leftTime = _ref.read(quizTimeNotifierProvider);
-    state = state.copyWith(
-      leftTime: leftTime,
-    );
     beginCountDown();
   }
 
@@ -29,15 +25,16 @@ class GameNotifier extends StateNotifier<GameState> {
   Timer? timer;
 
   void beginCountDown() {
-    int leftTime = _ref.read(quizTimeNotifierProvider);
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      leftTime -= 1;
-      if (leftTime == 0) {
+    final leftTime = _ref.read(quizTimeNotifierProvider) * 1000;
+
+    /// 0.01秒単位で計測
+    timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
+      if (state.time + 10 == leftTime) {
         timer.cancel();
       }
 
       state = state.copyWith(
-        leftTime: leftTime,
+        time: state.time + 10,
       );
     });
   }
