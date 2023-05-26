@@ -23,7 +23,6 @@ class GameResult extends ConsumerWidget {
     final timePerQuiz = (limit - leftTime) / answerList.length;
     final quizType = ref.watch(quizTypeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
-    final numCorrects = answerList.where((ans) => ans.isCorrect).length;
     final viewPadding = MediaQuery.of(context).viewPadding;
 
     return Scaffold(
@@ -102,47 +101,6 @@ class GameResult extends ConsumerWidget {
                         ),
                       const SizedBox(height: 16),
                       Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 32,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: Theme.of(context).dividerColor,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '正答率',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '${(numCorrects * 100 / answerList.length).toStringAsPrecision(3)}%',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'あなたの回答',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          Text(
-                            '（回答数：${answerList.length}）',
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
@@ -159,12 +117,6 @@ class GameResult extends ConsumerWidget {
                             DataColumn(
                               label: Text('問題'),
                             ),
-                            DataColumn(
-                              label: Text('回答'),
-                            ),
-                            DataColumn(
-                              label: Text('判定'),
-                            ),
                           ],
                           rows: <DataRow>[
                             ...List.generate(
@@ -175,19 +127,11 @@ class GameResult extends ConsumerWidget {
                                 return DataRow(
                                   cells: <DataCell>[
                                     DataCell(
-                                      Text('${index + 1}'),
+                                      Text('(${index + 1})'),
                                     ),
                                     DataCell(
-                                      Text('${quiz.title}'),
-                                    ),
-                                    DataCell(
-                                      Text('${answer.answer}'),
-                                    ),
-                                    DataCell(
-                                      Icon(
-                                        answer.isCorrect
-                                            ? Icons.circle_outlined
-                                            : Icons.close,
+                                      Text(
+                                        '${quiz.title} = ${quiz.correctAnswer}',
                                       ),
                                     ),
                                   ],
@@ -196,11 +140,6 @@ class GameResult extends ConsumerWidget {
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '※未回答の回答は表示されません。',
-                        style: Theme.of(context).textTheme.caption,
                       ),
                     ],
                   )

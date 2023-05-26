@@ -19,7 +19,7 @@ class Quiz with _$Quiz {
       case QuizCategory.additional:
         return '${this.figures.first} + ${this.figures.last}';
       case QuizCategory.subtraction:
-        return '${this.figures.first} - ${this.figures.last}';
+        return '${this.figures.first} – ${this.figures.last}';
       case QuizCategory.multiplication:
         return '${this.figures.first} × ${this.figures.last}';
       case QuizCategory.division:
