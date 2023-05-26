@@ -1,4 +1,5 @@
 import 'package:calculate/analytics.dart';
+import 'package:calculate/extensions/num.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
@@ -20,10 +21,19 @@ class GameResult extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final limit = ref.watch(quizTimeNotifierProvider);
-    final timePerQuiz = (limit - leftTime) / answerList.length;
     final quizType = ref.watch(quizTypeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
     final viewPadding = MediaQuery.of(context).viewPadding;
+
+    final avgTime = () {
+      if (answerList.isEmpty) {
+        return null;
+      }
+
+      final times = answerList.map((e) => e.time.inMilliseconds);
+      final sumTimes = times.reduce((value, element) => value + element);
+      return Duration(milliseconds: (sumTimes / answerList.length).truncate());
+    }();
 
     return Scaffold(
       appBar: AppBar(
@@ -69,36 +79,34 @@ class GameResult extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      if (quizType == QuizType.timeLimit)
-                        const SizedBox(height: 16),
-                      if (quizType == QuizType.timeLimit)
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 32,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Theme.of(context).dividerColor,
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '時間／問',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '${timePerQuiz.toStringAsFixed(2)}秒',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                            ],
+                      const SizedBox(height: 16),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 32,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Theme.of(context).dividerColor,
                           ),
                         ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '時間／問',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${(avgTime!.inMilliseconds / 1000).digit()}秒',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: 16),
                       Container(
                         decoration: BoxDecoration(
@@ -117,6 +125,9 @@ class GameResult extends ConsumerWidget {
                             DataColumn(
                               label: Text('問題'),
                             ),
+                            DataColumn(
+                              label: Text('時間'),
+                            ),
                           ],
                           rows: <DataRow>[
                             ...List.generate(
@@ -132,6 +143,11 @@ class GameResult extends ConsumerWidget {
                                     DataCell(
                                       Text(
                                         '${quiz.title} = ${quiz.correctAnswer}',
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Text(
+                                        '${(answer.time.inMilliseconds / 1000).digit()}秒',
                                       ),
                                     ),
                                   ],

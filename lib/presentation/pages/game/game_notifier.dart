@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:calculate/model/domains/answer/answer.dart';
-import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_state.dart';
 import 'package:calculate/model/domains/quiz/quiz.dart';
@@ -13,11 +12,6 @@ final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
 
 class GameNotifier extends StateNotifier<GameState> {
   GameNotifier(this._ref) : super(GameState()) {
-    /// 問題形式を取得
-    final quizType = _ref.read(quizTypeNotifierProvider);
-    if (quizType == QuizType.numQuizzes) return;
-
-    /// 問題形式が時間制限ならカウントを始める。
     beginCountDown();
   }
 
@@ -67,10 +61,22 @@ class GameNotifier extends StateNotifier<GameState> {
     final userAnswer = state.answer;
     final correctAnswer = quiz.correctAnswer;
     final isCorrect = userAnswer == '$correctAnswer';
+
+    final time = () {
+      if (state.answerList.isEmpty) {
+        return Duration(milliseconds: state.time);
+      }
+
+      final times = state.answerList.map((e) => e.time.inMilliseconds);
+      final sumTimes = times.reduce((value, element) => value + element);
+      return Duration(milliseconds: state.time - sumTimes);
+    }();
+
     final answer = Answer(
       quiz: quiz,
       answer: userAnswer,
       isCorrect: isCorrect,
+      time: time,
     );
     state = state.copyWith(
       answerList: [...state.answerList, answer],
@@ -82,6 +88,7 @@ class GameNotifier extends StateNotifier<GameState> {
   }
 
   void finishQuiz() {
+    endCountDown();
     state = state.copyWith(isFinished: true);
   }
 
