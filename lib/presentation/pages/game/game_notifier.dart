@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_state.dart';
@@ -19,17 +20,18 @@ class GameNotifier extends StateNotifier<GameState> {
   Timer? timer;
 
   void beginCountDown() {
+    final quizType = _ref.read(quizTypeNotifierProvider);
     final leftTime = _ref.read(quizTimeNotifierProvider) * 1000;
 
     /// 0.01秒単位で計測
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
-      if (state.time + 10 == leftTime) {
-        timer.cancel();
-      }
-
       state = state.copyWith(
         time: state.time + 10,
       );
+
+      if (quizType == QuizType.timeLimit && state.time + 10 == leftTime) {
+        finishQuiz();
+      }
     });
   }
 

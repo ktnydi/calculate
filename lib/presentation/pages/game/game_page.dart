@@ -89,7 +89,7 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
     ref.listen(
       gameProvider,
       (previous, next) {
-        if (next.time != quizTimeState && !next.isFinished) return;
+        if (!next.isFinished) return;
 
         Navigator.pushReplacement(
           context,
