@@ -2,20 +2,22 @@ import 'dart:convert';
 
 import 'package:calculate/model/domains/update_info/update_info.dart';
 import 'package:calculate/enums/update_request_type.dart';
-import 'package:calculate/providers.dart';
+import 'package:calculate/model/repositories/remote_config_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info/package_info.dart';
 import 'package:version/version.dart';
 
 final updateRequestProvider = FutureProvider<UpdateRequestType>(
   (ref) async {
-    final remoteConfig = ref.watch(remoteConfigProvider);
-    await remoteConfig.fetchAndActivate();
+    final repository = ref.watch(remoteConfigRepositoryProvider);
+    await repository.fetchAndActivate();
     final packageInfo = await PackageInfo.fromPlatform();
-    final updateInfoJson = remoteConfig.getString('update_info');
+    final updateInfoJson = repository.getString(RemoteConfigKey.updateInfo);
+
     if (updateInfoJson.isEmpty) {
       return UpdateRequestType.not;
     }
+
     final map = json.decode(updateInfoJson) as Map<String, Object?>;
     final updateInfo = UpdateInfo.fromJson(map);
     final enabledAt = updateInfo.enabledAt;
