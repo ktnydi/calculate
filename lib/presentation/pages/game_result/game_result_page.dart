@@ -52,70 +52,52 @@ class GameResult extends ConsumerWidget {
                       ),
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 32,
-                          ),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Theme.of(context).dividerColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '設定',
+                                ),
+                                Text(
+                                  quizType == QuizType.numQuizzes
+                                      ? '問題数・全${quizLength}問'
+                                      : '時間制限・$limit秒',
+                                ),
+                              ],
                             ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '設定',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                quizType == QuizType.numQuizzes
-                                    ? '問題数・全${quizLength}問'
-                                    : '時間制限・$limit秒',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                            ],
-                          ),
                         ),
-                        const SizedBox(height: 16),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 32,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Theme.of(context).dividerColor,
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '時間／問',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '${(avgTime!.inMilliseconds / 1000).digit()}秒',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Theme.of(context).dividerColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '時間／問',
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  '${(avgTime!.inMilliseconds / 1000).digit()}秒',
+                                ),
+                              ],
                             ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           clipBehavior: Clip.antiAlias,
                           child: DataTable(
