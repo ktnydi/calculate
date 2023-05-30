@@ -59,153 +59,156 @@ class GameResult extends ConsumerWidget {
               child: Stack(
                 children: [
                   if (answerList.isNotEmpty)
-                    ListView(
+                    SingleChildScrollView(
                       padding: const EdgeInsets.all(16).copyWith(
                         bottom: 84 + viewPadding.bottom,
                       ),
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('設定'),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text('設定'),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '出題モード',
-                                    ),
-                                    Text(quizCategory.name),
-                                  ],
-                                ),
-                              ),
-                              const Divider(height: 1),
-                              ListTile(
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '問題形式',
-                                    ),
-                                    Text(
-                                      quizType == QuizType.numQuizzes
-                                          ? '問題数・全${quizLength}問'
-                                          : '時間制限・$limit秒',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 32),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('平均タイム'),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '全体',
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      '${(avgTime!.inMilliseconds / 1000).digit()}秒',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              for (var i in QuizCategory.values)
-                                if (eachAvgTime(i) != null) ...[
-                                  const Divider(height: 1),
-                                  ListTile(
-                                    title: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          i.label,
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()}秒',
-                                        )
-                                      ],
-                                    ),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '出題モード',
+                                      ),
+                                      Text(quizCategory.name),
+                                    ],
                                   ),
-                                ]
-                            ],
+                                ),
+                                const Divider(height: 1),
+                                ListTile(
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '問題形式',
+                                      ),
+                                      Text(
+                                        quizType == QuizType.numQuizzes
+                                            ? '問題数・全${quizLength}問'
+                                            : '時間制限・$limit秒',
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 32),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('解答した問題'),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                          const SizedBox(height: 32),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text('平均タイム'),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: List.generate(
-                              answerList.length,
-                              (index) {
-                                final answer = answerList.elementAt(index);
-                                final quiz = answer.quiz;
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (index != 0) const Divider(height: 1),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '全体',
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        '${(avgTime!.inMilliseconds / 1000).digit()}秒',
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                for (var i in QuizCategory.values)
+                                  if (eachAvgTime(i) != null) ...[
+                                    const Divider(height: 1),
                                     ListTile(
                                       title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          SizedBox(
-                                            width: 48,
-                                            child: Text('(${index + 1})'),
-                                          ),
                                           Text(
-                                            '${quiz.title} = ${quiz.correctAnswer}',
+                                            i.label,
                                           ),
-                                          Spacer(),
+                                          const SizedBox(height: 4),
                                           Text(
-                                            '${(answer.time.inMilliseconds / 1000).digit()}秒',
-                                          ),
+                                            '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()}秒',
+                                          )
                                         ],
                                       ),
                                     ),
-                                  ],
-                                );
-                              },
+                                  ]
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 32),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text('解答した問題'),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                answerList.length,
+                                (index) {
+                                  final answer = answerList.elementAt(index);
+                                  final quiz = answer.quiz;
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if (index != 0) const Divider(height: 1),
+                                      ListTile(
+                                        title: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 48,
+                                              child: Text('(${index + 1})'),
+                                            ),
+                                            Text(
+                                              '${quiz.title} = ${quiz.correctAnswer}',
+                                            ),
+                                            Spacer(),
+                                            Text(
+                                              '${(answer.time.inMilliseconds / 1000).digit()}秒',
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   else
                     Center(
