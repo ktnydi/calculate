@@ -1,4 +1,6 @@
 import 'package:calculate/analytics.dart';
+import 'package:calculate/enums/quiz_category.dart';
+import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/num.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/quiz_type.dart';
@@ -17,23 +19,34 @@ class GameResult extends ConsumerWidget {
 
   GameResult(this.leftTime, this.answerList);
 
+  Duration? get avgTime {
+    if (answerList.isEmpty) {
+      return null;
+    }
+
+    final times = answerList.map((e) => e.time.inMilliseconds);
+    final sumTimes = times.reduce((value, element) => value + element);
+    return Duration(milliseconds: (sumTimes / answerList.length).truncate());
+  }
+
+  Duration? eachAvgTime(QuizCategory type) {
+    final answers = answerList.where((element) => element.quiz.type == type);
+    if (answers.isEmpty) {
+      return null;
+    }
+    final times = answers.map((e) => e.time.inMilliseconds);
+    final sumTimes = times.reduce((value, element) => value + element);
+    return Duration(milliseconds: (sumTimes / answers.length).truncate());
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final limit = ref.watch(quizTimeNotifierProvider);
+    final quizCategory = ref.watch(quizCategoryModeNotifierProvider);
     final quizType = ref.watch(quizTypeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
     final viewPadding = MediaQuery.of(context).viewPadding;
-
-    final avgTime = () {
-      if (answerList.isEmpty) {
-        return null;
-      }
-
-      final times = answerList.map((e) => e.time.inMilliseconds);
-      final sumTimes = times.reduce((value, element) => value + element);
-      return Duration(milliseconds: (sumTimes / answerList.length).truncate());
-    }();
 
     return Scaffold(
       appBar: AppBar(
@@ -51,26 +64,9 @@ class GameResult extends ConsumerWidget {
                         bottom: 84 + viewPadding.bottom,
                       ),
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '設定',
-                                ),
-                                Text(
-                                  quizType == QuizType.numQuizzes
-                                      ? '問題数・全${quizLength}問'
-                                      : '時間制限・$limit秒',
-                                ),
-                              ],
-                            ),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text('設定'),
                         ),
                         const SizedBox(height: 8),
                         Container(
@@ -78,20 +74,45 @@ class GameResult extends ConsumerWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '時間／問',
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '出題モード',
+                                    ),
+                                    Text(quizCategory.name),
+                                  ],
                                 ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  '${(avgTime!.inMilliseconds / 1000).digit()}秒',
+                              ),
+                              const Divider(height: 1),
+                              ListTile(
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '問題形式',
+                                    ),
+                                    Text(
+                                      quizType == QuizType.numQuizzes
+                                          ? '問題数・全${quizLength}問'
+                                          : '時間制限・$limit秒',
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                        ),
+                        const SizedBox(height: 32),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text('平均タイム'),
                         ),
                         const SizedBox(height: 8),
                         Container(
@@ -99,45 +120,89 @@ class GameResult extends ConsumerWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          clipBehavior: Clip.antiAlias,
-                          child: DataTable(
-                            columns: <DataColumn>[
-                              DataColumn(
-                                label: Text('No.'),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '全体',
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      '${(avgTime!.inMilliseconds / 1000).digit()}秒',
+                                    ),
+                                  ],
+                                ),
                               ),
-                              DataColumn(
-                                label: Text('問題'),
-                              ),
-                              DataColumn(
-                                label: Text('時間'),
-                              ),
-                            ],
-                            rows: <DataRow>[
-                              ...List.generate(
-                                answerList.length,
-                                (index) {
-                                  final answer = answerList.elementAt(index);
-                                  final quiz = answer.quiz;
-                                  return DataRow(
-                                    cells: <DataCell>[
-                                      DataCell(
-                                        Text('(${index + 1})'),
-                                      ),
-                                      DataCell(
+                              for (var i in QuizCategory.values)
+                                if (eachAvgTime(i) != null) ...[
+                                  const Divider(height: 1),
+                                  ListTile(
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
                                         Text(
-                                          '${quiz.title} = ${quiz.correctAnswer}',
+                                          i.label,
                                         ),
-                                      ),
-                                      DataCell(
+                                        const SizedBox(height: 4),
                                         Text(
-                                          '${(answer.time.inMilliseconds / 1000).digit()}秒',
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
+                                          '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()}秒',
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ]
                             ],
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text('解答した問題'),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(
+                              answerList.length,
+                              (index) {
+                                final answer = answerList.elementAt(index);
+                                final quiz = answer.quiz;
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (index != 0) const Divider(height: 1),
+                                    ListTile(
+                                      title: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 48,
+                                            child: Text('(${index + 1})'),
+                                          ),
+                                          Text(
+                                            '${quiz.title} = ${quiz.correctAnswer}',
+                                          ),
+                                          Spacer(),
+                                          Text(
+                                            '${(answer.time.inMilliseconds / 1000).digit()}秒',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -158,8 +223,9 @@ class GameResult extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ElevatedButton(
-                            child: Text('もう一回'),
+                          ElevatedButton.icon(
+                            icon: Icon(Icons.refresh_outlined),
+                            label: Text('リトライ'),
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
@@ -180,8 +246,9 @@ class GameResult extends ConsumerWidget {
                             },
                           ),
                           const SizedBox(width: 16),
-                          ElevatedButton(
-                            child: Text('ホームに戻る'),
+                          ElevatedButton.icon(
+                            icon: Icon(Icons.home_outlined),
+                            label: Text('ホーム'),
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
