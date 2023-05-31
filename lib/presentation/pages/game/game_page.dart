@@ -294,7 +294,8 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
                       const Divider(height: 1, thickness: 1),
                       Row(
                         children: [
-                          if (keyboardLocation == 2) const SizedBox(width: 80),
+                          if (keyboardLocation.id == 2)
+                            const SizedBox(width: 80),
                           Flexible(
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 1),
@@ -344,7 +345,8 @@ class _GameState extends ConsumerState<Game> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-                          if (keyboardLocation == 1) const SizedBox(width: 80),
+                          if (keyboardLocation.id == 1)
+                            const SizedBox(width: 80),
                         ],
                       ),
                       const Divider(height: 1, thickness: 1),
