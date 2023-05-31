@@ -1,4 +1,5 @@
 import 'package:calculate/providers.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,31 +31,14 @@ class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
 }
 
 enum KeyboardLocation {
-  center,
-  left,
-  right,
-}
+  center(0, '標準', Alignment.bottomCenter),
+  left(1, '左', Alignment.bottomLeft),
+  right(2, '右', Alignment.bottomRight),
+  ;
 
-extension KeyboardLocationEx on KeyboardLocation {
-  int get id {
-    switch (this) {
-      case KeyboardLocation.center:
-        return 0;
-      case KeyboardLocation.left:
-        return 1;
-      case KeyboardLocation.right:
-        return 2;
-    }
-  }
+  const KeyboardLocation(this.id, this.name, this.alignment);
 
-  String get name {
-    switch (this) {
-      case KeyboardLocation.center:
-        return '標準';
-      case KeyboardLocation.left:
-        return '左';
-      case KeyboardLocation.right:
-        return '右';
-    }
-  }
+  final int id;
+  final String name;
+  final AlignmentGeometry alignment;
 }
