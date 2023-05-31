@@ -16,6 +16,12 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
   BannerAd? ad;
 
   @override
+  void dispose() {
+    ad?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Future<TrackingStatus> requestTracking() async {
       var status = await AppTrackingTransparency.trackingAuthorizationStatus;
@@ -29,32 +35,35 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-          await requestTracking();
+        if (ad == null) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+            await requestTracking();
 
-          final width = constraints.maxWidth.truncate();
-          final orientation = Orientation.portrait;
-          final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
-            orientation,
-            width,
-          );
+            final width = constraints.maxWidth.truncate();
+            final orientation = Orientation.portrait;
+            final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
+              orientation,
+              width,
+            );
 
-          final ad = BannerAd(
-            size: adaptiveSize ?? AdSize.banner,
-            // ユニットIdはlib/config.dartに記述済み。（Github管理対象外）
-            adUnitId: Platform.isAndroid ? androidUnitId : iosUnitId,
-            listener: BannerAdListener(
-              onAdLoaded: (ad) {
-                setState(() => this.ad = ad as BannerAd);
-              },
-              onAdFailedToLoad: (ad, error) {
-                ad.dispose();
-              },
-            ),
-            request: AdRequest(),
-          );
-          ad.load();
-        });
+            final ad = BannerAd(
+              size: adaptiveSize ?? AdSize.banner,
+              // ユニットIdはlib/config.dartに記述済み。（Github管理対象外）
+              adUnitId: Platform.isAndroid ? androidUnitId : iosUnitId,
+              listener: BannerAdListener(
+                onAdLoaded: (ad) {
+                  setState(() => this.ad = ad as BannerAd);
+                },
+                onAdFailedToLoad: (ad, error) {
+                  ad.dispose();
+                },
+              ),
+              request: AdRequest(),
+            );
+
+            ad.load();
+          });
+        }
 
         final bannerAd = ad;
         return bannerAd != null
