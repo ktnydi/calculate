@@ -1,4 +1,5 @@
 import 'package:calculate/analytics.dart';
+import 'package:calculate/config.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/num.dart';
@@ -8,7 +9,8 @@ import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
-import 'package:calculate/presentation/widgets/bottom_ad_banner.dart';
+import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
+import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -278,7 +280,12 @@ class GameResult extends ConsumerWidget {
                 ],
               ),
             ),
-            const BottomAdBanner(),
+            BottomAdBanner(
+              adUnitId: AdUnitId(
+                android: androidResultBottomCenter,
+                ios: iosResultBottomCenter,
+              ),
+            ),
           ],
         ),
       ),

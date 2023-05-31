@@ -1,12 +1,15 @@
-import 'dart:io';
-
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:calculate/config.dart';
+import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class BottomAdBanner extends StatefulWidget {
-  const BottomAdBanner({Key? key}) : super(key: key);
+  const BottomAdBanner({
+    Key? key,
+    required this.adUnitId,
+  }) : super(key: key);
+
+  final AdUnitId adUnitId;
 
   @override
   State<BottomAdBanner> createState() => _BottomAdBannerState();
@@ -48,8 +51,7 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
 
             final ad = BannerAd(
               size: adaptiveSize ?? AdSize.banner,
-              // ユニットIdはlib/config.dartに記述済み。（Github管理対象外）
-              adUnitId: Platform.isAndroid ? androidUnitId : iosUnitId,
+              adUnitId: widget.adUnitId.platform,
               listener: BannerAdListener(
                 onAdLoaded: (ad) {
                   setState(() => this.ad = ad as BannerAd);
