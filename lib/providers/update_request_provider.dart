@@ -10,6 +10,7 @@ import 'package:version/version.dart';
 final updateRequestProvider = FutureProvider<UpdateRequestType>(
   (ref) async {
     final repository = ref.watch(remoteConfigRepositoryProvider);
+    await repository.configuration();
     await repository.fetchAndActivate();
     final packageInfo = await PackageInfo.fromPlatform();
     final updateInfoJson = repository.getString(RemoteConfigKey.updateInfo);
