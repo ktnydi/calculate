@@ -5,7 +5,7 @@ build_ios:
 	fvm flutter clean
 	fvm flutter pub get
 	fvm flutter build ipa --dart-define FLAVOR=production --flavor production
-	open -a Xcode ./build/ios/archive/Runner.xcarchive
+	open -a Transporter ./build/ios/ipa/calculate.ipa
 
 build_android:
 	fvm flutter clean
