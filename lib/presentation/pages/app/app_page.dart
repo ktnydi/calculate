@@ -1,5 +1,7 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/flavor.dart';
+import 'package:calculate/model/use_cases/play_counter.dart';
+import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/presentation/pages/version_check/version_check_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +11,13 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final flavor = ref.watch(flavorProvider);
+
+    ref.listen(playCounterNotifierProvider, (previous, next) async {
+      if (next < 5) return;
+      if (next % 5 != 0) return;
+
+      await ref.read(requestReviewProvider)();
+    });
 
     return MaterialApp(
       debugShowCheckedModeBanner: flavor == Flavor.development,

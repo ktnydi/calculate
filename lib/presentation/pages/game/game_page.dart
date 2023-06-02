@@ -1,3 +1,4 @@
+import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/pages/game/widgets/app_bar.dart';
@@ -18,6 +19,8 @@ class Game extends ConsumerWidget {
         if (!next.isFinished) return;
 
         final quizTimeState = ref.read(quizTimeNotifierProvider) * 1000;
+
+        ref.read(playCounterNotifierProvider.notifier).increment();
 
         Navigator.pushReplacement(
           context,
