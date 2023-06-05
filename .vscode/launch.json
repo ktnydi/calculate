@@ -9,8 +9,8 @@
             "request": "launch",
             "type": "dart",
             "args": [
-                "--dart-define=FLAVOR",
-                "development",
+                "--dart-define",
+                "FLAVOR=development",
                 "--flavor",
                 "development"
             ]
@@ -21,8 +21,8 @@
             "type": "dart",
             "flutterMode": "release",
             "args": [
-                "--dart-define=FLAVOR",
-                "development",
+                "--dart-define",
+                "FLAVOR=development",
                 "--flavor",
                 "development"
             ]
@@ -33,8 +33,8 @@
             "type": "dart",
             "flutterMode": "release",
             "args": [
-                "--dart-define=FLAVOR",
-                "production",
+                "--dart-define",
+                "FLAVOR=production",
                 "--flavor",
                 "production"
             ]
