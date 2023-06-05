@@ -15,6 +15,7 @@ class GameState with _$GameState {
     @Default([]) List<Answer> answerList,
     @Default(0) int time,
     @Default(false) bool isFinished,
+    @Default(false) bool isRetired,
   }) = _GameState;
 
   int get numCorrects {

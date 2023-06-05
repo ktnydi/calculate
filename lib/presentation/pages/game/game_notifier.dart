@@ -94,6 +94,11 @@ class GameNotifier extends StateNotifier<GameState> {
     state = state.copyWith(isFinished: true);
   }
 
+  void retiredQuiz() {
+    endCountDown();
+    state = state.copyWith(isFinished: true, isRetired: true);
+  }
+
   @override
   void dispose() {
     endCountDown();

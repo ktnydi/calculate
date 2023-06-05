@@ -5,7 +5,6 @@ import 'package:calculate/presentation/pages/game/widgets/app_bar.dart';
 import 'package:calculate/presentation/pages/game/widgets/indicator.dart';
 import 'package:calculate/presentation/pages/game/widgets/num_keyboard.dart';
 import 'package:calculate/presentation/pages/game/widgets/quiz_field.dart';
-import 'package:calculate/presentation/pages/game/widgets/retire_dialog.dart';
 import 'package:calculate/presentation/pages/game_result/game_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +19,9 @@ class Game extends ConsumerWidget {
 
         final quizTimeState = ref.read(quizTimeNotifierProvider) * 1000;
 
-        ref.read(playCounterNotifierProvider.notifier).increment();
+        if (!next.isRetired) {
+          ref.read(playCounterNotifierProvider.notifier).increment();
+        }
 
         Navigator.pushReplacement(
           context,
@@ -50,19 +51,7 @@ class Game extends ConsumerWidget {
             backgroundColor: Colors.white,
             leading: CloseButton(
               onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(16),
-                    ),
-                  ),
-                  builder: (context) {
-                    return SafeArea(
-                      child: RetireDialog(),
-                    );
-                  },
-                );
+                ref.read(gameProvider.notifier).retiredQuiz();
               },
             ),
             title: AppBarTitle(),

@@ -22,6 +22,7 @@ mixin _$GameState {
   List<Answer> get answerList => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
+  bool get isRetired => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GameStateCopyWith<GameState> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $GameStateCopyWith<$Res> {
       String answer,
       List<Answer> answerList,
       int time,
-      bool isFinished});
+      bool isFinished,
+      bool isRetired});
 }
 
 /// @nodoc
@@ -61,6 +63,7 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
     Object? answerList = null,
     Object? time = null,
     Object? isFinished = null,
+    Object? isRetired = null,
   }) {
     return _then(_value.copyWith(
       figuresList: null == figuresList
@@ -87,6 +90,10 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
           ? _value.isFinished
           : isFinished // ignore: cast_nullable_to_non_nullable
               as bool,
+      isRetired: null == isRetired
+          ? _value.isRetired
+          : isRetired // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -104,7 +111,8 @@ abstract class _$$_GameStateCopyWith<$Res> implements $GameStateCopyWith<$Res> {
       String answer,
       List<Answer> answerList,
       int time,
-      bool isFinished});
+      bool isFinished,
+      bool isRetired});
 }
 
 /// @nodoc
@@ -124,6 +132,7 @@ class __$$_GameStateCopyWithImpl<$Res>
     Object? answerList = null,
     Object? time = null,
     Object? isFinished = null,
+    Object? isRetired = null,
   }) {
     return _then(_$_GameState(
       figuresList: null == figuresList
@@ -150,6 +159,10 @@ class __$$_GameStateCopyWithImpl<$Res>
           ? _value.isFinished
           : isFinished // ignore: cast_nullable_to_non_nullable
               as bool,
+      isRetired: null == isRetired
+          ? _value.isRetired
+          : isRetired // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -163,7 +176,8 @@ class _$_GameState extends _GameState {
       this.answer = '',
       final List<Answer> answerList = const [],
       this.time = 0,
-      this.isFinished = false})
+      this.isFinished = false,
+      this.isRetired = false})
       : _figuresList = figuresList,
         _answerList = answerList,
         super._();
@@ -198,10 +212,13 @@ class _$_GameState extends _GameState {
   @override
   @JsonKey()
   final bool isFinished;
+  @override
+  @JsonKey()
+  final bool isRetired;
 
   @override
   String toString() {
-    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, answerList: $answerList, time: $time, isFinished: $isFinished)';
+    return 'GameState(figuresList: $figuresList, index: $index, answer: $answer, answerList: $answerList, time: $time, isFinished: $isFinished, isRetired: $isRetired)';
   }
 
   @override
@@ -217,7 +234,9 @@ class _$_GameState extends _GameState {
                 .equals(other._answerList, _answerList) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.isFinished, isFinished) ||
-                other.isFinished == isFinished));
+                other.isFinished == isFinished) &&
+            (identical(other.isRetired, isRetired) ||
+                other.isRetired == isRetired));
   }
 
   @override
@@ -228,7 +247,8 @@ class _$_GameState extends _GameState {
       answer,
       const DeepCollectionEquality().hash(_answerList),
       time,
-      isFinished);
+      isFinished,
+      isRetired);
 
   @JsonKey(ignore: true)
   @override
@@ -244,7 +264,8 @@ abstract class _GameState extends GameState {
       final String answer,
       final List<Answer> answerList,
       final int time,
-      final bool isFinished}) = _$_GameState;
+      final bool isFinished,
+      final bool isRetired}) = _$_GameState;
   const _GameState._() : super._();
 
   @override
@@ -259,6 +280,8 @@ abstract class _GameState extends GameState {
   int get time;
   @override
   bool get isFinished;
+  @override
+  bool get isRetired;
   @override
   @JsonKey(ignore: true)
   _$$_GameStateCopyWith<_$_GameState> get copyWith =>
