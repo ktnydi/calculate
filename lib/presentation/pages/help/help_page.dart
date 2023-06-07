@@ -119,7 +119,7 @@ class Help extends StatelessWidget {
                     Text(
                       '${packageInfo.version}+${packageInfo.buildNumber}',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.caption!.color,
+                        color: Theme.of(context).textTheme.bodySmall!.color,
                       ),
                     ),
                   ],

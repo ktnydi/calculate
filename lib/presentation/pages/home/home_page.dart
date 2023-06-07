@@ -70,7 +70,7 @@ class Home extends ConsumerWidget {
                                   Text(
                                     'Let\'s challenge!',
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                 ],
                               ),

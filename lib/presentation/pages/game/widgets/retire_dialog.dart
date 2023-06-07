@@ -37,7 +37,7 @@ class RetireDialog extends ConsumerWidget {
               Text(
                 'ホーム画面に戻ります。',
                 style: TextStyle(
-                  color: Theme.of(context).textTheme.caption!.color,
+                  color: Theme.of(context).textTheme.bodySmall!.color,
                 ),
               ),
               const SizedBox(height: 32),

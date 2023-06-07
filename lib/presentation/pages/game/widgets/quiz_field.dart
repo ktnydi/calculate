@@ -101,7 +101,7 @@ class _QuizFieldState extends ConsumerState<QuizField>
             children: [
               Text(
                 '=',
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(width: 8),
               Container(
@@ -117,7 +117,7 @@ class _QuizFieldState extends ConsumerState<QuizField>
                   child: Text(
                     userAnswer,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
               ),
