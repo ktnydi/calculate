@@ -43,7 +43,7 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
             await requestTracking();
 
             final width = constraints.maxWidth.truncate();
-            final orientation = Orientation.portrait;
+            const orientation = Orientation.portrait;
             final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
               orientation,
               width,
@@ -60,7 +60,7 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
                   ad.dispose();
                 },
               ),
-              request: AdRequest(),
+              request: const AdRequest(),
             );
 
             ad.load();

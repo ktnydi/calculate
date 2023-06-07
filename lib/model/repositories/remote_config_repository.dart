@@ -24,12 +24,12 @@ class RemoteConfigRepository {
   Future<void> configuration() async {
     final flavor = ref.read(flavorProvider);
     final interval = flavor == Flavor.production
-        ? Duration(minutes: 12)
-        : Duration(seconds: 10);
+        ? const Duration(minutes: 12)
+        : const Duration(seconds: 10);
     await rc.setConfigSettings(
       RemoteConfigSettings(
         minimumFetchInterval: interval,
-        fetchTimeout: Duration(minutes: 1),
+        fetchTimeout: const Duration(minutes: 1),
       ),
     );
   }

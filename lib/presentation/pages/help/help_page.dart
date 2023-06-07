@@ -5,25 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Help extends StatelessWidget {
+  const Help({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ヘルプ'),
+        title: const Text('ヘルプ'),
       ),
       body: ListView(
         children: [
           const SizedBox(height: 16),
           const Divider(height: 1),
           ListTile(
-            title: Text('フィードバック'),
-            trailing: Icon(Icons.navigate_next),
+            title: const Text('フィードバック'),
+            trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WebViewPage(
+                  builder: (context) => const WebViewPage(
                     'https://docs.google.com/forms/d/e/1FAIpQLSe_4ggMubBXHaUCRqEbDckA1Eibx-zt8K4F6V-K0lXuSRqBiQ/viewform?usp=sf_link',
                   ),
                 ),
@@ -32,14 +34,14 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: Text('ロードマップ'),
-            trailing: Icon(Icons.navigate_next),
+            title: const Text('ロードマップ'),
+            trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WebViewPage(
+                  builder: (context) => const WebViewPage(
                     'https://toothsome-persimmon-e89.notion.site/9dd91417b57d414ca4b09765db0ba7f2',
                   ),
                 ),
@@ -48,8 +50,8 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: Text('アプリを評価'),
-            trailing: Icon(Icons.navigate_next),
+            title: const Text('アプリを評価'),
+            trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () async {
               if (await AppReview.isRequestReviewAvailable) {
@@ -62,8 +64,8 @@ class Help extends StatelessWidget {
             builder: (context, ref, child) {
               final packageInfo = ref.watch(packageInfoProvider);
               return ListTile(
-                title: Text('ライセンス'),
-                trailing: Icon(Icons.navigate_next),
+                title: const Text('ライセンス'),
+                trailing: const Icon(Icons.navigate_next),
                 tileColor: Colors.white,
                 onTap: () {
                   showLicensePage(
@@ -77,14 +79,14 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: Text('利用規約'),
-            trailing: Icon(Icons.navigate_next),
+            title: const Text('利用規約'),
+            trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WebViewPage(
+                  builder: (context) => const WebViewPage(
                     'https://toothsome-persimmon-e89.notion.site/dc7d95253ab1441c9ec099c1b79e2c67',
                   ),
                 ),
@@ -93,14 +95,14 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: Text('プライバシーポリシー'),
-            trailing: Icon(Icons.navigate_next),
+            title: const Text('プライバシーポリシー'),
+            trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WebViewPage(
+                  builder: (context) => const WebViewPage(
                     'https://toothsome-persimmon-e89.notion.site/d9bdcb0258c846eb987f08e583dd7ff2',
                   ),
                 ),
@@ -115,7 +117,7 @@ class Help extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('バージョン'),
+                    const Text('バージョン'),
                     Text(
                       '${packageInfo.version}+${packageInfo.buildNumber}',
                       style: TextStyle(

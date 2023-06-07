@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Home extends ConsumerWidget {
+  const Home({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
@@ -79,16 +81,12 @@ class Home extends ConsumerWidget {
                           const SizedBox(height: 32),
                           Center(
                             child: ElevatedButton(
-                              child: Text(
-                                'スタート\n（${quizCategoryModeState.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
-                                textAlign: TextAlign.center,
-                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
                                 ),
-                                minimumSize: Size(232, 80),
+                                minimumSize: const Size(232, 80),
                               ),
                               onPressed: () {
                                 analytics.logStartGame();
@@ -97,10 +95,14 @@ class Home extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                     fullscreenDialog: true,
-                                    builder: (context) => Game(),
+                                    builder: (context) => const Game(),
                                   ),
                                 );
                               },
+                              child: Text(
+                                'スタート\n（${quizCategoryModeState.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -108,41 +110,41 @@ class Home extends ConsumerWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               ElevatedButton(
-                                child: Text('設定'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                   ),
-                                  minimumSize: Size(112, 56),
+                                  minimumSize: const Size(112, 56),
                                 ),
                                 onPressed: () async {
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Setting(),
+                                      builder: (context) => const Setting(),
                                     ),
                                   );
                                 },
+                                child: const Text('設定'),
                               ),
                               const SizedBox(width: 8),
                               ElevatedButton(
-                                child: Text('ヘルプ'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                   ),
-                                  minimumSize: Size(112, 56),
+                                  minimumSize: const Size(112, 56),
                                 ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Help(),
+                                      builder: (context) => const Help(),
                                     ),
                                   );
                                 },
+                                child: const Text('ヘルプ'),
                               ),
                             ],
                           )
@@ -153,7 +155,7 @@ class Home extends ConsumerWidget {
                 );
               }),
             ),
-            BottomAdBanner(
+            const BottomAdBanner(
               adUnitId: AdUnitId(
                 android: androidHomeBottomCenter,
                 ios: iosHomeBottomCenter,

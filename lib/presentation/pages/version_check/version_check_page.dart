@@ -10,7 +10,7 @@ class VersionCheckPage extends ConsumerStatefulWidget {
   const VersionCheckPage({Key? key}) : super(key: key);
 
   @override
-  _VersionCheckPageState createState() => _VersionCheckPageState();
+  ConsumerState createState() => _VersionCheckPageState();
 }
 
 class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
@@ -21,6 +21,9 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
       final requestType = await ref.read(updateRequestProvider.future);
 
       if (requestType == UpdateRequestType.not) {
+        // ignore: use_build_context_synchronously
+        if (!context.mounted) return;
+
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
@@ -28,7 +31,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
             pageBuilder: (context, animation, secondaryAnimation) {
               return FadeTransition(
                 opacity: animation.drive(Tween(begin: 0, end: 1)),
-                child: Home(),
+                child: const Home(),
               );
             },
           ),
@@ -37,12 +40,15 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
         return;
       }
 
-      final title = 'アップデートのお知らせ';
-      final message = '新しいバージョンのアプリをリリースしました。アップデートしてください。';
-      final cancelLabel = '後で行う';
-      final okLabel = 'アップデート';
+      const title = 'アップデートのお知らせ';
+      const message = '新しいバージョンのアプリをリリースしました。アップデートしてください。';
+      const cancelLabel = '後で行う';
+      const okLabel = 'アップデート';
 
       if (requestType == UpdateRequestType.cancelable) {
+        // ignore: use_build_context_synchronously
+        if (!context.mounted) return;
+
         final result = await showOkCancelAlertDialog(
           context: context,
           title: title,
@@ -52,6 +58,9 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
         );
 
         if (result == OkCancelResult.cancel) {
+          // ignore: use_build_context_synchronously
+          if (!context.mounted) return;
+
           Navigator.pushReplacement(
             context,
             PageRouteBuilder(
@@ -59,7 +68,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
               pageBuilder: (context, animation, secondaryAnimation) {
                 return FadeTransition(
                   opacity: animation.drive(Tween(begin: 0, end: 1)),
-                  child: Home(),
+                  child: const Home(),
                 );
               },
             ),
@@ -72,6 +81,9 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
       }
 
       if (requestType == UpdateRequestType.forcibly) {
+        // ignore: use_build_context_synchronously
+        if (!context.mounted) return;
+
         await showOkAlertDialog(
           context: context,
           title: title,
@@ -90,7 +102,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: Center(
+      child: const Center(
         child: CircularProgressIndicator(),
       ),
     );

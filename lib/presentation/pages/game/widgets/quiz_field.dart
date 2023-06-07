@@ -80,14 +80,14 @@ class _QuizFieldState extends ConsumerState<QuizField>
     return SlideTransition(
       position: Tween(
         begin: Offset.zero,
-        end: Offset(0, 0.05),
+        end: const Offset(0, 0.05),
       ).animate(quizAnimation),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             quiz.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w300,
               fontFeatures: [

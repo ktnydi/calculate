@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
@@ -23,16 +25,16 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: flavor == Flavor.development,
       title: '計算ドリル',
       theme: ThemeData.from(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Color(0xFFB4CEB3),
           onPrimary: Color(0xFF000000),
           secondary: Color(0xFFB4CEB3),
           onSecondary: Color(0xFF000000),
         ),
       ).copyWith(
-        primaryColor: Color(0xFFB4CEB3),
-        scaffoldBackgroundColor: Color(0xFFF4F5F7),
-        appBarTheme: AppBarTheme(
+        primaryColor: const Color(0xFFB4CEB3),
+        scaffoldBackgroundColor: const Color(0xFFF4F5F7),
+        appBarTheme: const AppBarTheme(
           elevation: 1,
           centerTitle: true,
         ),
@@ -49,11 +51,11 @@ class MyApp extends ConsumerWidget {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: Color(0xFF849D83),
+            foregroundColor: const Color(0xFF849D83),
           ),
         ),
       ),
-      home: Scaffold(
+      home: const Scaffold(
         body: VersionCheckPage(),
       ),
       navigatorObservers: [

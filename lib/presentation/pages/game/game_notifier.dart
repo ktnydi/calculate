@@ -12,7 +12,7 @@ final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
 );
 
 class GameNotifier extends StateNotifier<GameState> {
-  GameNotifier(this._ref) : super(GameState()) {
+  GameNotifier(this._ref) : super(const GameState()) {
     beginCountDown();
   }
 
@@ -24,7 +24,7 @@ class GameNotifier extends StateNotifier<GameState> {
     final leftTime = _ref.read(quizTimeNotifierProvider) * 1000;
 
     /// 0.01秒単位で計測
-    timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
       state = state.copyWith(
         time: state.time + 10,
       );
@@ -46,7 +46,7 @@ class GameNotifier extends StateNotifier<GameState> {
       return;
     }
 
-    state = state.copyWith(answer: state.answer + '$figure');
+    state = state.copyWith(answer: '${state.answer}$figure');
   }
 
   void clearAnswer() {

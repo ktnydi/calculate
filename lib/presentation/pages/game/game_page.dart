@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Game extends ConsumerWidget {
+  const Game({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(
@@ -54,21 +56,21 @@ class Game extends ConsumerWidget {
                 ref.read(gameProvider.notifier).retiredQuiz();
               },
             ),
-            title: AppBarTitle(),
+            title: const AppBarTitle(),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
+              const Expanded(
                 child: Center(
                   child: QuizField(),
                 ),
               ),
               const Divider(height: 1, thickness: 1),
-              Indicator(),
+              const Indicator(),
               Container(
                 color: Colors.white,
-                child: SafeArea(
+                child: const SafeArea(
                   child: NumKeyboard(),
                 ),
               ),

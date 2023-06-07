@@ -13,7 +13,7 @@ class QuizRepository {
     final random = Random();
     const minNum = 10;
     const maxNum = 100;
-    final createNum = (int min, int max) => min + random.nextInt(max - min);
+    createNum(int min, int max) => min + random.nextInt(max - min);
     final num1 = createNum(minNum, maxNum);
     final num2 = createNum(minNum, maxNum);
     final figures = [num1, num2];
@@ -24,7 +24,7 @@ class QuizRepository {
     final random = Random();
     const minNum = 10;
     const maxNum = 100;
-    final createNum = (int min, int max) => min + random.nextInt(max - min);
+    createNum(int min, int max) => min + random.nextInt(max - min);
     final num1 = createNum(minNum, maxNum);
     final num2 = createNum(minNum, maxNum);
     final figures = [num1, num2]..sort((i, j) => j - i);
@@ -35,7 +35,7 @@ class QuizRepository {
     final random = Random();
     const minNum = 10;
     const maxNum = 100;
-    final createNum = (int min, int max) => min + random.nextInt(max - min);
+    createNum(int min, int max) => min + random.nextInt(max - min);
     final num1 = createNum(minNum, maxNum);
 
     /// num1の約数をランダムで1つ取得する
@@ -56,7 +56,7 @@ class QuizRepository {
     final random = Random();
     const minNum = 0;
     const maxNum = 10;
-    final createNum = (int min, int max) => min + random.nextInt(max - min);
+    createNum(int min, int max) => min + random.nextInt(max - min);
     final num1 = createNum(minNum, maxNum);
     final num2 = createNum(minNum, maxNum);
     final figures = [num1, num2];

@@ -23,10 +23,10 @@ class NumKeyboard extends ConsumerWidget {
               width: keyboardLocation == KeyboardLocation.center
                   ? constrains.maxWidth
                   : constrains.maxWidth * 0.75,
-              padding: EdgeInsets.symmetric(horizontal: 1),
+              padding: const EdgeInsets.symmetric(horizontal: 1),
               color: Theme.of(context).dividerColor,
               child: GridView.count(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 3,
                 childAspectRatio: 5 / 3,
@@ -37,7 +37,7 @@ class NumKeyboard extends ConsumerWidget {
                   (index) {
                     if (index == 9) {
                       return FigureButton(
-                        child: Text('C'),
+                        child: const Text('C'),
                         onPressed: () {
                           gameNotifier.clearAnswer();
                         },
@@ -46,7 +46,7 @@ class NumKeyboard extends ConsumerWidget {
 
                     if (index == 11) {
                       return FigureButton(
-                        child: Text('BS'),
+                        child: const Text('BS'),
                         onPressed: () {
                           final userAnswer = ref.read(
                             gameProvider.select((value) => value.answer),

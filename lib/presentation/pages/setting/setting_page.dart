@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Setting extends ConsumerWidget {
+  const Setting({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final flavor = ref.watch(flavorProvider);
@@ -25,10 +27,10 @@ class Setting extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('設定'),
+        title: const Text('設定'),
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         children: [
           const Divider(height: 1),
           ListTile(
@@ -36,11 +38,11 @@ class Setting extends ConsumerWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('出題モード'),
-                Text('${quizCategoryMode.name}'),
+                const Text('出題モード'),
+                Text(quizCategoryMode.name),
               ],
             ),
-            trailing: Icon(Icons.navigate_next),
+            trailing: const Icon(Icons.navigate_next),
             onTap: () {
               showModalBottomSheet(
                 context: context,
@@ -53,7 +55,7 @@ class Setting extends ConsumerWidget {
           const Divider(height: 1),
           ListTile(
             tileColor: Colors.white,
-            title: Text('問題形式'),
+            title: const Text('問題形式'),
             trailing: CupertinoSlidingSegmentedControl<QuizType>(
               groupValue: quizTypeState,
               children: {
@@ -80,7 +82,7 @@ class Setting extends ConsumerWidget {
                       if (value == null) return;
                       quizSizeNotifier.change(value);
                     },
-                    title: Text('2問（開発環境）'),
+                    title: const Text('2問（開発環境）'),
                     tileColor: Colors.white,
                   ),
                 RadioListTile<int>(
@@ -90,7 +92,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizSizeNotifier.change(value);
                   },
-                  title: Text('10問'),
+                  title: const Text('10問'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
@@ -100,7 +102,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizSizeNotifier.change(value);
                   },
-                  title: Text('20問'),
+                  title: const Text('20問'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
@@ -110,7 +112,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizSizeNotifier.change(value);
                   },
-                  title: Text('30問'),
+                  title: const Text('30問'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
@@ -120,7 +122,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizSizeNotifier.change(value);
                   },
-                  title: Text('40問'),
+                  title: const Text('40問'),
                   tileColor: Colors.white,
                 ),
               ],
@@ -138,7 +140,7 @@ class Setting extends ConsumerWidget {
                       if (value == null) return;
                       quizTimeNotifier.change(time: value);
                     },
-                    title: Text('10秒（開発環境）'),
+                    title: const Text('10秒（開発環境）'),
                     tileColor: Colors.white,
                   ),
                 RadioListTile<int>(
@@ -148,7 +150,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizTimeNotifier.change(time: value);
                   },
-                  title: Text('30秒'),
+                  title: const Text('30秒'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
@@ -158,7 +160,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizTimeNotifier.change(time: value);
                   },
-                  title: Text('60秒'),
+                  title: const Text('60秒'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
@@ -168,7 +170,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizTimeNotifier.change(time: value);
                   },
-                  title: Text('120秒'),
+                  title: const Text('120秒'),
                   tileColor: Colors.white,
                 ),
                 RadioListTile<int>(
@@ -178,7 +180,7 @@ class Setting extends ConsumerWidget {
                     if (value == null) return;
                     quizTimeNotifier.change(time: value);
                   },
-                  title: Text('180秒'),
+                  title: const Text('180秒'),
                   tileColor: Colors.white,
                 ),
               ],
@@ -187,7 +189,7 @@ class Setting extends ConsumerWidget {
           const SizedBox(height: 16),
           const Divider(height: 1),
           ListTile(
-            title: Text('キーボードの位置'),
+            title: const Text('キーボードの位置'),
             trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
               groupValue: keyboardLocation,
               children: {
@@ -218,7 +220,7 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
 
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: QuizCategoryMode.values.map(
@@ -230,7 +232,7 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
                   if (value == null) return;
                   quizCategoryModeNotifier.change(value);
                 },
-                title: Text('${value.name}'),
+                title: Text(value.name),
                 tileColor: Colors.white,
               );
             },

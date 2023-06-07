@@ -16,18 +16,18 @@ class RetireDialog extends ConsumerWidget {
         Container(
           width: 40,
           height: 3,
-          margin: EdgeInsets.symmetric(vertical: 16),
+          margin: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
             color: Theme.of(context).dividerColor,
             borderRadius: BorderRadius.circular(3),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 '中断してもよろしいですか？',
                 style: TextStyle(
                   fontSize: 18,
@@ -45,26 +45,25 @@ class RetireDialog extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    child: Text('キャンセル'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(22),
                       ),
                       backgroundColor: Colors.grey.shade200,
-                      minimumSize: Size(120, 44),
+                      minimumSize: const Size(120, 44),
                     ),
                     onPressed: () {
                       Navigator.pop(context);
                     },
+                    child: const Text('キャンセル'),
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    child: Text('中断する'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(22),
                       ),
-                      minimumSize: Size(120, 44),
+                      minimumSize: const Size(120, 44),
                     ),
                     onPressed: () {
                       analytics.logStopGame();
@@ -75,10 +74,11 @@ class RetireDialog extends ConsumerWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Home(),
+                          builder: (context) => const Home(),
                         ),
                       );
                     },
+                    child: const Text('中断する'),
                   ),
                 ],
               ),

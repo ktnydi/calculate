@@ -5,10 +5,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 class WebViewPage extends StatefulWidget {
   final String url;
 
-  WebViewPage(this.url);
+  const WebViewPage(this.url, {super.key});
 
   @override
-  _WebViewPageState createState() => _WebViewPageState();
+  State createState() => _WebViewPageState();
 }
 
 class _WebViewPageState extends State<WebViewPage> {
@@ -50,7 +50,7 @@ class _WebViewPageState extends State<WebViewPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.launch),
+        child: const Icon(Icons.launch),
         onPressed: () async {
           final isValid = await canLaunchUrl(Uri.parse(widget.url));
           if (!isValid) return;

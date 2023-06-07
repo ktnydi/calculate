@@ -42,7 +42,7 @@ class Indicator extends ConsumerWidget {
                 quizTypeState == QuizType.numQuizzes
                     ? '残り：${quizSizeState - gameState.answerList.length}問'
                     : '残り：${((quizTimeState - gameState.time) / 1000).digit()}秒',
-                style: TextStyle(
+                style: const TextStyle(
                   fontFeatures: [
                     FontFeature.tabularFigures(),
                   ],
@@ -51,7 +51,7 @@ class Indicator extends ConsumerWidget {
               const Text('／'),
               Text(
                 '正答数：${gameState.numCorrects}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontFeatures: [
                     FontFeature.tabularFigures(),
                   ],

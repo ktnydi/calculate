@@ -17,9 +17,9 @@ class AppBarTitle extends ConsumerWidget {
 
     return Text(
       quizTypeState == QuizType.numQuizzes
-          ? '${quizIndex + 1}／${quizSizeState}問'
+          ? '${quizIndex + 1}／$quizSizeState問'
           : '第${quizIndex + 1}問',
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 18,
         fontFeatures: [
           FontFeature.tabularFigures(),

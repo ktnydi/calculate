@@ -27,7 +27,7 @@ void main() async {
           await PackageInfo.fromPlatform(),
         ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
