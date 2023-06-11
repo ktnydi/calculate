@@ -25,6 +25,7 @@ dependencies:
   app_tracking_transparency: ^2.0.1
   adaptive_dialog: ^1.8.2
   intl: ^0.18.1
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

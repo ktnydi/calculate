@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
@@ -54,25 +55,22 @@ class Home extends ConsumerWidget {
                               ),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
+                                children: const [
+                                  AutoSizeText(
                                     'Keisan Doriru',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .color,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 1,
                                   ),
-                                  const SizedBox(height: 32),
-                                  Text(
+                                  SizedBox(height: 32),
+                                  AutoSizeText(
                                     'Let\'s challenge!',
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                    ),
+                                    maxLines: 1,
                                   ),
                                 ],
                               ),
@@ -99,9 +97,12 @@ class Home extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              child: Text(
-                                'スタート\n（${quizCategoryModeState.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
-                                textAlign: TextAlign.center,
+                              child: FittedBox(
+                                child: Text(
+                                  'スタート\n（${quizCategoryModeState.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                ),
                               ),
                             ),
                           ),
