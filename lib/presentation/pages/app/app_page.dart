@@ -38,22 +38,6 @@ class MyApp extends ConsumerWidget {
           elevation: 1,
           centerTitle: true,
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-          ).copyWith(
-            elevation: MaterialStateProperty.resolveWith(
-              (states) {
-                return 0;
-              },
-            ),
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: const Color(0xFF849D83),
-          ),
-        ),
       ),
       home: const Scaffold(
         body: VersionCheckPage(),

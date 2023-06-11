@@ -228,10 +228,10 @@ class GameResult extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ElevatedButton.icon(
+                          FilledButton.icon(
                             icon: const Icon(Icons.refresh_outlined),
                             label: const Text('リトライ'),
-                            style: ElevatedButton.styleFrom(
+                            style: FilledButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
                               ),
@@ -251,10 +251,10 @@ class GameResult extends ConsumerWidget {
                             },
                           ),
                           const SizedBox(width: 16),
-                          ElevatedButton.icon(
+                          FilledButton.icon(
                             icon: const Icon(Icons.home_outlined),
                             label: const Text('ホーム'),
-                            style: ElevatedButton.styleFrom(
+                            style: FilledButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
                               ),

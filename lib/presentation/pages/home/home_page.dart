@@ -80,8 +80,8 @@ class Home extends ConsumerWidget {
                           ),
                           const SizedBox(height: 32),
                           Center(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
+                            child: FilledButton(
+                              style: FilledButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
@@ -109,8 +109,8 @@ class Home extends ConsumerWidget {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
+                              FilledButton(
+                                style: FilledButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
@@ -128,8 +128,8 @@ class Home extends ConsumerWidget {
                                 child: const Text('設定'),
                               ),
                               const SizedBox(width: 8),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
+                              FilledButton(
+                                style: FilledButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
