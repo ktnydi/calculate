@@ -61,13 +61,12 @@ class Game extends ConsumerWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Indicator(),
               const Expanded(
                 child: Center(
                   child: QuizField(),
                 ),
               ),
-              const Divider(height: 1, thickness: 1),
-              const Indicator(),
               Container(
                 color: Colors.white,
                 child: const SafeArea(

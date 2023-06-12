@@ -8,7 +8,6 @@ class Answer with _$Answer {
   const factory Answer({
     required Quiz quiz,
     required String answer,
-    required bool isCorrect,
     required Duration time,
   }) = _Answer;
 }

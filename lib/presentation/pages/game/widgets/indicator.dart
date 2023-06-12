@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:calculate/enums/quiz_type.dart';
-import 'package:calculate/extensions/num.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
@@ -17,6 +14,7 @@ class Indicator extends ConsumerWidget {
     final quizTypeState = ref.watch(quizTypeNotifierProvider);
     final quizTimeState = ref.watch(quizTimeNotifierProvider) * 1000;
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
       color: Colors.grey.shade200,
@@ -26,38 +24,15 @@ class Indicator extends ConsumerWidget {
           AnimatedContainer(
             duration: const Duration(milliseconds: 10),
             width: quizTypeState == QuizType.numQuizzes
-                ? MediaQuery.of(context).size.width *
-                    (gameState.answerList.length / quizSizeState)
-                : MediaQuery.of(context).size.width *
-                    (gameState.time / quizTimeState),
-            height: 30,
+                ? screenWidth * (gameState.answerList.length / quizSizeState)
+                : screenWidth * (gameState.time / quizTimeState),
+            height: 8,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
+              borderRadius: const BorderRadius.horizontal(
+                right: Radius.circular(1000),
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                quizTypeState == QuizType.numQuizzes
-                    ? '残り：${quizSizeState - gameState.answerList.length}問'
-                    : '残り：${((quizTimeState - gameState.time) / 1000).digit()}秒',
-                style: const TextStyle(
-                  fontFeatures: [
-                    FontFeature.tabularFigures(),
-                  ],
-                ),
-              ),
-              const Text('／'),
-              Text(
-                '正答数：${gameState.numCorrects}',
-                style: const TextStyle(
-                  fontFeatures: [
-                    FontFeature.tabularFigures(),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
       ),

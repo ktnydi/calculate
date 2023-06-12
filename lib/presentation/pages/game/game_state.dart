@@ -17,8 +17,4 @@ class GameState with _$GameState {
     @Default(false) bool isFinished,
     @Default(false) bool isRetired,
   }) = _GameState;
-
-  int get numCorrects {
-    return answerList.where((element) => element.isCorrect).length;
-  }
 }

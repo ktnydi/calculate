@@ -61,8 +61,6 @@ class GameNotifier extends StateNotifier<GameState> {
 
   void checkAnswer(Quiz quiz) {
     final userAnswer = state.answer;
-    final correctAnswer = quiz.correctAnswer;
-    final isCorrect = userAnswer == '$correctAnswer';
 
     final time = () {
       if (state.answerList.isEmpty) {
@@ -77,7 +75,6 @@ class GameNotifier extends StateNotifier<GameState> {
     final answer = Answer(
       quiz: quiz,
       answer: userAnswer,
-      isCorrect: isCorrect,
       time: time,
     );
     state = state.copyWith(

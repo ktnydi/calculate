@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Answer {
   Quiz get quiz => throw _privateConstructorUsedError;
   String get answer => throw _privateConstructorUsedError;
-  bool get isCorrect => throw _privateConstructorUsedError;
   Duration get time => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +29,7 @@ abstract class $AnswerCopyWith<$Res> {
   factory $AnswerCopyWith(Answer value, $Res Function(Answer) then) =
       _$AnswerCopyWithImpl<$Res, Answer>;
   @useResult
-  $Res call({Quiz quiz, String answer, bool isCorrect, Duration time});
+  $Res call({Quiz quiz, String answer, Duration time});
 
   $QuizCopyWith<$Res> get quiz;
 }
@@ -50,7 +49,6 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
   $Res call({
     Object? quiz = null,
     Object? answer = null,
-    Object? isCorrect = null,
     Object? time = null,
   }) {
     return _then(_value.copyWith(
@@ -62,10 +60,6 @@ class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String,
-      isCorrect: null == isCorrect
-          ? _value.isCorrect
-          : isCorrect // ignore: cast_nullable_to_non_nullable
-              as bool,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -88,7 +82,7 @@ abstract class _$$_AnswerCopyWith<$Res> implements $AnswerCopyWith<$Res> {
       __$$_AnswerCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Quiz quiz, String answer, bool isCorrect, Duration time});
+  $Res call({Quiz quiz, String answer, Duration time});
 
   @override
   $QuizCopyWith<$Res> get quiz;
@@ -106,7 +100,6 @@ class __$$_AnswerCopyWithImpl<$Res>
   $Res call({
     Object? quiz = null,
     Object? answer = null,
-    Object? isCorrect = null,
     Object? time = null,
   }) {
     return _then(_$_Answer(
@@ -118,10 +111,6 @@ class __$$_AnswerCopyWithImpl<$Res>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String,
-      isCorrect: null == isCorrect
-          ? _value.isCorrect
-          : isCorrect // ignore: cast_nullable_to_non_nullable
-              as bool,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -134,23 +123,18 @@ class __$$_AnswerCopyWithImpl<$Res>
 
 class _$_Answer implements _Answer {
   const _$_Answer(
-      {required this.quiz,
-      required this.answer,
-      required this.isCorrect,
-      required this.time});
+      {required this.quiz, required this.answer, required this.time});
 
   @override
   final Quiz quiz;
   @override
   final String answer;
   @override
-  final bool isCorrect;
-  @override
   final Duration time;
 
   @override
   String toString() {
-    return 'Answer(quiz: $quiz, answer: $answer, isCorrect: $isCorrect, time: $time)';
+    return 'Answer(quiz: $quiz, answer: $answer, time: $time)';
   }
 
   @override
@@ -160,13 +144,11 @@ class _$_Answer implements _Answer {
             other is _$_Answer &&
             (identical(other.quiz, quiz) || other.quiz == quiz) &&
             (identical(other.answer, answer) || other.answer == answer) &&
-            (identical(other.isCorrect, isCorrect) ||
-                other.isCorrect == isCorrect) &&
             (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, quiz, answer, isCorrect, time);
+  int get hashCode => Object.hash(runtimeType, quiz, answer, time);
 
   @JsonKey(ignore: true)
   @override
@@ -179,15 +161,12 @@ abstract class _Answer implements Answer {
   const factory _Answer(
       {required final Quiz quiz,
       required final String answer,
-      required final bool isCorrect,
       required final Duration time}) = _$_Answer;
 
   @override
   Quiz get quiz;
   @override
   String get answer;
-  @override
-  bool get isCorrect;
   @override
   Duration get time;
   @override
