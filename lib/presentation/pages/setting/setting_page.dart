@@ -1,7 +1,10 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
+import 'package:calculate/enums/supported_locale.dart';
+import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +27,7 @@ class Setting extends ConsumerWidget {
     final quizTimeNotifier = ref.watch(quizTimeNotifierProvider.notifier);
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final quizSizeNotifier = ref.watch(quizSizeNotifierProvider.notifier);
+    final localeState = ref.watch(localeNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +43,9 @@ class Setting extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('出題モード'),
-                Text(quizCategoryMode.name),
+                Text(
+                  quizCategoryMode.name,
+                ),
               ],
             ),
             trailing: const Icon(Icons.navigate_next),
@@ -202,6 +208,36 @@ class Setting extends ConsumerWidget {
                 keyboardLocationNotifier.change(value);
               },
             ),
+            tileColor: Colors.white,
+          ),
+          const Divider(height: 1),
+          const SizedBox(height: 16),
+          const Divider(height: 1),
+          ListTile(
+            onTap: () async {
+              final result = await showModalActionSheet(
+                context: context,
+                actions: SupportedLocale.values.map((e) {
+                  return SheetAction(
+                    key: e,
+                    label: e.label,
+                  );
+                }).toList(),
+              );
+
+              if (result == null) return;
+
+              ref.read(localeNotifierProvider.notifier).change(result);
+            },
+            title: Row(
+              children: [
+                const Expanded(
+                  child: Text('言語設定'),
+                ),
+                Text(localeState.label),
+              ],
+            ),
+            trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
           ),
           const Divider(height: 1),

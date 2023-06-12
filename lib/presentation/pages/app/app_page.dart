@@ -1,10 +1,12 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/flavor.dart';
+import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/presentation/pages/version_check/version_check_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -13,6 +15,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final flavor = ref.watch(flavorProvider);
+    final locale = ref.watch(localeNotifierProvider);
 
     ref.listen(playCounterNotifierProvider, (previous, next) async {
       if (next < 5) return;
@@ -24,6 +27,9 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: flavor == Flavor.development,
       title: '計算ドリル',
+      localizationsDelegates: L10n.localizationsDelegates,
+      locale: locale.toLocale(),
+      supportedLocales: L10n.supportedLocales,
       theme: ThemeData.from(
         colorScheme: const ColorScheme.light(
           primary: Color(0xFFB4CEB3),
