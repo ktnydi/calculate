@@ -5,6 +5,7 @@ import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class VersionCheckPage extends ConsumerStatefulWidget {
   const VersionCheckPage({Key? key}) : super(key: key);
@@ -40,10 +41,13 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
         return;
       }
 
-      const title = 'アップデートのお知らせ';
-      const message = '新しいバージョンのアプリをリリースしました。アップデートしてください。';
-      const cancelLabel = '後で行う';
-      const okLabel = 'アップデート';
+      // ignore: use_build_context_synchronously
+      if (!context.mounted) return;
+
+      final title = L10n.of(context)!.updateRequestTitle;
+      final message = L10n.of(context)!.updateRequestMessage;
+      final cancelLabel = L10n.of(context)!.cancelUpdateButtonLabel;
+      final okLabel = L10n.of(context)!.okUpdateButtonLabel;
 
       if (requestType == UpdateRequestType.cancelable) {
         // ignore: use_build_context_synchronously

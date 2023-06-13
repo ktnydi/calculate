@@ -35,6 +35,7 @@ enum QuizCategoryMode {
   subtraction,
   division,
   multiplication,
+  ;
 }
 
 extension QuizCategoryModeEx on QuizCategoryMode {
@@ -50,21 +51,6 @@ extension QuizCategoryModeEx on QuizCategoryMode {
         return 3;
       case QuizCategoryMode.multiplication:
         return 4;
-    }
-  }
-
-  String get name {
-    switch (this) {
-      case QuizCategoryMode.random:
-        return 'ランダム';
-      case QuizCategoryMode.add:
-        return '足し算';
-      case QuizCategoryMode.subtraction:
-        return '引き算';
-      case QuizCategoryMode.division:
-        return '割り算';
-      case QuizCategoryMode.multiplication:
-        return '掛け算';
     }
   }
 }

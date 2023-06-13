@@ -10,6 +10,7 @@ import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Setting extends ConsumerWidget {
   const Setting({super.key});
@@ -31,7 +32,7 @@ class Setting extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('設定'),
+        title: Text(L10n.of(context)!.settingsPageTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -42,9 +43,11 @@ class Setting extends ConsumerWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('出題モード'),
                 Text(
-                  quizCategoryMode.name,
+                  L10n.of(context)!.quizModeTileLabel,
+                ),
+                Text(
+                  L10n.of(context)!.quizCategoryMode(quizCategoryMode.name),
                 ),
               ],
             ),
@@ -61,13 +64,17 @@ class Setting extends ConsumerWidget {
           const Divider(height: 1),
           ListTile(
             tileColor: Colors.white,
-            title: const Text('問題形式'),
+            title: Text(L10n.of(context)!.quizTypeTileLabel),
             trailing: CupertinoSlidingSegmentedControl<QuizType>(
               groupValue: quizTypeState,
-              children: {
-                QuizType.numQuizzes: Text(QuizType.numQuizzes.name),
-                QuizType.timeLimit: Text(QuizType.timeLimit.name),
-              },
+              children: QuizType.values.asMap().map(
+                (key, value) {
+                  return MapEntry(
+                    value,
+                    Text(L10n.of(context)!.quizType(value.name)),
+                  );
+                },
+              ),
               onValueChanged: (value) async {
                 if (value == null) return;
                 quizTypeNotifier.change(value);
@@ -80,129 +87,64 @@ class Setting extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (flavor == Flavor.development)
-                  RadioListTile<int>(
-                    value: 2,
-                    groupValue: quizSizeState,
-                    onChanged: (value) {
-                      if (value == null) return;
-                      quizSizeNotifier.change(value);
-                    },
-                    title: const Text('2問（開発環境）'),
-                    tileColor: Colors.white,
-                  ),
-                RadioListTile<int>(
-                  value: 10,
+                if (flavor == Flavor.development) 2,
+                10,
+                20,
+                30,
+                40,
+              ].map((value) {
+                return RadioListTile<int>(
+                  value: value,
                   groupValue: quizSizeState,
                   onChanged: (value) {
                     if (value == null) return;
                     quizSizeNotifier.change(value);
                   },
-                  title: const Text('10問'),
+                  title: Text(L10n.of(context)!.quizSize(value)),
                   tileColor: Colors.white,
-                ),
-                RadioListTile<int>(
-                  value: 20,
-                  groupValue: quizSizeState,
-                  onChanged: (value) {
-                    if (value == null) return;
-                    quizSizeNotifier.change(value);
-                  },
-                  title: const Text('20問'),
-                  tileColor: Colors.white,
-                ),
-                RadioListTile<int>(
-                  value: 30,
-                  groupValue: quizSizeState,
-                  onChanged: (value) {
-                    if (value == null) return;
-                    quizSizeNotifier.change(value);
-                  },
-                  title: const Text('30問'),
-                  tileColor: Colors.white,
-                ),
-                RadioListTile<int>(
-                  value: 40,
-                  groupValue: quizSizeState,
-                  onChanged: (value) {
-                    if (value == null) return;
-                    quizSizeNotifier.change(value);
-                  },
-                  title: const Text('40問'),
-                  tileColor: Colors.white,
-                ),
-              ],
+                );
+              }).toList(),
             ),
           if (quizTypeState == QuizType.timeLimit)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (flavor == Flavor.development)
-                  RadioListTile<int>(
-                    value: 10,
-                    groupValue: quizTimeState,
-                    onChanged: (value) async {
-                      if (value == null) return;
-                      quizTimeNotifier.change(time: value);
-                    },
-                    title: const Text('10秒（開発環境）'),
-                    tileColor: Colors.white,
-                  ),
-                RadioListTile<int>(
-                  value: 30,
+                if (flavor == Flavor.development) 10,
+                30,
+                60,
+                120,
+                180,
+              ].map((e) {
+                return RadioListTile<int>(
+                  value: e,
                   groupValue: quizTimeState,
                   onChanged: (value) async {
                     if (value == null) return;
                     quizTimeNotifier.change(time: value);
                   },
-                  title: const Text('30秒'),
+                  title: Text('$e${L10n.of(context)!.seconds}'),
                   tileColor: Colors.white,
-                ),
-                RadioListTile<int>(
-                  value: 60,
-                  groupValue: quizTimeState,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    quizTimeNotifier.change(time: value);
-                  },
-                  title: const Text('60秒'),
-                  tileColor: Colors.white,
-                ),
-                RadioListTile<int>(
-                  value: 120,
-                  groupValue: quizTimeState,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    quizTimeNotifier.change(time: value);
-                  },
-                  title: const Text('120秒'),
-                  tileColor: Colors.white,
-                ),
-                RadioListTile<int>(
-                  value: 180,
-                  groupValue: quizTimeState,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    quizTimeNotifier.change(time: value);
-                  },
-                  title: const Text('180秒'),
-                  tileColor: Colors.white,
-                ),
-              ],
+                );
+              }).toList(),
             ),
           const Divider(height: 1),
           const SizedBox(height: 16),
           const Divider(height: 1),
           ListTile(
-            title: const Text('キーボードの位置'),
+            title: Text(
+              L10n.of(context)!.keyboardLocationTileLabel,
+            ),
             trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
               groupValue: keyboardLocation,
-              children: {
-                KeyboardLocation.left: Text(KeyboardLocation.left.name),
-                KeyboardLocation.center: Text(KeyboardLocation.center.name),
-                KeyboardLocation.right: Text(KeyboardLocation.right.name),
-              },
+              children: KeyboardLocation.values.asMap().map(
+                (key, value) {
+                  return MapEntry(
+                    value,
+                    Text(L10n.of(context)!.keyboardLocation(value.name)),
+                  );
+                },
+              ),
               onValueChanged: (value) async {
                 if (value == null) return;
                 keyboardLocationNotifier.change(value);
@@ -231,8 +173,8 @@ class Setting extends ConsumerWidget {
             },
             title: Row(
               children: [
-                const Expanded(
-                  child: Text('言語設定'),
+                Expanded(
+                  child: Text(L10n.of(context)!.languageSettingsTileLabel),
                 ),
                 Text(localeState.label),
               ],
@@ -268,7 +210,9 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
                   if (value == null) return;
                   quizCategoryModeNotifier.change(value);
                 },
-                title: Text(value.name),
+                title: Text(
+                  L10n.of(context)!.quizCategoryMode(value.name),
+                ),
                 tileColor: Colors.white,
               );
             },

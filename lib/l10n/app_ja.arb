@@ -1,1 +1,80 @@
-{}
+{
+  "appTitle": "Keisan Doriru",
+  "appMessage": "Let's challenge!",
+  "startButtonLabel": "スタート",
+  "quizCategoryMode": "{value, select, random{ランダム} add{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}",
+  "@quizCategoryMode": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quizCategory": "{value, select, additional{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}",
+  "@quizCategory": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quizType": "{value, select, timeLimit{時間制限} numQuizzes{問題数} other{}}",
+  "@quizType": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quizSize": "{value} 問",
+  "@quizSize": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsButtonLabel": "設定",
+  "helpButtonLabel": "ヘルプ",
+  "currentQuizNumber": "第{value}問",
+  "@currentQuizNumber": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "gameResultPageTitle": "結果",
+  "gameSettingsSectionLabel": "設定",
+  "averageTimeSectionLabel": "平均タイム",
+  "answeredQuizSectionLabel": "解答した問題",
+  "allQuizAverageTimeLabel": "全体",
+  "seconds": "秒",
+  "retryButtonLabel": "リトライ",
+  "homeButtonLabel": "ホーム",
+  "settingsPageTitle": "設定",
+  "quizModeTileLabel": "出題モード",
+  "quizTypeTileLabel": "問題形式",
+  "keyboardLocationTileLabel": "キーボードの位置",
+  "keyboardLocation": "{value, select, left{左} center{標準} right{右} other{}}",
+  "@keyboardLocation": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "languageSettingsTileLabel": "言語設定",
+  "helpPageTitle": "ヘルプ",
+  "feedbackTileLabel": "フィードバック",
+  "loadmapTileLabel": "ロードマップ",
+  "reviewTileLabel": "アプリを評価",
+  "licenseTileLabel": "ライセンス",
+  "termsOfUseTileLabel": "利用規約",
+  "privacyPolicyTileLabel": "プライバシーポリシー",
+  "versionTileLabel": "バージョン",
+  "updateRequestTitle": "アップデートのお知らせ",
+  "updateRequestMessage": "新しいバージョンのアプリをリリースしました。アップデートしてください。",
+  "cancelUpdateButtonLabel": "あとで行う",
+  "okUpdateButtonLabel": "アップデート"
+}

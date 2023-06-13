@@ -3,6 +3,7 @@ import 'package:calculate/providers.dart';
 import 'package:calculate/presentation/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Help extends StatelessWidget {
   const Help({super.key});
@@ -11,14 +12,14 @@ class Help extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ヘルプ'),
+        title: Text(L10n.of(context)!.helpPageTitle),
       ),
       body: ListView(
         children: [
           const SizedBox(height: 16),
           const Divider(height: 1),
           ListTile(
-            title: const Text('フィードバック'),
+            title: Text(L10n.of(context)!.feedbackTileLabel),
             trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
@@ -34,7 +35,7 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: const Text('ロードマップ'),
+            title: Text(L10n.of(context)!.loadmapTileLabel),
             trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
@@ -50,7 +51,7 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: const Text('アプリを評価'),
+            title: Text(L10n.of(context)!.reviewTileLabel),
             trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () async {
@@ -64,7 +65,7 @@ class Help extends StatelessWidget {
             builder: (context, ref, child) {
               final packageInfo = ref.watch(packageInfoProvider);
               return ListTile(
-                title: const Text('ライセンス'),
+                title: Text(L10n.of(context)!.licenseTileLabel),
                 trailing: const Icon(Icons.navigate_next),
                 tileColor: Colors.white,
                 onTap: () {
@@ -79,7 +80,7 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: const Text('利用規約'),
+            title: Text(L10n.of(context)!.termsOfUseTileLabel),
             trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
@@ -95,7 +96,7 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: const Text('プライバシーポリシー'),
+            title: Text(L10n.of(context)!.privacyPolicyTileLabel),
             trailing: const Icon(Icons.navigate_next),
             tileColor: Colors.white,
             onTap: () {
@@ -117,7 +118,7 @@ class Help extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('バージョン'),
+                    Text(L10n.of(context)!.versionTileLabel),
                     Text(
                       '${packageInfo.version}+${packageInfo.buildNumber}',
                       style: TextStyle(

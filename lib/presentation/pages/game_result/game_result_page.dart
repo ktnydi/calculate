@@ -14,6 +14,7 @@ import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class GameResult extends ConsumerWidget {
   final int leftTime;
@@ -52,7 +53,7 @@ class GameResult extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('結果'),
+        title: Text(L10n.of(context)!.gameResultPageTitle),
       ),
       body: SafeArea(
         child: Column(
@@ -68,9 +69,11 @@ class GameResult extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('設定'),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              L10n.of(context)!.gameSettingsSectionLabel,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Container(
@@ -86,10 +89,14 @@ class GameResult extends ConsumerWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        '出題モード',
+                                      Text(
+                                        L10n.of(context)!.quizModeTileLabel,
                                       ),
-                                      Text(quizCategory.name),
+                                      Text(
+                                        L10n.of(context)!.quizCategoryMode(
+                                          quizCategory.name,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -99,13 +106,13 @@ class GameResult extends ConsumerWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        '問題形式',
+                                      Text(
+                                        L10n.of(context)!.quizTypeTileLabel,
                                       ),
                                       Text(
                                         quizType == QuizType.numQuizzes
-                                            ? '問題数・全$quizLength問'
-                                            : '時間制限・$limit秒',
+                                            ? '${L10n.of(context)!.quizType(quizType.name)}・${L10n.of(context)!.quizSize(quizLength)}'
+                                            : '${L10n.of(context)!.quizType(quizType.name)}・$limit${L10n.of(context)!.seconds}',
                                       ),
                                     ],
                                   ),
@@ -114,9 +121,11 @@ class GameResult extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('平均タイム'),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              L10n.of(context)!.averageTimeSectionLabel,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Container(
@@ -132,12 +141,13 @@ class GameResult extends ConsumerWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        '全体',
+                                      Text(
+                                        L10n.of(context)!
+                                            .allQuizAverageTimeLabel,
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
-                                        '${(avgTime!.inMilliseconds / 1000).digit()}秒',
+                                        '${(avgTime!.inMilliseconds / 1000).digit()}${L10n.of(context)!.seconds}',
                                       ),
                                     ],
                                   ),
@@ -151,11 +161,12 @@ class GameResult extends ConsumerWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            i.label,
+                                            L10n.of(context)!
+                                                .quizCategory(i.name),
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()}秒',
+                                            '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()}${L10n.of(context)!.seconds}',
                                           )
                                         ],
                                       ),
@@ -165,9 +176,11 @@ class GameResult extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('解答した問題'),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              L10n.of(context)!.answeredQuizSectionLabel,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Container(
@@ -198,7 +211,7 @@ class GameResult extends ConsumerWidget {
                                             ),
                                             const Spacer(),
                                             Text(
-                                              '${(answer.time.inMilliseconds / 1000).digit()}秒',
+                                              '${(answer.time.inMilliseconds / 1000).digit()}${L10n.of(context)!.seconds}',
                                             ),
                                           ],
                                         ),
@@ -230,7 +243,7 @@ class GameResult extends ConsumerWidget {
                         children: [
                           FilledButton.icon(
                             icon: const Icon(Icons.refresh_outlined),
-                            label: const Text('リトライ'),
+                            label: Text(L10n.of(context)!.retryButtonLabel),
                             style: FilledButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
@@ -253,7 +266,7 @@ class GameResult extends ConsumerWidget {
                           const SizedBox(width: 16),
                           FilledButton.icon(
                             icon: const Icon(Icons.home_outlined),
-                            label: const Text('ホーム'),
+                            label: Text(L10n.of(context)!.homeButtonLabel),
                             style: FilledButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
