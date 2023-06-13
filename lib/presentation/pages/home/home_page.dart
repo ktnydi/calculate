@@ -15,6 +15,7 @@ import 'package:calculate/presentation/pages/setting/setting_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key});
@@ -55,19 +56,19 @@ class Home extends ConsumerWidget {
                               ),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: const [
+                                children: [
                                   AutoSizeText(
-                                    'Keisan Doriru',
-                                    style: TextStyle(
+                                    L10n.of(context)!.appTitle,
+                                    style: const TextStyle(
                                       fontSize: 40,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     maxLines: 1,
                                   ),
-                                  SizedBox(height: 32),
+                                  const SizedBox(height: 32),
                                   AutoSizeText(
-                                    'Let\'s challenge!',
-                                    style: TextStyle(
+                                    L10n.of(context)!.appMessage,
+                                    style: const TextStyle(
                                       fontSize: 24,
                                     ),
                                     maxLines: 1,
@@ -99,7 +100,10 @@ class Home extends ConsumerWidget {
                               },
                               child: FittedBox(
                                 child: Text(
-                                  'スタート\n（${quizCategoryModeState.name}・${quizType.name}・${quizType == QuizType.numQuizzes ? '$quizLength問' : '$limit秒'}）',
+                                  '${L10n.of(context)!.startButtonLabel}\n'
+                                  '（${L10n.of(context)!.quizCategoryMode(quizCategoryModeState.name)}・'
+                                  '${L10n.of(context)!.quizType(quizType.name)}・'
+                                  '${quizType == QuizType.numQuizzes ? L10n.of(context)!.quizSize(quizLength) : '$limit${L10n.of(context)!.seconds}'}）',
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
                                 ),
@@ -126,7 +130,9 @@ class Home extends ConsumerWidget {
                                     ),
                                   );
                                 },
-                                child: const Text('設定'),
+                                child: Text(
+                                  L10n.of(context)!.settingsButtonLabel,
+                                ),
                               ),
                               const SizedBox(width: 8),
                               FilledButton(
@@ -145,7 +151,9 @@ class Home extends ConsumerWidget {
                                     ),
                                   );
                                 },
-                                child: const Text('ヘルプ'),
+                                child: Text(
+                                  L10n.of(context)!.helpButtonLabel,
+                                ),
                               ),
                             ],
                           )

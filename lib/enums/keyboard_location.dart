@@ -31,14 +31,13 @@ class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
 }
 
 enum KeyboardLocation {
-  center(0, '標準', Alignment.bottomCenter),
-  left(1, '左', Alignment.bottomLeft),
-  right(2, '右', Alignment.bottomRight),
+  left(1, Alignment.bottomLeft),
+  center(0, Alignment.bottomCenter),
+  right(2, Alignment.bottomRight),
   ;
 
-  const KeyboardLocation(this.id, this.name, this.alignment);
+  const KeyboardLocation(this.id, this.alignment);
 
   final int id;
-  final String name;
   final AlignmentGeometry alignment;
 }
