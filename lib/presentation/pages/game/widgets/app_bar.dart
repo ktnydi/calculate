@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
+import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +24,25 @@ class GameAppBar extends ConsumerWidget with PreferredSizeWidget {
       backgroundColor: Colors.white,
       leading: CloseButton(
         onPressed: () {
+          if (quizIndex == 0) {
+            Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                transitionDuration: const Duration(milliseconds: 500),
+                pageBuilder: (context, animation, _) {
+                  return const Home();
+                },
+                transitionsBuilder: (context, animation, _, child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              ),
+            );
+            return;
+          }
+
           ref.read(gameProvider.notifier).retiredQuiz();
         },
       ),
