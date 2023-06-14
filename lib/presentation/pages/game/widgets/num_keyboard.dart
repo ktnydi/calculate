@@ -18,11 +18,13 @@ class NumKeyboard extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Divider(height: 1, thickness: 1),
-        Align(
+        AnimatedAlign(
+          duration: const Duration(milliseconds: 200),
           alignment:
               oneHandKeypad ? keyboardLocation.alignment : Alignment.center,
           child: LayoutBuilder(builder: (context, constrains) {
-            return Container(
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               width: oneHandKeypad
                   ? constrains.maxWidth * 0.75
                   : constrains.maxWidth,
