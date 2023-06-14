@@ -34,156 +34,158 @@ class Setting extends ConsumerWidget {
       appBar: AppBar(
         title: Text(L10n.of(context)!.settingsPageTitle),
       ),
-      body: ListView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        children: [
-          const Divider(height: 1),
-          ListTile(
-            tileColor: Colors.white,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  L10n.of(context)!.quizModeTileLabel,
-                ),
-                Text(
-                  L10n.of(context)!.quizCategoryMode(quizCategoryMode.name),
-                ),
-              ],
-            ),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => _QuizCategoryModeSheet(),
-              );
-            },
-          ),
-          const Divider(height: 1),
-          const SizedBox(height: 16),
-          const Divider(height: 1),
-          ListTile(
-            tileColor: Colors.white,
-            title: Text(L10n.of(context)!.quizTypeTileLabel),
-            trailing: CupertinoSlidingSegmentedControl<QuizType>(
-              groupValue: quizTypeState,
-              children: QuizType.values.asMap().map(
-                (key, value) {
-                  return MapEntry(
-                    value,
-                    Text(L10n.of(context)!.quizType(value.name)),
-                  );
-                },
+        child: Column(
+          children: [
+            const Divider(height: 1),
+            ListTile(
+              tileColor: Colors.white,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    L10n.of(context)!.quizModeTileLabel,
+                  ),
+                  Text(
+                    L10n.of(context)!.quizCategoryMode(quizCategoryMode.name),
+                  ),
+                ],
               ),
-              onValueChanged: (value) async {
-                if (value == null) return;
-                quizTypeNotifier.change(value);
+              trailing: const Icon(Icons.navigate_next),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => _QuizCategoryModeSheet(),
+                );
               },
             ),
-          ),
-          const Divider(height: 1),
-          if (quizTypeState == QuizType.numQuizzes)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (flavor == Flavor.development) 2,
-                10,
-                20,
-                30,
-                40,
-              ].map((value) {
-                return RadioListTile<int>(
-                  value: value,
-                  groupValue: quizSizeState,
-                  onChanged: (value) {
-                    if (value == null) return;
-                    quizSizeNotifier.change(value);
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
+            ListTile(
+              tileColor: Colors.white,
+              title: Text(L10n.of(context)!.quizTypeTileLabel),
+              trailing: CupertinoSlidingSegmentedControl<QuizType>(
+                groupValue: quizTypeState,
+                children: QuizType.values.asMap().map(
+                  (key, value) {
+                    return MapEntry(
+                      value,
+                      Text(L10n.of(context)!.quizType(value.name)),
+                    );
                   },
-                  title: Text(L10n.of(context)!.quizSize(value)),
-                  tileColor: Colors.white,
-                );
-              }).toList(),
-            ),
-          if (quizTypeState == QuizType.timeLimit)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (flavor == Flavor.development) 10,
-                30,
-                60,
-                120,
-                180,
-              ].map((e) {
-                return RadioListTile<int>(
-                  value: e,
-                  groupValue: quizTimeState,
-                  onChanged: (value) async {
-                    if (value == null) return;
-                    quizTimeNotifier.change(time: value);
-                  },
-                  title: Text('$e${L10n.of(context)!.seconds}'),
-                  tileColor: Colors.white,
-                );
-              }).toList(),
-            ),
-          const Divider(height: 1),
-          const SizedBox(height: 16),
-          const Divider(height: 1),
-          ListTile(
-            title: Text(
-              L10n.of(context)!.keyboardLocationTileLabel,
-            ),
-            trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
-              groupValue: keyboardLocation,
-              children: KeyboardLocation.values.asMap().map(
-                (key, value) {
-                  return MapEntry(
-                    value,
-                    Text(L10n.of(context)!.keyboardLocation(value.name)),
-                  );
+                ),
+                onValueChanged: (value) async {
+                  if (value == null) return;
+                  quizTypeNotifier.change(value);
                 },
               ),
-              onValueChanged: (value) async {
-                if (value == null) return;
-                keyboardLocationNotifier.change(value);
-              },
             ),
-            tileColor: Colors.white,
-          ),
-          const Divider(height: 1),
-          const SizedBox(height: 16),
-          const Divider(height: 1),
-          ListTile(
-            onTap: () async {
-              final result = await showModalActionSheet(
-                context: context,
-                actions: SupportedLocale.values.map((e) {
-                  return SheetAction(
-                    key: e,
-                    label: e.label,
+            const Divider(height: 1),
+            if (quizTypeState == QuizType.numQuizzes)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (flavor == Flavor.development) 2,
+                  10,
+                  20,
+                  30,
+                  40,
+                ].map((value) {
+                  return RadioListTile<int>(
+                    value: value,
+                    groupValue: quizSizeState,
+                    onChanged: (value) {
+                      if (value == null) return;
+                      quizSizeNotifier.change(value);
+                    },
+                    title: Text(L10n.of(context)!.quizSize(value)),
+                    tileColor: Colors.white,
                   );
                 }).toList(),
-              );
-
-              if (result == null) return;
-
-              ref.read(localeNotifierProvider.notifier).change(result);
-            },
-            title: Row(
-              children: [
-                Expanded(
-                  child: Text(L10n.of(context)!.languageSettingsTileLabel),
+              ),
+            if (quizTypeState == QuizType.timeLimit)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (flavor == Flavor.development) 10,
+                  30,
+                  60,
+                  120,
+                  180,
+                ].map((e) {
+                  return RadioListTile<int>(
+                    value: e,
+                    groupValue: quizTimeState,
+                    onChanged: (value) async {
+                      if (value == null) return;
+                      quizTimeNotifier.change(time: value);
+                    },
+                    title: Text('$e${L10n.of(context)!.seconds}'),
+                    tileColor: Colors.white,
+                  );
+                }).toList(),
+              ),
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
+            ListTile(
+              title: Text(
+                L10n.of(context)!.keyboardLocationTileLabel,
+              ),
+              trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
+                groupValue: keyboardLocation,
+                children: KeyboardLocation.values.asMap().map(
+                  (key, value) {
+                    return MapEntry(
+                      value,
+                      Text(L10n.of(context)!.keyboardLocation(value.name)),
+                    );
+                  },
                 ),
-                Text(localeState.label),
-              ],
+                onValueChanged: (value) async {
+                  if (value == null) return;
+                  keyboardLocationNotifier.change(value);
+                },
+              ),
+              tileColor: Colors.white,
             ),
-            trailing: const Icon(Icons.navigate_next),
-            tileColor: Colors.white,
-          ),
-          const Divider(height: 1),
-        ],
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
+            ListTile(
+              onTap: () async {
+                final result = await showModalActionSheet(
+                  context: context,
+                  actions: SupportedLocale.values.map((e) {
+                    return SheetAction(
+                      key: e,
+                      label: e.label,
+                    );
+                  }).toList(),
+                );
+
+                if (result == null) return;
+
+                ref.read(localeNotifierProvider.notifier).change(result);
+              },
+              title: Row(
+                children: [
+                  Expanded(
+                    child: Text(L10n.of(context)!.languageSettingsTileLabel),
+                  ),
+                  Text(localeState.label),
+                ],
+              ),
+              trailing: const Icon(Icons.navigate_next),
+              tileColor: Colors.white,
+            ),
+            const Divider(height: 1),
+          ],
+        ),
       ),
     );
   }
