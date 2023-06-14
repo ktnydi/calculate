@@ -25,7 +25,7 @@ class Game extends ConsumerWidget {
 
         final quizTimeState = ref.read(quizTimeNotifierProvider) * 1000;
 
-        if (!next.isRetired) {
+        if (!next.isRetired && next.answerList.isNotEmpty) {
           ref.read(playCounterNotifierProvider.notifier).increment();
         }
 
