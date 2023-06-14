@@ -16,8 +16,6 @@ class Help extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          const SizedBox(height: 16),
-          const Divider(height: 1),
           ListTile(
             title: Text(L10n.of(context)!.feedbackTileLabel),
             trailing: const Icon(Icons.navigate_next),
@@ -131,7 +129,6 @@ class Help extends StatelessWidget {
               );
             },
           ),
-          const Divider(height: 1),
         ],
       ),
     );

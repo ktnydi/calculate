@@ -38,10 +38,8 @@ class Setting extends ConsumerWidget {
         title: Text(L10n.of(context)!.settingsPageTitle),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
           children: [
-            const Divider(height: 1),
             ListTile(
               tileColor: Colors.white,
               title: Row(
@@ -63,26 +61,30 @@ class Setting extends ConsumerWidget {
                 );
               },
             ),
-            const Divider(height: 1),
             const SizedBox(height: 16),
-            const Divider(height: 1),
             ListTile(
               tileColor: Colors.white,
-              title: Text(L10n.of(context)!.quizTypeTileLabel),
-              trailing: CupertinoSlidingSegmentedControl<QuizType>(
-                groupValue: quizTypeState,
-                children: QuizType.values.asMap().map(
-                  (key, value) {
-                    return MapEntry(
-                      value,
-                      Text(L10n.of(context)!.quizType(value.name)),
-                    );
-                  },
-                ),
-                onValueChanged: (value) async {
-                  if (value == null) return;
-                  quizTypeNotifier.change(value);
-                },
+              title: Row(
+                children: [
+                  Expanded(
+                    child: Text(L10n.of(context)!.quizTypeTileLabel),
+                  ),
+                  CupertinoSlidingSegmentedControl<QuizType>(
+                    groupValue: quizTypeState,
+                    children: QuizType.values.asMap().map(
+                      (key, value) {
+                        return MapEntry(
+                          value,
+                          Text(L10n.of(context)!.quizType(value.name)),
+                        );
+                      },
+                    ),
+                    onValueChanged: (value) async {
+                      if (value == null) return;
+                      quizTypeNotifier.change(value);
+                    },
+                  ),
+                ],
               ),
             ),
             const Divider(height: 1),
@@ -132,9 +134,7 @@ class Setting extends ConsumerWidget {
                   );
                 }).toList(),
               ),
-            const Divider(height: 1),
             const SizedBox(height: 16),
-            const Divider(height: 1),
             ListTile(
               title: Text(
                 L10n.of(context)!.oneHandKeypad,
@@ -151,30 +151,35 @@ class Setting extends ConsumerWidget {
             if (oneHandKeypad) ...[
               const Divider(height: 1),
               ListTile(
-                title: Text(
-                  L10n.of(context)!.keyboardLocationTileLabel,
-                ),
-                trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
-                  groupValue: keyboardLocation,
-                  children: KeyboardLocation.values.asMap().map(
-                    (key, value) {
-                      return MapEntry(
-                        value,
-                        Text(L10n.of(context)!.keyboardLocation(value.name)),
-                      );
-                    },
-                  ),
-                  onValueChanged: (value) async {
-                    if (value == null) return;
-                    keyboardLocationNotifier.change(value);
-                  },
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        L10n.of(context)!.keyboardLocationTileLabel,
+                      ),
+                    ),
+                    CupertinoSlidingSegmentedControl<KeyboardLocation>(
+                      groupValue: keyboardLocation,
+                      children: KeyboardLocation.values.asMap().map(
+                        (key, value) {
+                          return MapEntry(
+                            value,
+                            Text(
+                                L10n.of(context)!.keyboardLocation(value.name)),
+                          );
+                        },
+                      ),
+                      onValueChanged: (value) async {
+                        if (value == null) return;
+                        keyboardLocationNotifier.change(value);
+                      },
+                    ),
+                  ],
                 ),
                 tileColor: Colors.white,
               ),
             ],
-            const Divider(height: 1),
             const SizedBox(height: 16),
-            const Divider(height: 1),
             ListTile(
               onTap: () async {
                 final result = await showModalActionSheet(
@@ -202,7 +207,6 @@ class Setting extends ConsumerWidget {
               trailing: const Icon(Icons.navigate_next),
               tileColor: Colors.white,
             ),
-            const Divider(height: 1),
           ],
         ),
       ),
