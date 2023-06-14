@@ -5,6 +5,7 @@ import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/enums/supported_locale.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
+import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,8 @@ class Setting extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final flavor = ref.watch(flavorProvider);
     final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
+    final oneHandKeypad = ref.watch(oneHandKeypadProvider);
+    final oneHandKeypadNotifier = ref.watch(oneHandKeypadProvider.notifier);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
     final keyboardLocationNotifier =
         ref.watch(keyboardLocationProvider.notifier);
@@ -134,25 +137,41 @@ class Setting extends ConsumerWidget {
             const Divider(height: 1),
             ListTile(
               title: Text(
-                L10n.of(context)!.keyboardLocationTileLabel,
+                L10n.of(context)!.oneHandKeypad,
               ),
-              trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
-                groupValue: keyboardLocation,
-                children: KeyboardLocation.values.asMap().map(
-                  (key, value) {
-                    return MapEntry(
-                      value,
-                      Text(L10n.of(context)!.keyboardLocation(value.name)),
-                    );
-                  },
-                ),
-                onValueChanged: (value) async {
-                  if (value == null) return;
-                  keyboardLocationNotifier.change(value);
+              trailing: Switch.adaptive(
+                activeColor: Theme.of(context).colorScheme.primary,
+                value: oneHandKeypad,
+                onChanged: (value) {
+                  oneHandKeypadNotifier.update(value);
                 },
               ),
               tileColor: Colors.white,
             ),
+            if (oneHandKeypad) ...[
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  L10n.of(context)!.keyboardLocationTileLabel,
+                ),
+                trailing: CupertinoSlidingSegmentedControl<KeyboardLocation>(
+                  groupValue: keyboardLocation,
+                  children: KeyboardLocation.values.asMap().map(
+                    (key, value) {
+                      return MapEntry(
+                        value,
+                        Text(L10n.of(context)!.keyboardLocation(value.name)),
+                      );
+                    },
+                  ),
+                  onValueChanged: (value) async {
+                    if (value == null) return;
+                    keyboardLocationNotifier.change(value);
+                  },
+                ),
+                tileColor: Colors.white,
+              ),
+            ],
             const Divider(height: 1),
             const SizedBox(height: 16),
             const Divider(height: 1),

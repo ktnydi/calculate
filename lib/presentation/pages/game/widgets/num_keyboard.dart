@@ -1,4 +1,5 @@
 import 'package:calculate/enums/keyboard_location.dart';
+import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/widgets/figure_button.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class NumKeyboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final oneHandKeypad = ref.watch(oneHandKeypadProvider);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
     final gameNotifier = ref.watch(gameProvider.notifier);
 
@@ -17,12 +19,13 @@ class NumKeyboard extends ConsumerWidget {
       children: [
         const Divider(height: 1, thickness: 1),
         Align(
-          alignment: keyboardLocation.alignment,
+          alignment:
+              oneHandKeypad ? keyboardLocation.alignment : Alignment.center,
           child: LayoutBuilder(builder: (context, constrains) {
             return Container(
-              width: keyboardLocation == KeyboardLocation.center
-                  ? constrains.maxWidth
-                  : constrains.maxWidth * 0.75,
+              width: oneHandKeypad
+                  ? constrains.maxWidth * 0.75
+                  : constrains.maxWidth,
               padding: const EdgeInsets.symmetric(horizontal: 1),
               color: Theme.of(context).dividerColor,
               child: GridView.count(

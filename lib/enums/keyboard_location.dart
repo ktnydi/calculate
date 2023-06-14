@@ -11,12 +11,12 @@ final keyboardLocationProvider =
 );
 
 class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
-  KeyboardLocationNotifier(this.ref) : super(KeyboardLocation.center) {
+  KeyboardLocationNotifier(this.ref) : super(KeyboardLocation.right) {
     final id = prefs.getInt(key);
     if (id == null) return;
     state = KeyboardLocation.values.firstWhere(
       (element) => element.id == id,
-      orElse: () => KeyboardLocation.center,
+      orElse: () => KeyboardLocation.right,
     );
   }
 
@@ -32,7 +32,6 @@ class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
 
 enum KeyboardLocation {
   left(1, Alignment.bottomLeft),
-  center(0, Alignment.bottomCenter),
   right(2, Alignment.bottomRight),
   ;
 

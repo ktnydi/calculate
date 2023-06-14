@@ -55,7 +55,8 @@
   "settingsPageTitle": "設定",
   "quizModeTileLabel": "出題モード",
   "quizTypeTileLabel": "問題形式",
-  "keyboardLocationTileLabel": "キーボードの位置",
+  "oneHandKeypad": "片手モード",
+  "keyboardLocationTileLabel": "キーパッドの位置",
   "keyboardLocation": "{value, select, left{左} center{標準} right{右} other{}}",
   "@keyboardLocation": {
     "placeholders": {
