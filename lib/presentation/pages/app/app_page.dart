@@ -31,17 +31,21 @@ class MyApp extends ConsumerWidget {
       locale: locale.toLocale(),
       supportedLocales: L10n.supportedLocales,
       theme: ThemeData.from(
+        useMaterial3: true,
         colorScheme: const ColorScheme.light(
           primary: Color(0xFFB4CEB3),
           onPrimary: Color(0xFF000000),
           secondary: Color(0xFFB4CEB3),
           onSecondary: Color(0xFF000000),
+          outlineVariant: Color(0x1F000000),
         ),
       ).copyWith(
         primaryColor: const Color(0xFFB4CEB3),
         scaffoldBackgroundColor: const Color(0xFFF4F5F7),
         appBarTheme: const AppBarTheme(
-          elevation: 1,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: Color(0xFFB4CEB3),
           centerTitle: true,
         ),
       ),
