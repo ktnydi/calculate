@@ -38,6 +38,7 @@ class Home extends ConsumerWidget {
                 return SingleChildScrollView(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
+                      minWidth: constraints.maxWidth,
                       minHeight: constraints.minHeight,
                     ),
                     child: Padding(
@@ -78,84 +79,98 @@ class Home extends ConsumerWidget {
                             ],
                           ),
                           const SizedBox(height: 32),
-                          Center(
-                            child: FilledButton(
-                              style: FilledButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                minimumSize: const Size(232, 80),
-                              ),
-                              onPressed: () {
-                                analytics.logStartGame();
-                                ref.invalidate(quizProvider);
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    fullscreenDialog: true,
-                                    builder: (context) => const Game(),
+                          IntrinsicWidth(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                FilledButton(
+                                  style: FilledButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    minimumSize: const Size(232, 80),
                                   ),
-                                );
-                              },
-                              child: FittedBox(
-                                child: Text(
-                                  '${L10n.of(context)!.startButtonLabel}\n'
-                                  '（${L10n.of(context)!.quizCategoryMode(quizCategoryModeState.name)}・'
-                                  '${L10n.of(context)!.quizType(quizType.name)}・'
-                                  '${quizType == QuizType.numQuizzes ? L10n.of(context)!.quizSize(quizLength) : '$limit${L10n.of(context)!.seconds}'}）',
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
+                                  onPressed: () {
+                                    analytics.logStartGame();
+                                    ref.invalidate(quizProvider);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        fullscreenDialog: true,
+                                        builder: (context) => const Game(),
+                                      ),
+                                    );
+                                  },
+                                  child: FittedBox(
+                                    child: Text(
+                                      '${L10n.of(context)!.startButtonLabel}\n'
+                                      '（${L10n.of(context)!.quizCategoryMode(quizCategoryModeState.name)}・'
+                                      '${L10n.of(context)!.quizType(quizType.name)}・'
+                                      '${quizType == QuizType.numQuizzes ? L10n.of(context)!.quizSize(quizLength) : '$limit${L10n.of(context)!.seconds}'}）',
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Expanded(
+                                      child: FilledButton(
+                                        style: FilledButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                          minimumSize: const Size(112, 56),
+                                        ),
+                                        onPressed: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Setting(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          L10n.of(context)!.settingsButtonLabel,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: FilledButton(
+                                        style: FilledButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                          minimumSize: const Size(112, 56),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Help(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          L10n.of(context)!.helpButtonLabel,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              FilledButton(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  minimumSize: const Size(112, 56),
-                                ),
-                                onPressed: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const Setting(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  L10n.of(context)!.settingsButtonLabel,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              FilledButton(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  minimumSize: const Size(112, 56),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const Help(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  L10n.of(context)!.helpButtonLabel,
-                                ),
-                              ),
-                            ],
                           )
                         ],
                       ),
