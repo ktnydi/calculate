@@ -5,6 +5,7 @@
   "quizCategoryMode": "{value, select, random{Mix} add{Additional} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizCategory": "{value, select, additional{Additional} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizType": "{value, select, timeLimit{Time Limit} numQuizzes{Number} other{}}",
+  "quizTypeDescription": "{value, select, timeLimit{Answer as many questions as possible within the time limit} numQuizzes{Answer questions a set number of questions} other{}}",
   "quizSize": "{value}",
   "settingsButtonLabel": "Settings",
   "helpButtonLabel": "Help",
@@ -35,5 +36,8 @@
   "updateRequestTitle": "New Version of the App Released",
   "updateRequestMessage": "A new version of the app is available. Please download the latest version.",
   "cancelUpdateButtonLabel": "Later",
-  "okUpdateButtonLabel": "Update"
+  "okUpdateButtonLabel": "Update",
+  "finishTutorialButtonLabel": "Start",
+  "welcomeMessage": "Thank you for downloading this application. Before using the application, please complete a simple initial setup.",
+  "quizTypeSettingsDescription": "Choose your preferred question mode (Can be changed later)"
 }

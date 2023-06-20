@@ -2,6 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:app_review/app_review.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
+import 'package:calculate/presentation/pages/initial_settings/initial_settings_screen.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,8 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
     super.initState();
     Future(() async {
       final requestType = await ref.read(updateRequestProvider.future);
+      final prefs = ref.watch(sharedPreferencesProvider);
+      final isTutorialDone = prefs.getBool('isTutorialDone') ?? false;
 
       if (requestType == UpdateRequestType.not) {
         // ignore: use_build_context_synchronously
@@ -32,7 +35,9 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
             pageBuilder: (context, animation, secondaryAnimation) {
               return FadeTransition(
                 opacity: animation.drive(Tween(begin: 0, end: 1)),
-                child: const Home(),
+                child: isTutorialDone
+                    ? const Home()
+                    : const InitialSettingsScreen(),
               );
             },
           ),
@@ -72,7 +77,9 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
               pageBuilder: (context, animation, secondaryAnimation) {
                 return FadeTransition(
                   opacity: animation.drive(Tween(begin: 0, end: 1)),
-                  child: const Home(),
+                  child: isTutorialDone
+                      ? const Home()
+                      : const InitialSettingsScreen(),
                 );
               },
             ),

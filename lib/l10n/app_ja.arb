@@ -26,6 +26,14 @@
       }
     }
   },
+  "quizTypeDescription": "{value, select, timeLimit{決められた制限時間内にできるだけ問題を解く形式} numQuizzes{決められた問題数だけ問題を解く形式} other{}}",
+  "@quizTypeDescription": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "quizSize": "{value} 問",
   "@quizSize": {
     "placeholders": {
@@ -77,5 +85,8 @@
   "updateRequestTitle": "アップデートのお知らせ",
   "updateRequestMessage": "新しいバージョンのアプリをリリースしました。アップデートしてください。",
   "cancelUpdateButtonLabel": "あとで行う",
-  "okUpdateButtonLabel": "アップデート"
+  "okUpdateButtonLabel": "アップデート",
+  "finishTutorialButtonLabel": "はじめる",
+  "welcomeMessage": "本アプリをダウンロードいただきありがとうございます。アプリを利用する前に簡単な初期設定を行います。",
+  "quizTypeSettingsDescription": "お好みの問題形式を選択してください(あとで変更可能)"
 }
