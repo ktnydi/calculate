@@ -89,7 +89,7 @@ class InitialSettingsScreen extends ConsumerWidget {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, animation, _) {
-                            final prefs = ref.watch(sharedPreferencesProvider);
+                            final prefs = ref.read(sharedPreferencesProvider);
                             prefs.setBool('isTutorialDone', true);
 
                             return FadeTransition(
