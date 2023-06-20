@@ -21,7 +21,6 @@ class GameAppBar extends ConsumerWidget with PreferredSizeWidget {
     final oneHandKeypadNotifier = ref.watch(oneHandKeypadProvider.notifier);
 
     return AppBar(
-      backgroundColor: Colors.white,
       leading: CloseButton(
         onPressed: () {
           if (quizIndex == 0) {

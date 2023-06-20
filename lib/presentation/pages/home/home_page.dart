@@ -5,6 +5,7 @@ import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
@@ -60,17 +61,19 @@ class Home extends ConsumerWidget {
                                 children: [
                                   AutoSizeText(
                                     L10n.of(context)!.appTitle,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 40,
                                       fontWeight: FontWeight.bold,
+                                      color: context.colorScheme.onPrimary,
                                     ),
                                     maxLines: 1,
                                   ),
                                   const SizedBox(height: 32),
                                   AutoSizeText(
                                     L10n.of(context)!.appMessage,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 24,
+                                      color: context.colorScheme.onPrimary,
                                     ),
                                     maxLines: 1,
                                   ),
@@ -86,7 +89,10 @@ class Home extends ConsumerWidget {
                               children: [
                                 FilledButton(
                                   style: FilledButton.styleFrom(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor:
+                                        context.colorScheme.surface,
+                                    foregroundColor:
+                                        context.colorScheme.onSurface,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16),
                                     ),
@@ -128,7 +134,10 @@ class Home extends ConsumerWidget {
                                     Expanded(
                                       child: FilledButton(
                                         style: FilledButton.styleFrom(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor:
+                                              context.colorScheme.surface,
+                                          foregroundColor:
+                                              context.colorScheme.onSurface,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(16),
@@ -153,7 +162,10 @@ class Home extends ConsumerWidget {
                                     Expanded(
                                       child: FilledButton(
                                         style: FilledButton.styleFrom(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor:
+                                              context.colorScheme.surface,
+                                          foregroundColor:
+                                              context.colorScheme.onSurface,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(16),

@@ -1,3 +1,4 @@
+import 'package:calculate/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 class FigureButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class FigureButton extends StatelessWidget {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: context.colorScheme.surface,
         textStyle: Theme.of(context).textTheme.headlineSmall,
       ),
       onPressed: onPressed,

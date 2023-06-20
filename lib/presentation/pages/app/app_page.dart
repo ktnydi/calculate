@@ -37,15 +37,14 @@ class MyApp extends ConsumerWidget {
           onPrimary: Color(0xFF000000),
           secondary: Color(0xFFB4CEB3),
           onSecondary: Color(0xFF000000),
-          outlineVariant: Color(0x1F000000),
+          outline: Color(0xFF79747E),
+          outlineVariant: Color(0xFFCAC4D0),
         ),
       ).copyWith(
-        primaryColor: const Color(0xFFB4CEB3),
         scaffoldBackgroundColor: const Color(0xFFF4F5F7),
         appBarTheme: const AppBarTheme(
           elevation: 0,
           scrolledUnderElevation: 0,
-          backgroundColor: Color(0xFFB4CEB3),
           centerTitle: true,
         ),
       ),

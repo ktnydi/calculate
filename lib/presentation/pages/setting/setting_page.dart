@@ -4,6 +4,7 @@ import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/enums/supported_locale.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
@@ -34,6 +35,7 @@ class Setting extends ConsumerWidget {
     final localeState = ref.watch(localeNotifierProvider);
 
     return Scaffold(
+      backgroundColor: context.colorScheme.surface,
       appBar: AppBar(
         title: Text(L10n.of(context)!.settingsPageTitle),
       ),
@@ -41,7 +43,6 @@ class Setting extends ConsumerWidget {
         child: Column(
           children: [
             ListTile(
-              tileColor: Colors.white,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,9 +62,9 @@ class Setting extends ConsumerWidget {
                 );
               },
             ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
             const SizedBox(height: 16),
             ListTile(
-              tileColor: Colors.white,
               title: Row(
                 children: [
                   Expanded(
@@ -87,7 +88,6 @@ class Setting extends ConsumerWidget {
                 ],
               ),
             ),
-            const Divider(height: 1),
             if (quizTypeState == QuizType.numQuizzes)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +107,6 @@ class Setting extends ConsumerWidget {
                       quizSizeNotifier.change(value);
                     },
                     title: Text(L10n.of(context)!.quizSize(value)),
-                    tileColor: Colors.white,
                   );
                 }).toList(),
               ),
@@ -130,10 +129,10 @@ class Setting extends ConsumerWidget {
                       quizTimeNotifier.change(time: value);
                     },
                     title: Text('$e${L10n.of(context)!.seconds}'),
-                    tileColor: Colors.white,
                   );
                 }).toList(),
               ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
             const SizedBox(height: 16),
             ListTile(
               title: Text(
@@ -141,15 +140,15 @@ class Setting extends ConsumerWidget {
               ),
               trailing: Switch.adaptive(
                 activeColor: Theme.of(context).colorScheme.primary,
+                inactiveTrackColor:
+                    Theme.of(context).colorScheme.outlineVariant,
                 value: oneHandKeypad,
                 onChanged: (value) {
                   oneHandKeypadNotifier.update(value);
                 },
               ),
-              tileColor: Colors.white,
             ),
             if (oneHandKeypad) ...[
-              const Divider(height: 1),
               ListTile(
                 title: Row(
                   children: [
@@ -176,9 +175,9 @@ class Setting extends ConsumerWidget {
                     ),
                   ],
                 ),
-                tileColor: Colors.white,
               ),
             ],
+            const Divider(height: 1, indent: 16, endIndent: 16),
             const SizedBox(height: 16),
             ListTile(
               onTap: () async {
@@ -205,8 +204,8 @@ class Setting extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.navigate_next),
-              tileColor: Colors.white,
             ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
           ],
         ),
       ),
@@ -238,7 +237,6 @@ class _QuizCategoryModeSheet extends ConsumerWidget {
                 title: Text(
                   L10n.of(context)!.quizCategoryMode(value.name),
                 ),
-                tileColor: Colors.white,
               );
             },
           ).toList(),

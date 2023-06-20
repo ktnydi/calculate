@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/providers/quiz_provider.dart';
@@ -99,9 +100,24 @@ class _QuizFieldState extends ConsumerState<QuizField>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '=',
-                style: Theme.of(context).textTheme.titleLarge,
+              SizedBox(
+                width: 20,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Divider(
+                      height: 1,
+                      thickness: 2,
+                      color: context.colorScheme.onSurface,
+                    ),
+                    const SizedBox(height: 8),
+                    Divider(
+                      height: 1,
+                      thickness: 2,
+                      color: context.colorScheme.onSurface,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(width: 8),
               Container(

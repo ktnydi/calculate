@@ -1,4 +1,5 @@
 import 'package:app_review/app_review.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/providers.dart';
 import 'package:calculate/presentation/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class Help extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colorScheme.surface,
       appBar: AppBar(
         title: Text(L10n.of(context)!.helpPageTitle),
       ),
@@ -19,7 +21,6 @@ class Help extends StatelessWidget {
           ListTile(
             title: Text(L10n.of(context)!.feedbackTileLabel),
             trailing: const Icon(Icons.navigate_next),
-            tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
@@ -31,11 +32,10 @@ class Help extends StatelessWidget {
               );
             },
           ),
-          const Divider(height: 1),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           ListTile(
             title: Text(L10n.of(context)!.loadmapTileLabel),
             trailing: const Icon(Icons.navigate_next),
-            tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
@@ -47,25 +47,23 @@ class Help extends StatelessWidget {
               );
             },
           ),
-          const Divider(height: 1),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           ListTile(
             title: Text(L10n.of(context)!.reviewTileLabel),
             trailing: const Icon(Icons.navigate_next),
-            tileColor: Colors.white,
             onTap: () async {
               if (await AppReview.isRequestReviewAvailable) {
                 await AppReview.requestReview;
               }
             },
           ),
-          const Divider(height: 1),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           Consumer(
             builder: (context, ref, child) {
               final packageInfo = ref.watch(packageInfoProvider);
               return ListTile(
                 title: Text(L10n.of(context)!.licenseTileLabel),
                 trailing: const Icon(Icons.navigate_next),
-                tileColor: Colors.white,
                 onTap: () {
                   showLicensePage(
                     context: context,
@@ -76,11 +74,10 @@ class Help extends StatelessWidget {
               );
             },
           ),
-          const Divider(height: 1),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           ListTile(
             title: Text(L10n.of(context)!.termsOfUseTileLabel),
             trailing: const Icon(Icons.navigate_next),
-            tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
@@ -92,11 +89,10 @@ class Help extends StatelessWidget {
               );
             },
           ),
-          const Divider(height: 1),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           ListTile(
             title: Text(L10n.of(context)!.privacyPolicyTileLabel),
             trailing: const Icon(Icons.navigate_next),
-            tileColor: Colors.white,
             onTap: () {
               Navigator.push(
                 context,
@@ -108,7 +104,7 @@ class Help extends StatelessWidget {
               );
             },
           ),
-          const Divider(height: 1),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           Consumer(
             builder: (context, ref, child) {
               final packageInfo = ref.watch(packageInfoProvider);
@@ -125,10 +121,10 @@ class Help extends StatelessWidget {
                     ),
                   ],
                 ),
-                tileColor: Colors.white,
               );
             },
           ),
+          const Divider(height: 1, indent: 16, endIndent: 16),
         ],
       ),
     );

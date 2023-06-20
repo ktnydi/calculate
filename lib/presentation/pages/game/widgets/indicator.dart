@@ -1,4 +1,5 @@
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
@@ -28,7 +29,7 @@ class Indicator extends ConsumerWidget {
                 : screenWidth * (gameState.time / quizTimeState),
             height: 8,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: context.colorScheme.primary,
               borderRadius: const BorderRadius.horizontal(
                 right: Radius.circular(1000),
               ),
