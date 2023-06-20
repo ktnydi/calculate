@@ -8,6 +8,14 @@ class Analytics {
   final _instance = FirebaseAnalytics.instance;
   late final observer = FirebaseAnalyticsObserver(analytics: _instance);
 
+  Future<void> logTimeLimitMode() async {
+    await _instance.logEvent(name: '時間制限モード');
+  }
+
+  Future<void> logNumberOfQuizMode() async {
+    await _instance.logEvent(name: '問題数モード');
+  }
+
   Future<void> logStartGame() async {
     await _instance.logEvent(name: 'start_game');
   }

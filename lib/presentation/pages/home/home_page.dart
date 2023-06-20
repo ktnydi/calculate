@@ -94,6 +94,13 @@ class Home extends ConsumerWidget {
                                   ),
                                   onPressed: () {
                                     analytics.logStartGame();
+
+                                    if (quizType == QuizType.numQuizzes) {
+                                      analytics.logNumberOfQuizMode();
+                                    } else {
+                                      analytics.logTimeLimitMode();
+                                    }
+
                                     ref.invalidate(quizProvider);
                                     Navigator.pushReplacement(
                                       context,
