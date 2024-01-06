@@ -31,7 +31,6 @@ class MyApp extends ConsumerWidget {
       locale: locale.toLocale(),
       supportedLocales: L10n.supportedLocales,
       theme: ThemeData.from(
-        useMaterial3: true,
         colorScheme: const ColorScheme.light(
           primary: Color(0xFFB4CEB3),
           onPrimary: Color(0xFF000000),
@@ -42,10 +41,12 @@ class MyApp extends ConsumerWidget {
         ),
       ).copyWith(
         scaffoldBackgroundColor: const Color(0xFFF4F5F7),
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           elevation: 0,
           scrolledUnderElevation: 0,
           centerTitle: true,
+          backgroundColor: const Color(0xFFFFFFFF),
+          foregroundColor: Typography.material2021().black.bodyMedium!.color,
         ),
       ),
       home: const Scaffold(
