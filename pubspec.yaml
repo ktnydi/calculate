@@ -22,13 +22,16 @@ dependencies:
   firebase_analytics: ^10.1.0
   firebase_remote_config: ^3.0.9
   version: ^3.0.2
-  app_review: ^2.1.1+1
+  app_review: ^2.1.2+1
   google_mobile_ads: ^2.3.0
   app_tracking_transparency: ^2.0.1
-  adaptive_dialog: ^1.8.2
-  intl: ^0.17.0
+  adaptive_dialog: ^1.9.0
+  intl: ^0.18.0
   auto_size_text: ^3.0.0
   flutter_sliding_tutorial: ^2.0.0+1
+
+dependency_overrides:
+  package_info_plus: ^4.2.0
 
 dev_dependencies:
   flutter_test:

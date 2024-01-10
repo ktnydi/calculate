@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
-class GameAppBar extends ConsumerWidget with PreferredSizeWidget {
+class GameAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const GameAppBar({super.key});
 
   @override
