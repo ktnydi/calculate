@@ -34,21 +34,6 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
           ListTile(
-            title: Text(L10n.of(context)!.loadmapTileLabel),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WebViewPage(
-                    'https://toothsome-persimmon-e89.notion.site/9dd91417b57d414ca4b09765db0ba7f2',
-                  ),
-                ),
-              );
-            },
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
-          ListTile(
             title: Text(L10n.of(context)!.reviewTileLabel),
             trailing: const Icon(Icons.navigate_next),
             onTap: () async {
