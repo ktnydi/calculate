@@ -31,6 +31,7 @@ class MyApp extends ConsumerWidget {
       locale: locale.toLocale(),
       supportedLocales: L10n.supportedLocales,
       theme: ThemeData.from(
+        useMaterial3: false,
         colorScheme: const ColorScheme.light(
           primary: Color(0xFFB4CEB3),
           onPrimary: Color(0xFF000000),
