@@ -27,7 +27,7 @@ class QuizRepository {
     createNum(int min, int max) => min + random.nextInt(max - min);
     final num1 = createNum(minNum, maxNum);
     final num2 = createNum(minNum, maxNum);
-    final figures = [num1, num2]..sort((i, j) => j - i);
+    final figures = num1 > num2 ? [num1, num2] : [num2, num1];
     return Quiz(figures: figures, type: QuizCategory.subtraction);
   }
 
