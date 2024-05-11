@@ -35,15 +35,20 @@ class QuizRepository {
   }
 
   Quiz getDivision() {
-    final num1 = _getRandamIntInRange(10, 99);
+    late int num1;
 
-    /// num1の約数をランダムで1つ取得する
     final divisors = <int>[];
-    for (int i = 1; i <= num1 ~/ 2; i++) {
-      final isDivisor = num1 % i == 0;
-      if (isDivisor) divisors.add(i);
+
+    while (divisors.isEmpty) {
+      num1 = _getRandamIntInRange(2, 99);
+
+      /// [num1]の1自身以外の約数をランダムで1つ取得する。
+      for (int i = 2; i <= num1 ~/ 2; i++) {
+        final isDivisor = num1 % i == 0;
+        if (isDivisor) divisors.add(i);
+      }
     }
-    divisors.add(num1);
+
     divisors.shuffle();
     final num2 = divisors.first;
 
@@ -52,8 +57,8 @@ class QuizRepository {
   }
 
   Quiz getMultiplication() {
-    final num1 = _getRandamIntInRange(1, 9);
-    final num2 = _getRandamIntInRange(1, 9);
+    final num1 = _getRandamIntInRange(2, 10);
+    final num2 = _getRandamIntInRange(2, 10);
 
     final figures = [num1, num2];
     return Quiz(figures: figures, type: QuizCategory.multiplication);
