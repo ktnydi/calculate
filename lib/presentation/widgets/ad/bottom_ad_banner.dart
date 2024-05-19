@@ -36,46 +36,37 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
       return status;
     }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (ad == null) {
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-            await requestTracking();
+    if (ad == null) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+        await requestTracking();
 
-            final width = constraints.maxWidth.truncate();
-            const orientation = Orientation.portrait;
-            final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
-              orientation,
-              width,
-            );
+        final ad = BannerAd(
+          size: AdSize.banner,
+          adUnitId: widget.adUnitId.platform,
+          listener: BannerAdListener(
+            onAdLoaded: (ad) {
+              setState(() => this.ad = ad as BannerAd);
+            },
+            onAdFailedToLoad: (ad, error) {
+              ad.dispose();
+            },
+          ),
+          request: const AdRequest(),
+        );
 
-            final ad = BannerAd(
-              size: adaptiveSize ?? AdSize.banner,
-              adUnitId: widget.adUnitId.platform,
-              listener: BannerAdListener(
-                onAdLoaded: (ad) {
-                  setState(() => this.ad = ad as BannerAd);
-                },
-                onAdFailedToLoad: (ad, error) {
-                  ad.dispose();
-                },
-              ),
-              request: const AdRequest(),
-            );
+        ad.load();
+      });
+    }
 
-            ad.load();
-          });
-        }
-
-        final bannerAd = ad;
-        return bannerAd != null
-            ? SizedBox(
-                width: bannerAd.size.width.toDouble(),
-                height: bannerAd.size.height.toDouble(),
-                child: AdWidget(ad: bannerAd),
-              )
-            : const SizedBox();
-      },
-    );
+    final bannerAd = ad;
+    return bannerAd != null
+        ? SizedBox(
+            width: bannerAd.size.width.toDouble(),
+            height: bannerAd.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd),
+          )
+        : SizedBox(
+            height: AdSize.banner.height.toDouble(),
+          );
   }
 }
