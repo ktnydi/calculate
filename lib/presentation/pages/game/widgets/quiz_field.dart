@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';

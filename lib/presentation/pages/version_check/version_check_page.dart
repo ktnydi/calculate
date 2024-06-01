@@ -25,8 +25,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
       final isTutorialDone = prefs.getBool('isTutorialDone') ?? false;
 
       if (requestType == UpdateRequestType.not) {
-        // ignore: use_build_context_synchronously
-        if (!context.mounted) return;
+        if (!mounted) return;
 
         Navigator.pushReplacement(
           context,
@@ -46,8 +45,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
         return;
       }
 
-      // ignore: use_build_context_synchronously
-      if (!context.mounted) return;
+      if (!mounted) return;
 
       final title = L10n.of(context)!.updateRequestTitle;
       final message = L10n.of(context)!.updateRequestMessage;
@@ -67,8 +65,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
         );
 
         if (result == OkCancelResult.cancel) {
-          // ignore: use_build_context_synchronously
-          if (!context.mounted) return;
+          if (!mounted) return;
 
           Navigator.pushReplacement(
             context,
