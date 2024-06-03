@@ -1,4 +1,4 @@
-import 'package:app_review/app_review.dart';
+import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/providers.dart';
 import 'package:calculate/presentation/pages/web_view/web_view_page.dart';
@@ -33,13 +33,15 @@ class Help extends StatelessWidget {
             },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
-          ListTile(
-            title: Text(L10n.of(context)!.reviewTileLabel),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () async {
-              if (await AppReview.isRequestReviewAvailable) {
-                await AppReview.requestReview;
-              }
+          Consumer(
+            builder: (context, ref, child) {
+              return ListTile(
+                title: Text(L10n.of(context)!.reviewTileLabel),
+                trailing: const Icon(Icons.navigate_next),
+                onTap: () async {
+                  ref.read(requestReviewProvider).openAppStore();
+                },
+              );
             },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),

@@ -1,5 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:app_review/app_review.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/presentation/pages/initial_settings/initial_settings_screen.dart';
@@ -82,7 +82,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
             ),
           );
         } else {
-          AppReview.storeListing;
+          await InAppReview.instance.openStoreListing(appStoreId: '1572014520');
         }
 
         return;
@@ -99,7 +99,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
           okLabel: okLabel,
         );
 
-        AppReview.storeListing;
+        await InAppReview.instance.openStoreListing(appStoreId: '1572014520');
 
         return;
       }

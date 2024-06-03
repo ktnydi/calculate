@@ -1,4 +1,4 @@
-import 'package:app_review/app_review.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final requestReviewProvider = Provider(_RequestReview.new);
@@ -9,7 +9,12 @@ class _RequestReview {
   final Ref ref;
 
   Future<void> call() async {
-    if (!await AppReview.isRequestReviewAvailable) return;
-    await AppReview.requestReview;
+    final inAppReview = InAppReview.instance;
+    if (!await inAppReview.isAvailable()) return;
+    await inAppReview.requestReview();
+  }
+
+  Future<void> openAppStore() async {
+    await InAppReview.instance.openStoreListing(appStoreId: '1572014520');
   }
 }
