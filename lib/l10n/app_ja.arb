@@ -2,7 +2,7 @@
   "appTitle": "Keisan Doriru",
   "appMessage": "Let's challenge!",
   "startButtonLabel": "スタート",
-  "quizCategoryMode": "{value, select, random{ランダム} add{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}",
+  "quizCategoryMode": "{value, select, random{ミックス} add{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}",
   "@quizCategoryMode": {
     "placeholders": {
       "value": {
