@@ -1,4 +1,5 @@
 import 'package:calculate/providers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,12 +31,16 @@ class QuizCategoryModeNotifier extends StateNotifier<QuizCategoryMode> {
 }
 
 enum QuizCategoryMode {
-  random,
-  add,
-  subtraction,
-  division,
-  multiplication,
+  multiplication(CupertinoIcons.multiply),
+  division(CupertinoIcons.divide),
+  add(CupertinoIcons.add),
+  subtraction(CupertinoIcons.minus),
+  random(),
   ;
+
+  const QuizCategoryMode([this.icon]);
+
+  final IconData? icon;
 }
 
 extension QuizCategoryModeEx on QuizCategoryMode {

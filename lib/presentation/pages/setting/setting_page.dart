@@ -1,12 +1,8 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:calculate/enums/flavor.dart';
-import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/enums/supported_locale.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
-import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,13 +15,9 @@ class Setting extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final flavor = ref.watch(flavorProvider);
     final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
-    final oneHandKeypad = ref.watch(oneHandKeypadProvider);
-    final oneHandKeypadNotifier = ref.watch(oneHandKeypadProvider.notifier);
-    final keyboardLocation = ref.watch(keyboardLocationProvider);
-    final keyboardLocationNotifier =
-        ref.watch(keyboardLocationProvider.notifier);
+    final quizCategoryModeNotifier =
+        ref.watch(quizCategoryModeNotifierProvider.notifier);
     final quizTypeState = ref.watch(quizTypeNotifierProvider);
     final quizTypeNotifier = ref.watch(quizTypeNotifierProvider.notifier);
     final quizTimeState = ref.watch(quizTimeNotifierProvider);
@@ -41,28 +33,122 @@ class Setting extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    L10n.of(context)!.quizModeTileLabel,
-                  ),
-                  Text(
-                    L10n.of(context)!.quizCategoryMode(quizCategoryMode.name),
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Text(
+                L10n.of(context)!.quizModeTileLabel,
+                style: context.textTheme.titleMedium,
               ),
-              trailing: const Icon(Icons.navigate_next),
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) => _QuizCategoryModeSheet(),
-                );
-              },
             ),
-            const Divider(height: 1, indent: 16, endIndent: 16),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Material(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    color: context.dividerColor,
+                  ),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: ListView.separated(
+                  padding: EdgeInsets.zero,
+                  reverse: true,
+                  itemCount: (QuizCategoryMode.values.length / 2).ceil(),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final leftItem =
+                        QuizCategoryMode.values.elementAt(index * 2);
+                    final rightItem =
+                        QuizCategoryMode.values.elementAtOrNull(index * 2 + 1);
+
+                    return IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                shape: const BeveledRectangleBorder(),
+                                foregroundColor: quizCategoryMode == leftItem
+                                    ? context.colorScheme.primary
+                                    : context.textTheme.bodyMedium!.color,
+                                backgroundColor: quizCategoryMode == leftItem
+                                    ? context.colorScheme.primary
+                                        .withOpacity(0.2)
+                                    : null,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                minimumSize: const Size.fromHeight(80),
+                                padding: const EdgeInsets.all(16),
+                                textStyle: context.textTheme.titleMedium,
+                              ),
+                              onPressed: () {
+                                quizCategoryModeNotifier.change(leftItem);
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (leftItem.icon != null) ...[
+                                    Icon(
+                                      leftItem.icon,
+                                    ),
+                                  ] else
+                                    Text(
+                                      L10n.of(context)!
+                                          .quizCategoryMode(leftItem.name),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          if (rightItem != null) ...[
+                            const VerticalDivider(width: 1),
+                            Expanded(
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  shape: const BeveledRectangleBorder(),
+                                  foregroundColor: quizCategoryMode == rightItem
+                                      ? context.colorScheme.primary
+                                      : context.textTheme.bodyMedium!.color,
+                                  backgroundColor: quizCategoryMode == rightItem
+                                      ? context.colorScheme.primary
+                                          .withOpacity(0.2)
+                                      : null,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  minimumSize: const Size.fromHeight(80),
+                                  textStyle: context.textTheme.labelSmall,
+                                ),
+                                onPressed: () {
+                                  quizCategoryModeNotifier.change(rightItem);
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (rightItem.icon != null) ...[
+                                      Icon(
+                                        rightItem.icon,
+                                      ),
+                                    ] else
+                                      Text(
+                                        L10n.of(context)!
+                                            .quizCategoryMode(rightItem.name),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (_, __) => const Divider(height: 1),
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
             ListTile(
               title: Row(
@@ -89,106 +175,120 @@ class Setting extends ConsumerWidget {
               ),
             ),
             if (quizTypeState == QuizType.numQuizzes)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (flavor == Flavor.development) 2,
-                  10,
-                  20,
-                  30,
-                  40,
-                ].map((value) {
-                  return RadioListTile<int>(
-                    value: value,
-                    groupValue: quizSizeState,
-                    onChanged: (value) {
-                      if (value == null) return;
-                      quizSizeNotifier.change(value);
-                    },
-                    title: Text(L10n.of(context)!.quizSize(value)),
-                  );
-                }).toList(),
-              ),
-            if (quizTypeState == QuizType.timeLimit)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (flavor == Flavor.development) 10,
-                  30,
-                  60,
-                  120,
-                  180,
-                ].map((e) {
-                  return RadioListTile<int>(
-                    value: e,
-                    groupValue: quizTimeState,
-                    onChanged: (value) async {
-                      if (value == null) return;
-                      quizTimeNotifier.change(time: value);
-                    },
-                    title: Text('$e${L10n.of(context)!.seconds}'),
-                  );
-                }).toList(),
-              ),
-            const Divider(height: 1, indent: 16, endIndent: 16),
-            const SizedBox(height: 16),
-            ListTile(
-              title: Text(
-                L10n.of(context)!.oneHandKeypad,
-              ),
-              trailing: Switch.adaptive(
-                activeColor: Theme.of(context).colorScheme.primary,
-                inactiveTrackColor:
-                    Theme.of(context).colorScheme.outlineVariant,
-                value: oneHandKeypad,
-                onChanged: (value) {
-                  oneHandKeypadNotifier.update(value);
-                },
-              ),
-            ),
-            if (oneHandKeypad) ...[
-              ListTile(
-                title: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        L10n.of(context)!.keyboardLocationTileLabel,
-                      ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Material(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(
+                      color: context.dividerColor,
                     ),
-                    CupertinoSlidingSegmentedControl<KeyboardLocation>(
-                      groupValue: keyboardLocation,
-                      children: KeyboardLocation.values.asMap().map(
-                        (key, value) {
-                          return MapEntry(
-                            value,
-                            Text(
-                                L10n.of(context)!.keyboardLocation(value.name)),
-                          );
-                        },
-                      ),
-                      onValueChanged: (value) async {
-                        if (value == null) return;
-                        keyboardLocationNotifier.change(value);
-                      },
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Row(
+                    key: const ValueKey(QuizType.numQuizzes),
+                    children: QuizType.numQuizzes.selections.map((value) {
+                      return Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            quizSizeNotifier.change(value);
+                          },
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            foregroundColor: quizSizeState == value
+                                ? context.colorScheme.primary
+                                : context.textTheme.bodyMedium!.color,
+                            backgroundColor: quizSizeState == value
+                                ? context.colorScheme.primary.withOpacity(0.2)
+                                : null,
+                            minimumSize: const Size.fromHeight(48),
+                          ),
+                          child: Text(L10n.of(context)!.quizSize(value)),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Material(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(
+                      color: context.dividerColor,
                     ),
-                  ],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Row(
+                    key: const ValueKey(QuizType.timeLimit),
+                    children: QuizType.timeLimit.selections.map((value) {
+                      return Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            quizTimeNotifier.change(time: value);
+                          },
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            foregroundColor: quizTimeState == value
+                                ? context.colorScheme.primary
+                                : context.textTheme.bodyMedium!.color,
+                            backgroundColor: quizTimeState == value
+                                ? context.colorScheme.primary.withOpacity(0.2)
+                                : null,
+                            minimumSize: const Size.fromHeight(48),
+                          ),
+                          child: Text('$value${L10n.of(context)!.seconds}'),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
-            ],
-            const Divider(height: 1, indent: 16, endIndent: 16),
             const SizedBox(height: 16),
             ListTile(
               onTap: () async {
-                final result = await showModalActionSheet(
+                final result = await showModalBottomSheet(
                   context: context,
-                  actions: SupportedLocale.values.map((e) {
-                    return SheetAction(
-                      key: e,
-                      label: e.label,
+                  builder: (context) {
+                    return SafeArea(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: SupportedLocale.values.map(
+                          (value) {
+                            final selected = localeState == value;
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Material(
+                                shape: const StadiumBorder(),
+                                color: selected
+                                    ? context.colorScheme.primary
+                                        .withOpacity(0.2)
+                                    : null,
+                                clipBehavior: Clip.antiAlias,
+                                child: ListTile(
+                                  selected: selected,
+                                  leading: selected
+                                      ? const Icon(Icons.check)
+                                      : const SizedBox(),
+                                  title: Text(value.label),
+                                  onTap: () {
+                                    Navigator.of(context).pop(value);
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      ),
                     );
-                  }).toList(),
+                  },
                 );
 
                 if (result == null) return;
@@ -205,41 +305,7 @@ class Setting extends ConsumerWidget {
               ),
               trailing: const Icon(Icons.navigate_next),
             ),
-            const Divider(height: 1, indent: 16, endIndent: 16),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _QuizCategoryModeSheet extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
-    final quizCategoryModeNotifier =
-        ref.watch(quizCategoryModeNotifierProvider.notifier);
-
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: QuizCategoryMode.values.map(
-            (value) {
-              return RadioListTile<QuizCategoryMode>(
-                value: value,
-                groupValue: quizCategoryModeState,
-                onChanged: (value) async {
-                  if (value == null) return;
-                  quizCategoryModeNotifier.change(value);
-                },
-                title: Text(
-                  L10n.of(context)!.quizCategoryMode(value.name),
-                ),
-              );
-            },
-          ).toList(),
         ),
       ),
     );
