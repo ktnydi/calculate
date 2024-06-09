@@ -232,7 +232,7 @@ class Setting extends ConsumerWidget {
                               : null,
                           minimumSize: const Size.fromHeight(48),
                         ),
-                        child: Text('$value${L10n.of(context)!.seconds}'),
+                        child: Text('$value ${L10n.of(context)!.seconds}'),
                       ),
                     );
                   }).toList(),
