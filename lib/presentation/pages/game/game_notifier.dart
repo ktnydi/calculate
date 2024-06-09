@@ -7,20 +7,21 @@ import 'package:calculate/presentation/pages/game/game_state.dart';
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
-  (ref) => GameNotifier(ref),
+final gameProvider =
+    StateNotifierProvider.family.autoDispose<GameNotifier, GameState, QuizType>(
+  (ref, quizType) => GameNotifier(ref, quizType),
 );
 
 class GameNotifier extends StateNotifier<GameState> {
-  GameNotifier(this._ref) : super(const GameState()) {
+  GameNotifier(this._ref, this.quizType) : super(const GameState()) {
     beginCountDown();
   }
 
   final Ref _ref;
+  final QuizType quizType;
   Timer? timer;
 
   void beginCountDown() {
-    final quizType = _ref.read(quizTypeNotifierProvider);
     final leftTime = _ref.read(quizTimeNotifierProvider) * 1000;
 
     /// 0.01秒単位で計測

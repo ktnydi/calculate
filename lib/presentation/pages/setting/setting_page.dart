@@ -5,7 +5,6 @@ import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -18,8 +17,6 @@ class Setting extends ConsumerWidget {
     final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
     final quizCategoryModeNotifier =
         ref.watch(quizCategoryModeNotifierProvider.notifier);
-    final quizTypeState = ref.watch(quizTypeNotifierProvider);
-    final quizTypeNotifier = ref.watch(quizTypeNotifierProvider.notifier);
     final quizTimeState = ref.watch(quizTimeNotifierProvider);
     final quizTimeNotifier = ref.watch(quizTimeNotifierProvider.notifier);
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
@@ -156,100 +153,92 @@ class Setting extends ConsumerWidget {
                   Expanded(
                     child: Text(L10n.of(context)!.quizTypeTileLabel),
                   ),
-                  CupertinoSlidingSegmentedControl<QuizType>(
-                    groupValue: quizTypeState,
-                    children: QuizType.values.asMap().map(
-                      (key, value) {
-                        return MapEntry(
-                          value,
-                          Text(L10n.of(context)!.quizType(value.name)),
-                        );
-                      },
-                    ),
-                    onValueChanged: (value) async {
-                      if (value == null) return;
-                      quizTypeNotifier.change(value);
-                    },
-                  ),
                 ],
               ),
             ),
-            if (quizTypeState == QuizType.numQuizzes)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Material(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                      color: context.dividerColor,
-                    ),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Row(
-                    key: const ValueKey(QuizType.numQuizzes),
-                    children: QuizType.numQuizzes.selections.map((value) {
-                      return Expanded(
-                        child: TextButton(
-                          onPressed: () {
-                            quizSizeNotifier.change(value);
-                          },
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            foregroundColor: quizSizeState == value
-                                ? context.colorScheme.primary
-                                : context.textTheme.bodyMedium!.color,
-                            backgroundColor: quizSizeState == value
-                                ? context.colorScheme.primary.withOpacity(0.2)
-                                : null,
-                            minimumSize: const Size.fromHeight(48),
-                          ),
-                          child: Text(L10n.of(context)!.quizSize(value)),
-                        ),
-                      );
-                    }).toList(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(L10n.of(context)!.quizType(QuizType.numQuizzes.name)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Material(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    color: context.dividerColor,
                   ),
                 ),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Material(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                      color: context.dividerColor,
-                    ),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Row(
-                    key: const ValueKey(QuizType.timeLimit),
-                    children: QuizType.timeLimit.selections.map((value) {
-                      return Expanded(
-                        child: TextButton(
-                          onPressed: () {
-                            quizTimeNotifier.change(time: value);
-                          },
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            foregroundColor: quizTimeState == value
-                                ? context.colorScheme.primary
-                                : context.textTheme.bodyMedium!.color,
-                            backgroundColor: quizTimeState == value
-                                ? context.colorScheme.primary.withOpacity(0.2)
-                                : null,
-                            minimumSize: const Size.fromHeight(48),
+                clipBehavior: Clip.antiAlias,
+                child: Row(
+                  key: const ValueKey(QuizType.numQuizzes),
+                  children: QuizType.numQuizzes.selections.map((value) {
+                    return Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          quizSizeNotifier.change(value);
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text('$value${L10n.of(context)!.seconds}'),
+                          foregroundColor: quizSizeState == value
+                              ? context.colorScheme.primary
+                              : context.textTheme.bodyMedium!.color,
+                          backgroundColor: quizSizeState == value
+                              ? context.colorScheme.primary.withOpacity(0.2)
+                              : null,
+                          minimumSize: const Size.fromHeight(48),
                         ),
-                      );
-                    }).toList(),
-                  ),
+                        child: Text(L10n.of(context)!.quizSize(value)),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(L10n.of(context)!.quizType(QuizType.timeLimit.name)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Material(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    color: context.dividerColor,
+                  ),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Row(
+                  key: const ValueKey(QuizType.timeLimit),
+                  children: QuizType.timeLimit.selections.map((value) {
+                    return Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          quizTimeNotifier.change(time: value);
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          foregroundColor: quizTimeState == value
+                              ? context.colorScheme.primary
+                              : context.textTheme.bodyMedium!.color,
+                          backgroundColor: quizTimeState == value
+                              ? context.colorScheme.primary.withOpacity(0.2)
+                              : null,
+                          minimumSize: const Size.fromHeight(48),
+                        ),
+                        child: Text('$value${L10n.of(context)!.seconds}'),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
             ListTile(
               onTap: () async {

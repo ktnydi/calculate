@@ -1,6 +1,7 @@
 import 'package:calculate/enums/keyboard_location.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
+import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/widgets/figure_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,9 +11,10 @@ class NumKeyboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final quizType = ref.watch(quizTypeProvider);
     final oneHandKeypad = ref.watch(oneHandKeypadProvider);
     final keyboardLocation = ref.watch(keyboardLocationProvider);
-    final gameNotifier = ref.watch(gameProvider.notifier);
+    final gameNotifier = ref.watch(gameProvider(quizType).notifier);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -53,7 +55,8 @@ class NumKeyboard extends ConsumerWidget {
                         child: const Text('BS'),
                         onPressed: () {
                           final userAnswer = ref.read(
-                            gameProvider.select((value) => value.answer),
+                            gameProvider(quizType)
+                                .select((value) => value.answer),
                           );
                           if (userAnswer.isEmpty) {
                             return;

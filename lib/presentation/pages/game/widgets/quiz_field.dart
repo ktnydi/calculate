@@ -2,6 +2,7 @@ import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
+import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/providers/quiz_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,15 +41,17 @@ class _QuizFieldState extends ConsumerState<QuizField>
 
   @override
   Widget build(BuildContext context) {
-    final gameNotifier = ref.watch(gameProvider.notifier);
+    final quizType = ref.watch(quizTypeProvider);
+    final gameNotifier = ref.watch(gameProvider(quizType).notifier);
     final quiz = ref.watch(quizProvider);
-    final quizIndex = ref.watch(gameProvider.select((value) => value.index));
-    final userAnswer = ref.watch(gameProvider.select((value) => value.answer));
+    final quizIndex =
+        ref.watch(gameProvider(quizType).select((value) => value.index));
+    final userAnswer =
+        ref.watch(gameProvider(quizType).select((value) => value.answer));
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
-    final quizTypeState = ref.watch(quizTypeNotifierProvider);
 
     ref.listen(
-      gameProvider.select((value) => int.tryParse(value.answer)),
+      gameProvider(quizType).select((value) => int.tryParse(value.answer)),
       (previous, next) {
         if (next == null) return;
         if (next != quiz.correctAnswer) return;
@@ -58,7 +61,7 @@ class _QuizFieldState extends ConsumerState<QuizField>
     );
 
     ref.listen(
-      gameProvider.select((value) => int.tryParse(value.answer)),
+      gameProvider(quizType).select((value) => int.tryParse(value.answer)),
       (previous, next) {
         if (next == null) return;
         if (next != quiz.correctAnswer) return;
@@ -66,7 +69,7 @@ class _QuizFieldState extends ConsumerState<QuizField>
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           gameNotifier.checkAnswer(quiz);
           final lastIndex = quizSizeState - 1;
-          if (quizTypeState == QuizType.numQuizzes && quizIndex == lastIndex) {
+          if (quizType == QuizType.numQuizzes && quizIndex == lastIndex) {
             return gameNotifier.finishQuiz();
           }
           ref.invalidate(quizProvider);

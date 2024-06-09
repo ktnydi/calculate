@@ -1,3 +1,4 @@
+import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
@@ -11,15 +12,24 @@ import 'package:calculate/presentation/pages/game_result/game_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final quizTypeProvider = Provider<QuizType>(
+  (ref) => throw UnimplementedError(),
+);
+
 class Game extends ConsumerWidget {
-  const Game({super.key});
+  const Game({
+    super.key,
+    required this.quizType,
+  });
+
+  final QuizType quizType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final oneHandKeypad = ref.watch(oneHandKeypadProvider);
 
     ref.listen(
-      gameProvider,
+      gameProvider(quizType),
       (previous, next) {
         if (!next.isFinished) return;
 
@@ -37,6 +47,7 @@ class Game extends ConsumerWidget {
               return GameResult(
                 quizTimeState - next.time,
                 next.answerList,
+                quizType,
               );
             },
             transitionsBuilder: (context, animation, _, child) {
@@ -52,35 +63,40 @@ class Game extends ConsumerWidget {
 
     return Stack(
       children: [
-        Scaffold(
-          appBar: const GameAppBar(),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Indicator(),
-              Expanded(
-                child: Stack(
-                  children: [
-                    const Center(
-                      child: QuizField(),
-                    ),
-                    if (oneHandKeypad)
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: KeypadPositionButton(),
+        ProviderScope(
+          overrides: [
+            quizTypeProvider.overrideWithValue(quizType),
+          ],
+          child: Scaffold(
+            appBar: const GameAppBar(),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Indicator(),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      const Center(
+                        child: QuizField(),
                       ),
-                  ],
+                      if (oneHandKeypad)
+                        const Positioned(
+                          bottom: 0,
+                          right: 0,
+                          left: 0,
+                          child: KeypadPositionButton(),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                color: Colors.white,
-                child: const SafeArea(
-                  child: NumKeyboard(),
+                Container(
+                  color: Colors.white,
+                  child: const SafeArea(
+                    child: NumKeyboard(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

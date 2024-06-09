@@ -19,8 +19,14 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 class GameResult extends ConsumerWidget {
   final int leftTime;
   final List<Answer> answerList;
+  final QuizType quizType;
 
-  const GameResult(this.leftTime, this.answerList, {super.key});
+  const GameResult(
+    this.leftTime,
+    this.answerList,
+    this.quizType, {
+    super.key,
+  });
 
   Duration? get avgTime {
     if (answerList.isEmpty) {
@@ -47,7 +53,6 @@ class GameResult extends ConsumerWidget {
     final analytics = ref.watch(analyticsProvider);
     final limit = ref.watch(quizTimeNotifierProvider);
     final quizCategory = ref.watch(quizCategoryModeNotifierProvider);
-    final quizType = ref.watch(quizTypeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
     final viewPadding = MediaQuery.of(context).viewPadding;
 
@@ -258,7 +263,9 @@ class GameResult extends ConsumerWidget {
                                 context,
                                 MaterialPageRoute(
                                   fullscreenDialog: true,
-                                  builder: (context) => const Game(),
+                                  builder: (context) => Game(
+                                    quizType: quizType,
+                                  ),
                                 ),
                               );
                             },
