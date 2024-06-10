@@ -41,7 +41,7 @@ class GameNotifier extends StateNotifier<GameState> {
   }
 
   void fillInAnswer(int figure) {
-    if (state.answer.length >= 10) return;
+    if (state.answer.length >= 5) return;
 
     if (state.answer == '0') {
       return;

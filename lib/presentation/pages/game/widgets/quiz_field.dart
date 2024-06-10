@@ -122,7 +122,7 @@ class _QuizFieldState extends ConsumerState<QuizField>
               const Icon(CupertinoIcons.equal, size: 32),
               const SizedBox(width: 8),
               Container(
-                width: 180,
+                width: 124,
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -134,10 +134,16 @@ class _QuizFieldState extends ConsumerState<QuizField>
                   child: Text(
                     userAnswer,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontFeatures: [
+                        FontFeature.tabularFigures(),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              const SizedBox(width: 40),
             ],
           ),
         ],
