@@ -14,19 +14,6 @@ class Quiz with _$Quiz {
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
 
-  String get title {
-    switch (type) {
-      case QuizCategory.additional:
-        return '${figures.first} + ${figures.last}';
-      case QuizCategory.subtraction:
-        return '${figures.first} – ${figures.last}';
-      case QuizCategory.multiplication:
-        return '${figures.first} × ${figures.last}';
-      case QuizCategory.division:
-        return '${figures.first} ÷ ${figures.last}';
-    }
-  }
-
   int get correctAnswer {
     switch (type) {
       case QuizCategory.additional:

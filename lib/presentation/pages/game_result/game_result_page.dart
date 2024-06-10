@@ -2,6 +2,7 @@ import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/extensions/num.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/quiz_type.dart';
@@ -12,6 +13,7 @@ import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
 import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/providers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -205,14 +207,41 @@ class GameResult extends ConsumerWidget {
                                     children: [
                                       if (index != 0) const Divider(height: 1),
                                       ListTile(
+                                        iconColor:
+                                            context.textTheme.bodyMedium!.color,
                                         title: Row(
                                           children: [
                                             SizedBox(
                                               width: 48,
                                               child: Text('(${index + 1})'),
                                             ),
-                                            Text(
-                                              '${quiz.title} = ${quiz.correctAnswer}',
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  '${quiz.figures.first}',
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Icon(
+                                                  quiz.type.icon,
+                                                  size: context.textTheme
+                                                      .titleMedium!.fontSize,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Text(
+                                                  '${quiz.figures.last}',
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Icon(
+                                                  CupertinoIcons.equal,
+                                                  size: context.textTheme
+                                                      .titleMedium!.fontSize,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Text(
+                                                  '${quiz.correctAnswer}',
+                                                ),
+                                              ],
                                             ),
                                             const Spacer(),
                                             Text(

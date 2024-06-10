@@ -1,9 +1,9 @@
 import 'package:calculate/enums/quiz_type.dart';
-import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/providers/quiz_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -87,39 +87,39 @@ class _QuizFieldState extends ConsumerState<QuizField>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            quiz.title,
-            style: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w300,
-              fontFeatures: [
-                FontFeature.tabularFigures(),
-              ],
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '${quiz.figures.first}',
+                style: const TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w300,
+                  fontFeatures: [
+                    FontFeature.tabularFigures(),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(quiz.type.icon, size: 32),
+              const SizedBox(width: 8),
+              Text(
+                '${quiz.figures.last}',
+                style: const TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w300,
+                  fontFeatures: [
+                    FontFeature.tabularFigures(),
+                  ],
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 20,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Divider(
-                      height: 1,
-                      thickness: 2,
-                      color: context.colorScheme.onSurface,
-                    ),
-                    const SizedBox(height: 8),
-                    Divider(
-                      height: 1,
-                      thickness: 2,
-                      color: context.colorScheme.onSurface,
-                    ),
-                  ],
-                ),
-              ),
+              const Icon(CupertinoIcons.equal, size: 32),
               const SizedBox(width: 8),
               Container(
                 width: 180,
