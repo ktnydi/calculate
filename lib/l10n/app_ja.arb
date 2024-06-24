@@ -42,7 +42,7 @@
       }
     }
   },
-  "settingsButtonLabel": "設定",
+  "settingsButtonLabel": "ゲーム設定",
   "helpButtonLabel": "ヘルプ",
   "currentQuizNumber": "第{value}問",
   "@currentQuizNumber": {
@@ -60,7 +60,7 @@
   "seconds": "秒",
   "retryButtonLabel": "リトライ",
   "homeButtonLabel": "ホーム",
-  "settingsPageTitle": "設定",
+  "settingsPageTitle": "ゲーム設定",
   "quizModeTileLabel": "出題モード",
   "quizTypeTileLabel": "問題形式",
   "oneHandKeypad": "片手モード",

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
@@ -14,8 +12,10 @@ import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/presentation/pages/setting/setting_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:lottie/lottie.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key});
@@ -27,10 +27,30 @@ class Home extends ConsumerWidget {
     final quizLength = ref.watch(quizSizeNotifierProvider);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      extendBodyBehindAppBar: true,
+      backgroundColor: context.colorScheme.surface,
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Help(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.menu),
+          )
+        ],
+      ),
       body: SafeArea(
+        top: false,
         child: Column(
           children: [
+            const SizedBox(height: kToolbarHeight),
             Expanded(
               child: LayoutBuilder(builder: (context, constraints) {
                 return SingleChildScrollView(
@@ -47,30 +67,31 @@ class Home extends ConsumerWidget {
                           Stack(
                             alignment: Alignment.center,
                             children: [
-                              Image.asset(
-                                'assets/blobs.png',
-                                width:
-                                    min(MediaQuery.of(context).size.width, 320),
-                                color: Colors.black12,
-                              ),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  AutoSizeText(
-                                    L10n.of(context)!.appTitle,
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                      color: context.colorScheme.onPrimary,
+                                  Material(
+                                    color: Colors.transparent,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      side: BorderSide(
+                                        color: context.colorScheme.onPrimary,
+                                        width: 2,
+                                      ),
                                     ),
-                                    maxLines: 1,
+                                    child: Lottie.asset(
+                                      'assets/app_icon.json',
+                                      width: 80,
+                                      height: 80,
+                                      repeat: false,
+                                    ),
                                   ),
                                   const SizedBox(height: 32),
                                   AutoSizeText(
-                                    L10n.of(context)!.appMessage,
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: context.colorScheme.onPrimary,
+                                    L10n.of(context)!.appTitle,
+                                    style: context.textTheme.headlineLarge!
+                                        .copyWith(
+                                      color: context.colorScheme.onSurface,
                                     ),
                                     maxLines: 1,
                                   ),
@@ -78,20 +99,24 @@ class Home extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 64),
                           IntrinsicWidth(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                FilledButton(
-                                  style: FilledButton.styleFrom(
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
                                     backgroundColor:
                                         context.colorScheme.surface,
                                     foregroundColor:
                                         context.colorScheme.onSurface,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
+                                    side: BorderSide(
+                                      width: 2,
+                                      color: context.colorScheme.outlineVariant,
+                                    ),
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.zero,
                                     ),
                                     minimumSize: const Size(232, 80),
                                   ),
@@ -128,21 +153,29 @@ class Home extends ConsumerWidget {
                                               .quizSize(quizLength),
                                           textAlign: TextAlign.center,
                                           maxLines: 2,
-                                          style: context.textTheme.labelSmall,
+                                          style: context.textTheme.bodyMedium!
+                                              .copyWith(
+                                            color: context
+                                                .textTheme.bodySmall!.color,
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                FilledButton(
-                                  style: FilledButton.styleFrom(
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
                                     backgroundColor:
                                         context.colorScheme.surface,
                                     foregroundColor:
                                         context.colorScheme.onSurface,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
+                                    side: BorderSide(
+                                      width: 2,
+                                      color: context.colorScheme.outlineVariant,
+                                    ),
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.zero,
                                     ),
                                     minimumSize: const Size(232, 80),
                                   ),
@@ -173,81 +206,42 @@ class Home extends ConsumerWidget {
                                           textAlign: TextAlign.center,
                                           maxLines: 2,
                                         ),
-                                        const SizedBox(height: 4),
+                                        const SizedBox(height: 2),
                                         Text(
                                           '$limit ${L10n.of(context)!.seconds}',
                                           textAlign: TextAlign.center,
                                           maxLines: 2,
-                                          style: context.textTheme.labelSmall,
+                                          style: context.textTheme.bodyMedium!
+                                              .copyWith(
+                                            color: context
+                                                .textTheme.bodySmall!.color,
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Expanded(
-                                      child: FilledButton(
-                                        style: FilledButton.styleFrom(
-                                          backgroundColor:
-                                              context.colorScheme.surface,
-                                          foregroundColor:
-                                              context.colorScheme.onSurface,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          minimumSize: const Size(112, 56),
-                                        ),
-                                        onPressed: () async {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Setting(),
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          L10n.of(context)!.settingsButtonLabel,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: FilledButton(
-                                        style: FilledButton.styleFrom(
-                                          backgroundColor:
-                                              context.colorScheme.surface,
-                                          foregroundColor:
-                                              context.colorScheme.onSurface,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          minimumSize: const Size(112, 56),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Help(),
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          L10n.of(context)!.helpButtonLabel,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
-                          )
+                          ),
+                          const SizedBox(height: 16),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Setting(),
+                                ),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              foregroundColor: context.colorScheme.onPrimary,
+                              textStyle: context.textTheme.labelLarge!.copyWith(
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                            child: Text(L10n.of(context)!.settingsButtonLabel),
+                          ),
                         ],
                       ),
                     ),
