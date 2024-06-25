@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:calculate/enums/update_request_type.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
@@ -6,6 +7,7 @@ import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:lottie/lottie.dart';
 
 class VersionCheckPage extends ConsumerStatefulWidget {
   const VersionCheckPage({Key? key}) : super(key: key);
@@ -102,9 +104,12 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: const Center(
-        child: CircularProgressIndicator(),
+      color: context.colorScheme.surface,
+      child: Center(
+        child: Lottie.asset(
+          'assets/loading.json',
+          width: 160,
+        ),
       ),
     );
   }

@@ -47,6 +47,7 @@ flutter:
     - assets/blobs.png
     - assets/app_icon.png
     - assets/app_icon.json
+    - assets/loading.json
 
 flutter_icons:
   android: true
