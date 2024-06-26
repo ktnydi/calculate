@@ -1,10 +1,10 @@
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/providers/quiz_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class QuizField extends ConsumerStatefulWidget {
@@ -125,9 +125,9 @@ class _QuizFieldState extends ConsumerState<QuizField>
                 width: 124,
                 height: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: Theme.of(context).dividerColor,
+                    width: 2,
+                    color: context.colorScheme.outlineVariant,
                   ),
                 ),
                 child: Center(

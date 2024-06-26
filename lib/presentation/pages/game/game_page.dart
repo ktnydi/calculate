@@ -1,4 +1,5 @@
 import 'package:calculate/enums/quiz_type.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
@@ -68,6 +69,7 @@ class Game extends ConsumerWidget {
             quizTypeProvider.overrideWithValue(quizType),
           ],
           child: Scaffold(
+            backgroundColor: context.colorScheme.surface,
             appBar: const GameAppBar(),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

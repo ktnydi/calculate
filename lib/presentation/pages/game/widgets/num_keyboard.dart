@@ -1,4 +1,5 @@
 import 'package:calculate/enums/keyboard_location.dart';
+import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
@@ -19,6 +20,10 @@ class NumKeyboard extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Divider(
+          height: 1,
+          color: context.colorScheme.outlineVariant,
+        ),
         AnimatedAlign(
           duration: const Duration(milliseconds: 200),
           alignment:
@@ -30,7 +35,7 @@ class NumKeyboard extends ConsumerWidget {
                   ? constrains.maxWidth * 0.75
                   : constrains.maxWidth,
               padding: const EdgeInsets.symmetric(horizontal: 1),
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: context.colorScheme.outlineVariant,
               child: GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -80,6 +85,10 @@ class NumKeyboard extends ConsumerWidget {
               ),
             );
           }),
+        ),
+        Divider(
+          height: 1,
+          color: context.colorScheme.outlineVariant,
         ),
       ],
     );
