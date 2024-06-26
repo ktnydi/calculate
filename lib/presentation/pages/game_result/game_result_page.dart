@@ -56,11 +56,15 @@ class GameResult extends ConsumerWidget {
     final limit = ref.watch(quizTimeNotifierProvider);
     final quizCategory = ref.watch(quizCategoryModeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
-    final viewPadding = MediaQuery.of(context).viewPadding;
 
     return Scaffold(
+      backgroundColor: context.colorScheme.surface,
       appBar: AppBar(
-        title: Text(L10n.of(context)!.gameResultPageTitle),
+        title: Text(
+          quizType == QuizType.numQuizzes
+              ? '${L10n.of(context)!.quizCategoryMode(quizCategory.name)}・${L10n.of(context)!.quizType(quizType.name)}・${L10n.of(context)!.quizSize(quizLength)}'
+              : '${L10n.of(context)!.quizCategoryMode(quizCategory.name)}・${L10n.of(context)!.quizType(quizType.name)}・$limit${L10n.of(context)!.seconds}',
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -71,63 +75,11 @@ class GameResult extends ConsumerWidget {
                   if (answerList.isNotEmpty)
                     SingleChildScrollView(
                       padding: const EdgeInsets.all(16).copyWith(
-                        bottom: 84 + viewPadding.bottom,
+                        bottom: 96,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              L10n.of(context)!.gameSettingsSectionLabel,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ListTile(
-                                  title: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        L10n.of(context)!.quizModeTileLabel,
-                                      ),
-                                      Text(
-                                        L10n.of(context)!.quizCategoryMode(
-                                          quizCategory.name,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Divider(height: 1),
-                                ListTile(
-                                  title: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        L10n.of(context)!.quizTypeTileLabel,
-                                      ),
-                                      Text(
-                                        quizType == QuizType.numQuizzes
-                                            ? '${L10n.of(context)!.quizType(quizType.name)}・${L10n.of(context)!.quizSize(quizLength)}'
-                                            : '${L10n.of(context)!.quizType(quizType.name)}・$limit${L10n.of(context)!.seconds}',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 32),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
@@ -139,6 +91,9 @@ class GameResult extends ConsumerWidget {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: context.colorScheme.outlineVariant,
+                              ),
                             ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -194,6 +149,9 @@ class GameResult extends ConsumerWidget {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: context.colorScheme.outlineVariant,
+                              ),
                             ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -268,59 +226,64 @@ class GameResult extends ConsumerWidget {
                     ),
                   Positioned(
                     bottom: 16,
-                    right: 0,
-                    left: 0,
+                    right: 16,
+                    left: 16,
                     child: SafeArea(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          FilledButton.icon(
-                            icon: const Icon(Icons.refresh_outlined),
-                            label: Text(L10n.of(context)!.retryButtonLabel),
-                            style: FilledButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(28),
-                              ),
-                              backgroundColor: Colors.grey.shade200,
-                              minimumSize: const Size(140, 48),
-                            ),
-                            onPressed: () async {
-                              analytics.logRestartGame();
-                              ref.invalidate(quizProvider);
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  fullscreenDialog: true,
-                                  builder: (context) => Game(
-                                    quizType: quizType,
-                                  ),
+                          Expanded(
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              );
-                            },
+                                side: BorderSide(
+                                  color: context.colorScheme.outlineVariant,
+                                ),
+                                minimumSize: const Size(140, 56),
+                                foregroundColor: context.colorScheme.onSurface,
+                                backgroundColor: context.colorScheme.surface,
+                              ),
+                              onPressed: () async {
+                                analytics.logRestartGame();
+                                ref.invalidate(quizProvider);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    fullscreenDialog: true,
+                                    builder: (context) => Game(
+                                      quizType: quizType,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Text(L10n.of(context)!.retryButtonLabel),
+                            ),
                           ),
                           const SizedBox(width: 16),
-                          FilledButton.icon(
-                            icon: const Icon(Icons.home_outlined),
-                            label: Text(L10n.of(context)!.homeButtonLabel),
-                            style: FilledButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(28),
-                              ),
-                              minimumSize: const Size(140, 48),
-                            ),
-                            onPressed: () async {
-                              Navigator.popUntil(
-                                context,
-                                (route) => route.isFirst,
-                              );
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Home(),
+                          Expanded(
+                            child: FilledButton(
+                              style: FilledButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              );
-                            },
+                                minimumSize: const Size(140, 56),
+                              ),
+                              onPressed: () async {
+                                Navigator.popUntil(
+                                  context,
+                                  (route) => route.isFirst,
+                                );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Home(),
+                                  ),
+                                );
+                              },
+                              child: Text(L10n.of(context)!.homeButtonLabel),
+                            ),
                           ),
                         ],
                       ),
