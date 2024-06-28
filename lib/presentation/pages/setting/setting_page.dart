@@ -43,6 +43,7 @@ class Setting extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Material(
+                color: context.colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
@@ -70,11 +71,10 @@ class Setting extends ConsumerWidget {
                               style: TextButton.styleFrom(
                                 shape: const BeveledRectangleBorder(),
                                 foregroundColor: quizCategoryMode == leftItem
-                                    ? context.colorScheme.primary
-                                    : context.textTheme.bodyMedium!.color,
+                                    ? context.colorScheme.onSecondaryContainer
+                                    : context.colorScheme.onSurface,
                                 backgroundColor: quizCategoryMode == leftItem
-                                    ? context.colorScheme.primary
-                                        .withOpacity(0.2)
+                                    ? context.colorScheme.secondaryContainer
                                     : null,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 minimumSize: const Size.fromHeight(80),
@@ -107,11 +107,10 @@ class Setting extends ConsumerWidget {
                                 style: TextButton.styleFrom(
                                   shape: const BeveledRectangleBorder(),
                                   foregroundColor: quizCategoryMode == rightItem
-                                      ? context.colorScheme.primary
-                                      : context.textTheme.bodyMedium!.color,
+                                      ? context.colorScheme.onSecondaryContainer
+                                      : context.colorScheme.onSurface,
                                   backgroundColor: quizCategoryMode == rightItem
-                                      ? context.colorScheme.primary
-                                          .withOpacity(0.2)
+                                      ? context.colorScheme.secondaryContainer
                                       : null,
                                   tapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
@@ -163,6 +162,7 @@ class Setting extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Material(
+                color: context.colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
@@ -183,10 +183,10 @@ class Setting extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           foregroundColor: quizSizeState == value
-                              ? context.colorScheme.primary
-                              : context.textTheme.bodyMedium!.color,
+                              ? context.colorScheme.onSecondaryContainer
+                              : context.colorScheme.onSurface,
                           backgroundColor: quizSizeState == value
-                              ? context.colorScheme.primary.withOpacity(0.2)
+                              ? context.colorScheme.secondaryContainer
                               : null,
                           minimumSize: const Size.fromHeight(48),
                         ),
@@ -205,6 +205,7 @@ class Setting extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Material(
+                color: context.colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
@@ -225,10 +226,10 @@ class Setting extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           foregroundColor: quizTimeState == value
-                              ? context.colorScheme.primary
-                              : context.textTheme.bodyMedium!.color,
+                              ? context.colorScheme.onSecondaryContainer
+                              : context.colorScheme.onSurface,
                           backgroundColor: quizTimeState == value
-                              ? context.colorScheme.primary.withOpacity(0.2)
+                              ? context.colorScheme.secondaryContainer
                               : null,
                           minimumSize: const Size.fromHeight(48),
                         ),
@@ -257,12 +258,13 @@ class Setting extends ConsumerWidget {
                               child: Material(
                                 shape: const StadiumBorder(),
                                 color: selected
-                                    ? context.colorScheme.primary
-                                        .withOpacity(0.2)
+                                    ? context.colorScheme.secondaryContainer
                                     : null,
                                 clipBehavior: Clip.antiAlias,
                                 child: ListTile(
                                   selected: selected,
+                                  selectedColor:
+                                      context.colorScheme.onSecondaryContainer,
                                   leading: selected
                                       ? const Icon(Icons.check)
                                       : const SizedBox(),

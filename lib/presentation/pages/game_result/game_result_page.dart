@@ -89,7 +89,6 @@ class GameResult extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                 color: context.colorScheme.outlineVariant,
@@ -147,7 +146,6 @@ class GameResult extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                 color: context.colorScheme.outlineVariant,

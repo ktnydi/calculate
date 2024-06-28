@@ -92,7 +92,7 @@ class Game extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  color: Colors.white,
+                  color: context.colorScheme.surface,
                   child: const SafeArea(
                     child: NumKeyboard(),
                   ),

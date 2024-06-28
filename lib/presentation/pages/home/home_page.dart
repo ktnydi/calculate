@@ -75,7 +75,7 @@ class Home extends ConsumerWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16),
                                       side: BorderSide(
-                                        color: context.colorScheme.onPrimary,
+                                        color: context.colorScheme.onSurface,
                                         width: 2,
                                       ),
                                     ),
@@ -235,7 +235,7 @@ class Home extends ConsumerWidget {
                               );
                             },
                             style: TextButton.styleFrom(
-                              foregroundColor: context.colorScheme.onPrimary,
+                              foregroundColor: context.colorScheme.onSurface,
                               textStyle: context.textTheme.labelLarge!.copyWith(
                                 decoration: TextDecoration.underline,
                               ),
