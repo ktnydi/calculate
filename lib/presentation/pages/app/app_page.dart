@@ -39,7 +39,7 @@ class MyApp extends ConsumerWidget {
           outlineVariant: const Color(0xFFEBEEF2),
           surface: const Color(0xFFFFFFFF),
         ),
-        textTheme: createTextTheme(context, 'Noto Sans', 'Noto Sans'),
+        textTheme: createTextTheme(context, 'Roboto', 'Roboto'),
       ).copyWith(
         splashFactory: InkSparkle.splashFactory,
         appBarTheme: const AppBarTheme(
