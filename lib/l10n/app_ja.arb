@@ -26,14 +26,6 @@
       }
     }
   },
-  "quizTypeDescription": "{value, select, timeLimit{決められた制限時間内にできるだけ問題を解く形式} numQuizzes{決められた問題数だけ問題を解く形式} other{}}",
-  "@quizTypeDescription": {
-    "placeholders": {
-      "value": {
-        "type": "String"
-      }
-    }
-  },
   "quizSize": "{value} 問",
   "@quizSize": {
     "placeholders": {
@@ -42,9 +34,8 @@
       }
     }
   },
-  "settingsButtonLabel": "ゲーム設定",
-  "helpButtonLabel": "ヘルプ",
-  "currentQuizNumber": "第{value}問",
+  "settingsButtonLabel": "設定",
+  "currentQuizNumber": "Q{value}",
   "@currentQuizNumber": {
     "placeholders": {
       "value": {
@@ -60,24 +51,11 @@
   "seconds": "秒",
   "retryButtonLabel": "リトライ",
   "homeButtonLabel": "ホーム",
-  "settingsPageTitle": "ゲーム設定",
-  "quizModeTileLabel": "出題モード",
-  "quizTypeTileLabel": "問題形式",
-  "oneHandKeypad": "片手モード",
-  "keyboardLocationTileLabel": "キーパッドの位置",
-  "keyboardLocation": "{value, select, left{左} center{標準} right{右} other{}}",
-  "@keyboardLocation": {
-    "placeholders": {
-      "value": {
-        "type": "String"
-      }
-    }
-  },
+  "settingsPageTitle": "プレイ設定",
   "languageSettingsTileLabel": "言語設定",
   "helpPageTitle": "ヘルプ",
   "feedbackTileLabel": "フィードバック",
-  "loadmapTileLabel": "ロードマップ",
-  "reviewTileLabel": "アプリを評価",
+  "reviewTileLabel": "レビューを書く",
   "licenseTileLabel": "ライセンス",
   "termsOfUseTileLabel": "利用規約",
   "privacyPolicyTileLabel": "プライバシーポリシー",
@@ -85,8 +63,5 @@
   "updateRequestTitle": "アップデートのお知らせ",
   "updateRequestMessage": "新しいバージョンのアプリをリリースしました。アップデートしてください。",
   "cancelUpdateButtonLabel": "あとで行う",
-  "okUpdateButtonLabel": "アップデート",
-  "finishTutorialButtonLabel": "はじめる",
-  "welcomeMessage": "本アプリをダウンロードいただきありがとうございます。アプリを利用する前に簡単な初期設定を行います。",
-  "quizTypeSettingsDescription": "お好みの問題形式を選択してください(あとで変更可能)"
+  "okUpdateButtonLabel": "アップデート"
 }
