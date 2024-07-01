@@ -6,6 +6,7 @@ import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/presentation/pages/app/theme.dart';
 import 'package:calculate/presentation/pages/app/util.dart';
 import 'package:calculate/presentation/pages/version_check/version_check_page.dart';
+import 'package:calculate/providers/review_counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -20,8 +21,9 @@ class MyApp extends ConsumerWidget {
     final locale = ref.watch(localeNotifierProvider);
 
     ref.listen(playCounterNotifierProvider, (previous, next) async {
-      if (next < 5) return;
-      if (next % 5 != 0) return;
+      final reviewCounter = await ref.watch(reviewCounterProvider.future);
+      if (next < reviewCounter) return;
+      if (next % reviewCounter != 0) return;
 
       await ref.read(requestReviewProvider)();
     });

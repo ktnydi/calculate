@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum RemoteConfigKey {
   updateInfo('update_info'),
+  reviewCounter('review_counter'),
   ;
 
   const RemoteConfigKey(this.key);
@@ -32,6 +33,9 @@ class RemoteConfigRepository {
         fetchTimeout: const Duration(minutes: 1),
       ),
     );
+    await rc.setDefaults({
+      RemoteConfigKey.reviewCounter.key: '20',
+    });
   }
 
   Future<void> fetchAndActivate() async {
@@ -40,5 +44,9 @@ class RemoteConfigRepository {
 
   String getString(RemoteConfigKey value) {
     return rc.getString(value.key);
+  }
+
+  int getInt(RemoteConfigKey value) {
+    return rc.getInt(value.key);
   }
 }
