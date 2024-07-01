@@ -108,7 +108,7 @@ class GameResult extends ConsumerWidget {
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
-                                        '${(avgTime!.inMilliseconds / 1000).digit()}${L10n.of(context)!.seconds}',
+                                        '${(avgTime!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
                                       ),
                                     ],
                                   ),
@@ -127,7 +127,7 @@ class GameResult extends ConsumerWidget {
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()}${L10n.of(context)!.seconds}',
+                                            '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
                                           )
                                         ],
                                       ),
@@ -201,7 +201,7 @@ class GameResult extends ConsumerWidget {
                                             ),
                                             const Spacer(),
                                             Text(
-                                              '${(answer.time.inMilliseconds / 1000).digit()}${L10n.of(context)!.seconds}',
+                                              '${(answer.time.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
                                             ),
                                           ],
                                         ),
