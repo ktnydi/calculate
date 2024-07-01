@@ -19,16 +19,17 @@ class Indicator extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      color: Colors.grey.shade200,
+      color: context.colorScheme.surfaceContainer,
+      width: screenWidth,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
           AnimatedContainer(
-            duration: const Duration(milliseconds: 10),
+            duration: const Duration(milliseconds: 100),
             width: quizType == QuizType.numQuizzes
                 ? screenWidth * (gameState.answerList.length / quizSizeState)
                 : screenWidth * (gameState.time / quizTimeState),
-            height: 8,
+            height: 4,
             decoration: BoxDecoration(
               color: context.colorScheme.primary,
               borderRadius: const BorderRadius.horizontal(

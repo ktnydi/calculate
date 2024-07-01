@@ -1,8 +1,6 @@
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
-import 'package:calculate/enums/supported_locale.dart';
 import 'package:calculate/extensions/context.dart';
-import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
 import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/material.dart';
@@ -21,22 +19,22 @@ class Setting extends ConsumerWidget {
     final quizTimeNotifier = ref.watch(quizTimeNotifierProvider.notifier);
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final quizSizeNotifier = ref.watch(quizSizeNotifierProvider.notifier);
-    final localeState = ref.watch(localeNotifierProvider);
 
-    return Scaffold(
-      backgroundColor: context.colorScheme.surface,
-      appBar: AppBar(
-        title: Text(L10n.of(context)!.settingsPageTitle),
-      ),
-      body: SingleChildScrollView(
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Text(
-                L10n.of(context)!.quizModeTileLabel,
-                style: context.textTheme.titleMedium,
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(1000),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -45,10 +43,7 @@ class Setting extends ConsumerWidget {
               child: Material(
                 color: context.colorScheme.surface,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                    color: context.dividerColor,
-                  ),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: ListView.separated(
@@ -71,15 +66,19 @@ class Setting extends ConsumerWidget {
                               style: TextButton.styleFrom(
                                 shape: const BeveledRectangleBorder(),
                                 foregroundColor: quizCategoryMode == leftItem
-                                    ? context.colorScheme.onSecondaryContainer
+                                    ? context.colorScheme.onPrimary
                                     : context.colorScheme.onSurface,
                                 backgroundColor: quizCategoryMode == leftItem
-                                    ? context.colorScheme.secondaryContainer
+                                    ? context.colorScheme.primary
                                     : null,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                minimumSize: const Size.fromHeight(80),
-                                padding: const EdgeInsets.all(16),
-                                textStyle: context.textTheme.titleMedium,
+                                minimumSize: const Size.fromHeight(56),
+                                textStyle:
+                                    context.textTheme.labelLarge!.copyWith(
+                                  fontWeight: quizCategoryMode == leftItem
+                                      ? FontWeight.bold
+                                      : null,
+                                ),
                               ),
                               onPressed: () {
                                 quizCategoryModeNotifier.change(leftItem);
@@ -90,6 +89,7 @@ class Setting extends ConsumerWidget {
                                   if (leftItem.icon != null) ...[
                                     Icon(
                                       leftItem.icon,
+                                      size: 20,
                                     ),
                                   ] else
                                     Text(
@@ -101,20 +101,20 @@ class Setting extends ConsumerWidget {
                             ),
                           ),
                           if (rightItem != null) ...[
-                            const VerticalDivider(width: 1),
+                            const VerticalDivider(width: 2, thickness: 2),
                             Expanded(
                               child: TextButton(
                                 style: TextButton.styleFrom(
                                   shape: const BeveledRectangleBorder(),
                                   foregroundColor: quizCategoryMode == rightItem
-                                      ? context.colorScheme.onSecondaryContainer
+                                      ? context.colorScheme.onPrimary
                                       : context.colorScheme.onSurface,
                                   backgroundColor: quizCategoryMode == rightItem
-                                      ? context.colorScheme.secondaryContainer
+                                      ? context.colorScheme.primary
                                       : null,
                                   tapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
-                                  minimumSize: const Size.fromHeight(80),
+                                  minimumSize: const Size.fromHeight(56),
                                   textStyle: context.textTheme.labelSmall,
                                 ),
                                 onPressed: () {
@@ -126,6 +126,7 @@ class Setting extends ConsumerWidget {
                                     if (rightItem.icon != null) ...[
                                       Icon(
                                         rightItem.icon,
+                                        size: 20,
                                       ),
                                     ] else
                                       Text(
@@ -141,33 +142,20 @@ class Setting extends ConsumerWidget {
                       ),
                     );
                   },
-                  separatorBuilder: (_, __) => const Divider(height: 1),
+                  separatorBuilder: (_, __) => const Divider(
+                    height: 2,
+                    thickness: 2,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            ListTile(
-              title: Row(
-                children: [
-                  Expanded(
-                    child: Text(L10n.of(context)!.quizTypeTileLabel),
-                  ),
-                ],
-              ),
-            ),
+            const SizedBox(height: 8),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(L10n.of(context)!.quizType(QuizType.numQuizzes.name)),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Material(
                 color: context.colorScheme.surface,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                    color: context.dividerColor,
-                  ),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Row(
@@ -180,15 +168,19 @@ class Setting extends ConsumerWidget {
                         },
                         style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(4),
                           ),
                           foregroundColor: quizSizeState == value
-                              ? context.colorScheme.onSecondaryContainer
+                              ? context.colorScheme.onPrimary
                               : context.colorScheme.onSurface,
                           backgroundColor: quizSizeState == value
-                              ? context.colorScheme.secondaryContainer
+                              ? context.colorScheme.primary
                               : null,
-                          minimumSize: const Size.fromHeight(48),
+                          minimumSize: const Size.fromHeight(56),
+                          textStyle: context.textTheme.labelLarge!.copyWith(
+                            fontWeight:
+                                quizSizeState == value ? FontWeight.bold : null,
+                          ),
                         ),
                         child: Text(L10n.of(context)!.quizSize(value)),
                       ),
@@ -197,20 +189,12 @@ class Setting extends ConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(L10n.of(context)!.quizType(QuizType.timeLimit.name)),
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Material(
                 color: context.colorScheme.surface,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                    color: context.dividerColor,
-                  ),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Row(
@@ -223,15 +207,19 @@ class Setting extends ConsumerWidget {
                         },
                         style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(4),
                           ),
                           foregroundColor: quizTimeState == value
-                              ? context.colorScheme.onSecondaryContainer
+                              ? context.colorScheme.onPrimary
                               : context.colorScheme.onSurface,
                           backgroundColor: quizTimeState == value
-                              ? context.colorScheme.secondaryContainer
+                              ? context.colorScheme.primary
                               : null,
-                          minimumSize: const Size.fromHeight(48),
+                          minimumSize: const Size.fromHeight(56),
+                          textStyle: context.textTheme.labelLarge!.copyWith(
+                            fontWeight:
+                                quizTimeState == value ? FontWeight.bold : null,
+                          ),
                         ),
                         child: Text('$value ${L10n.of(context)!.seconds}'),
                       ),
@@ -239,62 +227,6 @@ class Setting extends ConsumerWidget {
                   }).toList(),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            ListTile(
-              onTap: () async {
-                final result = await showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SafeArea(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: SupportedLocale.values.map(
-                          (value) {
-                            final selected = localeState == value;
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Material(
-                                shape: const StadiumBorder(),
-                                color: selected
-                                    ? context.colorScheme.secondaryContainer
-                                    : null,
-                                clipBehavior: Clip.antiAlias,
-                                child: ListTile(
-                                  selected: selected,
-                                  selectedColor:
-                                      context.colorScheme.onSecondaryContainer,
-                                  leading: selected
-                                      ? const Icon(Icons.check)
-                                      : const SizedBox(),
-                                  title: Text(value.label),
-                                  onTap: () {
-                                    Navigator.of(context).pop(value);
-                                  },
-                                ),
-                              ),
-                            );
-                          },
-                        ).toList(),
-                      ),
-                    );
-                  },
-                );
-
-                if (result == null) return;
-
-                ref.read(localeNotifierProvider.notifier).change(result);
-              },
-              title: Row(
-                children: [
-                  Expanded(
-                    child: Text(L10n.of(context)!.languageSettingsTileLabel),
-                  ),
-                  Text(localeState.label),
-                ],
-              ),
-              trailing: const Icon(Icons.navigate_next),
             ),
           ],
         ),

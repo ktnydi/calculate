@@ -92,6 +92,7 @@ class Home extends ConsumerWidget {
                                     style: context.textTheme.headlineLarge!
                                         .copyWith(
                                       color: context.colorScheme.onSurface,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                     maxLines: 1,
                                   ),
@@ -113,12 +114,13 @@ class Home extends ConsumerWidget {
                                         context.colorScheme.onSurface,
                                     side: BorderSide(
                                       width: 2,
-                                      color: context.colorScheme.outlineVariant,
+                                      color: context.colorScheme.onSurface,
                                     ),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.zero,
                                     ),
                                     minimumSize: const Size(232, 80),
+                                    textStyle: context.textTheme.bodyLarge,
                                   ),
                                   onPressed: () {
                                     analytics
@@ -172,12 +174,13 @@ class Home extends ConsumerWidget {
                                         context.colorScheme.onSurface,
                                     side: BorderSide(
                                       width: 2,
-                                      color: context.colorScheme.outlineVariant,
+                                      color: context.colorScheme.onSurface,
                                     ),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.zero,
                                     ),
                                     minimumSize: const Size(232, 80),
+                                    textStyle: context.textTheme.bodyLarge,
                                   ),
                                   onPressed: () {
                                     analytics
@@ -227,17 +230,20 @@ class Home extends ConsumerWidget {
                           const SizedBox(height: 16),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Setting(),
-                                ),
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(),
+                                builder: (context) {
+                                  return const Setting();
+                                },
                               );
                             },
                             style: TextButton.styleFrom(
                               foregroundColor: context.colorScheme.onSurface,
-                              textStyle: context.textTheme.labelLarge!.copyWith(
+                              textStyle: context.textTheme.bodyLarge!.copyWith(
                                 decoration: TextDecoration.underline,
+                                decorationStyle: TextDecorationStyle.dotted,
                               ),
                             ),
                             child: Text(L10n.of(context)!.settingsButtonLabel),

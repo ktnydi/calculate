@@ -89,7 +89,7 @@ class GameResult extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: context.colorScheme.outlineVariant,
                               ),
@@ -146,7 +146,7 @@ class GameResult extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: context.colorScheme.outlineVariant,
                               ),
@@ -231,19 +231,16 @@ class GameResult extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                side: BorderSide(
-                                  color: context.colorScheme.outlineVariant,
-                                ),
+                            child: FilledButton(
+                              style: FilledButton.styleFrom(
+                                shape: const StadiumBorder(),
                                 minimumSize: const Size(140, 56),
-                                foregroundColor: context.colorScheme.onSurface,
-                                backgroundColor: context.colorScheme.surface,
+                                textStyle:
+                                    context.textTheme.labelLarge!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              onPressed: () async {
+                              onPressed: () {
                                 analytics.logRestartGame();
                                 ref.invalidate(quizProvider);
                                 Navigator.pushReplacement(
@@ -260,28 +257,29 @@ class GameResult extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          Expanded(
-                            child: FilledButton(
-                              style: FilledButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                minimumSize: const Size(140, 56),
+                          IconButton.outlined(
+                            style: IconButton.styleFrom(
+                              shape: const CircleBorder(),
+                              side: BorderSide(
+                                color: context.colorScheme.outlineVariant,
                               ),
-                              onPressed: () async {
-                                Navigator.popUntil(
-                                  context,
-                                  (route) => route.isFirst,
-                                );
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Home(),
-                                  ),
-                                );
-                              },
-                              child: Text(L10n.of(context)!.homeButtonLabel),
+                              minimumSize: const Size(56, 56),
+                              foregroundColor: context.colorScheme.onSurface,
+                              backgroundColor: context.colorScheme.surface,
                             ),
+                            onPressed: () {
+                              Navigator.popUntil(
+                                context,
+                                (route) => route.isFirst,
+                              );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Home(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.home_outlined),
                           ),
                         ],
                       ),

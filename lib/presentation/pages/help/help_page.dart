@@ -1,3 +1,5 @@
+import 'package:calculate/enums/supported_locale.dart';
+import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/providers.dart';
@@ -18,6 +20,34 @@ class Help extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          Consumer(
+            builder: (context, ref, child) {
+              final localeState = ref.watch(localeNotifierProvider);
+
+              return ListTile(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: context.colorScheme.surface,
+                    shape: const RoundedRectangleBorder(),
+                    builder: (context) {
+                      return const LanguageSettings();
+                    },
+                  );
+                },
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Text(L10n.of(context)!.languageSettingsTileLabel),
+                    ),
+                    Text(localeState.label),
+                  ],
+                ),
+                trailing: const Icon(Icons.navigate_next),
+              );
+            },
+          ),
+          const Divider(height: 1, indent: 16, endIndent: 16),
           ListTile(
             title: Text(L10n.of(context)!.feedbackTileLabel),
             trailing: const Icon(Icons.navigate_next),
@@ -113,6 +143,42 @@ class Help extends StatelessWidget {
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
         ],
+      ),
+    );
+  }
+}
+
+class LanguageSettings extends ConsumerWidget {
+  const LanguageSettings({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localeState = ref.watch(localeNotifierProvider);
+
+    return SafeArea(
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          final value = SupportedLocale.values[index];
+          final selected = value == localeState;
+
+          return ListTile(
+            title: Row(
+              children: [
+                Expanded(
+                  child: Text(value.label),
+                ),
+                selected ? const Icon(Icons.check) : const SizedBox(),
+              ],
+            ),
+            onTap: () {
+              ref.read(localeNotifierProvider.notifier).change(value);
+            },
+          );
+        },
+        separatorBuilder: (_, __) => const Divider(height: 1),
+        itemCount: SupportedLocale.values.length,
       ),
     );
   }
