@@ -4,6 +4,7 @@ import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/presentation/pages/app/theme.dart';
+import 'package:calculate/presentation/pages/app/util.dart';
 import 'package:calculate/presentation/pages/version_check/version_check_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +39,7 @@ class MyApp extends ConsumerWidget {
         ),
         textTheme: createTextTheme(context, 'Noto Sans', 'Noto Sans'),
       ).copyWith(
+        splashFactory: InkSparkle.splashFactory,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           scrolledUnderElevation: 0,
