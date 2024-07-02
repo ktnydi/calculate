@@ -158,7 +158,7 @@ class Home extends ConsumerWidget {
                                           style: context.textTheme.bodyMedium!
                                               .copyWith(
                                             color: context
-                                                .textTheme.bodySmall!.color,
+                                                .colorScheme.onSurfaceVariant,
                                           ),
                                         ),
                                       ],
@@ -217,7 +217,7 @@ class Home extends ConsumerWidget {
                                           style: context.textTheme.bodyMedium!
                                               .copyWith(
                                             color: context
-                                                .textTheme.bodySmall!.color,
+                                                .colorScheme.onSurfaceVariant,
                                           ),
                                         ),
                                       ],
