@@ -106,9 +106,15 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
     return Container(
       color: context.colorScheme.surface,
       child: Center(
-        child: Lottie.asset(
-          'assets/loading.json',
-          width: 160,
+        child: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            context.colorScheme.onSurface,
+            BlendMode.srcATop,
+          ),
+          child: Lottie.asset(
+            'assets/loading.json',
+            width: 160,
+          ),
         ),
       ),
     );

@@ -12,7 +12,6 @@ import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/presentation/pages/setting/setting_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:lottie/lottie.dart';
@@ -30,8 +29,6 @@ class Home extends ConsumerWidget {
       extendBodyBehindAppBar: true,
       backgroundColor: context.colorScheme.surface,
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: Colors.transparent,
         actions: [
           IconButton(
             onPressed: () {
@@ -79,11 +76,17 @@ class Home extends ConsumerWidget {
                                         width: 2,
                                       ),
                                     ),
-                                    child: Lottie.asset(
-                                      'assets/app_icon.json',
-                                      width: 80,
-                                      height: 80,
-                                      repeat: false,
+                                    child: ColorFiltered(
+                                      colorFilter: ColorFilter.mode(
+                                        context.colorScheme.onSurface,
+                                        BlendMode.srcATop,
+                                      ),
+                                      child: Lottie.asset(
+                                        'assets/app_icon.json',
+                                        width: 80,
+                                        height: 80,
+                                        repeat: false,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(height: 32),
@@ -244,6 +247,7 @@ class Home extends ConsumerWidget {
                               textStyle: context.textTheme.bodyLarge!.copyWith(
                                 decoration: TextDecoration.underline,
                                 decorationStyle: TextDecorationStyle.dotted,
+                                decorationColor: context.colorScheme.onSurface,
                               ),
                             ),
                             child: Text(L10n.of(context)!.settingsButtonLabel),

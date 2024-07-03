@@ -28,27 +28,45 @@ class MyApp extends ConsumerWidget {
       await ref.read(requestReviewProvider)();
     });
 
+    TextTheme textTheme = createTextTheme(context, "Lato", "Lato");
+
     return MaterialApp(
       debugShowCheckedModeBanner: flavor == Flavor.development,
       title: '計算ドリル',
       localizationsDelegates: L10n.localizationsDelegates,
       locale: locale.toLocale(),
       supportedLocales: L10n.supportedLocales,
-      theme: ThemeData.from(
-        colorScheme: MaterialTheme.lightScheme().copyWith(
-          outlineVariant: const Color(0xFFEBEEF2),
-          surface: const Color(0xFFFFFFFF),
-        ),
-        textTheme: createTextTheme(context, 'Roboto', 'Roboto'),
-      ).copyWith(
-        splashFactory: InkSparkle.splashFactory,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          centerTitle: true,
-          backgroundColor: Color(0xFFFFFFFF),
-        ),
-      ),
+      theme: MaterialTheme(textTheme)
+          .theme(
+            MaterialTheme.lightScheme().copyWith(
+              outlineVariant: const Color(0xFFEBEEF2),
+              surface: const Color(0xFFFFFFFF),
+            ),
+          )
+          .copyWith(
+            splashFactory: InkSparkle.splashFactory,
+            appBarTheme: const AppBarTheme(
+              elevation: 0,
+              scrolledUnderElevation: 0,
+              centerTitle: true,
+              backgroundColor: Color(0xFFFFFFFF),
+            ),
+          ),
+      darkTheme: MaterialTheme(textTheme)
+          .theme(
+            MaterialTheme.darkScheme().copyWith(
+              outlineVariant: const Color(0xFF29323E),
+            ),
+          )
+          .copyWith(
+            splashFactory: InkSparkle.splashFactory,
+            appBarTheme: const AppBarTheme(
+              elevation: 0,
+              scrolledUnderElevation: 0,
+              centerTitle: true,
+              backgroundColor: Color(0xFF0F1417),
+            ),
+          ),
       home: const Scaffold(
         body: VersionCheckPage(),
       ),
