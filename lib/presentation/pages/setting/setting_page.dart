@@ -22,7 +22,7 @@ class Setting extends ConsumerWidget {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.fromLTRB(0, 12, 0, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -32,12 +32,12 @@ class Setting extends ConsumerWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.surfaceContainerHighest,
+                  color: context.colorScheme.onSurfaceVariant,
                   borderRadius: BorderRadius.circular(1000),
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Material(
@@ -101,7 +101,11 @@ class Setting extends ConsumerWidget {
                             ),
                           ),
                           if (rightItem != null) ...[
-                            const VerticalDivider(width: 2, thickness: 2),
+                            VerticalDivider(
+                              width: 2,
+                              thickness: 2,
+                              color: context.colorScheme.surfaceContainerLow,
+                            ),
                             Expanded(
                               child: TextButton(
                                 style: TextButton.styleFrom(
@@ -142,9 +146,10 @@ class Setting extends ConsumerWidget {
                       ),
                     );
                   },
-                  separatorBuilder: (_, __) => const Divider(
+                  separatorBuilder: (_, __) => Divider(
                     height: 2,
                     thickness: 2,
+                    color: context.colorScheme.surfaceContainerLow,
                   ),
                 ),
               ),
