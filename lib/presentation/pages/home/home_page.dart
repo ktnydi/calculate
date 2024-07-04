@@ -14,7 +14,7 @@ import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key});
@@ -76,16 +76,13 @@ class Home extends ConsumerWidget {
                                         width: 2,
                                       ),
                                     ),
-                                    child: ColorFiltered(
+                                    child: SvgPicture.asset(
+                                      'assets/app_icon_clear.svg',
+                                      width: 80,
+                                      height: 80,
                                       colorFilter: ColorFilter.mode(
                                         context.colorScheme.onSurface,
                                         BlendMode.srcATop,
-                                      ),
-                                      child: Lottie.asset(
-                                        'assets/app_icon.json',
-                                        width: 80,
-                                        height: 80,
-                                        repeat: false,
                                       ),
                                     ),
                                   ),

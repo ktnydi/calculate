@@ -31,6 +31,7 @@ dependencies:
   flutter_sliding_tutorial: ^2.0.0+1
   lottie: ^3.1.2
   google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +48,7 @@ flutter:
   assets:
     - assets/blobs.png
     - assets/app_icon.png
-    - assets/app_icon.json
+    - assets/app_icon_clear.svg
     - assets/loading.json
 
 flutter_icons:
