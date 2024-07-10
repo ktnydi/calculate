@@ -38,6 +38,20 @@
                 "--flavor",
                 "production"
             ]
+        },
+        {
+            "name": "DebugStaging",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--dart-define",
+                "SHOW_ADS=false",
+                "--dart-define",
+                "FLAVOR=development",
+                "--flavor",
+                "development",
+            ]
         }
     ]
 }

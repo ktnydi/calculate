@@ -58,6 +58,11 @@ class _BottomAdBannerState extends State<BottomAdBanner> {
       });
     }
 
+    const showAds = bool.fromEnvironment('SHOW_ADS', defaultValue: true);
+    if (!showAds) {
+      return const SizedBox();
+    }
+
     final bannerAd = ad;
     return bannerAd != null
         ? SizedBox(
