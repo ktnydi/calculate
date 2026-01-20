@@ -51,3 +51,6 @@ app.*.map.json
 
 # Apiキー
 /lib/config.dart
+
+# FVM
+.fvm/
