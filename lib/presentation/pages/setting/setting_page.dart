@@ -2,7 +2,6 @@ import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
-import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -15,8 +14,6 @@ class Setting extends ConsumerWidget {
     final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
     final quizCategoryModeNotifier =
         ref.watch(quizCategoryModeNotifierProvider.notifier);
-    final quizTimeState = ref.watch(quizTimeNotifierProvider);
-    final quizTimeNotifier = ref.watch(quizTimeNotifierProvider.notifier);
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final quizSizeNotifier = ref.watch(quizSizeNotifierProvider.notifier);
 
@@ -188,45 +185,6 @@ class Setting extends ConsumerWidget {
                           ),
                         ),
                         child: Text(L10n.of(context)!.quizSize(value)),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: Material(
-                color: context.colorScheme.surface,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Row(
-                  key: const ValueKey(QuizType.timeLimit),
-                  children: QuizType.timeLimit.selections.map((value) {
-                    return Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          quizTimeNotifier.change(time: value);
-                        },
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          foregroundColor: quizTimeState == value
-                              ? context.colorScheme.onPrimary
-                              : context.colorScheme.onSurface,
-                          backgroundColor: quizTimeState == value
-                              ? context.colorScheme.primary
-                              : null,
-                          minimumSize: const Size.fromHeight(56),
-                          textStyle: context.textTheme.labelLarge!.copyWith(
-                            fontWeight:
-                                quizTimeState == value ? FontWeight.bold : null,
-                          ),
-                        ),
-                        child: Text('$value ${L10n.of(context)!.seconds}'),
                       ),
                     );
                   }).toList(),

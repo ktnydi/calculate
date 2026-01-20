@@ -4,7 +4,6 @@ import 'package:calculate/config.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
-import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/pages/help/help_page.dart';
 import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
@@ -22,7 +21,6 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
-    final limit = ref.watch(quizTimeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
 
     return Scaffold(
@@ -123,9 +121,7 @@ class Home extends ConsumerWidget {
                                     textStyle: context.textTheme.bodyLarge,
                                   ),
                                   onPressed: () {
-                                    analytics
-                                      ..logStartGame()
-                                      ..logNumberOfQuizMode();
+                                    analytics.logStartGame();
 
                                     ref.invalidate(quizProvider);
 
@@ -153,65 +149,6 @@ class Home extends ConsumerWidget {
                                         Text(
                                           L10n.of(context)!
                                               .quizSize(quizLength),
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
-                                          style: context.textTheme.bodyMedium!
-                                              .copyWith(
-                                            color: context
-                                                .colorScheme.onSurfaceVariant,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                    backgroundColor:
-                                        context.colorScheme.surface,
-                                    foregroundColor:
-                                        context.colorScheme.onSurface,
-                                    side: BorderSide(
-                                      width: 2,
-                                      color: context.colorScheme.onSurface,
-                                    ),
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero,
-                                    ),
-                                    minimumSize: const Size(232, 80),
-                                    textStyle: context.textTheme.bodyLarge,
-                                  ),
-                                  onPressed: () {
-                                    analytics
-                                      ..logStartGame()
-                                      ..logTimeLimitMode();
-
-                                    ref.invalidate(quizProvider);
-
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        builder: (context) => const Game(
-                                          quizType: QuizType.timeLimit,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: FittedBox(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          L10n.of(context)!.quizType(
-                                              QuizType.timeLimit.name),
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
-                                        ),
-                                        const SizedBox(height: 2),
-                                        Text(
-                                          '$limit ${L10n.of(context)!.seconds}',
                                           textAlign: TextAlign.center,
                                           maxLines: 2,
                                           style: context.textTheme.bodyMedium!
