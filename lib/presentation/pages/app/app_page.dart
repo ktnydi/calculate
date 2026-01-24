@@ -1,5 +1,6 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/flavor.dart';
+import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
@@ -9,7 +10,6 @@ import 'package:calculate/presentation/pages/version_check/version_check_page.da
 import 'package:calculate/providers/review_counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

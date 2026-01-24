@@ -4,6 +4,7 @@ import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/extensions/num.dart';
+import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
@@ -16,7 +17,6 @@ import 'package:calculate/providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class GameResult extends ConsumerWidget {
   final int leftTime;

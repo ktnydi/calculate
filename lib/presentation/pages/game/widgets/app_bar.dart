@@ -1,3 +1,4 @@
+import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
@@ -5,7 +6,6 @@ import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class GameAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const GameAppBar({super.key});

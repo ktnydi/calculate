@@ -5,9 +5,9 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class BottomAdBanner extends StatefulWidget {
   const BottomAdBanner({
-    Key? key,
+    super.key,
     required this.adUnitId,
-  }) : super(key: key);
+  });
 
   final AdUnitId adUnitId;
 

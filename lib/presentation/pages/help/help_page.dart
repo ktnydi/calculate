@@ -1,4 +1,5 @@
 import 'package:calculate/enums/supported_locale.dart';
+import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/extensions/context.dart';
@@ -6,7 +7,6 @@ import 'package:calculate/providers.dart';
 import 'package:calculate/presentation/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Help extends StatelessWidget {
   const Help({super.key});
