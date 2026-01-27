@@ -75,6 +75,11 @@ class L10nJa extends L10n {
   }
 
   @override
+  String quizSettingsDescription(String quizCategory, int quizSize) {
+    return '「$quizCategory」の問題を「$quizSize問」';
+  }
+
+  @override
   String get gameResultPageTitle => '結果';
 
   @override

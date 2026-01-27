@@ -75,6 +75,11 @@ class L10nEn extends L10n {
   }
 
   @override
+  String quizSettingsDescription(String quizCategory, int quizSize) {
+    return '\"$quizSize\" questions on \"$quizCategory\"';
+  }
+
+  @override
   String get gameResultPageTitle => 'Result';
 
   @override

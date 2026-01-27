@@ -43,6 +43,17 @@
       }
     }
   },
+  "quizSettingsDescription": "「{quizCategory}」の問題を「{quizSize}問」",
+  "@quizSettingsDescription": {
+    "placeholders": {
+      "quizCategory": {
+        "type": "String"
+      },
+      "quizSize": {
+        "type": "int"
+      }
+    }
+  },
   "gameResultPageTitle": "結果",
   "gameSettingsSectionLabel": "設定",
   "averageTimeSectionLabel": "平均タイム",

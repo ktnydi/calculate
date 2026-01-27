@@ -8,6 +8,7 @@
   "quizSize": "{value} Q",
   "settingsButtonLabel": "Settings",
   "currentQuizNumber": "Q{value}",
+  "quizSettingsDescription": "\"{quizSize}\" questions on \"{quizCategory}\"",
   "gameResultPageTitle": "Result",
   "gameSettingsSectionLabel": "Settings",
   "averageTimeSectionLabel": "Average Time",

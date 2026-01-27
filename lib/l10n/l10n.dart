@@ -151,6 +151,12 @@ abstract class L10n {
   /// **'Q{value}'**
   String currentQuizNumber(int value);
 
+  /// No description provided for @quizSettingsDescription.
+  ///
+  /// In ja, this message translates to:
+  /// **'「{quizCategory}」の問題を「{quizSize}問」'**
+  String quizSettingsDescription(String quizCategory, int quizSize);
+
   /// No description provided for @gameResultPageTitle.
   ///
   /// In ja, this message translates to:

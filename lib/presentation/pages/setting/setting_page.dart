@@ -21,7 +21,6 @@ class Setting extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 12, 0, 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Center(
@@ -32,6 +31,17 @@ class Setting extends ConsumerWidget {
                   color: context.colorScheme.onSurfaceVariant,
                   borderRadius: BorderRadius.circular(1000),
                 ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              L10n.of(context)!.quizSettingsDescription(
+                L10n.of(context)!.quizCategoryMode(quizCategoryMode.name),
+                quizSizeState,
+              ),
+              textAlign: TextAlign.center,
+              style: context.textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 24),
