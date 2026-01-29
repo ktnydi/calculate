@@ -68,159 +68,148 @@ class GameResult extends ConsumerWidget {
               Expanded(
                 child: Stack(
                   children: [
-                    if (answerList.isNotEmpty)
-                      SingleChildScrollView(
-                        padding: const EdgeInsets.all(16).copyWith(
-                          bottom: 96,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                L10n.of(context)!.averageTimeSectionLabel,
+                    SingleChildScrollView(
+                      padding: const EdgeInsets.all(16).copyWith(
+                        bottom: 96,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              L10n.of(context)!.averageTimeSectionLabel,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: context.colorScheme.outlineVariant,
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: context.colorScheme.outlineVariant,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ListTile(
-                                    title: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          L10n.of(context)!
-                                              .allQuizAverageTimeLabel,
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          '${(avgTime!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
-                                        ),
-                                      ],
-                                    ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        L10n.of(context)!
+                                            .allQuizAverageTimeLabel,
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        '${(avgTime!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
+                                      ),
+                                    ],
                                   ),
-                                  for (var i in QuizCategory.values)
-                                    if (eachAvgTime(i) != null) ...[
-                                      const Divider(height: 1),
+                                ),
+                                for (var i in QuizCategory.values)
+                                  if (eachAvgTime(i) != null) ...[
+                                    const Divider(height: 1),
+                                    ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            L10n.of(context)!
+                                                .quizCategory(i.name),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ]
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 32),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              L10n.of(context)!.answeredQuizSectionLabel,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: context.colorScheme.outlineVariant,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                answerList.length,
+                                (index) {
+                                  final answer = answerList.elementAt(index);
+                                  final quiz = answer.quiz;
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if (index != 0) const Divider(height: 1),
                                       ListTile(
+                                        iconColor:
+                                            context.textTheme.bodyMedium!.color,
                                         title: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              L10n.of(context)!
-                                                  .quizCategory(i.name),
+                                            SizedBox(
+                                              width: 48,
+                                              child: Text('(${index + 1})'),
                                             ),
-                                            const SizedBox(height: 4),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  '${quiz.figures.first}',
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Icon(
+                                                  quiz.type.icon,
+                                                  size: context.textTheme
+                                                      .titleMedium!.fontSize,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Text(
+                                                  '${quiz.figures.last}',
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Icon(
+                                                  CupertinoIcons.equal,
+                                                  size: context.textTheme
+                                                      .titleMedium!.fontSize,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Text(
+                                                  '${quiz.correctAnswer}',
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
                                             Text(
-                                              '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
-                                            )
+                                              '${(answer.time.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ]
-                                ],
+                                    ],
+                                  );
+                                },
                               ),
                             ),
-                            const SizedBox(height: 32),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                L10n.of(context)!.answeredQuizSectionLabel,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: context.colorScheme.outlineVariant,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: List.generate(
-                                  answerList.length,
-                                  (index) {
-                                    final answer = answerList.elementAt(index);
-                                    final quiz = answer.quiz;
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (index != 0)
-                                          const Divider(height: 1),
-                                        ListTile(
-                                          iconColor: context
-                                              .textTheme.bodyMedium!.color,
-                                          title: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 48,
-                                                child: Text('(${index + 1})'),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(
-                                                    '${quiz.figures.first}',
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Icon(
-                                                    quiz.type.icon,
-                                                    size: context.textTheme
-                                                        .titleMedium!.fontSize,
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Text(
-                                                    '${quiz.figures.last}',
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Icon(
-                                                    CupertinoIcons.equal,
-                                                    size: context.textTheme
-                                                        .titleMedium!.fontSize,
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Text(
-                                                    '${quiz.correctAnswer}',
-                                                  ),
-                                                ],
-                                              ),
-                                              const Spacer(),
-                                              Text(
-                                                '${(answer.time.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    else
-                      Center(
-                        child: Text(
-                          '回答しないと結果は表示されません。',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
+                          ),
+                        ],
                       ),
+                    ),
                     Positioned(
                       bottom: 16,
                       right: 16,
