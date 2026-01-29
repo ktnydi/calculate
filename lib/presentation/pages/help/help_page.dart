@@ -4,9 +4,9 @@ import 'package:calculate/model/use_cases/app_localize.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/providers.dart';
-import 'package:calculate/presentation/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class Help extends StatelessWidget {
   const Help({super.key});
@@ -52,14 +52,7 @@ class Help extends StatelessWidget {
             title: Text(L10n.of(context)!.feedbackTileLabel),
             trailing: const Icon(Icons.navigate_next),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WebViewPage(
-                    'https://docs.google.com/forms/d/e/1FAIpQLSe_4ggMubBXHaUCRqEbDckA1Eibx-zt8K4F6V-K0lXuSRqBiQ/viewform?usp=sf_link',
-                  ),
-                ),
-              );
+              context.go('/help/feedback');
             },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
@@ -96,14 +89,7 @@ class Help extends StatelessWidget {
             title: Text(L10n.of(context)!.termsOfUseTileLabel),
             trailing: const Icon(Icons.navigate_next),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WebViewPage(
-                    'https://toothsome-persimmon-e89.notion.site/dc7d95253ab1441c9ec099c1b79e2c67',
-                  ),
-                ),
-              );
+              context.go('/help/terms');
             },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
@@ -111,14 +97,7 @@ class Help extends StatelessWidget {
             title: Text(L10n.of(context)!.privacyPolicyTileLabel),
             trailing: const Icon(Icons.navigate_next),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WebViewPage(
-                    'https://toothsome-persimmon-e89.notion.site/d9bdcb0258c846eb987f08e583dd7ff2',
-                  ),
-                ),
-              );
+              context.go('/help/policy');
             },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),

@@ -3,8 +3,6 @@ import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
-import 'package:calculate/presentation/pages/game/game_page.dart';
-import 'package:calculate/presentation/pages/help/help_page.dart';
 import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
 import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/presentation/pages/setting/setting_page.dart';
@@ -12,6 +10,7 @@ import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key});
@@ -27,12 +26,7 @@ class Home extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Help(),
-                ),
-              );
+              context.go('/help');
             },
             icon: const Icon(Icons.menu),
           )
@@ -117,13 +111,7 @@ class Home extends ConsumerWidget {
 
                                     ref.invalidate(quizProvider);
 
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        builder: (context) => const Game(),
-                                      ),
-                                    );
+                                    context.go('/game');
                                   },
                                   child: FittedBox(
                                     child: Column(

@@ -1,10 +1,10 @@
 import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
-import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class GameAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const GameAppBar({super.key});
@@ -22,21 +22,7 @@ class GameAppBar extends ConsumerWidget implements PreferredSizeWidget {
       leading: CloseButton(
         onPressed: () {
           if (quizIndex == 0) {
-            Navigator.pushReplacement(
-              context,
-              PageRouteBuilder(
-                transitionDuration: const Duration(milliseconds: 500),
-                pageBuilder: (context, animation, _) {
-                  return const Home();
-                },
-                transitionsBuilder: (context, animation, _, child) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-              ),
-            );
+            context.go('/');
             return;
           }
 

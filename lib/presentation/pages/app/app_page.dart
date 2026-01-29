@@ -1,4 +1,3 @@
-import 'package:calculate/analytics.dart';
 import 'package:calculate/enums/flavor.dart';
 import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/use_cases/app_localize.dart';
@@ -6,7 +5,7 @@ import 'package:calculate/model/use_cases/play_counter.dart';
 import 'package:calculate/model/use_cases/request_review.dart';
 import 'package:calculate/presentation/pages/app/theme.dart';
 import 'package:calculate/presentation/pages/app/util.dart';
-import 'package:calculate/presentation/pages/version_check/version_check_page.dart';
+import 'package:calculate/presentation/router.dart';
 import 'package:calculate/providers/review_counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +15,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final analytics = ref.watch(analyticsProvider);
     final flavor = ref.watch(flavorProvider);
     final locale = ref.watch(localeNotifierProvider);
 
@@ -30,7 +28,7 @@ class MyApp extends ConsumerWidget {
 
     TextTheme textTheme = createTextTheme(context, "Lato", "Lato");
 
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: flavor == Flavor.development,
       title: '計算ドリル',
       localizationsDelegates: L10n.localizationsDelegates,
@@ -67,12 +65,7 @@ class MyApp extends ConsumerWidget {
               backgroundColor: Color(0xFF0F1417),
             ),
           ),
-      home: const Scaffold(
-        body: VersionCheckPage(),
-      ),
-      navigatorObservers: [
-        analytics.observer,
-      ],
+      routerConfig: ref.watch(routerProvider),
     );
   }
 }

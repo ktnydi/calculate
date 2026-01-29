@@ -1,9 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
+import 'package:go_router/go_router.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:calculate/enums/update_request_type.dart';
-import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,18 +26,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
       if (requestType == UpdateRequestType.not) {
         if (!mounted) return;
 
-        Navigator.pushReplacement(
-          context,
-          PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 200),
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return FadeTransition(
-                opacity: animation.drive(Tween(begin: 0, end: 1)),
-                child: const Home(),
-              );
-            },
-          ),
-        );
+        context.go('/');
 
         return;
       }
@@ -64,18 +53,7 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
         if (result == OkCancelResult.cancel) {
           if (!mounted) return;
 
-          Navigator.pushReplacement(
-            context,
-            PageRouteBuilder(
-              transitionDuration: const Duration(microseconds: 200),
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return FadeTransition(
-                  opacity: animation.drive(Tween(begin: 0, end: 1)),
-                  child: const Home(),
-                );
-              },
-            ),
-          );
+          context.go('/');
         } else {
           await InAppReview.instance.openStoreListing(appStoreId: '1572014520');
         }
@@ -103,19 +81,21 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: context.colorScheme.surface,
-      child: Center(
-        child: Lottie.asset(
-          'assets/loading.json',
-          width: 160,
-          delegates: LottieDelegates(
-            values: [
-              ValueDelegate.color(
-                ['**'],
-                value: context.colorScheme.onSurface,
-              ),
-            ],
+    return Scaffold(
+      body: Container(
+        color: context.colorScheme.surface,
+        child: Center(
+          child: Lottie.asset(
+            'assets/loading.json',
+            width: 160,
+            delegates: LottieDelegates(
+              values: [
+                ValueDelegate.color(
+                  ['**'],
+                  value: context.colorScheme.onSurface,
+                ),
+              ],
+            ),
           ),
         ),
       ),
