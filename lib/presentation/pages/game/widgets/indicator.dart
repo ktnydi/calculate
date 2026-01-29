@@ -1,9 +1,6 @@
-import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
-import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
-import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,9 +9,7 @@ class Indicator extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizType = ref.watch(quizTypeProvider);
-    final gameState = ref.watch(gameProvider(quizType));
-    final quizTimeState = ref.watch(quizTimeNotifierProvider) * 1000;
+    final gameState = ref.watch(gameProvider);
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -26,9 +21,7 @@ class Indicator extends ConsumerWidget {
         children: [
           AnimatedContainer(
             duration: const Duration(milliseconds: 100),
-            width: quizType == QuizType.numQuizzes
-                ? screenWidth * (gameState.answerList.length / quizSizeState)
-                : screenWidth * (gameState.time / quizTimeState),
+            width: screenWidth * (gameState.answerList.length / quizSizeState),
             height: 4,
             decoration: BoxDecoration(
               color: context.colorScheme.primary,

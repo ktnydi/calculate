@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
-import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
@@ -122,9 +121,7 @@ class Home extends ConsumerWidget {
                                       context,
                                       MaterialPageRoute(
                                         fullscreenDialog: true,
-                                        builder: (context) => const Game(
-                                          quizType: QuizType.numQuizzes,
-                                        ),
+                                        builder: (context) => const Game(),
                                       ),
                                     );
                                   },

@@ -1,7 +1,6 @@
 import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
-import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,9 +14,7 @@ class GameAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizType = ref.watch(quizTypeProvider);
-    final quizIndex =
-        ref.watch(gameProvider(quizType).select((value) => value.index));
+    final quizIndex = ref.watch(gameProvider.select((value) => value.index));
     final oneHandKeypad = ref.watch(oneHandKeypadProvider);
     final oneHandKeypadNotifier = ref.watch(oneHandKeypadProvider.notifier);
 
@@ -43,7 +40,7 @@ class GameAppBar extends ConsumerWidget implements PreferredSizeWidget {
             return;
           }
 
-          ref.read(gameProvider(quizType).notifier).retiredQuiz();
+          ref.read(gameProvider.notifier).retiredQuiz();
         },
       ),
       title: Text(

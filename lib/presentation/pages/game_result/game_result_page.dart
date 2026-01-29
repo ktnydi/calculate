@@ -6,9 +6,7 @@ import 'package:calculate/extensions/context.dart';
 import 'package:calculate/extensions/num.dart';
 import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
-import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/use_cases/quiz_size.dart';
-import 'package:calculate/model/use_cases/quiz_time.dart';
 import 'package:calculate/presentation/pages/game/game_page.dart';
 import 'package:calculate/presentation/pages/home/home_page.dart';
 import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
@@ -19,14 +17,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GameResult extends ConsumerWidget {
-  final int leftTime;
   final List<Answer> answerList;
-  final QuizType quizType;
 
   const GameResult(
-    this.leftTime,
-    this.answerList,
-    this.quizType, {
+    this.answerList, {
     super.key,
   });
 
@@ -53,7 +47,6 @@ class GameResult extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
-    final limit = ref.watch(quizTimeNotifierProvider);
     final quizCategory = ref.watch(quizCategoryModeNotifierProvider);
     final quizLength = ref.watch(quizSizeNotifierProvider);
 
@@ -61,9 +54,7 @@ class GameResult extends ConsumerWidget {
       backgroundColor: context.colorScheme.surface,
       appBar: AppBar(
         title: Text(
-          quizType == QuizType.numQuizzes
-              ? '${L10n.of(context)!.quizCategoryMode(quizCategory.name)}・${L10n.of(context)!.quizType(quizType.name)}・${L10n.of(context)!.quizSize(quizLength)}'
-              : '${L10n.of(context)!.quizCategoryMode(quizCategory.name)}・${L10n.of(context)!.quizType(quizType.name)}・$limit${L10n.of(context)!.seconds}',
+          '${L10n.of(context)!.quizCategoryMode(quizCategory.name)}・${L10n.of(context)!.quizSize(quizLength)}',
         ),
       ),
       body: SafeArea(
@@ -247,9 +238,7 @@ class GameResult extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                     fullscreenDialog: true,
-                                    builder: (context) => Game(
-                                      quizType: quizType,
-                                    ),
+                                    builder: (context) => Game(),
                                   ),
                                 );
                               },

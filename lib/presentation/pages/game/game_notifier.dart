@@ -1,22 +1,19 @@
 import 'dart:async';
 
-import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
 import 'package:calculate/presentation/pages/game/game_state.dart';
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final gameProvider =
-    StateNotifierProvider.family.autoDispose<GameNotifier, GameState, QuizType>(
-  (ref, quizType) => GameNotifier(quizType),
+final gameProvider = StateNotifierProvider.autoDispose<GameNotifier, GameState>(
+  (ref) => GameNotifier(),
 );
 
 class GameNotifier extends StateNotifier<GameState> {
-  GameNotifier(this.quizType) : super(const GameState()) {
+  GameNotifier() : super(const GameState()) {
     beginCountDown();
   }
 
-  final QuizType quizType;
   Timer? timer;
 
   void beginCountDown() {
