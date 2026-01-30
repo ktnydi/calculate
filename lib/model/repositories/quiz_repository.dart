@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,60 +9,62 @@ final quizRepositoryProvider = Provider<QuizRepository>(
 );
 
 class QuizRepository {
-  /// [start]から[last]の範囲内でランダムに整数を1つ取得する。
-  int _getRandamIntInRange(int start, int last) {
-    assert(start < last);
-    assert(start > 0);
-    assert(last > 0);
+  int getTerm({int digit = 2}) {
+    assert(digit > 0, '[digit] must be greater than 0.');
 
-    final rangeValue = List.generate(
-      last + 1 - start,
-      (index) => start + index,
-    );
-    return [...rangeValue..shuffle()].first;
+    final min = pow(10, digit - 1) as int;
+    final max = pow(10, digit) as int;
+    int figure = Random().nextInt(max - min) + min;
+
+    // `1`だと問題が簡単すぎるので再取得する。
+    while (digit == 1 && figure == 1) {
+      figure = Random().nextInt(max - min) + min;
+    }
+
+    return figure;
   }
 
   Quiz getAdditional() {
-    final num1 = _getRandamIntInRange(10, 99);
-    final num2 = _getRandamIntInRange(10, 99);
-    final figures = [num1, num2];
+    final firstTerm = getTerm(digit: 2);
+    final lastTerm = getTerm(digit: 2);
+    final figures = [firstTerm, lastTerm];
     return Quiz(figures: figures, type: QuizCategory.additional);
   }
 
   Quiz getSubtraction() {
-    final num1 = _getRandamIntInRange(10, 99);
-    final num2 = _getRandamIntInRange(10, 99);
-    final figures = num1 > num2 ? [num1, num2] : [num2, num1];
+    final firstTerm = getTerm(digit: 2);
+    final lastTerm = getTerm(digit: 2);
+    final figures = [firstTerm, lastTerm]..sort((a, b) => b.compareTo(a));
     return Quiz(figures: figures, type: QuizCategory.subtraction);
   }
 
   Quiz getDivision() {
-    late int num1;
+    /// 割られる数
+    late int dividend;
 
+    /// [divided]の1と自身以外のすべての約数
     final divisors = <int>[];
 
     while (divisors.isEmpty) {
-      num1 = _getRandamIntInRange(2, 99);
+      dividend = getTerm(digit: 2);
 
-      /// [num1]の1自身以外の約数をランダムで1つ取得する。
-      for (int i = 2; i <= num1 ~/ 2; i++) {
-        final isDivisor = num1 % i == 0;
+      for (int i = 2; i <= dividend ~/ 2; i++) {
+        final isDivisor = dividend % i == 0;
         if (isDivisor) divisors.add(i);
       }
     }
 
-    divisors.shuffle();
-    final num2 = divisors.first;
+    final divisor = divisors[Random().nextInt(divisors.length)];
 
-    final figures = [num1, num2];
+    final figures = [dividend, divisor];
     return Quiz(figures: figures, type: QuizCategory.division);
   }
 
   Quiz getMultiplication() {
-    final num1 = _getRandamIntInRange(2, 10);
-    final num2 = _getRandamIntInRange(2, 10);
+    final firstTerm = getTerm(digit: 1);
+    final lastTerm = getTerm(digit: 1);
 
-    final figures = [num1, num2];
+    final figures = [firstTerm, lastTerm];
     return Quiz(figures: figures, type: QuizCategory.multiplication);
   }
 }
