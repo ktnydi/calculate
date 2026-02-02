@@ -19,45 +19,36 @@ class L10nJa extends L10n {
 
   @override
   String quizCategoryMode(String value) {
-    String _temp0 = intl.Intl.selectLogic(
-      value,
-      {
-        'random': 'ミックス',
-        'add': '足し算',
-        'subtraction': '引き算',
-        'division': '割り算',
-        'multiplication': '掛け算',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(value, {
+      'random': 'ミックス',
+      'add': '足し算',
+      'subtraction': '引き算',
+      'division': '割り算',
+      'multiplication': '掛け算',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String quizCategory(String value) {
-    String _temp0 = intl.Intl.selectLogic(
-      value,
-      {
-        'additional': '足し算',
-        'subtraction': '引き算',
-        'division': '割り算',
-        'multiplication': '掛け算',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(value, {
+      'additional': '足し算',
+      'subtraction': '引き算',
+      'division': '割り算',
+      'multiplication': '掛け算',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String quizType(String value) {
-    String _temp0 = intl.Intl.selectLogic(
-      value,
-      {
-        'timeLimit': '時間制限',
-        'numQuizzes': '問題数',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(value, {
+      'timeLimit': '時間制限',
+      'numQuizzes': '問題数',
+      'other': '',
+    });
     return '$_temp0';
   }
 

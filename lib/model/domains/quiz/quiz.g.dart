@@ -6,15 +6,17 @@ part of 'quiz.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Quiz _$$_QuizFromJson(Map<String, dynamic> json) => _$_Quiz(
-      figures: (json['figures'] as List<dynamic>).map((e) => e as int).toList(),
-      type: $enumDecode(_$QuizCategoryEnumMap, json['type']),
-    );
+_Quiz _$QuizFromJson(Map<String, dynamic> json) => _Quiz(
+  figures: (json['figures'] as List<dynamic>)
+      .map((e) => (e as num).toInt())
+      .toList(),
+  type: $enumDecode(_$QuizCategoryEnumMap, json['type']),
+);
 
-Map<String, dynamic> _$$_QuizToJson(_$_Quiz instance) => <String, dynamic>{
-      'figures': instance.figures,
-      'type': _$QuizCategoryEnumMap[instance.type]!,
-    };
+Map<String, dynamic> _$QuizToJson(_Quiz instance) => <String, dynamic>{
+  'figures': instance.figures,
+  'type': _$QuizCategoryEnumMap[instance.type]!,
+};
 
 const _$QuizCategoryEnumMap = {
   QuizCategory.additional: 'additional',

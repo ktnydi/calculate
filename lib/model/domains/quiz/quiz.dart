@@ -5,12 +5,10 @@ part 'quiz.freezed.dart';
 part 'quiz.g.dart';
 
 @freezed
-class Quiz with _$Quiz {
+abstract class Quiz with _$Quiz {
   const Quiz._();
-  const factory Quiz({
-    required List<int> figures,
-    required QuizCategory type,
-  }) = _Quiz;
+  const factory Quiz({required List<int> figures, required QuizCategory type}) =
+      _Quiz;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
 

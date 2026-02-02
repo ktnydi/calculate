@@ -6,14 +6,13 @@ part of 'update_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UpdateInfo _$$_UpdateInfoFromJson(Map<String, dynamic> json) =>
-    _$_UpdateInfo(
-      requiredVersion: json['requiredVersion'] as String,
-      canCancel: json['canCancel'] as bool? ?? false,
-      enabledAt: DateTime.parse(json['enabledAt'] as String),
-    );
+_UpdateInfo _$UpdateInfoFromJson(Map<String, dynamic> json) => _UpdateInfo(
+  requiredVersion: json['requiredVersion'] as String,
+  canCancel: json['canCancel'] as bool? ?? false,
+  enabledAt: DateTime.parse(json['enabledAt'] as String),
+);
 
-Map<String, dynamic> _$$_UpdateInfoToJson(_$_UpdateInfo instance) =>
+Map<String, dynamic> _$UpdateInfoToJson(_UpdateInfo instance) =>
     <String, dynamic>{
       'requiredVersion': instance.requiredVersion,
       'canCancel': instance.canCancel,

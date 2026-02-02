@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'game_state.freezed.dart';
 
 @freezed
-class GameState with _$GameState {
+abstract class GameState with _$GameState {
   const GameState._();
 
   const factory GameState({
