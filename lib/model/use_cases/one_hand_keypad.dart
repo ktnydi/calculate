@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final oneHandKeypadProvider =
     StateNotifierProvider<OneHandKeypadNotifier, bool>((ref) {
-  return OneHandKeypadNotifier(ref);
-});
+      return OneHandKeypadNotifier(ref);
+    });
 
 class OneHandKeypadNotifier extends StateNotifier<bool> {
   OneHandKeypadNotifier(this.ref) : super(false) {

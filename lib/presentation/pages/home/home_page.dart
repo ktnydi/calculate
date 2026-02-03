@@ -29,7 +29,7 @@ class Home extends ConsumerWidget {
               context.go('/help');
             },
             icon: const Icon(Icons.menu),
-          )
+          ),
         ],
       ),
       body: SafeArea(
@@ -38,125 +38,133 @@ class Home extends ConsumerWidget {
           children: [
             const SizedBox(height: kToolbarHeight),
             Expanded(
-              child: LayoutBuilder(builder: (context, constraints) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: constraints.maxWidth,
-                      minHeight: constraints.minHeight,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Material(
-                                    color: Colors.transparent,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      side: BorderSide(
-                                        color: context.colorScheme.onSurface,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: SvgPicture.asset(
-                                      'assets/app_icon_clear.svg',
-                                      width: 80,
-                                      height: 80,
-                                      colorFilter: ColorFilter.mode(
-                                        context.colorScheme.onSurface,
-                                        BlendMode.srcATop,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 32),
-                                  AutoSizeText(
-                                    L10n.of(context)!.appTitle,
-                                    style: context.textTheme.headlineLarge!
-                                        .copyWith(
-                                      color: context.colorScheme.onSurface,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    maxLines: 1,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 64),
-                          IntrinsicWidth(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: constraints.maxWidth,
+                        minHeight: constraints.minHeight,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Stack(
+                              alignment: Alignment.center,
                               children: [
-                                FilledButton(
-                                  style: FilledButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero,
-                                    ),
-                                    minimumSize: const Size(232, 80),
-                                    textStyle:
-                                        context.textTheme.bodyLarge!.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    analytics.logStartGame();
-
-                                    ref.invalidate(quizProvider);
-
-                                    context.go('/game');
-                                  },
-                                  child: FittedBox(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          'start'.toUpperCase(),
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Material(
+                                      color: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                        side: BorderSide(
+                                          color: context.colorScheme.onSurface,
+                                          width: 2,
                                         ),
-                                      ],
+                                      ),
+                                      child: SvgPicture.asset(
+                                        'assets/app_icon_clear.svg',
+                                        width: 80,
+                                        height: 80,
+                                        colorFilter: ColorFilter.mode(
+                                          context.colorScheme.onSurface,
+                                          BlendMode.srcATop,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(height: 32),
+                                    AutoSizeText(
+                                      L10n.of(context)!.appTitle,
+                                      style: context.textTheme.headlineLarge!
+                                          .copyWith(
+                                            color:
+                                                context.colorScheme.onSurface,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                      maxLines: 1,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(height: 16),
-                          TextButton(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(),
-                                builder: (context) {
-                                  return const Setting();
-                                },
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                              foregroundColor: context.colorScheme.onSurface,
-                              textStyle: context.textTheme.bodyLarge!.copyWith(
-                                decoration: TextDecoration.underline,
-                                decorationStyle: TextDecorationStyle.dotted,
-                                decorationColor: context.colorScheme.onSurface,
+                            const SizedBox(height: 64),
+                            IntrinsicWidth(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  FilledButton(
+                                    style: FilledButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.zero,
+                                      ),
+                                      minimumSize: const Size(232, 80),
+                                      textStyle: context.textTheme.bodyLarge!
+                                          .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    onPressed: () {
+                                      analytics.logStartGame();
+
+                                      ref.invalidate(quizProvider);
+
+                                      context.go('/game');
+                                    },
+                                    child: FittedBox(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            'start'.toUpperCase(),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            child: Text(L10n.of(context)!.settingsButtonLabel),
-                          ),
-                        ],
+                            const SizedBox(height: 16),
+                            TextButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(),
+                                  builder: (context) {
+                                    return const Setting();
+                                  },
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                foregroundColor: context.colorScheme.onSurface,
+                                textStyle: context.textTheme.bodyLarge!
+                                    .copyWith(
+                                      decoration: TextDecoration.underline,
+                                      decorationStyle:
+                                          TextDecorationStyle.dotted,
+                                      decorationColor:
+                                          context.colorScheme.onSurface,
+                                    ),
+                              ),
+                              child: Text(
+                                L10n.of(context)!.settingsButtonLabel,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                },
+              ),
             ),
             const BottomAdBanner(
               adUnitId: AdUnitId(

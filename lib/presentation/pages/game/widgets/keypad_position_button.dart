@@ -9,8 +9,9 @@ class KeypadPositionButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final keyboardLocation = ref.watch(keyboardLocationProvider);
-    final keyboardLocationNotifier =
-        ref.watch(keyboardLocationProvider.notifier);
+    final keyboardLocationNotifier = ref.watch(
+      keyboardLocationProvider.notifier,
+    );
 
     return Row(
       children: [

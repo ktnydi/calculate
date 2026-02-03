@@ -11,8 +11,7 @@ enum QuizCategory {
   division('割り算', CupertinoIcons.divide),
 
   /// 掛け算
-  multiplication('掛け算', CupertinoIcons.multiply),
-  ;
+  multiplication('掛け算', CupertinoIcons.multiply);
 
   const QuizCategory(this.label, this.icon);
 

@@ -12,8 +12,9 @@ class Setting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
-    final quizCategoryModeNotifier =
-        ref.watch(quizCategoryModeNotifierProvider.notifier);
+    final quizCategoryModeNotifier = ref.watch(
+      quizCategoryModeNotifierProvider.notifier,
+    );
     final quizSizeState = ref.watch(quizSizeNotifierProvider);
     final quizSizeNotifier = ref.watch(quizSizeNotifierProvider.notifier);
 
@@ -60,10 +61,12 @@ class Setting extends ConsumerWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    final leftItem =
-                        QuizCategoryMode.values.elementAt(index * 2);
-                    final rightItem =
-                        QuizCategoryMode.values.elementAtOrNull(index * 2 + 1);
+                    final leftItem = QuizCategoryMode.values.elementAt(
+                      index * 2,
+                    );
+                    final rightItem = QuizCategoryMode.values.elementAtOrNull(
+                      index * 2 + 1,
+                    );
 
                     return IntrinsicHeight(
                       child: Row(
@@ -80,12 +83,12 @@ class Setting extends ConsumerWidget {
                                     : null,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 minimumSize: const Size.fromHeight(56),
-                                textStyle:
-                                    context.textTheme.labelLarge!.copyWith(
-                                  fontWeight: quizCategoryMode == leftItem
-                                      ? FontWeight.bold
-                                      : null,
-                                ),
+                                textStyle: context.textTheme.labelLarge!
+                                    .copyWith(
+                                      fontWeight: quizCategoryMode == leftItem
+                                          ? FontWeight.bold
+                                          : null,
+                                    ),
                               ),
                               onPressed: () {
                                 quizCategoryModeNotifier.change(leftItem);
@@ -100,8 +103,9 @@ class Setting extends ConsumerWidget {
                                     ),
                                   ] else
                                     Text(
-                                      L10n.of(context)!
-                                          .quizCategoryMode(leftItem.name),
+                                      L10n.of(
+                                        context,
+                                      )!.quizCategoryMode(leftItem.name),
                                     ),
                                 ],
                               ),
@@ -141,8 +145,9 @@ class Setting extends ConsumerWidget {
                                       ),
                                     ] else
                                       Text(
-                                        L10n.of(context)!
-                                            .quizCategoryMode(rightItem.name),
+                                        L10n.of(
+                                          context,
+                                        )!.quizCategoryMode(rightItem.name),
                                       ),
                                   ],
                                 ),
@@ -190,8 +195,9 @@ class Setting extends ConsumerWidget {
                               : null,
                           minimumSize: const Size.fromHeight(56),
                           textStyle: context.textTheme.labelLarge!.copyWith(
-                            fontWeight:
-                                quizSizeState == value ? FontWeight.bold : null,
+                            fontWeight: quizSizeState == value
+                                ? FontWeight.bold
+                                : null,
                           ),
                         ),
                         child: Text(L10n.of(context)!.quizSize(value)),

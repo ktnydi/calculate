@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 enum SupportedLocale {
   en('English'),
-  ja('日本語'),
-  ;
+  ja('日本語');
 
   const SupportedLocale(this.label);
 

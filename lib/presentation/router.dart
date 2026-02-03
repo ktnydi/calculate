@@ -127,12 +127,14 @@ final routerProvider = Provider((ref) {
 
 enum WebSite {
   feedback(
-      'https://docs.google.com/forms/d/e/1FAIpQLSe_4ggMubBXHaUCRqEbDckA1Eibx-zt8K4F6V-K0lXuSRqBiQ/viewform?usp=sf_link'),
+    'https://docs.google.com/forms/d/e/1FAIpQLSe_4ggMubBXHaUCRqEbDckA1Eibx-zt8K4F6V-K0lXuSRqBiQ/viewform?usp=sf_link',
+  ),
   terms(
-      'https://toothsome-persimmon-e89.notion.site/dc7d95253ab1441c9ec099c1b79e2c67'),
+    'https://toothsome-persimmon-e89.notion.site/dc7d95253ab1441c9ec099c1b79e2c67',
+  ),
   policy(
-      'https://toothsome-persimmon-e89.notion.site/d9bdcb0258c846eb987f08e583dd7ff2'),
-  ;
+    'https://toothsome-persimmon-e89.notion.site/d9bdcb0258c846eb987f08e583dd7ff2',
+  );
 
   const WebSite(this.url);
 

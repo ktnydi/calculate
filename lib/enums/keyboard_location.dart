@@ -5,10 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final keyboardLocationProvider =
     StateNotifierProvider<KeyboardLocationNotifier, KeyboardLocation>(
-  (ref) {
-    return KeyboardLocationNotifier(ref);
-  },
-);
+      (ref) {
+        return KeyboardLocationNotifier(ref);
+      },
+    );
 
 class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
   KeyboardLocationNotifier(this.ref) : super(KeyboardLocation.right) {
@@ -32,8 +32,7 @@ class KeyboardLocationNotifier extends StateNotifier<KeyboardLocation> {
 
 enum KeyboardLocation {
   left(1, Alignment.bottomLeft),
-  right(2, Alignment.bottomRight),
-  ;
+  right(2, Alignment.bottomRight);
 
   const KeyboardLocation(this.id, this.alignment);
 

@@ -2,8 +2,7 @@ enum QuizType {
   /// 問題数
   numQuizzes(
     selections: [10, 20, 30, 40],
-  ),
-  ;
+  );
 
   const QuizType({required this.selections});
 

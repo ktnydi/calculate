@@ -98,8 +98,9 @@ class GameResult extends ConsumerWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        L10n.of(context)!
-                                            .allQuizAverageTimeLabel,
+                                        L10n.of(
+                                          context,
+                                        )!.allQuizAverageTimeLabel,
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
@@ -117,17 +118,18 @@ class GameResult extends ConsumerWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            L10n.of(context)!
-                                                .quizCategory(i.name),
+                                            L10n.of(
+                                              context,
+                                            )!.quizCategory(i.name),
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
                                             '${(eachAvgTime(i)!.inMilliseconds / 1000).digit()} ${L10n.of(context)!.seconds}',
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
-                                  ]
+                                  ],
                               ],
                             ),
                           ),
@@ -175,8 +177,10 @@ class GameResult extends ConsumerWidget {
                                                 const SizedBox(width: 4),
                                                 Icon(
                                                   quiz.type.icon,
-                                                  size: context.textTheme
-                                                      .titleMedium!.fontSize,
+                                                  size: context
+                                                      .textTheme
+                                                      .titleMedium!
+                                                      .fontSize,
                                                 ),
                                                 const SizedBox(width: 4),
                                                 Text(
@@ -185,8 +189,10 @@ class GameResult extends ConsumerWidget {
                                                 const SizedBox(width: 4),
                                                 Icon(
                                                   CupertinoIcons.equal,
-                                                  size: context.textTheme
-                                                      .titleMedium!.fontSize,
+                                                  size: context
+                                                      .textTheme
+                                                      .titleMedium!
+                                                      .fontSize,
                                                 ),
                                                 const SizedBox(width: 4),
                                                 Text(
@@ -223,10 +229,10 @@ class GameResult extends ConsumerWidget {
                                 style: FilledButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   minimumSize: const Size(140, 56),
-                                  textStyle:
-                                      context.textTheme.labelLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  textStyle: context.textTheme.labelLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                                 onPressed: () {
                                   analytics.logRestartGame();

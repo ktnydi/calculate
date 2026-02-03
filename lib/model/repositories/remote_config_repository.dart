@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum RemoteConfigKey {
   updateInfo('update_info'),
-  reviewCounter('review_counter'),
-  ;
+  reviewCounter('review_counter');
 
   const RemoteConfigKey(this.key);
 

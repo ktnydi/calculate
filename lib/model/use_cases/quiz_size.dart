@@ -2,8 +2,9 @@ import 'package:calculate/providers/shared_preferences_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final quizSizeNotifierProvider =
-    StateNotifierProvider<QuizSizeNotifier, int>((ref) {
+final quizSizeNotifierProvider = StateNotifierProvider<QuizSizeNotifier, int>((
+  ref,
+) {
   return QuizSizeNotifier(ref);
 });
 

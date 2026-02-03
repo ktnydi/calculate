@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final localeNotifierProvider =
     StateNotifierProvider<LocaleNotifier, SupportedLocale>((ref) {
-  return LocaleNotifier(ref);
-});
+      return LocaleNotifier(ref);
+    });
 
 final platformLocale = WidgetsBinding.instance.platformDispatcher.locale;
 

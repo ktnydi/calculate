@@ -5,10 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final quizCategoryModeNotifierProvider =
     StateNotifierProvider<QuizCategoryModeNotifier, QuizCategoryMode>(
-  (ref) {
-    return QuizCategoryModeNotifier(ref);
-  },
-);
+      (ref) {
+        return QuizCategoryModeNotifier(ref);
+      },
+    );
 
 class QuizCategoryModeNotifier extends StateNotifier<QuizCategoryMode> {
   QuizCategoryModeNotifier(this.ref) : super(QuizCategoryMode.random) {
@@ -35,8 +35,7 @@ enum QuizCategoryMode {
   division(CupertinoIcons.divide),
   add(CupertinoIcons.add),
   subtraction(CupertinoIcons.minus),
-  random(),
-  ;
+  random();
 
   const QuizCategoryMode([this.icon]);
 
