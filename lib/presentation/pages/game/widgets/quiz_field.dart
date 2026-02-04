@@ -1,5 +1,5 @@
 import 'package:calculate/extensions/context.dart';
-import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/providers/quiz_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,14 +43,16 @@ class _QuizFieldState extends ConsumerState<QuizField>
     final quiz = ref.watch(quizProvider);
     final quizIndex = ref.watch(gameProvider.select((value) => value.index));
     final userAnswer = ref.watch(gameProvider.select((value) => value.answer));
-    final quizSizeState = ref.watch(quizSizeNotifierProvider);
+    final quizSize = ref.watch(
+      quizSettingsManagerNotifierProvider.select((value) => value.size),
+    );
 
     ref.listen(
       gameProvider.select((value) => int.tryParse(value.answer)),
       (previous, next) {
         if (next == null) return;
         if (next != quiz.correctAnswer) return;
-        if (quizIndex == quizSizeState - 1) return;
+        if (quizIndex == quizSize - 1) return;
         quizAnimation.forward();
       },
     );
@@ -63,7 +65,7 @@ class _QuizFieldState extends ConsumerState<QuizField>
 
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           gameNotifier.checkAnswer(quiz);
-          final lastIndex = quizSizeState - 1;
+          final lastIndex = quizSize - 1;
           if (quizIndex == lastIndex) {
             return gameNotifier.finishQuiz();
           }

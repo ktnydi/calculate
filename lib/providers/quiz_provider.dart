@@ -2,14 +2,17 @@ import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/model/repositories/quiz_repository.dart';
+import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final quizProvider = Provider<Quiz>(
   (ref) {
-    final quizCategoryModeState = ref.watch(quizCategoryModeNotifierProvider);
+    final currentCategory = ref.watch(
+      quizSettingsManagerNotifierProvider.select((value) => value.category),
+    );
 
     QuizCategory quizCategory;
-    switch (quizCategoryModeState) {
+    switch (currentCategory) {
       case QuizCategoryMode.random:
         quizCategory = ([...QuizCategory.values]..shuffle()).first;
         break;

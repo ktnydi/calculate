@@ -2,7 +2,7 @@ import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
-import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,12 +11,12 @@ class Setting extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizCategoryMode = ref.watch(quizCategoryModeNotifierProvider);
-    final quizCategoryModeNotifier = ref.watch(
-      quizCategoryModeNotifierProvider.notifier,
+    final currentState = ref.watch(
+      quizSettingsManagerNotifierProvider,
     );
-    final quizSizeState = ref.watch(quizSizeNotifierProvider);
-    final quizSizeNotifier = ref.watch(quizSizeNotifierProvider.notifier);
+    final quizSettingsManagerNotifier = ref.watch(
+      quizSettingsManagerNotifierProvider.notifier,
+    );
 
     return SafeArea(
       child: Padding(
@@ -37,8 +37,10 @@ class Setting extends ConsumerWidget {
             const SizedBox(height: 24),
             Text(
               L10n.of(context)!.quizSettingsDescription(
-                L10n.of(context)!.quizCategoryMode(quizCategoryMode.name),
-                quizSizeState,
+                L10n.of(
+                  context,
+                )!.quizCategoryMode(currentState.category.name),
+                currentState.size,
               ),
               textAlign: TextAlign.center,
               style: context.textTheme.titleLarge!.copyWith(
@@ -75,23 +77,28 @@ class Setting extends ConsumerWidget {
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 shape: const BeveledRectangleBorder(),
-                                foregroundColor: quizCategoryMode == leftItem
+                                foregroundColor:
+                                    currentState.category == leftItem
                                     ? context.colorScheme.onPrimary
                                     : context.colorScheme.onSurface,
-                                backgroundColor: quizCategoryMode == leftItem
+                                backgroundColor:
+                                    currentState.category == leftItem
                                     ? context.colorScheme.primary
                                     : null,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 minimumSize: const Size.fromHeight(56),
                                 textStyle: context.textTheme.labelLarge!
                                     .copyWith(
-                                      fontWeight: quizCategoryMode == leftItem
+                                      fontWeight:
+                                          currentState.category == leftItem
                                           ? FontWeight.bold
                                           : null,
                                     ),
                               ),
                               onPressed: () {
-                                quizCategoryModeNotifier.change(leftItem);
+                                quizSettingsManagerNotifier.updateQuizCategory(
+                                  leftItem,
+                                );
                               },
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -121,10 +128,12 @@ class Setting extends ConsumerWidget {
                               child: TextButton(
                                 style: TextButton.styleFrom(
                                   shape: const BeveledRectangleBorder(),
-                                  foregroundColor: quizCategoryMode == rightItem
+                                  foregroundColor:
+                                      currentState.category == rightItem
                                       ? context.colorScheme.onPrimary
                                       : context.colorScheme.onSurface,
-                                  backgroundColor: quizCategoryMode == rightItem
+                                  backgroundColor:
+                                      currentState.category == rightItem
                                       ? context.colorScheme.primary
                                       : null,
                                   tapTargetSize:
@@ -133,7 +142,8 @@ class Setting extends ConsumerWidget {
                                   textStyle: context.textTheme.labelSmall,
                                 ),
                                 onPressed: () {
-                                  quizCategoryModeNotifier.change(rightItem);
+                                  quizSettingsManagerNotifier
+                                      .updateQuizCategory(rightItem);
                                 },
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -181,21 +191,21 @@ class Setting extends ConsumerWidget {
                     return Expanded(
                       child: TextButton(
                         onPressed: () {
-                          quizSizeNotifier.change(value);
+                          quizSettingsManagerNotifier.updateQuizSize(value);
                         },
                         style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          foregroundColor: quizSizeState == value
+                          foregroundColor: currentState.size == value
                               ? context.colorScheme.onPrimary
                               : context.colorScheme.onSurface,
-                          backgroundColor: quizSizeState == value
+                          backgroundColor: currentState.size == value
                               ? context.colorScheme.primary
                               : null,
                           minimumSize: const Size.fromHeight(56),
                           textStyle: context.textTheme.labelLarge!.copyWith(
-                            fontWeight: quizSizeState == value
+                            fontWeight: currentState.size == value
                                 ? FontWeight.bold
                                 : null,
                           ),

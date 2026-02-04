@@ -19,36 +19,45 @@ class L10nEn extends L10n {
 
   @override
   String quizCategoryMode(String value) {
-    String _temp0 = intl.Intl.selectLogic(value, {
-      'random': 'Mix',
-      'add': 'Addition',
-      'subtraction': 'Subtraction',
-      'division': 'Division',
-      'multiplication': 'Multiplication',
-      'other': '',
-    });
+    String _temp0 = intl.Intl.selectLogic(
+      value,
+      {
+        'random': 'Mix',
+        'add': 'Addition',
+        'subtraction': 'Subtraction',
+        'division': 'Division',
+        'multiplication': 'Multiplication',
+        'other': '',
+      },
+    );
     return '$_temp0';
   }
 
   @override
   String quizCategory(String value) {
-    String _temp0 = intl.Intl.selectLogic(value, {
-      'additional': 'Addition',
-      'subtraction': 'Subtraction',
-      'division': 'Division',
-      'multiplication': 'Multiplication',
-      'other': '',
-    });
+    String _temp0 = intl.Intl.selectLogic(
+      value,
+      {
+        'additional': 'Addition',
+        'subtraction': 'Subtraction',
+        'division': 'Division',
+        'multiplication': 'Multiplication',
+        'other': '',
+      },
+    );
     return '$_temp0';
   }
 
   @override
   String quizType(String value) {
-    String _temp0 = intl.Intl.selectLogic(value, {
-      'timeLimit': 'Time Limit',
-      'numQuizzes': 'Number',
-      'other': '',
-    });
+    String _temp0 = intl.Intl.selectLogic(
+      value,
+      {
+        'timeLimit': 'Time Limit',
+        'numQuizzes': 'Number',
+        'other': '',
+      },
+    );
     return '$_temp0';
   }
 

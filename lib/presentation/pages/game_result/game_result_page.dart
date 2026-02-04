@@ -1,12 +1,11 @@
 import 'package:calculate/analytics.dart';
 import 'package:calculate/config.dart';
 import 'package:calculate/enums/quiz_category.dart';
-import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/extensions/num.dart';
 import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
-import 'package:calculate/model/use_cases/quiz_size.dart';
+import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:calculate/presentation/widgets/ad/ad_unit_id/ad_unit_id.dart';
 import 'package:calculate/presentation/widgets/ad/bottom_ad_banner.dart';
 import 'package:calculate/providers.dart';
@@ -46,8 +45,7 @@ class GameResult extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
-    final quizCategory = ref.watch(quizCategoryModeNotifierProvider);
-    final quizLength = ref.watch(quizSizeNotifierProvider);
+    final quizSettingsState = ref.watch(quizSettingsManagerNotifierProvider);
 
     return PopScope(
       canPop: false,
@@ -59,7 +57,7 @@ class GameResult extends ConsumerWidget {
         appBar: AppBar(
           leading: const SizedBox(),
           title: Text(
-            '${L10n.of(context)!.quizCategoryMode(quizCategory.name)}・${L10n.of(context)!.quizSize(quizLength)}',
+            '${L10n.of(context)!.quizCategoryMode(quizSettingsState.category.name)}・${L10n.of(context)!.quizSize(quizSettingsState.size)}',
           ),
         ),
         body: SafeArea(
