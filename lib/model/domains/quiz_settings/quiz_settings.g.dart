@@ -9,7 +9,11 @@ part of 'quiz_settings.dart';
 _QuizSettings _$QuizSettingsFromJson(Map<String, dynamic> json) =>
     _QuizSettings(
       category:
-          $enumDecodeNullable(_$QuizCategoryModeEnumMap, json['category']) ??
+          $enumDecodeNullable(
+            _$QuizCategoryModeEnumMap,
+            json['category'],
+            unknownValue: QuizCategoryMode.random,
+          ) ??
           QuizCategoryMode.random,
       size: (json['size'] as num?)?.toInt() ?? 10,
     );
@@ -23,7 +27,7 @@ Map<String, dynamic> _$QuizSettingsToJson(_QuizSettings instance) =>
 const _$QuizCategoryModeEnumMap = {
   QuizCategoryMode.multiplication: 'multiplication',
   QuizCategoryMode.division: 'division',
-  QuizCategoryMode.add: 'add',
+  QuizCategoryMode.additional: 'additional',
   QuizCategoryMode.subtraction: 'subtraction',
   QuizCategoryMode.random: 'random',
 };

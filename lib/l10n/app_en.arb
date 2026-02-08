@@ -2,7 +2,7 @@
   "appTitle": "Keisan Doriru",
   "appMessage": "Let's challenge!",
   "startButtonLabel": "Start",
-  "quizCategoryMode": "{value, select, random{Mix} add{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
+  "quizCategoryMode": "{value, select, random{Mix} additional{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizCategory": "{value, select, additional{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizType": "{value, select, timeLimit{Time Limit} numQuizzes{Number} other{}}",
   "quizSize": "{value} Q",

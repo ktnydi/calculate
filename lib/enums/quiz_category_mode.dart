@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:calculate/enums/quiz_category.dart';
 
 enum QuizCategoryMode {
-  multiplication(CupertinoIcons.multiply),
-  division(CupertinoIcons.divide),
-  add(CupertinoIcons.add),
-  subtraction(CupertinoIcons.minus),
-  random();
+  multiplication([QuizCategory.multiplication]),
+  division([QuizCategory.division]),
+  additional([QuizCategory.additional]),
+  subtraction([QuizCategory.subtraction]),
+  random(QuizCategory.values);
 
-  const QuizCategoryMode([this.icon]);
+  const QuizCategoryMode(this.categories);
 
-  final IconData? icon;
+  final List<QuizCategory> categories;
 }
 
 extension QuizCategoryModeEx on QuizCategoryMode {
@@ -17,7 +17,7 @@ extension QuizCategoryModeEx on QuizCategoryMode {
     switch (this) {
       case QuizCategoryMode.random:
         return 0;
-      case QuizCategoryMode.add:
+      case QuizCategoryMode.additional:
         return 1;
       case QuizCategoryMode.subtraction:
         return 2;

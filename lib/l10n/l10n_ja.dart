@@ -23,7 +23,7 @@ class L10nJa extends L10n {
       value,
       {
         'random': 'ミックス',
-        'add': '足し算',
+        'additional': '足し算',
         'subtraction': '引き算',
         'division': '割り算',
         'multiplication': '掛け算',

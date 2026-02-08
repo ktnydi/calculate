@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$QuizSettings {
 
- QuizCategoryMode get category; int get size;
+@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode get category; int get size;
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $QuizSettingsCopyWith<$Res>  {
   factory $QuizSettingsCopyWith(QuizSettings value, $Res Function(QuizSettings) _then) = _$QuizSettingsCopyWithImpl;
 @useResult
 $Res call({
- QuizCategoryMode category, int size
+@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category, int size
 });
 
 
@@ -154,7 +154,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( QuizCategoryMode category,  int size)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _QuizSettings() when $default != null:
 return $default(_that.category,_that.size);case _:
@@ -175,7 +175,7 @@ return $default(_that.category,_that.size);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( QuizCategoryMode category,  int size)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size)  $default,) {final _that = this;
 switch (_that) {
 case _QuizSettings():
 return $default(_that.category,_that.size);case _:
@@ -195,7 +195,7 @@ return $default(_that.category,_that.size);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( QuizCategoryMode category,  int size)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size)?  $default,) {final _that = this;
 switch (_that) {
 case _QuizSettings() when $default != null:
 return $default(_that.category,_that.size);case _:
@@ -210,10 +210,10 @@ return $default(_that.category,_that.size);case _:
 @JsonSerializable()
 
 class _QuizSettings implements QuizSettings {
-  const _QuizSettings({this.category = QuizCategoryMode.random, this.size = 10});
+  const _QuizSettings({@JsonKey(unknownEnumValue: QuizCategoryMode.random) this.category = QuizCategoryMode.random, this.size = 10});
   factory _QuizSettings.fromJson(Map<String, dynamic> json) => _$QuizSettingsFromJson(json);
 
-@override@JsonKey() final  QuizCategoryMode category;
+@override@JsonKey(unknownEnumValue: QuizCategoryMode.random) final  QuizCategoryMode category;
 @override@JsonKey() final  int size;
 
 /// Create a copy of QuizSettings
@@ -249,7 +249,7 @@ abstract mixin class _$QuizSettingsCopyWith<$Res> implements $QuizSettingsCopyWi
   factory _$QuizSettingsCopyWith(_QuizSettings value, $Res Function(_QuizSettings) _then) = __$QuizSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- QuizCategoryMode category, int size
+@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category, int size
 });
 
 

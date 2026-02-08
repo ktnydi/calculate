@@ -103,9 +103,9 @@ class Setting extends ConsumerWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  if (leftItem.icon != null) ...[
+                                  if (leftItem != QuizCategoryMode.random) ...[
                                     Icon(
-                                      leftItem.icon,
+                                      leftItem.categories.first.icon,
                                       size: 20,
                                     ),
                                   ] else
@@ -148,9 +148,10 @@ class Setting extends ConsumerWidget {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    if (rightItem.icon != null) ...[
+                                    if (rightItem !=
+                                        QuizCategoryMode.random) ...[
                                       Icon(
-                                        rightItem.icon,
+                                        rightItem.categories.first.icon,
                                         size: 20,
                                       ),
                                     ] else

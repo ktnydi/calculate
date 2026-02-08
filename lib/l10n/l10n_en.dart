@@ -23,7 +23,7 @@ class L10nEn extends L10n {
       value,
       {
         'random': 'Mix',
-        'add': 'Addition',
+        'additional': 'Addition',
         'subtraction': 'Subtraction',
         'division': 'Division',
         'multiplication': 'Multiplication',
