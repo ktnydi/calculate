@@ -169,7 +169,7 @@ class Setting extends ConsumerWidget {
                       ),
                     );
                   },
-                  separatorBuilder: (_, __) => Divider(
+                  separatorBuilder: (_, _) => Divider(
                     height: 2,
                     thickness: 2,
                     color: context.colorScheme.surfaceContainerLow,
