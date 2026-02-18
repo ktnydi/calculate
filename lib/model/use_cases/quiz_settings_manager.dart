@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/model/domains/quiz_settings/quiz_settings.dart';
+import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
 import 'package:calculate/providers/shared_preferences_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,5 +40,10 @@ class QuizSettingsManagerNotifier extends StateNotifier<QuizSettings> {
 
     state = newState;
     await prefs.setString(key, jsonEncode(newState.toJson()));
+  }
+
+  Future<void> updateTerm(Term term) async {
+    state = state.copyWith(term: term);
+    await prefs.setString(key, jsonEncode(state.copyWith(term: term)));
   }
 }

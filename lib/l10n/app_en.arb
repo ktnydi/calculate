@@ -5,6 +5,7 @@
   "quizCategoryMode": "{value, select, random{Mix} additional{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizCategory": "{value, select, additional{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizType": "{value, select, timeLimit{Time Limit} numQuizzes{Number} other{}}",
+  "digitDescription": "The number of digits in the question uses the settings for addition, subtraction, multiplication, and division.",
   "quizSize": "{value} Q",
   "settingsButtonLabel": "Settings",
   "currentQuizNumber": "Q{value}",

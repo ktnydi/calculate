@@ -2,6 +2,7 @@ import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
+import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
 import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +18,14 @@ class Setting extends ConsumerWidget {
     final quizSettingsManagerNotifier = ref.watch(
       quizSettingsManagerNotifierProvider.notifier,
     );
+
+    final currentTerm = switch (currentState.category) {
+      QuizCategoryMode.multiplication => currentState.term.multiplication,
+      QuizCategoryMode.division => currentState.term.division,
+      QuizCategoryMode.additional => currentState.term.additional,
+      QuizCategoryMode.subtraction => currentState.term.subtraction,
+      QuizCategoryMode.random => null,
+    };
 
     return SafeArea(
       child: Padding(
@@ -48,6 +57,8 @@ class Setting extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 24),
+
+            /// 問題内容の設定
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Material(
@@ -177,7 +188,135 @@ class Setting extends ConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
+
+            if (currentTerm != null) ...[
+              /// 桁数の設定
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: Material(
+                  color: context.colorScheme.surface,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Row(
+                    key: const ValueKey(QuizType.numQuizzes),
+                    children: [1, 2, 3, 4].map((value) {
+                      return Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            final currentMode =
+                                currentState.category.categories.first;
+
+                            final nextDigit = currentTerm.copyWith(
+                              first: value,
+                            );
+
+                            final Term nextTerm = Function.apply(
+                              currentState.term.copyWith.call,
+                              null,
+                              {Symbol(currentMode.name): nextDigit},
+                            );
+
+                            quizSettingsManagerNotifier.updateTerm(
+                              nextTerm,
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            foregroundColor: currentTerm.first == value
+                                ? context.colorScheme.onPrimary
+                                : context.colorScheme.onSurface,
+                            backgroundColor: currentTerm.first == value
+                                ? context.colorScheme.primary
+                                : null,
+                            minimumSize: const Size.fromHeight(56),
+                            textStyle: context.textTheme.labelLarge!.copyWith(
+                              fontWeight: currentTerm.first == value
+                                  ? FontWeight.bold
+                                  : null,
+                            ),
+                          ),
+                          child: Text('$value'),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: Material(
+                  color: context.colorScheme.surface,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Row(
+                    key: const ValueKey(QuizType.numQuizzes),
+                    children: [1, 2, 3, 4].map((value) {
+                      return Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            final currentMode =
+                                currentState.category.categories.first;
+
+                            final nextDigit = currentTerm.copyWith(
+                              second: value,
+                            );
+
+                            final Term nextTerm = Function.apply(
+                              currentState.term.copyWith.call,
+                              null,
+                              {Symbol(currentMode.name): nextDigit},
+                            );
+
+                            quizSettingsManagerNotifier.updateTerm(
+                              nextTerm,
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            foregroundColor: currentTerm.second == value
+                                ? context.colorScheme.onPrimary
+                                : context.colorScheme.onSurface,
+                            backgroundColor: currentTerm.second == value
+                                ? context.colorScheme.primary
+                                : null,
+                            minimumSize: const Size.fromHeight(56),
+                            textStyle: context.textTheme.labelLarge!.copyWith(
+                              fontWeight: currentTerm.second == value
+                                  ? FontWeight.bold
+                                  : null,
+                            ),
+                          ),
+                          child: Text('$value'),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ] else
+              Container(
+                height: 120,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                alignment: Alignment.center,
+
+                child: Text(
+                  L10n.of(context)!.digitDescription,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            const SizedBox(height: 16),
+
+            /// 問題数の設定
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Material(

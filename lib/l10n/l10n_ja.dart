@@ -62,6 +62,9 @@ class L10nJa extends L10n {
   }
 
   @override
+  String get digitDescription => '問題の桁数は加減乗除の各設定が使用されます。';
+
+  @override
   String quizSize(int value) {
     return '$value 問';
   }

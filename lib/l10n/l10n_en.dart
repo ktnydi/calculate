@@ -62,6 +62,10 @@ class L10nEn extends L10n {
   }
 
   @override
+  String get digitDescription =>
+      'The number of digits in the question uses the settings for addition, subtraction, multiplication, and division.';
+
+  @override
   String quizSize(int value) {
     return '$value Q';
   }
