@@ -5,6 +5,7 @@ import 'package:calculate/l10n/l10n.dart';
 import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
 import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Setting extends ConsumerWidget {
@@ -32,180 +33,156 @@ class Setting extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(0, 12, 0, 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Container(
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.onSurfaceVariant,
+                  color: context.colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(1000),
                 ),
               ),
             ),
             const SizedBox(height: 24),
-            Text(
-              L10n.of(context)!.quizSettingsDescription(
-                L10n.of(
-                  context,
-                )!.quizCategoryMode(currentState.category.name),
-                currentState.size,
-              ),
-              textAlign: TextAlign.center,
-              style: context.textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                L10n.of(context)!.quizSettingsDescription(
+                  L10n.of(
+                    context,
+                  )!.quizCategoryMode(currentState.category.name),
+                  currentState.size,
+                ),
+                textAlign: TextAlign.center,
+                style: context.textTheme.titleLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 24),
 
             /// 問題内容の設定
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Material(
-                color: context.colorScheme.surface,
+                color: context.colorScheme.surfaceContainerLow,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: ListView.separated(
-                  padding: EdgeInsets.zero,
-                  reverse: true,
-                  itemCount: (QuizCategoryMode.values.length / 2).ceil(),
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final leftItem = QuizCategoryMode.values.elementAt(
-                      index * 2,
-                    );
-                    final rightItem = QuizCategoryMode.values.elementAtOrNull(
-                      index * 2 + 1,
-                    );
-
-                    return IntrinsicHeight(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                shape: const BeveledRectangleBorder(),
-                                foregroundColor:
-                                    currentState.category == leftItem
-                                    ? context.colorScheme.onPrimary
-                                    : context.colorScheme.onSurface,
-                                backgroundColor:
-                                    currentState.category == leftItem
-                                    ? context.colorScheme.primary
-                                    : null,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                minimumSize: const Size.fromHeight(56),
-                                textStyle: context.textTheme.labelLarge!
-                                    .copyWith(
-                                      fontWeight:
-                                          currentState.category == leftItem
-                                          ? FontWeight.bold
-                                          : null,
-                                    ),
-                              ),
-                              onPressed: () {
-                                quizSettingsManagerNotifier.updateQuizCategory(
-                                  leftItem,
-                                );
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (leftItem != QuizCategoryMode.random) ...[
-                                    Icon(
-                                      leftItem.categories.first.icon,
-                                      size: 20,
-                                    ),
-                                  ] else
-                                    Text(
-                                      L10n.of(
-                                        context,
-                                      )!.quizCategoryMode(leftItem.name),
-                                    ),
-                                ],
-                              ),
-                            ),
+                child: Row(
+                  spacing: 2,
+                  children: QuizCategoryMode.values.getRange(4, 5).map((
+                    value,
+                  ) {
+                    return Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          quizSettingsManagerNotifier.updateQuizCategory(
+                            value,
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                          animationDuration: Duration.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
                           ),
-                          if (rightItem != null) ...[
-                            VerticalDivider(
-                              width: 2,
-                              thickness: 2,
-                              color: context.colorScheme.surfaceContainerLow,
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  shape: const BeveledRectangleBorder(),
-                                  foregroundColor:
-                                      currentState.category == rightItem
-                                      ? context.colorScheme.onPrimary
-                                      : context.colorScheme.onSurface,
-                                  backgroundColor:
-                                      currentState.category == rightItem
-                                      ? context.colorScheme.primary
-                                      : null,
-                                  tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  minimumSize: const Size.fromHeight(56),
-                                  textStyle: context.textTheme.labelSmall,
-                                ),
-                                onPressed: () {
-                                  quizSettingsManagerNotifier
-                                      .updateQuizCategory(rightItem);
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (rightItem !=
-                                        QuizCategoryMode.random) ...[
-                                      Icon(
-                                        rightItem.categories.first.icon,
-                                        size: 20,
-                                      ),
-                                    ] else
-                                      Text(
-                                        L10n.of(
-                                          context,
-                                        )!.quizCategoryMode(rightItem.name),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ],
+                          foregroundColor: currentState.category == value
+                              ? context.colorScheme.onPrimary
+                              : context.colorScheme.onSurface,
+                          backgroundColor: currentState.category == value
+                              ? context.colorScheme.primary
+                              : context.colorScheme.surface,
+                          minimumSize: const Size.fromHeight(56),
+                          textStyle: context.textTheme.titleMedium!.copyWith(
+                            fontWeight: currentState.category == value
+                                ? FontWeight.bold
+                                : null,
+                          ),
+                        ),
+                        child: Text(
+                          L10n.of(
+                            context,
+                          )!.quizCategoryMode(value.name),
+                        ),
                       ),
                     );
-                  },
-                  separatorBuilder: (_, _) => Divider(
-                    height: 2,
-                    thickness: 2,
-                    color: context.colorScheme.surfaceContainerLow,
-                  ),
+                  }).toList(),
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Material(
+                color: context.colorScheme.surfaceContainerLow,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Row(
+                  spacing: 2,
+                  children: QuizCategoryMode.values.getRange(0, 4).map((
+                    value,
+                  ) {
+                    return Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          quizSettingsManagerNotifier.updateQuizCategory(
+                            value,
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                          animationDuration: Duration.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                          foregroundColor: currentState.category == value
+                              ? context.colorScheme.onPrimary
+                              : context.colorScheme.onSurface,
+                          backgroundColor: currentState.category == value
+                              ? context.colorScheme.primary
+                              : context.colorScheme.surface,
+                          minimumSize: const Size.fromHeight(56),
+                          textStyle: context.textTheme.titleMedium!.copyWith(
+                            fontWeight: currentState.category == value
+                                ? FontWeight.bold
+                                : null,
+                          ),
+                        ),
+                        child: Icon(
+                          value.categories.first.icon,
+                          size: 20,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
 
             if (currentTerm != null) ...[
               /// 桁数の設定
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Material(
-                  color: context.colorScheme.surface,
+                  color: context.colorScheme.surfaceContainerLow,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: Row(
                     key: const ValueKey(QuizType.numQuizzes),
+                    spacing: 2,
                     children: [1, 2, 3, 4].map((value) {
                       return Expanded(
                         child: TextButton(
                           onPressed: () {
+                            HapticFeedback.selectionClick();
                             final currentMode =
                                 currentState.category.categories.first;
 
@@ -224,17 +201,18 @@ class Setting extends ConsumerWidget {
                             );
                           },
                           style: TextButton.styleFrom(
+                            animationDuration: Duration.zero,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.zero,
                             ),
                             foregroundColor: currentTerm.first == value
                                 ? context.colorScheme.onPrimary
                                 : context.colorScheme.onSurface,
                             backgroundColor: currentTerm.first == value
                                 ? context.colorScheme.primary
-                                : null,
+                                : context.colorScheme.surface,
                             minimumSize: const Size.fromHeight(56),
-                            textStyle: context.textTheme.labelLarge!.copyWith(
+                            textStyle: context.textTheme.titleMedium!.copyWith(
                               fontWeight: currentTerm.first == value
                                   ? FontWeight.bold
                                   : null,
@@ -251,17 +229,19 @@ class Setting extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Material(
-                  color: context.colorScheme.surface,
+                  color: context.colorScheme.surfaceContainerLow,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: Row(
                     key: const ValueKey(QuizType.numQuizzes),
+                    spacing: 2,
                     children: [1, 2, 3, 4].map((value) {
                       return Expanded(
                         child: TextButton(
                           onPressed: () {
+                            HapticFeedback.selectionClick();
                             final currentMode =
                                 currentState.category.categories.first;
 
@@ -280,17 +260,18 @@ class Setting extends ConsumerWidget {
                             );
                           },
                           style: TextButton.styleFrom(
+                            animationDuration: Duration.zero,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.zero,
                             ),
                             foregroundColor: currentTerm.second == value
                                 ? context.colorScheme.onPrimary
                                 : context.colorScheme.onSurface,
                             backgroundColor: currentTerm.second == value
                                 ? context.colorScheme.primary
-                                : null,
+                                : context.colorScheme.surface,
                             minimumSize: const Size.fromHeight(56),
-                            textStyle: context.textTheme.labelLarge!.copyWith(
+                            textStyle: context.textTheme.titleMedium!.copyWith(
                               fontWeight: currentTerm.second == value
                                   ? FontWeight.bold
                                   : null,
@@ -314,37 +295,40 @@ class Setting extends ConsumerWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
 
             /// 問題数の設定
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Material(
-                color: context.colorScheme.surface,
+                color: context.colorScheme.surfaceContainerLow,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Row(
                   key: const ValueKey(QuizType.numQuizzes),
+                  spacing: 2,
                   children: QuizType.numQuizzes.selections.map((value) {
                     return Expanded(
                       child: TextButton(
                         onPressed: () {
+                          HapticFeedback.selectionClick();
                           quizSettingsManagerNotifier.updateQuizSize(value);
                         },
                         style: TextButton.styleFrom(
+                          animationDuration: Duration.zero,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(0),
                           ),
                           foregroundColor: currentState.size == value
                               ? context.colorScheme.onPrimary
                               : context.colorScheme.onSurface,
                           backgroundColor: currentState.size == value
                               ? context.colorScheme.primary
-                              : null,
+                              : context.colorScheme.surface,
                           minimumSize: const Size.fromHeight(56),
-                          textStyle: context.textTheme.labelLarge!.copyWith(
+                          textStyle: context.textTheme.titleMedium!.copyWith(
                             fontWeight: currentState.size == value
                                 ? FontWeight.bold
                                 : null,
