@@ -13,8 +13,8 @@ final quizProvider = Provider<Quiz>(
     final quizCategory = ([...currentCategory.categories]..shuffle()).first;
 
     switch (quizCategory) {
-      case QuizCategory.additional:
-        return ref.read(quizRepositoryProvider).getAdditional();
+      case QuizCategory.addition:
+        return ref.read(quizRepositoryProvider).getAddition();
       case QuizCategory.subtraction:
         return ref.read(quizRepositoryProvider).getSubtraction();
       case QuizCategory.division:

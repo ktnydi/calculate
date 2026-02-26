@@ -14,7 +14,7 @@ abstract class Quiz with _$Quiz {
 
   int get correctAnswer {
     switch (type) {
-      case QuizCategory.additional:
+      case QuizCategory.addition:
         return figures.first + figures.last;
       case QuizCategory.subtraction:
         return figures.first - figures.last;

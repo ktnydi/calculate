@@ -23,7 +23,7 @@ class L10nEn extends L10n {
       value,
       {
         'random': 'Mix',
-        'additional': 'Addition',
+        'addition': 'Addition',
         'subtraction': 'Subtraction',
         'division': 'Division',
         'multiplication': 'Multiplication',
@@ -38,7 +38,7 @@ class L10nEn extends L10n {
     String _temp0 = intl.Intl.selectLogic(
       value,
       {
-        'additional': 'Addition',
+        'addition': 'Addition',
         'subtraction': 'Subtraction',
         'division': 'Division',
         'multiplication': 'Multiplication',

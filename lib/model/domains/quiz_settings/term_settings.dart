@@ -6,7 +6,7 @@ part 'term_settings.g.dart';
 @freezed
 abstract class Term with _$Term {
   const factory Term({
-    @Default(Digit()) @DigitMapConverter() Digit additional,
+    @Default(Digit()) @DigitMapConverter() Digit addition,
     @Default(Digit()) @DigitMapConverter() Digit subtraction,
     @Default(Digit()) @DigitMapConverter() Digit division,
     @Default(Digit()) @DigitMapConverter() Digit multiplication,

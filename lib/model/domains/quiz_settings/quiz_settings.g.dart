@@ -33,7 +33,7 @@ Map<String, dynamic> _$QuizSettingsToJson(_QuizSettings instance) =>
 const _$QuizCategoryModeEnumMap = {
   QuizCategoryMode.multiplication: 'multiplication',
   QuizCategoryMode.division: 'division',
-  QuizCategoryMode.additional: 'additional',
+  QuizCategoryMode.addition: 'addition',
   QuizCategoryMode.subtraction: 'subtraction',
   QuizCategoryMode.random: 'random',
 };

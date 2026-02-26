@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 enum QuizCategory {
   /// 足し算
-  additional('足し算', CupertinoIcons.add),
+  addition('足し算', CupertinoIcons.add),
 
   /// 引き算
   subtraction('引き算', CupertinoIcons.minus),

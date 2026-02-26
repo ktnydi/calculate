@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Term {
 
-@DigitMapConverter() Digit get additional;@DigitMapConverter() Digit get subtraction;@DigitMapConverter() Digit get division;@DigitMapConverter() Digit get multiplication;
+@DigitMapConverter() Digit get addition;@DigitMapConverter() Digit get subtraction;@DigitMapConverter() Digit get division;@DigitMapConverter() Digit get multiplication;
 /// Create a copy of Term
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TermCopyWith<Term> get copyWith => _$TermCopyWithImpl<Term>(this as Term, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Term&&(identical(other.additional, additional) || other.additional == additional)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Term&&(identical(other.addition, addition) || other.addition == addition)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,additional,subtraction,division,multiplication);
+int get hashCode => Object.hash(runtimeType,addition,subtraction,division,multiplication);
 
 @override
 String toString() {
-  return 'Term(additional: $additional, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
+  return 'Term(addition: $addition, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $TermCopyWith<$Res>  {
   factory $TermCopyWith(Term value, $Res Function(Term) _then) = _$TermCopyWithImpl;
 @useResult
 $Res call({
-@DigitMapConverter() Digit additional,@DigitMapConverter() Digit subtraction,@DigitMapConverter() Digit division,@DigitMapConverter() Digit multiplication
+@DigitMapConverter() Digit addition,@DigitMapConverter() Digit subtraction,@DigitMapConverter() Digit division,@DigitMapConverter() Digit multiplication
 });
 
 
-$DigitCopyWith<$Res> get additional;$DigitCopyWith<$Res> get subtraction;$DigitCopyWith<$Res> get division;$DigitCopyWith<$Res> get multiplication;
+$DigitCopyWith<$Res> get addition;$DigitCopyWith<$Res> get subtraction;$DigitCopyWith<$Res> get division;$DigitCopyWith<$Res> get multiplication;
 
 }
 /// @nodoc
@@ -65,9 +65,9 @@ class _$TermCopyWithImpl<$Res>
 
 /// Create a copy of Term
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? additional = null,Object? subtraction = null,Object? division = null,Object? multiplication = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? addition = null,Object? subtraction = null,Object? division = null,Object? multiplication = null,}) {
   return _then(_self.copyWith(
-additional: null == additional ? _self.additional : additional // ignore: cast_nullable_to_non_nullable
+addition: null == addition ? _self.addition : addition // ignore: cast_nullable_to_non_nullable
 as Digit,subtraction: null == subtraction ? _self.subtraction : subtraction // ignore: cast_nullable_to_non_nullable
 as Digit,division: null == division ? _self.division : division // ignore: cast_nullable_to_non_nullable
 as Digit,multiplication: null == multiplication ? _self.multiplication : multiplication // ignore: cast_nullable_to_non_nullable
@@ -78,10 +78,10 @@ as Digit,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DigitCopyWith<$Res> get additional {
+$DigitCopyWith<$Res> get addition {
   
-  return $DigitCopyWith<$Res>(_self.additional, (value) {
-    return _then(_self.copyWith(additional: value));
+  return $DigitCopyWith<$Res>(_self.addition, (value) {
+    return _then(_self.copyWith(addition: value));
   });
 }/// Create a copy of Term
 /// with the given fields replaced by the non-null parameter values.
@@ -192,10 +192,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@DigitMapConverter()  Digit additional, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@DigitMapConverter()  Digit addition, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Term() when $default != null:
-return $default(_that.additional,_that.subtraction,_that.division,_that.multiplication);case _:
+return $default(_that.addition,_that.subtraction,_that.division,_that.multiplication);case _:
   return orElse();
 
 }
@@ -213,10 +213,10 @@ return $default(_that.additional,_that.subtraction,_that.division,_that.multipli
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@DigitMapConverter()  Digit additional, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@DigitMapConverter()  Digit addition, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)  $default,) {final _that = this;
 switch (_that) {
 case _Term():
-return $default(_that.additional,_that.subtraction,_that.division,_that.multiplication);case _:
+return $default(_that.addition,_that.subtraction,_that.division,_that.multiplication);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -233,10 +233,10 @@ return $default(_that.additional,_that.subtraction,_that.division,_that.multipli
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@DigitMapConverter()  Digit additional, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@DigitMapConverter()  Digit addition, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)?  $default,) {final _that = this;
 switch (_that) {
 case _Term() when $default != null:
-return $default(_that.additional,_that.subtraction,_that.division,_that.multiplication);case _:
+return $default(_that.addition,_that.subtraction,_that.division,_that.multiplication);case _:
   return null;
 
 }
@@ -248,10 +248,10 @@ return $default(_that.additional,_that.subtraction,_that.division,_that.multipli
 @JsonSerializable()
 
 class _Term implements Term {
-  const _Term({@DigitMapConverter() this.additional = const Digit(), @DigitMapConverter() this.subtraction = const Digit(), @DigitMapConverter() this.division = const Digit(), @DigitMapConverter() this.multiplication = const Digit()});
+  const _Term({@DigitMapConverter() this.addition = const Digit(), @DigitMapConverter() this.subtraction = const Digit(), @DigitMapConverter() this.division = const Digit(), @DigitMapConverter() this.multiplication = const Digit()});
   factory _Term.fromJson(Map<String, dynamic> json) => _$TermFromJson(json);
 
-@override@JsonKey()@DigitMapConverter() final  Digit additional;
+@override@JsonKey()@DigitMapConverter() final  Digit addition;
 @override@JsonKey()@DigitMapConverter() final  Digit subtraction;
 @override@JsonKey()@DigitMapConverter() final  Digit division;
 @override@JsonKey()@DigitMapConverter() final  Digit multiplication;
@@ -269,16 +269,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Term&&(identical(other.additional, additional) || other.additional == additional)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Term&&(identical(other.addition, addition) || other.addition == addition)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,additional,subtraction,division,multiplication);
+int get hashCode => Object.hash(runtimeType,addition,subtraction,division,multiplication);
 
 @override
 String toString() {
-  return 'Term(additional: $additional, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
+  return 'Term(addition: $addition, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
 }
 
 
@@ -289,11 +289,11 @@ abstract mixin class _$TermCopyWith<$Res> implements $TermCopyWith<$Res> {
   factory _$TermCopyWith(_Term value, $Res Function(_Term) _then) = __$TermCopyWithImpl;
 @override @useResult
 $Res call({
-@DigitMapConverter() Digit additional,@DigitMapConverter() Digit subtraction,@DigitMapConverter() Digit division,@DigitMapConverter() Digit multiplication
+@DigitMapConverter() Digit addition,@DigitMapConverter() Digit subtraction,@DigitMapConverter() Digit division,@DigitMapConverter() Digit multiplication
 });
 
 
-@override $DigitCopyWith<$Res> get additional;@override $DigitCopyWith<$Res> get subtraction;@override $DigitCopyWith<$Res> get division;@override $DigitCopyWith<$Res> get multiplication;
+@override $DigitCopyWith<$Res> get addition;@override $DigitCopyWith<$Res> get subtraction;@override $DigitCopyWith<$Res> get division;@override $DigitCopyWith<$Res> get multiplication;
 
 }
 /// @nodoc
@@ -306,9 +306,9 @@ class __$TermCopyWithImpl<$Res>
 
 /// Create a copy of Term
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? additional = null,Object? subtraction = null,Object? division = null,Object? multiplication = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? addition = null,Object? subtraction = null,Object? division = null,Object? multiplication = null,}) {
   return _then(_Term(
-additional: null == additional ? _self.additional : additional // ignore: cast_nullable_to_non_nullable
+addition: null == addition ? _self.addition : addition // ignore: cast_nullable_to_non_nullable
 as Digit,subtraction: null == subtraction ? _self.subtraction : subtraction // ignore: cast_nullable_to_non_nullable
 as Digit,division: null == division ? _self.division : division // ignore: cast_nullable_to_non_nullable
 as Digit,multiplication: null == multiplication ? _self.multiplication : multiplication // ignore: cast_nullable_to_non_nullable
@@ -320,10 +320,10 @@ as Digit,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DigitCopyWith<$Res> get additional {
+$DigitCopyWith<$Res> get addition {
   
-  return $DigitCopyWith<$Res>(_self.additional, (value) {
-    return _then(_self.copyWith(additional: value));
+  return $DigitCopyWith<$Res>(_self.addition, (value) {
+    return _then(_self.copyWith(addition: value));
   });
 }/// Create a copy of Term
 /// with the given fields replaced by the non-null parameter values.

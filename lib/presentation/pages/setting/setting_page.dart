@@ -23,7 +23,7 @@ class Setting extends ConsumerWidget {
     final currentTerm = switch (currentState.category) {
       QuizCategoryMode.multiplication => currentState.term.multiplication,
       QuizCategoryMode.division => currentState.term.division,
-      QuizCategoryMode.additional => currentState.term.additional,
+      QuizCategoryMode.addition => currentState.term.addition,
       QuizCategoryMode.subtraction => currentState.term.subtraction,
       QuizCategoryMode.random => null,
     };

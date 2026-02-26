@@ -3,7 +3,7 @@ import 'package:calculate/enums/quiz_category.dart';
 enum QuizCategoryMode {
   multiplication([QuizCategory.multiplication]),
   division([QuizCategory.division]),
-  additional([QuizCategory.additional]),
+  addition([QuizCategory.addition]),
   subtraction([QuizCategory.subtraction]),
   random(QuizCategory.values);
 
@@ -17,7 +17,7 @@ extension QuizCategoryModeEx on QuizCategoryMode {
     switch (this) {
       case QuizCategoryMode.random:
         return 0;
-      case QuizCategoryMode.additional:
+      case QuizCategoryMode.addition:
         return 1;
       case QuizCategoryMode.subtraction:
         return 2;

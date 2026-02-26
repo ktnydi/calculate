@@ -118,13 +118,13 @@ abstract class L10n {
   /// No description provided for @quizCategoryMode.
   ///
   /// In ja, this message translates to:
-  /// **'{value, select, random{ミックス} additional{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}'**
+  /// **'{value, select, random{ミックス} addition{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}'**
   String quizCategoryMode(String value);
 
   /// No description provided for @quizCategory.
   ///
   /// In ja, this message translates to:
-  /// **'{value, select, additional{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}'**
+  /// **'{value, select, addition{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}'**
   String quizCategory(String value);
 
   /// No description provided for @quizType.

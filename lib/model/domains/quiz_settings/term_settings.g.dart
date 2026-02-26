@@ -7,10 +7,10 @@ part of 'term_settings.dart';
 // **************************************************************************
 
 _Term _$TermFromJson(Map<String, dynamic> json) => _Term(
-  additional: json['additional'] == null
+  addition: json['addition'] == null
       ? const Digit()
       : const DigitMapConverter().fromJson(
-          json['additional'] as Map<String, dynamic>,
+          json['addition'] as Map<String, dynamic>,
         ),
   subtraction: json['subtraction'] == null
       ? const Digit()
@@ -30,7 +30,7 @@ _Term _$TermFromJson(Map<String, dynamic> json) => _Term(
 );
 
 Map<String, dynamic> _$TermToJson(_Term instance) => <String, dynamic>{
-  'additional': const DigitMapConverter().toJson(instance.additional),
+  'addition': const DigitMapConverter().toJson(instance.addition),
   'subtraction': const DigitMapConverter().toJson(instance.subtraction),
   'division': const DigitMapConverter().toJson(instance.division),
   'multiplication': const DigitMapConverter().toJson(instance.multiplication),

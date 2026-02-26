@@ -19,7 +19,7 @@ Map<String, dynamic> _$QuizToJson(_Quiz instance) => <String, dynamic>{
 };
 
 const _$QuizCategoryEnumMap = {
-  QuizCategory.additional: 'additional',
+  QuizCategory.addition: 'addition',
   QuizCategory.subtraction: 'subtraction',
   QuizCategory.division: 'division',
   QuizCategory.multiplication: 'multiplication',

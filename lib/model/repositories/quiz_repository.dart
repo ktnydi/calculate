@@ -32,11 +32,11 @@ class QuizRepository {
     return figure;
   }
 
-  Quiz getAdditional() {
-    final firstTerm = getTerm(digit: term.additional.first);
-    final lastTerm = getTerm(digit: term.additional.second);
+  Quiz getAddition() {
+    final firstTerm = getTerm(digit: term.addition.first);
+    final lastTerm = getTerm(digit: term.addition.second);
     final figures = [firstTerm, lastTerm];
-    return Quiz(figures: figures, type: QuizCategory.additional);
+    return Quiz(figures: figures, type: QuizCategory.addition);
   }
 
   Quiz getSubtraction() {
