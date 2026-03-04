@@ -18,14 +18,6 @@
       }
     }
   },
-  "quizType": "{value, select, timeLimit{時間制限} numQuizzes{問題数} other{}}",
-  "@quizType": {
-    "placeholders": {
-      "value": {
-        "type": "String"
-      }
-    }
-  },
   "digitDescription": "問題の桁数は加減乗除の各設定が使用されます。",
   "quizSize": "{value} 問",
   "@quizSize": {

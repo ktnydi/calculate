@@ -49,19 +49,6 @@ class L10nJa extends L10n {
   }
 
   @override
-  String quizType(String value) {
-    String _temp0 = intl.Intl.selectLogic(
-      value,
-      {
-        'timeLimit': '時間制限',
-        'numQuizzes': '問題数',
-        'other': '',
-      },
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get digitDescription => '問題の桁数は加減乗除の各設定が使用されます。';
 
   @override

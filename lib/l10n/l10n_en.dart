@@ -49,19 +49,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String quizType(String value) {
-    String _temp0 = intl.Intl.selectLogic(
-      value,
-      {
-        'timeLimit': 'Time Limit',
-        'numQuizzes': 'Number',
-        'other': '',
-      },
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get digitDescription =>
       'The number of digits in the question uses the settings for addition, subtraction, multiplication, and division.';
 

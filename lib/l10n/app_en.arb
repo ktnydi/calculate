@@ -4,7 +4,6 @@
   "startButtonLabel": "Start",
   "quizCategoryMode": "{value, select, random{Mix} addition{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
   "quizCategory": "{value, select, addition{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}}",
-  "quizType": "{value, select, timeLimit{Time Limit} numQuizzes{Number} other{}}",
   "digitDescription": "The number of digits in the question uses the settings for addition, subtraction, multiplication, and division.",
   "quizSize": "{value} Q",
   "settingsButtonLabel": "Settings",
