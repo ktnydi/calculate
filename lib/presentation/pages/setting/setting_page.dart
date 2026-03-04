@@ -218,7 +218,7 @@ class Setting extends ConsumerWidget {
                                   : null,
                             ),
                           ),
-                          child: Text('$value'),
+                          child: Text(L10n.of(context)!.digit(value)),
                         ),
                       );
                     }).toList(),
@@ -277,7 +277,7 @@ class Setting extends ConsumerWidget {
                                   : null,
                             ),
                           ),
-                          child: Text('$value'),
+                          child: Text(L10n.of(context)!.digit(value)),
                         ),
                       );
                     }).toList(),

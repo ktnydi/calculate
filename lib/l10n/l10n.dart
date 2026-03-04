@@ -127,6 +127,12 @@ abstract class L10n {
   /// **'{value, select, addition{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}}'**
   String quizCategory(String value);
 
+  /// No description provided for @digit.
+  ///
+  /// In ja, this message translates to:
+  /// **'{digit} 桁'**
+  String digit(int digit);
+
   /// No description provided for @digitDescription.
   ///
   /// In ja, this message translates to:

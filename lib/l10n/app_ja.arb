@@ -18,6 +18,14 @@
       }
     }
   },
+  "digit": "{digit} 桁",
+  "@digit": {
+    "placeholders": {
+      "digit": {
+        "type": "int"
+      }
+    }
+  },
   "digitDescription": "問題の桁数は加減乗除の各設定が使用されます。",
   "quizSize": "{value} 問",
   "@quizSize": {

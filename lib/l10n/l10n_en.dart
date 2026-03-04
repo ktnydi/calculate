@@ -49,6 +49,18 @@ class L10nEn extends L10n {
   }
 
   @override
+  String digit(int digit) {
+    String _temp0 = intl.Intl.pluralLogic(
+      digit,
+      locale: localeName,
+      other: '$digit digits',
+      one: '$digit digit',
+      zero: '$digit digit',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get digitDescription =>
       'The number of digits in the question uses the settings for addition, subtraction, multiplication, and division.';
 

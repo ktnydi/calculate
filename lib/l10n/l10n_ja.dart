@@ -49,6 +49,11 @@ class L10nJa extends L10n {
   }
 
   @override
+  String digit(int digit) {
+    return '$digit 桁';
+  }
+
+  @override
   String get digitDescription => '問題の桁数は加減乗除の各設定が使用されます。';
 
   @override
