@@ -78,8 +78,20 @@ class L10nEn extends L10n {
   }
 
   @override
-  String quizSettingsDescription(String quizCategory, int quizSize) {
-    return '\"$quizSize\" questions on \"$quizCategory\"';
+  String quizSettingsDescription(
+    int? firstDigit,
+    int? secondDigit,
+    String quizCategory,
+    int quizSize,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      quizCategory,
+      {
+        'random': '',
+        'other': '$firstDigit & $secondDigit-digit ',
+      },
+    );
+    return '$quizSize questions ($_temp0$quizCategory)';
   }
 
   @override

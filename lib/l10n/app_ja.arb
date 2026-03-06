@@ -44,9 +44,15 @@
       }
     }
   },
-  "quizSettingsDescription": "「{quizCategory}」の問題を「{quizSize}問」",
+  "quizSettingsDescription": "{quizCategory, select, random{} other{{firstDigit}桁 と {secondDigit}桁 の }}{quizCategory, select, random{ミックス} addition{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}} を {quizSize}問",
   "@quizSettingsDescription": {
     "placeholders": {
+      "firstDigit": {
+        "type": "int?"
+      },
+      "secondDigit": {
+        "type": "int?"
+      },
       "quizCategory": {
         "type": "String"
       },

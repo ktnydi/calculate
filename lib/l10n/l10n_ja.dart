@@ -70,8 +70,31 @@ class L10nJa extends L10n {
   }
 
   @override
-  String quizSettingsDescription(String quizCategory, int quizSize) {
-    return '「$quizCategory」の問題を「$quizSize問」';
+  String quizSettingsDescription(
+    int? firstDigit,
+    int? secondDigit,
+    String quizCategory,
+    int quizSize,
+  ) {
+    String _temp0 = intl.Intl.selectLogic(
+      quizCategory,
+      {
+        'random': '',
+        'other': '$firstDigit桁 と $secondDigit桁 の ',
+      },
+    );
+    String _temp1 = intl.Intl.selectLogic(
+      quizCategory,
+      {
+        'random': 'ミックス',
+        'addition': '足し算',
+        'subtraction': '引き算',
+        'division': '割り算',
+        'multiplication': '掛け算',
+        'other': '',
+      },
+    );
+    return '$_temp0$_temp1 を $quizSize問';
   }
 
   @override

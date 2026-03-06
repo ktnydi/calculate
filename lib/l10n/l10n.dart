@@ -160,8 +160,13 @@ abstract class L10n {
   /// No description provided for @quizSettingsDescription.
   ///
   /// In ja, this message translates to:
-  /// **'「{quizCategory}」の問題を「{quizSize}問」'**
-  String quizSettingsDescription(String quizCategory, int quizSize);
+  /// **'{quizCategory, select, random{} other{{firstDigit}桁 と {secondDigit}桁 の }}{quizCategory, select, random{ミックス} addition{足し算} subtraction{引き算} division{割り算} multiplication{掛け算} other{}} を {quizSize}問'**
+  String quizSettingsDescription(
+    int? firstDigit,
+    int? secondDigit,
+    String quizCategory,
+    int quizSize,
+  );
 
   /// No description provided for @gameResultPageTitle.
   ///

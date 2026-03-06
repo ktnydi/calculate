@@ -49,13 +49,13 @@ class Setting extends ConsumerWidget {
             Center(
               child: Text(
                 L10n.of(context)!.quizSettingsDescription(
-                  L10n.of(
-                    context,
-                  )!.quizCategoryMode(currentState.category.name),
+                  currentTerm?.first,
+                  currentTerm?.second,
+                  currentState.category.name,
                   currentState.size,
                 ),
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleLarge!.copyWith(
+                style: context.textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
