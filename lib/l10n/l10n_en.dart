@@ -50,14 +50,7 @@ class L10nEn extends L10n {
 
   @override
   String digit(int digit) {
-    String _temp0 = intl.Intl.pluralLogic(
-      digit,
-      locale: localeName,
-      other: '$digit digits',
-      one: '$digit digit',
-      zero: '$digit digit',
-    );
-    return '$_temp0';
+    return '$digit-digit';
   }
 
   @override
@@ -66,7 +59,7 @@ class L10nEn extends L10n {
 
   @override
   String quizSize(int value) {
-    return '$value Q';
+    return '$value Qs';
   }
 
   @override
