@@ -50,7 +50,7 @@ class L10nEn extends L10n {
 
   @override
   String digit(int digit) {
-    return '$digit-digit';
+    return '$digit-Digit';
   }
 
   @override
@@ -81,10 +81,21 @@ class L10nEn extends L10n {
       quizCategory,
       {
         'random': '',
-        'other': '$firstDigit & $secondDigit-digit ',
+        'other': '$firstDigit & $secondDigit-Digit ',
       },
     );
-    return '$quizSize questions ($_temp0$quizCategory)';
+    String _temp1 = intl.Intl.selectLogic(
+      quizCategory,
+      {
+        'random': 'Mix',
+        'addition': 'Addition',
+        'subtraction': 'Subtraction',
+        'division': 'Division',
+        'multiplication': 'Multiplication',
+        'other': '',
+      },
+    );
+    return '$quizSize Questions ($_temp0$_temp1)';
   }
 
   @override
