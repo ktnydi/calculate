@@ -179,6 +179,8 @@ class Setting extends ConsumerWidget {
                     key: const ValueKey(QuizType.numQuizzes),
                     spacing: 2,
                     children: [1, 2, 3, 4].map((value) {
+                      final isSelected = currentTerm.first == value;
+
                       return Expanded(
                         child: TextButton(
                           onPressed: () {
@@ -205,20 +207,22 @@ class Setting extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                             ),
-                            foregroundColor: currentTerm.first == value
+                            foregroundColor: isSelected
                                 ? context.colorScheme.onPrimary
                                 : context.colorScheme.onSurface,
-                            backgroundColor: currentTerm.first == value
+                            backgroundColor: isSelected
                                 ? context.colorScheme.primary
                                 : context.colorScheme.surface,
                             minimumSize: const Size.fromHeight(56),
                             textStyle: context.textTheme.titleMedium!.copyWith(
-                              fontWeight: currentTerm.first == value
-                                  ? FontWeight.bold
-                                  : null,
+                              fontWeight: isSelected ? FontWeight.bold : null,
                             ),
                           ),
-                          child: Text(L10n.of(context)!.digit(value)),
+                          child: Text(
+                            isSelected
+                                ? L10n.of(context)!.digit(value)
+                                : '$value',
+                          ),
                         ),
                       );
                     }).toList(),
@@ -238,6 +242,8 @@ class Setting extends ConsumerWidget {
                     key: const ValueKey(QuizType.numQuizzes),
                     spacing: 2,
                     children: [1, 2, 3, 4].map((value) {
+                      final isSelected = currentTerm.second == value;
+
                       return Expanded(
                         child: TextButton(
                           onPressed: () {
@@ -264,20 +270,22 @@ class Setting extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                             ),
-                            foregroundColor: currentTerm.second == value
+                            foregroundColor: isSelected
                                 ? context.colorScheme.onPrimary
                                 : context.colorScheme.onSurface,
-                            backgroundColor: currentTerm.second == value
+                            backgroundColor: isSelected
                                 ? context.colorScheme.primary
                                 : context.colorScheme.surface,
                             minimumSize: const Size.fromHeight(56),
                             textStyle: context.textTheme.titleMedium!.copyWith(
-                              fontWeight: currentTerm.second == value
-                                  ? FontWeight.bold
-                                  : null,
+                              fontWeight: isSelected ? FontWeight.bold : null,
                             ),
                           ),
-                          child: Text(L10n.of(context)!.digit(value)),
+                          child: Text(
+                            isSelected
+                                ? L10n.of(context)!.digit(value)
+                                : '$value',
+                          ),
                         ),
                       );
                     }).toList(),
@@ -310,6 +318,8 @@ class Setting extends ConsumerWidget {
                   key: const ValueKey(QuizType.numQuizzes),
                   spacing: 2,
                   children: QuizType.numQuizzes.selections.map((value) {
+                    final isSelected = currentState.size == value;
+
                     return Expanded(
                       child: TextButton(
                         onPressed: () {
@@ -321,20 +331,22 @@ class Setting extends ConsumerWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0),
                           ),
-                          foregroundColor: currentState.size == value
+                          foregroundColor: isSelected
                               ? context.colorScheme.onPrimary
                               : context.colorScheme.onSurface,
-                          backgroundColor: currentState.size == value
+                          backgroundColor: isSelected
                               ? context.colorScheme.primary
                               : context.colorScheme.surface,
                           minimumSize: const Size.fromHeight(56),
                           textStyle: context.textTheme.titleMedium!.copyWith(
-                            fontWeight: currentState.size == value
-                                ? FontWeight.bold
-                                : null,
+                            fontWeight: isSelected ? FontWeight.bold : null,
                           ),
                         ),
-                        child: Text(L10n.of(context)!.quizSize(value)),
+                        child: Text(
+                          isSelected
+                              ? L10n.of(context)!.quizSize(value)
+                              : '$value',
+                        ),
                       ),
                     );
                   }).toList(),
