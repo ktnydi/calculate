@@ -4,6 +4,7 @@ import 'package:calculate/model/use_cases/one_hand_keypad.dart';
 import 'package:calculate/presentation/pages/game/game_notifier.dart';
 import 'package:calculate/presentation/widgets/figure_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NumKeyboard extends ConsumerWidget {
@@ -50,6 +51,8 @@ class NumKeyboard extends ConsumerWidget {
                         return FigureButton(
                           child: const Text('C'),
                           onPressed: () {
+                            HapticFeedback.selectionClick();
+
                             gameNotifier.clearAnswer();
                           },
                         );
@@ -59,6 +62,8 @@ class NumKeyboard extends ConsumerWidget {
                         return FigureButton(
                           child: const Text('BS'),
                           onPressed: () {
+                            HapticFeedback.selectionClick();
+
                             final userAnswer = ref.read(
                               gameProvider.select((value) => value.answer),
                             );
@@ -76,6 +81,8 @@ class NumKeyboard extends ConsumerWidget {
                       return FigureButton(
                         child: Text('${index + 1}'),
                         onPressed: () {
+                          HapticFeedback.selectionClick();
+
                           gameNotifier.fillInAnswer(index + 1);
                         },
                       );
