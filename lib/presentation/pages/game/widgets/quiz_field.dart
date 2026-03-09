@@ -15,6 +15,7 @@ class QuizField extends ConsumerStatefulWidget {
 class _QuizFieldState extends ConsumerState<QuizField>
     with TickerProviderStateMixin {
   late final AnimationController quizAnimation;
+  late final AnimationController cursorAnimation;
 
   @override
   void initState() {
@@ -28,12 +29,20 @@ class _QuizFieldState extends ConsumerState<QuizField>
       }
     });
 
+    cursorAnimation = AnimationController(
+      vsync: this,
+      animationBehavior: AnimationBehavior.preserve,
+      duration: Duration(milliseconds: 500),
+    );
+    cursorAnimation.repeat(reverse: true);
+
     super.initState();
   }
 
   @override
   void dispose() {
     quizAnimation.dispose();
+    cursorAnimation.dispose();
     super.dispose();
   }
 
@@ -128,15 +137,31 @@ class _QuizFieldState extends ConsumerState<QuizField>
                   ),
                 ),
                 child: Center(
-                  child: Text(
-                    userAnswer,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontFeatures: [
-                        FontFeature.tabularFigures(),
-                      ],
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: userAnswer.isNotEmpty ? 4 : 0,
+                    children: [
+                      Text(
+                        userAnswer,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontFeatures: [
+                            FontFeature.tabularFigures(),
+                          ],
+                        ),
+                      ),
+                      FadeTransition(
+                        opacity: cursorAnimation,
+                        child: Container(
+                          width: 2,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
