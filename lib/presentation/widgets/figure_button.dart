@@ -1,5 +1,6 @@
 import 'package:calculate/extensions/context.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FigureButton extends StatelessWidget {
   final Widget child;
@@ -19,7 +20,11 @@ class FigureButton extends StatelessWidget {
         textStyle: Theme.of(context).textTheme.headlineSmall,
         splashFactory: NoSplash.splashFactory,
       ),
-      onPressed: onPressed,
+      onPressed: () {
+        HapticFeedback.selectionClick();
+
+        onPressed();
+      },
       child: child,
     );
   }
