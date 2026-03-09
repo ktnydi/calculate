@@ -17,6 +17,7 @@ class FigureButton extends StatelessWidget {
         ),
         backgroundColor: context.colorScheme.surface,
         textStyle: Theme.of(context).textTheme.headlineSmall,
+        splashFactory: NoSplash.splashFactory,
       ),
       onPressed: onPressed,
       child: child,
