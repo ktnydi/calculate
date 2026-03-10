@@ -226,7 +226,7 @@ class GameResult extends ConsumerWidget {
                               child: FilledButton(
                                 style: FilledButton.styleFrom(
                                   shape: const StadiumBorder(),
-                                  minimumSize: const Size(140, 56),
+                                  minimumSize: const Size(140, 64),
                                   textStyle: context.textTheme.labelLarge!
                                       .copyWith(
                                         fontWeight: FontWeight.bold,
@@ -247,7 +247,7 @@ class GameResult extends ConsumerWidget {
                                 side: BorderSide(
                                   color: context.colorScheme.outlineVariant,
                                 ),
-                                minimumSize: const Size(56, 56),
+                                minimumSize: const Size(64, 64),
                                 foregroundColor: context.colorScheme.onSurface,
                                 backgroundColor: context.colorScheme.surface,
                               ),
