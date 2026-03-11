@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'term_settings.dart';
+part of 'digit_config.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'term_settings.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Term {
+mixin _$DigitConfig {
 
 @DigitMapConverter() Digit get addition;@DigitMapConverter() Digit get subtraction;@DigitMapConverter() Digit get division;@DigitMapConverter() Digit get multiplication;
-/// Create a copy of Term
+/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$TermCopyWith<Term> get copyWith => _$TermCopyWithImpl<Term>(this as Term, _$identity);
+$DigitConfigCopyWith<DigitConfig> get copyWith => _$DigitConfigCopyWithImpl<DigitConfig>(this as DigitConfig, _$identity);
 
-  /// Serializes this Term to a JSON map.
+  /// Serializes this DigitConfig to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Term&&(identical(other.addition, addition) || other.addition == addition)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DigitConfig&&(identical(other.addition, addition) || other.addition == addition)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,addition,subtraction,division,multip
 
 @override
 String toString() {
-  return 'Term(addition: $addition, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
+  return 'DigitConfig(addition: $addition, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $TermCopyWith<$Res>  {
-  factory $TermCopyWith(Term value, $Res Function(Term) _then) = _$TermCopyWithImpl;
+abstract mixin class $DigitConfigCopyWith<$Res>  {
+  factory $DigitConfigCopyWith(DigitConfig value, $Res Function(DigitConfig) _then) = _$DigitConfigCopyWithImpl;
 @useResult
 $Res call({
 @DigitMapConverter() Digit addition,@DigitMapConverter() Digit subtraction,@DigitMapConverter() Digit division,@DigitMapConverter() Digit multiplication
@@ -56,14 +56,14 @@ $DigitCopyWith<$Res> get addition;$DigitCopyWith<$Res> get subtraction;$DigitCop
 
 }
 /// @nodoc
-class _$TermCopyWithImpl<$Res>
-    implements $TermCopyWith<$Res> {
-  _$TermCopyWithImpl(this._self, this._then);
+class _$DigitConfigCopyWithImpl<$Res>
+    implements $DigitConfigCopyWith<$Res> {
+  _$DigitConfigCopyWithImpl(this._self, this._then);
 
-  final Term _self;
-  final $Res Function(Term) _then;
+  final DigitConfig _self;
+  final $Res Function(DigitConfig) _then;
 
-/// Create a copy of Term
+/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? addition = null,Object? subtraction = null,Object? division = null,Object? multiplication = null,}) {
   return _then(_self.copyWith(
@@ -74,7 +74,7 @@ as Digit,multiplication: null == multiplication ? _self.multiplication : multipl
 as Digit,
   ));
 }
-/// Create a copy of Term
+/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -83,7 +83,7 @@ $DigitCopyWith<$Res> get addition {
   return $DigitCopyWith<$Res>(_self.addition, (value) {
     return _then(_self.copyWith(addition: value));
   });
-}/// Create a copy of Term
+}/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ $DigitCopyWith<$Res> get subtraction {
   return $DigitCopyWith<$Res>(_self.subtraction, (value) {
     return _then(_self.copyWith(subtraction: value));
   });
-}/// Create a copy of Term
+}/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ $DigitCopyWith<$Res> get division {
   return $DigitCopyWith<$Res>(_self.division, (value) {
     return _then(_self.copyWith(division: value));
   });
-}/// Create a copy of Term
+}/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -114,8 +114,8 @@ $DigitCopyWith<$Res> get multiplication {
 }
 
 
-/// Adds pattern-matching-related methods to [Term].
-extension TermPatterns on Term {
+/// Adds pattern-matching-related methods to [DigitConfig].
+extension DigitConfigPatterns on DigitConfig {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -128,10 +128,10 @@ extension TermPatterns on Term {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Term value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DigitConfig value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Term() when $default != null:
+case _DigitConfig() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -150,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Term value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DigitConfig value)  $default,){
 final _that = this;
 switch (_that) {
-case _Term():
+case _DigitConfig():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -171,10 +171,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Term value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DigitConfig value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Term() when $default != null:
+case _DigitConfig() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -194,7 +194,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@DigitMapConverter()  Digit addition, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Term() when $default != null:
+case _DigitConfig() when $default != null:
 return $default(_that.addition,_that.subtraction,_that.division,_that.multiplication);case _:
   return orElse();
 
@@ -215,7 +215,7 @@ return $default(_that.addition,_that.subtraction,_that.division,_that.multiplica
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@DigitMapConverter()  Digit addition, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)  $default,) {final _that = this;
 switch (_that) {
-case _Term():
+case _DigitConfig():
 return $default(_that.addition,_that.subtraction,_that.division,_that.multiplication);case _:
   throw StateError('Unexpected subclass');
 
@@ -235,7 +235,7 @@ return $default(_that.addition,_that.subtraction,_that.division,_that.multiplica
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@DigitMapConverter()  Digit addition, @DigitMapConverter()  Digit subtraction, @DigitMapConverter()  Digit division, @DigitMapConverter()  Digit multiplication)?  $default,) {final _that = this;
 switch (_that) {
-case _Term() when $default != null:
+case _DigitConfig() when $default != null:
 return $default(_that.addition,_that.subtraction,_that.division,_that.multiplication);case _:
   return null;
 
@@ -247,29 +247,29 @@ return $default(_that.addition,_that.subtraction,_that.division,_that.multiplica
 /// @nodoc
 @JsonSerializable()
 
-class _Term implements Term {
-  const _Term({@DigitMapConverter() this.addition = const Digit(), @DigitMapConverter() this.subtraction = const Digit(), @DigitMapConverter() this.division = const Digit(), @DigitMapConverter() this.multiplication = const Digit()});
-  factory _Term.fromJson(Map<String, dynamic> json) => _$TermFromJson(json);
+class _DigitConfig implements DigitConfig {
+  const _DigitConfig({@DigitMapConverter() this.addition = const Digit(), @DigitMapConverter() this.subtraction = const Digit(), @DigitMapConverter() this.division = const Digit(), @DigitMapConverter() this.multiplication = const Digit()});
+  factory _DigitConfig.fromJson(Map<String, dynamic> json) => _$DigitConfigFromJson(json);
 
 @override@JsonKey()@DigitMapConverter() final  Digit addition;
 @override@JsonKey()@DigitMapConverter() final  Digit subtraction;
 @override@JsonKey()@DigitMapConverter() final  Digit division;
 @override@JsonKey()@DigitMapConverter() final  Digit multiplication;
 
-/// Create a copy of Term
+/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$TermCopyWith<_Term> get copyWith => __$TermCopyWithImpl<_Term>(this, _$identity);
+_$DigitConfigCopyWith<_DigitConfig> get copyWith => __$DigitConfigCopyWithImpl<_DigitConfig>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$TermToJson(this, );
+  return _$DigitConfigToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Term&&(identical(other.addition, addition) || other.addition == addition)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DigitConfig&&(identical(other.addition, addition) || other.addition == addition)&&(identical(other.subtraction, subtraction) || other.subtraction == subtraction)&&(identical(other.division, division) || other.division == division)&&(identical(other.multiplication, multiplication) || other.multiplication == multiplication));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -278,15 +278,15 @@ int get hashCode => Object.hash(runtimeType,addition,subtraction,division,multip
 
 @override
 String toString() {
-  return 'Term(addition: $addition, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
+  return 'DigitConfig(addition: $addition, subtraction: $subtraction, division: $division, multiplication: $multiplication)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$TermCopyWith<$Res> implements $TermCopyWith<$Res> {
-  factory _$TermCopyWith(_Term value, $Res Function(_Term) _then) = __$TermCopyWithImpl;
+abstract mixin class _$DigitConfigCopyWith<$Res> implements $DigitConfigCopyWith<$Res> {
+  factory _$DigitConfigCopyWith(_DigitConfig value, $Res Function(_DigitConfig) _then) = __$DigitConfigCopyWithImpl;
 @override @useResult
 $Res call({
 @DigitMapConverter() Digit addition,@DigitMapConverter() Digit subtraction,@DigitMapConverter() Digit division,@DigitMapConverter() Digit multiplication
@@ -297,17 +297,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$TermCopyWithImpl<$Res>
-    implements _$TermCopyWith<$Res> {
-  __$TermCopyWithImpl(this._self, this._then);
+class __$DigitConfigCopyWithImpl<$Res>
+    implements _$DigitConfigCopyWith<$Res> {
+  __$DigitConfigCopyWithImpl(this._self, this._then);
 
-  final _Term _self;
-  final $Res Function(_Term) _then;
+  final _DigitConfig _self;
+  final $Res Function(_DigitConfig) _then;
 
-/// Create a copy of Term
+/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? addition = null,Object? subtraction = null,Object? division = null,Object? multiplication = null,}) {
-  return _then(_Term(
+  return _then(_DigitConfig(
 addition: null == addition ? _self.addition : addition // ignore: cast_nullable_to_non_nullable
 as Digit,subtraction: null == subtraction ? _self.subtraction : subtraction // ignore: cast_nullable_to_non_nullable
 as Digit,division: null == division ? _self.division : division // ignore: cast_nullable_to_non_nullable
@@ -316,7 +316,7 @@ as Digit,
   ));
 }
 
-/// Create a copy of Term
+/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -325,7 +325,7 @@ $DigitCopyWith<$Res> get addition {
   return $DigitCopyWith<$Res>(_self.addition, (value) {
     return _then(_self.copyWith(addition: value));
   });
-}/// Create a copy of Term
+}/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -334,7 +334,7 @@ $DigitCopyWith<$Res> get subtraction {
   return $DigitCopyWith<$Res>(_self.subtraction, (value) {
     return _then(_self.copyWith(subtraction: value));
   });
-}/// Create a copy of Term
+}/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -343,7 +343,7 @@ $DigitCopyWith<$Res> get division {
   return $DigitCopyWith<$Res>(_self.division, (value) {
     return _then(_self.copyWith(division: value));
   });
-}/// Create a copy of Term
+}/// Create a copy of DigitConfig
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

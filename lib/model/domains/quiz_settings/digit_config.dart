@@ -1,30 +1,32 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'term_settings.freezed.dart';
-part 'term_settings.g.dart';
+part 'digit_config.freezed.dart';
+part 'digit_config.g.dart';
 
 @freezed
-abstract class Term with _$Term {
-  const factory Term({
+abstract class DigitConfig with _$DigitConfig {
+  const factory DigitConfig({
     @Default(Digit()) @DigitMapConverter() Digit addition,
     @Default(Digit()) @DigitMapConverter() Digit subtraction,
     @Default(Digit()) @DigitMapConverter() Digit division,
     @Default(Digit()) @DigitMapConverter() Digit multiplication,
-  }) = _Term;
+  }) = _DigitConfig;
 
-  factory Term.fromJson(Map<String, dynamic> json) => _$TermFromJson(json);
+  factory DigitConfig.fromJson(Map<String, dynamic> json) =>
+      _$DigitConfigFromJson(json);
 }
 
-class TermMapConverter implements JsonConverter<Term, Map<String, dynamic>> {
-  const TermMapConverter();
+class DigitConfigMapConverter
+    implements JsonConverter<DigitConfig, Map<String, dynamic>> {
+  const DigitConfigMapConverter();
 
   @override
-  Term fromJson(Map<String, dynamic> json) {
-    return Term.fromJson(json);
+  DigitConfig fromJson(Map<String, dynamic> json) {
+    return DigitConfig.fromJson(json);
   }
 
   @override
-  Map<String, dynamic> toJson(Term object) {
+  Map<String, dynamic> toJson(DigitConfig object) {
     return object.toJson();
   }
 }

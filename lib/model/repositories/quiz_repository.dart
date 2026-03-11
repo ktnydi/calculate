@@ -3,19 +3,19 @@ import 'dart:math';
 
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:calculate/enums/quiz_category.dart';
-import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
+import 'package:calculate/model/domains/quiz_settings/digit_config.dart';
 import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final quizRepositoryProvider = Provider<QuizRepository>((ref) {
   final quizSettings = ref.watch(quizSettingsManagerNotifierProvider);
-  return QuizRepository(quizSettings.term);
+  return QuizRepository(quizSettings.digitConfig);
 });
 
 class QuizRepository {
-  final Term term;
+  final DigitConfig digitConfig;
 
-  QuizRepository(this.term);
+  QuizRepository(this.digitConfig);
 
   int getTerm({int digit = 2}) {
     assert(digit > 0, '[digit] must be greater than 0.');
@@ -33,21 +33,21 @@ class QuizRepository {
   }
 
   Quiz getAddition() {
-    final firstTerm = getTerm(digit: term.addition.first);
-    final lastTerm = getTerm(digit: term.addition.second);
+    final firstTerm = getTerm(digit: digitConfig.addition.first);
+    final lastTerm = getTerm(digit: digitConfig.addition.second);
     final figures = [firstTerm, lastTerm];
     return Quiz(figures: figures, type: QuizCategory.addition);
   }
 
   Quiz getSubtraction() {
-    final firstTerm = getTerm(digit: term.subtraction.first);
-    final lastTerm = getTerm(digit: term.subtraction.second);
+    final firstTerm = getTerm(digit: digitConfig.subtraction.first);
+    final lastTerm = getTerm(digit: digitConfig.subtraction.second);
     final figures = [firstTerm, lastTerm]..sort((a, b) => b.compareTo(a));
     return Quiz(figures: figures, type: QuizCategory.subtraction);
   }
 
   Quiz getDivision() {
-    final divisionJson = term.division.toJson();
+    final divisionJson = digitConfig.division.toJson();
 
     // 桁数が小さい順に並べる。
     final division = SplayTreeMap<String, dynamic>.from(
@@ -80,8 +80,8 @@ class QuizRepository {
   }
 
   Quiz getMultiplication() {
-    final firstTerm = getTerm(digit: term.multiplication.first);
-    final lastTerm = getTerm(digit: term.multiplication.second);
+    final firstTerm = getTerm(digit: digitConfig.multiplication.first);
+    final lastTerm = getTerm(digit: digitConfig.multiplication.second);
 
     final figures = [firstTerm, lastTerm];
     return Quiz(figures: figures, type: QuizCategory.multiplication);

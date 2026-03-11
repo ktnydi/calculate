@@ -2,7 +2,7 @@ import 'package:calculate/enums/quiz_type.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
-import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
+import 'package:calculate/model/domains/quiz_settings/digit_config.dart';
 import 'package:calculate/model/use_cases/quiz_settings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,10 +21,11 @@ class Setting extends ConsumerWidget {
     );
 
     final currentTerm = switch (currentState.category) {
-      QuizCategoryMode.multiplication => currentState.term.multiplication,
-      QuizCategoryMode.division => currentState.term.division,
-      QuizCategoryMode.addition => currentState.term.addition,
-      QuizCategoryMode.subtraction => currentState.term.subtraction,
+      QuizCategoryMode.multiplication =>
+        currentState.digitConfig.multiplication,
+      QuizCategoryMode.division => currentState.digitConfig.division,
+      QuizCategoryMode.addition => currentState.digitConfig.addition,
+      QuizCategoryMode.subtraction => currentState.digitConfig.subtraction,
       QuizCategoryMode.random => null,
     };
 
@@ -192,8 +193,8 @@ class Setting extends ConsumerWidget {
                               first: value,
                             );
 
-                            final Term nextTerm = Function.apply(
-                              currentState.term.copyWith.call,
+                            final DigitConfig nextTerm = Function.apply(
+                              currentState.digitConfig.copyWith.call,
                               null,
                               {Symbol(currentMode.name): nextDigit},
                             );
@@ -255,8 +256,8 @@ class Setting extends ConsumerWidget {
                               second: value,
                             );
 
-                            final Term nextTerm = Function.apply(
-                              currentState.term.copyWith.call,
+                            final DigitConfig nextTerm = Function.apply(
+                              currentState.digitConfig.copyWith.call,
                               null,
                               {Symbol(currentMode.name): nextDigit},
                             );

@@ -1,5 +1,5 @@
 import 'package:calculate/enums/quiz_category_mode.dart';
-import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
+import 'package:calculate/model/domains/quiz_settings/digit_config.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'quiz_settings.freezed.dart';
@@ -12,7 +12,7 @@ abstract class QuizSettings with _$QuizSettings {
     // ignore: invalid_annotation_target
     @Default(QuizCategoryMode.random) @JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category,
     @Default(10) int size,
-    @Default(Term()) @TermMapConverter() Term term,
+    @Default(DigitConfig()) @DigitConfigMapConverter() DigitConfig digitConfig,
   }) = _QuizSettings;
   // dart format on
 

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$QuizSettings {
 
 // ignore: invalid_annotation_target
-@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode get category; int get size;@TermMapConverter() Term get term;
+@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode get category; int get size;@DigitConfigMapConverter() DigitConfig get digitConfig;
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $QuizSettingsCopyWith<QuizSettings> get copyWith => _$QuizSettingsCopyWithImpl<Q
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuizSettings&&(identical(other.category, category) || other.category == category)&&(identical(other.size, size) || other.size == size)&&(identical(other.term, term) || other.term == term));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuizSettings&&(identical(other.category, category) || other.category == category)&&(identical(other.size, size) || other.size == size)&&(identical(other.digitConfig, digitConfig) || other.digitConfig == digitConfig));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,category,size,term);
+int get hashCode => Object.hash(runtimeType,category,size,digitConfig);
 
 @override
 String toString() {
-  return 'QuizSettings(category: $category, size: $size, term: $term)';
+  return 'QuizSettings(category: $category, size: $size, digitConfig: $digitConfig)';
 }
 
 
@@ -49,11 +49,11 @@ abstract mixin class $QuizSettingsCopyWith<$Res>  {
   factory $QuizSettingsCopyWith(QuizSettings value, $Res Function(QuizSettings) _then) = _$QuizSettingsCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category, int size,@TermMapConverter() Term term
+@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category, int size,@DigitConfigMapConverter() DigitConfig digitConfig
 });
 
 
-$TermCopyWith<$Res> get term;
+$DigitConfigCopyWith<$Res> get digitConfig;
 
 }
 /// @nodoc
@@ -66,22 +66,22 @@ class _$QuizSettingsCopyWithImpl<$Res>
 
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? category = null,Object? size = null,Object? term = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? category = null,Object? size = null,Object? digitConfig = null,}) {
   return _then(_self.copyWith(
 category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as QuizCategoryMode,size: null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
-as int,term: null == term ? _self.term : term // ignore: cast_nullable_to_non_nullable
-as Term,
+as int,digitConfig: null == digitConfig ? _self.digitConfig : digitConfig // ignore: cast_nullable_to_non_nullable
+as DigitConfig,
   ));
 }
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TermCopyWith<$Res> get term {
+$DigitConfigCopyWith<$Res> get digitConfig {
   
-  return $TermCopyWith<$Res>(_self.term, (value) {
-    return _then(_self.copyWith(term: value));
+  return $DigitConfigCopyWith<$Res>(_self.digitConfig, (value) {
+    return _then(_self.copyWith(digitConfig: value));
   });
 }
 }
@@ -165,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size, @TermMapConverter()  Term term)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size, @DigitConfigMapConverter()  DigitConfig digitConfig)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _QuizSettings() when $default != null:
-return $default(_that.category,_that.size,_that.term);case _:
+return $default(_that.category,_that.size,_that.digitConfig);case _:
   return orElse();
 
 }
@@ -186,10 +186,10 @@ return $default(_that.category,_that.size,_that.term);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size, @TermMapConverter()  Term term)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size, @DigitConfigMapConverter()  DigitConfig digitConfig)  $default,) {final _that = this;
 switch (_that) {
 case _QuizSettings():
-return $default(_that.category,_that.size,_that.term);case _:
+return $default(_that.category,_that.size,_that.digitConfig);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +206,10 @@ return $default(_that.category,_that.size,_that.term);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size, @TermMapConverter()  Term term)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(unknownEnumValue: QuizCategoryMode.random)  QuizCategoryMode category,  int size, @DigitConfigMapConverter()  DigitConfig digitConfig)?  $default,) {final _that = this;
 switch (_that) {
 case _QuizSettings() when $default != null:
-return $default(_that.category,_that.size,_that.term);case _:
+return $default(_that.category,_that.size,_that.digitConfig);case _:
   return null;
 
 }
@@ -221,13 +221,13 @@ return $default(_that.category,_that.size,_that.term);case _:
 @JsonSerializable()
 
 class _QuizSettings implements QuizSettings {
-  const _QuizSettings({@JsonKey(unknownEnumValue: QuizCategoryMode.random) this.category = QuizCategoryMode.random, this.size = 10, @TermMapConverter() this.term = const Term()});
+  const _QuizSettings({@JsonKey(unknownEnumValue: QuizCategoryMode.random) this.category = QuizCategoryMode.random, this.size = 10, @DigitConfigMapConverter() this.digitConfig = const DigitConfig()});
   factory _QuizSettings.fromJson(Map<String, dynamic> json) => _$QuizSettingsFromJson(json);
 
 // ignore: invalid_annotation_target
 @override@JsonKey(unknownEnumValue: QuizCategoryMode.random) final  QuizCategoryMode category;
 @override@JsonKey() final  int size;
-@override@JsonKey()@TermMapConverter() final  Term term;
+@override@JsonKey()@DigitConfigMapConverter() final  DigitConfig digitConfig;
 
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -242,16 +242,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuizSettings&&(identical(other.category, category) || other.category == category)&&(identical(other.size, size) || other.size == size)&&(identical(other.term, term) || other.term == term));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuizSettings&&(identical(other.category, category) || other.category == category)&&(identical(other.size, size) || other.size == size)&&(identical(other.digitConfig, digitConfig) || other.digitConfig == digitConfig));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,category,size,term);
+int get hashCode => Object.hash(runtimeType,category,size,digitConfig);
 
 @override
 String toString() {
-  return 'QuizSettings(category: $category, size: $size, term: $term)';
+  return 'QuizSettings(category: $category, size: $size, digitConfig: $digitConfig)';
 }
 
 
@@ -262,11 +262,11 @@ abstract mixin class _$QuizSettingsCopyWith<$Res> implements $QuizSettingsCopyWi
   factory _$QuizSettingsCopyWith(_QuizSettings value, $Res Function(_QuizSettings) _then) = __$QuizSettingsCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category, int size,@TermMapConverter() Term term
+@JsonKey(unknownEnumValue: QuizCategoryMode.random) QuizCategoryMode category, int size,@DigitConfigMapConverter() DigitConfig digitConfig
 });
 
 
-@override $TermCopyWith<$Res> get term;
+@override $DigitConfigCopyWith<$Res> get digitConfig;
 
 }
 /// @nodoc
@@ -279,12 +279,12 @@ class __$QuizSettingsCopyWithImpl<$Res>
 
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? category = null,Object? size = null,Object? term = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? category = null,Object? size = null,Object? digitConfig = null,}) {
   return _then(_QuizSettings(
 category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as QuizCategoryMode,size: null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
-as int,term: null == term ? _self.term : term // ignore: cast_nullable_to_non_nullable
-as Term,
+as int,digitConfig: null == digitConfig ? _self.digitConfig : digitConfig // ignore: cast_nullable_to_non_nullable
+as DigitConfig,
   ));
 }
 
@@ -292,10 +292,10 @@ as Term,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TermCopyWith<$Res> get term {
+$DigitConfigCopyWith<$Res> get digitConfig {
   
-  return $TermCopyWith<$Res>(_self.term, (value) {
-    return _then(_self.copyWith(term: value));
+  return $DigitConfigCopyWith<$Res>(_self.digitConfig, (value) {
+    return _then(_self.copyWith(digitConfig: value));
   });
 }
 }

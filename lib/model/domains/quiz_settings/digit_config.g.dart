@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'term_settings.dart';
+part of 'digit_config.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Term _$TermFromJson(Map<String, dynamic> json) => _Term(
+_DigitConfig _$DigitConfigFromJson(Map<String, dynamic> json) => _DigitConfig(
   addition: json['addition'] == null
       ? const Digit()
       : const DigitMapConverter().fromJson(
@@ -29,7 +29,9 @@ _Term _$TermFromJson(Map<String, dynamic> json) => _Term(
         ),
 );
 
-Map<String, dynamic> _$TermToJson(_Term instance) => <String, dynamic>{
+Map<String, dynamic> _$DigitConfigToJson(
+  _DigitConfig instance,
+) => <String, dynamic>{
   'addition': const DigitMapConverter().toJson(instance.addition),
   'subtraction': const DigitMapConverter().toJson(instance.subtraction),
   'division': const DigitMapConverter().toJson(instance.division),

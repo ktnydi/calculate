@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/enums/quiz_category_mode.dart';
 import 'package:calculate/model/domains/quiz_settings/quiz_settings.dart';
-import 'package:calculate/model/domains/quiz_settings/term_settings.dart';
+import 'package:calculate/model/domains/quiz_settings/digit_config.dart';
 import 'package:calculate/providers/shared_preferences_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,7 +58,7 @@ class QuizSettingsManagerNotifier extends StateNotifier<QuizSettings> {
     if (term != null) {
       final termJson = jsonDecode(term) as Map<String, dynamic>;
 
-      state = state.copyWith(term: Term.fromJson(termJson));
+      state = state.copyWith(digitConfig: DigitConfig.fromJson(termJson));
     }
   }
 
@@ -79,8 +79,8 @@ class QuizSettingsManagerNotifier extends StateNotifier<QuizSettings> {
     await prefs.setInt(QuizSettingsKey.quantity.name, size);
   }
 
-  Future<void> updateTerm(Term term) async {
-    state = state.copyWith(term: term);
+  Future<void> updateTerm(DigitConfig term) async {
+    state = state.copyWith(digitConfig: term);
 
     await prefs.setString(
       QuizSettingsKey.term.name,
