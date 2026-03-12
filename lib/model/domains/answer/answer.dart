@@ -1,4 +1,5 @@
 import 'package:calculate/model/domains/quiz/quiz.dart';
+import 'package:calculate/model/domains/score/score.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'answer.freezed.dart';
@@ -9,5 +10,6 @@ abstract class Answer with _$Answer {
     required Quiz quiz,
     required String answer,
     required Duration time,
+    required Score score,
   }) = _Answer;
 }

@@ -46,6 +46,9 @@ class GameResult extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final analytics = ref.watch(analyticsProvider);
     final quizSettingsState = ref.watch(quizSettingsManagerNotifierProvider);
+    final scores = answerList.map((e) => e.score.rawScore);
+    final sumScore = scores.reduce((a, b) => a + b);
+    final avgScore = sumScore / scores.length;
 
     return PopScope(
       canPop: false,
@@ -73,6 +76,28 @@ class GameResult extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: context.colorScheme.outlineVariant,
+                              ),
+                            ),
+                            child: ListTile(
+                              title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Score'),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    '${avgScore.truncate()} pt',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 32),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(

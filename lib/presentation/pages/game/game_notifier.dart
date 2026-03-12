@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
+import 'package:calculate/model/domains/score/score.dart';
 import 'package:calculate/presentation/pages/game/game_state.dart';
 import 'package:calculate/model/domains/quiz/quiz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,10 +64,26 @@ class GameNotifier extends StateNotifier<GameState> {
       return Duration(milliseconds: state.time - sumTimes);
     }();
 
+    final firstDigit = quiz.figures.first.toString().length;
+    final secondDigit = quiz.figures.last.toString().length;
+    final operatorPoint = switch (quiz.type) {
+      QuizCategory.addition => 10,
+      QuizCategory.subtraction => 15,
+      QuizCategory.division => 12,
+      QuizCategory.multiplication => 18,
+    };
+    final rawScore = firstDigit * secondDigit + operatorPoint;
+    final score = Score(
+      firstDigit: firstDigit,
+      secondDigit: secondDigit,
+      rawScore: rawScore,
+    );
+
     final answer = Answer(
       quiz: quiz,
       answer: userAnswer,
       time: time,
+      score: score,
     );
     state = state.copyWith(
       answerList: [...state.answerList, answer],

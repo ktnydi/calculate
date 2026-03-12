@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Answer {
 
- Quiz get quiz; String get answer; Duration get time;
+ Quiz get quiz; String get answer; Duration get time; Score get score;
 /// Create a copy of Answer
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AnswerCopyWith<Answer> get copyWith => _$AnswerCopyWithImpl<Answer>(this as Ans
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Answer&&(identical(other.quiz, quiz) || other.quiz == quiz)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.time, time) || other.time == time));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Answer&&(identical(other.quiz, quiz) || other.quiz == quiz)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.time, time) || other.time == time)&&(identical(other.score, score) || other.score == score));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,quiz,answer,time);
+int get hashCode => Object.hash(runtimeType,quiz,answer,time,score);
 
 @override
 String toString() {
-  return 'Answer(quiz: $quiz, answer: $answer, time: $time)';
+  return 'Answer(quiz: $quiz, answer: $answer, time: $time, score: $score)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $AnswerCopyWith<$Res>  {
   factory $AnswerCopyWith(Answer value, $Res Function(Answer) _then) = _$AnswerCopyWithImpl;
 @useResult
 $Res call({
- Quiz quiz, String answer, Duration time
+ Quiz quiz, String answer, Duration time, Score score
 });
 
 
-$QuizCopyWith<$Res> get quiz;
+$QuizCopyWith<$Res> get quiz;$ScoreCopyWith<$Res> get score;
 
 }
 /// @nodoc
@@ -62,12 +62,13 @@ class _$AnswerCopyWithImpl<$Res>
 
 /// Create a copy of Answer
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? quiz = null,Object? answer = null,Object? time = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? quiz = null,Object? answer = null,Object? time = null,Object? score = null,}) {
   return _then(_self.copyWith(
 quiz: null == quiz ? _self.quiz : quiz // ignore: cast_nullable_to_non_nullable
 as Quiz,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
 as String,time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
-as Duration,
+as Duration,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
+as Score,
   ));
 }
 /// Create a copy of Answer
@@ -78,6 +79,15 @@ $QuizCopyWith<$Res> get quiz {
   
   return $QuizCopyWith<$Res>(_self.quiz, (value) {
     return _then(_self.copyWith(quiz: value));
+  });
+}/// Create a copy of Answer
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ScoreCopyWith<$Res> get score {
+  
+  return $ScoreCopyWith<$Res>(_self.score, (value) {
+    return _then(_self.copyWith(score: value));
   });
 }
 }
@@ -161,10 +171,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Quiz quiz,  String answer,  Duration time)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Quiz quiz,  String answer,  Duration time,  Score score)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Answer() when $default != null:
-return $default(_that.quiz,_that.answer,_that.time);case _:
+return $default(_that.quiz,_that.answer,_that.time,_that.score);case _:
   return orElse();
 
 }
@@ -182,10 +192,10 @@ return $default(_that.quiz,_that.answer,_that.time);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Quiz quiz,  String answer,  Duration time)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Quiz quiz,  String answer,  Duration time,  Score score)  $default,) {final _that = this;
 switch (_that) {
 case _Answer():
-return $default(_that.quiz,_that.answer,_that.time);case _:
+return $default(_that.quiz,_that.answer,_that.time,_that.score);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +212,10 @@ return $default(_that.quiz,_that.answer,_that.time);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Quiz quiz,  String answer,  Duration time)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Quiz quiz,  String answer,  Duration time,  Score score)?  $default,) {final _that = this;
 switch (_that) {
 case _Answer() when $default != null:
-return $default(_that.quiz,_that.answer,_that.time);case _:
+return $default(_that.quiz,_that.answer,_that.time,_that.score);case _:
   return null;
 
 }
@@ -217,12 +227,13 @@ return $default(_that.quiz,_that.answer,_that.time);case _:
 
 
 class _Answer implements Answer {
-  const _Answer({required this.quiz, required this.answer, required this.time});
+  const _Answer({required this.quiz, required this.answer, required this.time, required this.score});
   
 
 @override final  Quiz quiz;
 @override final  String answer;
 @override final  Duration time;
+@override final  Score score;
 
 /// Create a copy of Answer
 /// with the given fields replaced by the non-null parameter values.
@@ -234,16 +245,16 @@ _$AnswerCopyWith<_Answer> get copyWith => __$AnswerCopyWithImpl<_Answer>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Answer&&(identical(other.quiz, quiz) || other.quiz == quiz)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.time, time) || other.time == time));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Answer&&(identical(other.quiz, quiz) || other.quiz == quiz)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.time, time) || other.time == time)&&(identical(other.score, score) || other.score == score));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,quiz,answer,time);
+int get hashCode => Object.hash(runtimeType,quiz,answer,time,score);
 
 @override
 String toString() {
-  return 'Answer(quiz: $quiz, answer: $answer, time: $time)';
+  return 'Answer(quiz: $quiz, answer: $answer, time: $time, score: $score)';
 }
 
 
@@ -254,11 +265,11 @@ abstract mixin class _$AnswerCopyWith<$Res> implements $AnswerCopyWith<$Res> {
   factory _$AnswerCopyWith(_Answer value, $Res Function(_Answer) _then) = __$AnswerCopyWithImpl;
 @override @useResult
 $Res call({
- Quiz quiz, String answer, Duration time
+ Quiz quiz, String answer, Duration time, Score score
 });
 
 
-@override $QuizCopyWith<$Res> get quiz;
+@override $QuizCopyWith<$Res> get quiz;@override $ScoreCopyWith<$Res> get score;
 
 }
 /// @nodoc
@@ -271,12 +282,13 @@ class __$AnswerCopyWithImpl<$Res>
 
 /// Create a copy of Answer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? quiz = null,Object? answer = null,Object? time = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? quiz = null,Object? answer = null,Object? time = null,Object? score = null,}) {
   return _then(_Answer(
 quiz: null == quiz ? _self.quiz : quiz // ignore: cast_nullable_to_non_nullable
 as Quiz,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
 as String,time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
-as Duration,
+as Duration,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
+as Score,
   ));
 }
 
@@ -288,6 +300,15 @@ $QuizCopyWith<$Res> get quiz {
   
   return $QuizCopyWith<$Res>(_self.quiz, (value) {
     return _then(_self.copyWith(quiz: value));
+  });
+}/// Create a copy of Answer
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ScoreCopyWith<$Res> get score {
+  
+  return $ScoreCopyWith<$Res>(_self.score, (value) {
+    return _then(_self.copyWith(score: value));
   });
 }
 }
