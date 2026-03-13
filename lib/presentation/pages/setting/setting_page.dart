@@ -56,7 +56,7 @@ class Setting extends ConsumerWidget {
                   currentState.size,
                 ),
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleMedium!.copyWith(
+                style: context.textTheme.labelLarge!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
