@@ -64,20 +64,7 @@ class GameNotifier extends StateNotifier<GameState> {
       return Duration(milliseconds: state.time - sumTimes);
     }();
 
-    final firstDigit = quiz.figures.first.toString().length;
-    final secondDigit = quiz.figures.last.toString().length;
-    final operatorPoint = switch (quiz.type) {
-      QuizCategory.addition => 10,
-      QuizCategory.subtraction => 15,
-      QuizCategory.division => 12,
-      QuizCategory.multiplication => 18,
-    };
-    final rawScore = firstDigit * secondDigit + operatorPoint;
-    final score = Score(
-      firstDigit: firstDigit,
-      secondDigit: secondDigit,
-      rawScore: rawScore,
-    );
+    final score = calculateScore(quiz);
 
     final answer = Answer(
       quiz: quiz,
@@ -108,5 +95,26 @@ class GameNotifier extends StateNotifier<GameState> {
   void dispose() {
     endCountDown();
     super.dispose();
+  }
+
+  Score calculateScore(Quiz quiz) {
+    final firstDigit = quiz.figures.first.toString().length;
+    final secondDigit = quiz.figures.last.toString().length;
+    final operatorPoint = switch (quiz.type) {
+      QuizCategory.addition => 10,
+      QuizCategory.subtraction => 15,
+      QuizCategory.division => 12,
+      QuizCategory.multiplication => 18,
+    };
+
+    final rawScore = (firstDigit * secondDigit) + operatorPoint;
+
+    final score = Score(
+      firstDigit: firstDigit,
+      secondDigit: secondDigit,
+      rawScore: rawScore,
+    );
+
+    return score;
   }
 }
