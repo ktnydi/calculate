@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:calculate/enums/quiz_category.dart';
 import 'package:calculate/model/domains/answer/answer.dart';
@@ -64,7 +65,7 @@ class GameNotifier extends StateNotifier<GameState> {
       return Duration(milliseconds: state.time - sumTimes);
     }();
 
-    final score = calculateScore(quiz);
+    final score = calculateScore(quiz, time);
 
     final answer = Answer(
       quiz: quiz,
@@ -97,7 +98,7 @@ class GameNotifier extends StateNotifier<GameState> {
     super.dispose();
   }
 
-  Score calculateScore(Quiz quiz) {
+  Score calculateScore(Quiz quiz, Duration time) {
     final firstDigit = quiz.figures.first.toString().length;
     final secondDigit = quiz.figures.last.toString().length;
     final operatorPoint = switch (quiz.type) {
@@ -107,14 +108,60 @@ class GameNotifier extends StateNotifier<GameState> {
       QuizCategory.multiplication => 18,
     };
 
-    final rawScore = (firstDigit * secondDigit) + operatorPoint;
+    final targetTime = calculateTargetTime(firstDigit, secondDigit, quiz.type);
+    final differenceTime = time - targetTime;
+
+    /// 解答時間によってスコアを変化させる。
+    final timeMultiplier = (1.0 - (differenceTime.inMilliseconds / 1000) * 0.05)
+        .clamp(0.1, 1.0);
+
+    final rawScore =
+        (firstDigit * secondDigit) +
+        min<int>(firstDigit, secondDigit) +
+        operatorPoint * timeMultiplier;
 
     final score = Score(
       firstDigit: firstDigit,
       secondDigit: secondDigit,
-      rawScore: rawScore,
+      rawScore: rawScore.round(),
     );
 
     return score;
+  }
+
+  Duration calculateTargetTime(int digitA, int digitB, QuizCategory op) {
+    assert(digitB >= digitA);
+
+    const double baseTime = 1.5;
+
+    // 1. 桁数による重み
+    final digitFactor = digitB + (digitA * 0.5);
+
+    // 2. 演算子による重み
+    final opFactor = switch (op) {
+      QuizCategory.addition => 1.0,
+      QuizCategory.subtraction => 1.2,
+      QuizCategory.division => () {
+        // 余りの出ない割り算では同じ桁数だと簡単になるため、目標時間を厳しくする。
+        if (digitA == digitB) {
+          return 0.5 + (digitA - 1) * 0.1;
+        }
+
+        if (digitB - digitA == 1) {
+          return 1.2;
+        }
+
+        if (digitB - digitA >= 2) {
+          return 2.2;
+        }
+
+        return 1.0;
+      }(),
+      QuizCategory.multiplication => 1.8,
+    };
+
+    final targetTime = baseTime * digitFactor * opFactor;
+
+    return Duration(milliseconds: targetTime.round());
   }
 }
