@@ -101,6 +101,9 @@ class L10nJa extends L10n {
   String get gameResultPageTitle => '結果';
 
   @override
+  String get score => 'スコア';
+
+  @override
   String get gameSettingsSectionLabel => '設定';
 
   @override

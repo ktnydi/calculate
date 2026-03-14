@@ -102,6 +102,9 @@ class L10nEn extends L10n {
   String get gameResultPageTitle => 'Result';
 
   @override
+  String get score => 'Score';
+
+  @override
   String get gameSettingsSectionLabel => 'Settings';
 
   @override

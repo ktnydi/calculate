@@ -88,7 +88,7 @@ class GameResult extends ConsumerWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Score'),
+                                  Text(L10n.of(context)!.score),
                                   const SizedBox(height: 4),
                                   Text(
                                     '${avgScore.truncate()} pt',

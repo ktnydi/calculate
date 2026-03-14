@@ -62,6 +62,7 @@
     }
   },
   "gameResultPageTitle": "結果",
+  "score": "スコア",
   "gameSettingsSectionLabel": "設定",
   "averageTimeSectionLabel": "平均タイム",
   "answeredQuizSectionLabel": "解答した問題",

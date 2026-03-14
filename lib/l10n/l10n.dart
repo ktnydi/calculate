@@ -174,6 +174,12 @@ abstract class L10n {
   /// **'結果'**
   String get gameResultPageTitle;
 
+  /// No description provided for @score.
+  ///
+  /// In ja, this message translates to:
+  /// **'スコア'**
+  String get score;
+
   /// No description provided for @gameSettingsSectionLabel.
   ///
   /// In ja, this message translates to:

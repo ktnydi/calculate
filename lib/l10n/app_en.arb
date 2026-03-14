@@ -11,6 +11,7 @@
   "currentQuizNumber": "Q{value}",
   "quizSettingsDescription": "{quizSize} Questions ({quizCategory, select, random{} other{{firstDigit} & {secondDigit}-Digit }}{quizCategory, select, random{Mix} addition{Addition} subtraction{Subtraction} division{Division} multiplication{Multiplication} other{}})",
   "gameResultPageTitle": "Result",
+  "score": "Score",
   "gameSettingsSectionLabel": "Settings",
   "averageTimeSectionLabel": "Average Time",
   "answeredQuizSectionLabel": "Your answer",
