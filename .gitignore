@@ -54,3 +54,6 @@ app.*.map.json
 
 # FVM
 .fvm/
+
+# Supabase
+env.json

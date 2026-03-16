@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:calculate/extensions/context.dart';
 import 'package:calculate/l10n/l10n.dart';
+import 'package:calculate/providers/supabase.dart';
 import 'package:go_router/go_router.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:calculate/enums/update_request_type.dart';
@@ -21,6 +22,13 @@ class _VersionCheckPageState extends ConsumerState<VersionCheckPage> {
   void initState() {
     super.initState();
     Future(() async {
+      final currentUser = ref.read(authenticatorProvider);
+      final authenticator = ref.read(authenticatorProvider.notifier);
+
+      if (currentUser == null) {
+        await authenticator.signInAnonymously();
+      }
+
       final requestType = await ref.read(updateRequestProvider.future);
 
       if (requestType == UpdateRequestType.not) {
